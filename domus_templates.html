@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JFM Italia — Template Library</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4f0; color: #1a1a1a; font-size: 15px; line-height: 1.6; }
+  header { background: #1a1a1a; color: #fff; padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 12px; }
+  header h1 { font-size: 17px; font-weight: 500; }
+  header span { font-size: 13px; color: #888; }
+  .filters { background: #fff; border-bottom: 1px solid #e8e6e0; padding: 1rem 1.5rem; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; position: sticky; top: 0; z-index: 100; }
+  .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-label { font-size: 12px; color: #888; margin-right: 4px; align-self: center; }
+  .pill { padding: 5px 12px; border-radius: 20px; font-size: 13px; border: 1px solid #d8d6d0; background: #fff; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .pill:hover { border-color: #888; }
+  .pill.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+  .main { padding: 1.5rem; max-width: 900px; margin: 0 auto; }
+  .section-title { font-size: 13px; font-weight: 500; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin: 1.5rem 0 0.75rem; }
+  .section-title:first-child { margin-top: 0; }
+  .card { background: #fff; border: 1px solid #e8e6e0; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+  .card-header { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+  .card-header:hover { background: #faf9f6; }
+  .card-title { font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+  .tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 400; }
+  .tag-bkg { background: #e8f0fe; color: #1a56db; }
+  .tag-abn { background: #fff0f0; color: #c0392b; }
+  .tag-it { background: #e8f5e9; color: #2e7d32; }
+  .tag-en { background: #e3f2fd; color: #1565c0; }
+  .tag-es { background: #fff8e1; color: #f57f17; }
+  .tag-lat { background: #f3e5f5; color: #6a1b9a; }
+  .tag-col { background: #fce4ec; color: #880e4f; }
+  .chevron { font-size: 18px; color: #888; transition: transform 0.2s; }
+  .chevron.open { transform: rotate(180deg); }
+  .card-body { display: none; padding: 0 16px 16px; }
+  .card-body.open { display: block; }
+  .template-text { background: #faf9f6; border: 1px solid #e8e6e0; border-radius: 8px; padding: 14px; font-size: 13.5px; line-height: 1.75; white-space: pre-wrap; word-break: break-word; max-height: 420px; overflow-y: auto; }
+  .copy-btn { margin-top: 10px; padding: 7px 16px; border-radius: 8px; border: 1px solid #d8d6d0; background: #fff; cursor: pointer; font-size: 13px; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px; }
+  .copy-btn:hover { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+  .copy-btn.copied { background: #2e7d32; color: #fff; border-color: #2e7d32; }
+  .vars { margin-top: 10px; font-size: 12px; color: #666; }
+  .vars strong { color: #1a1a1a; }
+  .empty { text-align: center; padding: 3rem; color: #888; font-size: 14px; }
+  .divider { height: 1px; background: #e8e6e0; margin: 6px 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>🏡 JFM Italia — Template Library</h1>
+    <span>Domus Colosseum &amp; Laterani · WhatsApp Templates</span>
+  </div>
+</header>
+
+<div class="filters">
+  <span class="filter-label">Casa:</span>
+  <div class="filter-group" id="filter-casa">
+    <div class="pill active" data-filter="casa" data-val="all">Tutte</div>
+    <div class="pill" data-filter="casa" data-val="lat">Laterani</div>
+    <div class="pill" data-filter="casa" data-val="col">Colosseum</div>
+  </div>
+  <div class="divider" style="width:1px;height:24px;margin:0 4px;"></div>
+  <span class="filter-label">Lingua:</span>
+  <div class="filter-group" id="filter-lingua">
+    <div class="pill active" data-filter="lingua" data-val="all">Tutte</div>
+    <div class="pill" data-filter="lingua" data-val="it">🇮🇹 IT</div>
+    <div class="pill" data-filter="lingua" data-val="en">🇬🇧 EN</div>
+    <div class="pill" data-filter="lingua" data-val="es">🇪🇸 ES</div>
+  </div>
+  <div class="divider" style="width:1px;height:24px;margin:0 4px;"></div>
+  <div class="divider" style="width:1px;height:24px;margin:0 4px;"></div>
+  <span class="filter-label">Piatt.:</span>
+  <div class="filter-group" id="filter-piatt">
+    <div class="pill active" data-filter="piatt" data-val="all">Tutte</div>
+    <div class="pill" data-filter="piatt" data-val="bkg">Booking</div>
+    <div class="pill" data-filter="piatt" data-val="abn">Airbnb</div>
+  </div>
+  <span class="filter-label">Sezione:</span>
+  <div class="filter-group" id="filter-section">
+    <div class="pill active" data-filter="section" data-val="all">Tutte</div>
+    <div class="pill" data-filter="section" data-val="precheckin">Pre check-in</div>
+    <div class="pill" data-filter="section" data-val="reminder">Reminder</div>
+    <div class="pill" data-filter="section" data-val="inhouse">In-house</div>
+    <div class="pill" data-filter="section" data-val="checkout">Pre-checkout</div>
+    <div class="pill" data-filter="section" data-val="luggage">Depositi</div>
+    <div class="pill" data-filter="section" data-val="tips_restaurants">🍽️ Ristoranti</div>
+    <div class="pill" data-filter="section" data-val="tips_itinerary">🗺️ Itinerario</div>
+    <div class="pill" data-filter="section" data-val="location">📍 Posizione</div>
+    <div class="pill" data-filter="section" data-val="warnings">⚠️ Avvisi</div>
+    <div class="pill" data-filter="section" data-val="pdf">📄 Istruzioni PDF</div>
+  </div>
+</div>
+
+<div class="main" id="main"></div>
+
+<script>
+var IBAN = "IT79Z0306905285100000008025";
+var BIC = "BCITITMMXXX";
+var PP1 = "https://www.paypal.me/FabioEsposito611";
+var PP2 = "https://paypal.me/FabioEsposito258?locale.x=it_IT&country.x=IT";
+var WEB = "www.jfmitalia.com";
+
+var taxBlock = {
+  en: `💶 City tax
+As required by the Municipality of Rome 🏛️, all visitors must pay the city tourist tax.
+It's a mandatory fee and amounts to €5 per person per night.
+In your case, the total is €[TOTALE TASSA].
+
+💳 Payment options
+💵 Cash (preferred):
+Since I won't be present at check-in, you can simply leave the cash on the table inside the apartment 🔐💶.
+If it's more convenient, I can also stop by later to collect it when you're not home 😊.
+
+💻 Bank transfer:
+Account holder: JF Management Srls
+IBAN: ${IBAN}
+BIC/SWIFT: ${BIC}
+
+🅿️ PayPal:
+${PP1}
+${PP2}
+
+👉 Once payment is made, please send me a quick confirmation message 🙏✨.`,
+
+  it: `💶 Tassa di soggiorno
+Come richiesto dal Comune di Roma 🏛️, tutti i visitatori sono tenuti a pagare la tassa turistica.
+Si tratta di una quota obbligatoria di €5 a persona a notte.
+Nel tuo caso, il totale è €[TOTALE TASSA].
+
+💳 Opzioni di pagamento
+💵 Contanti (preferibile):
+Non essendo presente al check-in, puoi lasciare i contanti sul tavolo in casa 🔐💶.
+Se preferisci, posso anche passare a ritirare quando non sei in casa 😊.
+
+💻 Bonifico bancario:
+Intestatario: JF Management Srls
+IBAN: ${IBAN}
+BIC/SWIFT: ${BIC}
+
+🅿️ PayPal:
+${PP1}
+${PP2}
+
+👉 Una volta effettuato il pagamento, mandami un messaggio di conferma 🙏✨.`,
+
+  es: `💶 Tasa turística municipal
+Tal como exige el Ayuntamiento de Roma 🏛️, todos los visitantes deben abonar la tasa turística.
+Es una tarifa obligatoria de €5 por persona por noche.
+En tu caso, el total es €[TOTAL TASA].
+
+💳 Opciones de pago
+💵 Efectivo (preferido):
+Como no estaré presente en el check-in, puedes dejar el importe sobre la mesa dentro del apartamento 🔐💶.
+Si lo prefieres, puedo pasarlo a recoger más tarde cuando no estés 😊.
+
+💻 Transferencia bancaria:
+Titular: JF Management Srls
+IBAN: ${IBAN}
+BIC/SWIFT: ${BIC}
+
+🅿️ PayPal:
+${PP1}
+${PP2}
+
+👉 Una vez realizado el pago, envíame un breve mensaje de confirmación 🙏✨.`
+};
+
+var docsBlock = {
+  en: `🗝️ Check-in & documents
+Check-in will be self check-in — I'll send you all the detailed instructions shortly 🏡🔐.
+Upon arrival, please send me a photo of the ID documents of all guests (front and back if possible), as required by Italian regulations 🪪📸.
+Thank you in advance for your cooperation 🙏😊.`,
+  it: `🗝️ Check-in & documenti
+Il check-in sarà self check-in — ti invierò a breve tutte le istruzioni dettagliate 🏡🔐.
+All'arrivo ti chiedo gentilmente di inviarmi la foto dei documenti d'identità di tutti gli ospiti (fronte e retro se possibile), come richiesto dalla normativa 🪪📸.
+Grazie mille in anticipo 🙏😊.`,
+  es: `🗝️ Check-in & documentos
+El check-in será self check-in — te enviaré todas las instrucciones detalladas en breve 🏡🔐.
+A la llegada, te pido amablemente que me envíes una foto de los documentos de identidad de todos los huéspedes (anverso y reverso si es posible), como exige la normativa italiana 🪪📸.
+Muchas gracias de antemano 🙏😊.`
+};
+
+var recBlock = {
+  en: `🌟 Recommendations & experiences
+If you'd like, I'll be happy to recommend unique experiences in Rome: private tours, authentic food tastings, guided visits, or local tips to enjoy the city in a special way 🏛️🍷🚶‍♂️✨.`,
+  it: `🌟 Consigli & esperienze
+Se vuoi, sono felice di consigliarti esperienze speciali a Roma: tour privati, degustazioni autentiche, visite guidate o consigli locali per vivere la città in modo unico 🏛️🍷🍝✨.`,
+  es: `🌟 Consejos y experiencias
+Si lo deseas, estaré encantado de recomendarte experiencias especiales en Roma: tours privados, degustaciones auténticas, visitas guiadas o planes locales para disfrutar la ciudad de una forma única 🏛️🍷🚶‍♂️✨.`
+};
+
+var closingBlock = {
+  en: `📩 I'll send you the full self check-in instructions very soon 🗝️😊.
+For any questions, needs, or just a tip, feel free to write anytime — I'm always here to help 💬🤍.
+I'm really looking forward to welcoming you and making sure you have a wonderful stay in Rome! 🇮🇹✨`,
+  it: `📩 Ti invierò a breve tutte le istruzioni di check-in 🗝️😊.
+Per qualsiasi domanda, necessità o consiglio al volo, scrivimi in qualsiasi momento — sono sempre disponibile 💬🤍.
+Non vedo l'ora di darvi il benvenuto e farvi vivere un bellissimo soggiorno a Roma! 🇮🇹✨`,
+  es: `📩 En breve recibirás todas las instrucciones de check-in 🗝️😊.
+Para cualquier duda, necesidad o consejo, escríbeme en cualquier momento — estaré encantado de ayudarte 💬🤍.
+¡Tengo muchas ganas de darte la bienvenida y hacer que tu estancia en Roma sea inolvidable! 🇮🇹✨`
+};
+
+var introNew = {
+  en: (name) => `Hi [NOME] 😊✨
+I'm Fabio, the host of your apartment here in Rome 🏛️🇮🇹.
+I'm writing here so we can stay in touch easily and quickly throughout your stay 📲💬.
+It will be a real pleasure to welcome you very soon! 🙌🤍`,
+  it: (name) => `Ciao [NOME] 😊✨
+Sono Fabio, l'host del tuo appartamento qui a Roma 🏛️🇮🇹.
+Ti scrivo qui così possiamo restare facilmente in contatto durante il soggiorno 📲💬.
+Sarà un vero piacere accoglierti molto presto! 🙌🤍`,
+  es: (name) => `¡Hola [NOME]! 😊✨
+Soy Fabio, el anfitrión de tu apartamento aquí en Roma 🏛️🇮🇹.
+Te escribo aquí para que podamos comunicarnos de forma fácil y directa durante tu estancia 📲💬.
+¡Será un verdadero placer darte la bienvenida muy pronto! 🙌🤍`
+};
+
+var introKnown = {
+  en: () => `Hi [NOME]! 😊✨
+How are you? Everything okay for your arrival?`,
+  it: () => `Ciao [NOME]! 😊✨
+Come va? Tutto pronto per l'arrivo?`,
+  es: () => `¡Hola [NOME]! 😊✨
+¿Cómo estás? ¿Todo listo para la llegada?`
+};
+
+function buildPreCheckin(lang, casa, arrivo, piatt, known) {
+  const L = lang;
+  const intro = known ? introKnown[L]() : introNew[L]();
+
+  let checkinBlock = "";
+  if (L === "en") {
+    if (arrivo === "after15") checkinBlock = `🕑 Check-in information
+The official check-in time is from 3:00 PM onwards.
+Since you'll be arriving around [ORA ARRIVO], that works perfectly for us! 🤩👌
+Please let me know when you're on your way and when you arrive 🚖📍, so I can be available if you need anything 😊.
+If you need tips on how to reach the apartment, feel free to ask — happy to help 💙🙂.`;
+    else if (arrivo === "13to15") checkinBlock = `🕑 Check-in information
+The official check-in time is from 3:00 PM onwards.
+Since you'll be arriving around [ORA ARRIVO], that's almost perfect! 🤩👌
+When you arrive, the cleaning staff may still be inside the apartment 🧹✨.
+In that case, you're welcome to leave your luggage inside 🧳 and wait outside for a few minutes while they finish up 😊🙏.
+Usually the apartment is ready by around 2:30 PM, so the wait should be very short ⏳😉.
+Either way I'll keep you updated, and if they finish earlier I'll let you know straight away!
+Please let me know when you're on your way 🚖📍 so I can stay available for anything you need 😊.
+If you need tips on how to reach us, just ask 💙🙂.`;
+    else if (arrivo === "1130to13") checkinBlock = `🕑 Check-in information
+The official check-in time is from 3:00 PM onwards.
+Since you'll be arriving around [ORA ARRIVO], you're very welcome to come by to drop off your luggage and pick up the keys 🔑 🧳.
+Please note that the cleaning team will still be working inside the apartment 🧹✨ — they'll show you where to leave your bags.
+After that, I'd ask you to step outside for a bit so they can finish up, and you'll be able to come back once everything is ready 😊.
+Usually the apartment is fully ready by around 2:30 PM 🏡✨.
+If it's more practical for you, I can also recommend some luggage storage options near Termini or close to the apartment (San Giovanni) 🧳, so you can explore the city without your bags in the meantime!
+Right in front of the building there's a lovely local bar where you can relax with a coffee ☕😊.
+I'll keep you updated as things progress — please also keep me posted when you're at the airport or on your way ✈️🚖.`;
+    else checkinBlock = `🕑 Check-in information
+The official check-in time is from 3:00 PM onwards.
+Since the previous guests check out at 10:00 AM, we need some time to clean and prepare the apartment carefully 🧹✨.
+For this reason, I'd ask you to arrive no earlier than 11:30–12:00 PM.
+You're of course welcome to come by at that time to drop off your luggage and pick up the keys 🔑🧳 — the cleaning team will be inside and will show you where to leave your bags.
+After dropping off your bags, I'll ask you to step outside for a bit while they finish up, and I'll let you know as soon as the apartment is fully ready 😊.
+Usually everything is done by around 2:30 PM — but if the previous guests leave earlier and cleaning finishes sooner, I'll let you know right away! 🙌
+In the meantime, if it helps, I can recommend some luggage storage options near Termini or close to the apartment 🧳.
+Right in front of the building there's also a lovely bar for a coffee while you wait ☕😊.
+Please keep me posted when you're at the airport and on your way ✈️🚖, so I can be available for anything you need.`;
+  } else if (L === "it") {
+    if (arrivo === "after15") checkinBlock = `🕑 Informazioni check-in
+L'orario ufficiale di check-in è dalle 15:00 in poi.
+Visto che arriverai intorno alle [ORA ARRIVO], va benissimo! 🤩👌
+Fammi sapere quando sei in viaggio e quando sei nei pressi dell'appartamento 🚖📍, così resto disponibile per qualsiasi necessità 😊.
+Se hai bisogno di indicazioni per raggiungere casa, chiedimi pure — sono felice di aiutarti 💙🙂.`;
+    else if (arrivo === "13to15") checkinBlock = `🕑 Informazioni check-in
+L'orario ufficiale di check-in è dalle 15:00 in poi.
+Visto che arriverai intorno alle [ORA ARRIVO], sei quasi in orario perfetto! 🤩👌
+Quando arrivi potrebbe esserci ancora lo staff delle pulizie in casa 🧹✨.
+In quel caso puoi lasciare tranquillamente le valigie dentro 🧳 e attendere fuori qualche minuto mentre terminano 😊🙏.
+Di solito l'appartamento è pronto verso le 14:30, quindi l'attesa sarà davvero breve ⏳😉.
+In ogni caso ti aggiorno, e se finissero prima te lo faccio sapere subito!
+Fammi sapere quando sei in viaggio 🚖📍 così resto disponibile 😊.
+Se hai bisogno di indicazioni per raggiungere casa, chiedimi pure 💙🙂.`;
+    else if (arrivo === "1130to13") checkinBlock = `🕑 Informazioni check-in
+L'orario ufficiale di check-in è dalle 15:00 in poi.
+Visto che arriverai intorno alle [ORA ARRIVO], puoi passare a depositare i bagagli e ritirare le chiavi 🔑🧳 senza problemi.
+Tieni presente che lo staff delle pulizie sarà ancora al lavoro in casa 🧹✨ — ti mostreranno dove lasciare le valigie.
+Dopodiché ti chiederei di uscire qualche minuto così possono terminare, e poi potrai rientrare quando tutto è pronto 😊.
+Di solito l'appartamento è pronto verso le 14:30 🏡✨.
+Se può esserti più comodo, posso anche consigliarti qualche deposito bagagli vicino a Termini o all'appartamento (San Giovanni) 🧳, così puoi goderti la città senza portarti le valigie dietro!
+Proprio davanti al palazzo c'è anche un bar carino dove rilassarti con un caffè ☕😊.
+Tienimi aggiornato quando sei all'aeroporto o in viaggio ✈️🚖.`;
+    else checkinBlock = `🕑 Informazioni check-in
+L'orario ufficiale di check-in è dalle 15:00 in poi.
+Poiché gli ospiti precedenti effettuano il checkout alle 10:00, abbiamo bisogno di tempo per pulire e preparare l'appartamento con cura 🧹✨.
+Per questo motivo ti chiedo di non arrivare prima delle 11:30–12:00.
+Puoi comunque venire in quell'orario a depositare i bagagli e ritirare le chiavi 🔑🧳 — lo staff sarà dentro e ti mostrerà dove lasciarli.
+Dopo aver lasciato i bagagli, ti chiederò di uscire qualche minuto così possono finire, e ti farò sapere non appena l'appartamento è pronto 😊.
+Di solito tutto è sistemato verso le 14:30 — ma se gli ospiti precedenti escono prima e le pulizie finiscono prima, te lo faccio sapere subito! 🙌
+Nel frattempo, se può esserti utile, posso consigliarti depositi bagagli vicino a Termini o all'appartamento 🧳.
+Proprio davanti al palazzo c'è anche un bar dove aspettare con un caffè ☕😊.
+Tienimi aggiornato quando sei all'aeroporto e in viaggio ✈️🚖.`;
+  } else {
+    if (arrivo === "after15") checkinBlock = `🕑 Información de check-in
+El horario oficial de check-in es a partir de las 15:00.
+Como llegarás alrededor de las [HORA DE LLEGADA], ¡nos viene perfecto! 🤩👌
+Avísame cuando estés de camino y cuando llegues al apartamento 🚖📍, así estaré disponible para cualquier cosa 😊.
+Si necesitas indicaciones para llegar, no dudes en preguntarme — estaré encantado de ayudarte 💙🙂.`;
+    else if (arrivo === "13to15") checkinBlock = `🕑 Información de check-in
+El horario oficial de check-in es a partir de las 15:00.
+Como llegarás alrededor de las [HORA DE LLEGADA], ¡casi perfecto! 🤩👌
+Cuando llegues, es posible que el equipo de limpieza aún esté en el apartamento 🧹✨.
+En ese caso puedes dejar las maletas dentro 🧳 y esperar fuera unos minutos mientras terminan 😊🙏.
+Normalmente el apartamento está listo hacia las 14:30, así que la espera será muy breve ⏳😉.
+De todas formas te mantendré informado, y si terminan antes te aviso enseguida.
+Avísame cuando estés de camino 🚖📍 para estar disponible 😊.
+Si necesitas indicaciones para llegar, pregúntame 💙🙂.`;
+    else if (arrivo === "1130to13") checkinBlock = `🕑 Información de check-in
+El horario oficial de check-in es a partir de las 15:00.
+Como llegarás alrededor de las [HORA DE LLEGADA], puedes pasar a dejar el equipaje y recoger las llaves 🔑🧳 sin problema.
+Ten en cuenta que el equipo de limpieza seguirá trabajando dentro 🧹✨ — te indicarán dónde dejar las maletas.
+Después te pediría que salieras un momento para que puedan terminar, y podrás volver cuando todo esté listo 😊.
+Normalmente el apartamento está listo hacia las 14:30 🏡✨.
+Si te resulta más cómodo, también puedo recomendarte algunas consignas de equipaje cerca de Termini o del apartamento 🧳.
+Justo enfrente del edificio hay un bar agradable donde puedes tomar un café mientras esperas ☕😊.
+Avísame cuando estés en el aeropuerto o de camino ✈️🚖.`;
+    else checkinBlock = `🕑 Información de check-in
+El horario oficial de check-in es a partir de las 15:00.
+Como los huéspedes anteriores hacen el checkout a las 10:00, necesitamos tiempo para limpiar y preparar el apartamento 🧹✨.
+Por eso te pido que no llegues antes de las 11:30–12:00.
+Puedes venir a esa hora a dejar el equipaje y recoger las llaves 🔑🧳 — el equipo estará dentro y te indicará dónde dejar las maletas.
+Tras dejar el equipaje, te pediría que salieras un momento para que puedan terminar, y te avisaré en cuanto el apartamento esté listo 😊.
+Normalmente todo está preparado hacia las 14:30 — pero si los huéspedes anteriores salen antes y la limpieza termina antes, ¡te aviso de inmediato! 🙌
+Mientras tanto, si te es útil, puedo recomendarte consignas de equipaje cerca de Termini o del apartamento 🧳.
+Justo enfrente hay un bar para tomar un café mientras esperas ☕😊.
+Avísame cuando estés en el aeropuerto o de camino ✈️🚖.`;
+  }
+
+  const taxSection = piatt === "bkg" ? "\n\n" + taxBlock[L] : "";
+  const recsSection = "\n\n" + recBlock[L];
+  const closing = "\n\n" + closingBlock[L];
+  const docs = "\n\n" + docsBlock[L];
+
+  return `${intro}\n\n${checkinBlock}${docs}${taxSection}${recsSection}${closing}`;
+}
+
+var reviewBlock = {
+  bkg: {
+    en: `⭐ One small favour
+If you enjoyed your stay and found the apartment comfortable, clean, and our tips helpful 🗺️, I'd be truly grateful if you could leave us a review on Booking with a score of 10 ⭐.
+It only takes a few minutes ⏳, but it means the world to us — it helps us grow and keep welcoming guests in the best way possible 🌟.
+We're also just one step away from achieving Superhost status, so your support would be incredibly important! 🙏`,
+    it: `⭐ Un piccolo favore
+Se ti sei trovato bene e hai trovato l'appartamento confortevole, pulito e i nostri consigli utili 🗺️, mi farebbe davvero piacere se potessi lasciarci una recensione da 10⭐ su Booking.
+Richiede solo pochi minuti ⏳, ma per noi significa moltissimo — ci aiuta a crescere e continuare ad accogliere ospiti nel miglior modo possibile 🌟.
+Siamo anche ad un passo dallo status Superhost, quindi il tuo supporto sarebbe incredibilmente importante! 🙏`,
+    es: `⭐ Un pequeño favor
+Si disfrutaste tu estancia y encontraste el apartamento cómodo, limpio y nuestros consejos útiles 🗺️, te estaría muy agradecido si pudieras dejarnos una reseña de 10⭐ en Booking.
+Solo lleva unos minutos ⏳, pero para nosotros significa muchísimo — nos ayuda a crecer y seguir recibiendo a futuros huéspedes de la mejor manera posible 🌟.
+¡Estamos a un paso del estatus Superanfitrión, así que tu apoyo sería increíblemente importante! 🙏`
+  },
+  abn: {
+    en: `⭐ One small favour
+If you enjoyed your stay and found the apartment comfortable and clean 🗺️, I'd be truly grateful if you could leave us a 5⭐ review on Airbnb.
+It only takes a few minutes ⏳, but it means the world to us — it helps us grow and keep welcoming guests in the best way 🌟.
+We're also just one step away from Superhost status, so your support would be incredibly important! 🙏`,
+    it: `⭐ Un piccolo favore
+Se ti sei trovato bene e hai trovato l'appartamento confortevole e pulito, mi farebbe davvero piacere se potessi lasciarci una recensione da 5⭐ su Airbnb.
+Richiede solo pochi minuti ⏳, ma per noi significa moltissimo 🌟.
+Siamo anche ad un passo dallo status Superhost! 🙏`,
+    es: `⭐ Un pequeño favor
+Si disfrutaste tu estancia y encontraste el apartamento cómodo y limpio, te estaría muy agradecido si pudieras dejarnos una reseña de 5⭐ en Airbnb.
+Solo lleva unos minutos ⏳, pero para nosotros significa muchísimo 🌟.
+¡Estamos a un paso del estatus Superanfitrión! 🙏`
+  }
+};
+
+var checkoutClosing = {
+  en: `It's truly been a pleasure hosting you! I really hope you felt comfortable and enjoyed some wonderful moments here in Rome ❤️🇮🇹.
+You'll always be more than welcome whenever you decide to come back 🤗.
+
+Next time you're in Rome, feel free to contact me directly — we're also adding new apartments 🏠✨.
+
+You can also follow us on our website:
+🌐 ${WEB}
+
+Thank you so much for everything! 🙏💫`,
+  it: `È stato davvero un grande piacere ospitarvi! Spero che abbiate trovato l'appartamento confortevole e che abbiate trascorso bei momenti a Roma ❤️🇮🇹.
+Sarete sempre i benvenuti ogni volta che tornerete 🤗.
+
+La prossima volta che sarai a Roma, contattami direttamente — stiamo anche aggiungendo nuovi appartamenti 🏠✨.
+
+Seguici anche sul nostro sito:
+🌐 ${WEB}
+
+Grazie di cuore per tutto! 🙏💫`,
+  es: `¡Ha sido un verdadero placer teneros aquí! Espero que os hayáis sentido cómodos y que hayáis disfrutado de momentos maravillosos en Roma ❤️🇮🇹.
+Siempre seréis bienvenidos cuando decidáis volver 🤗.
+
+La próxima vez que estéis en Roma, no dudéis en contactarme directamente — también estamos añadiendo nuevos apartamentos 🏠✨.
+
+Seguidnos en nuestra web:
+🌐 ${WEB}
+
+¡Muchas gracias por todo! 🙏💫`
+};
+
+function buildCheckout(lang, piatt, tipo, withTax) {
+  const L = lang;
+  let intro = "";
+  if (L === "en") intro = `Hi [NOME]! 👋🏻\nI hope you're enjoying your stay in Rome 😊\nUnluckily, tonight is your last night in our home 🏠`;
+  else if (L === "it") intro = `Buonasera [NOME]! 👋🏻\nSpero che stiate godendo al massimo della città! 😊\nPurtroppo questa è la vostra ultima notte nel nostro appartamento 🏠`;
+  else intro = `¡Buenas noches [NOMBRE]! 👋🏻\nEspero que estéis disfrutando al máximo de la ciudad 😊\nPor desgracia, esta es vuestra última noche en nuestro apartamento 🏠`;
+
+  let taxReminder = "";
+  if (withTax) {
+    if (L === "en") taxReminder = `\n💰 As agreed, tomorrow please leave the city tax (€[IMPORTO TASSA]) on the table before you check out. If you don't have exact change, no worries — just round it to the nearest convenient amount 😊.`;
+    else if (L === "it") taxReminder = `\n💰 Come concordato, domani ti chiedo di lasciare la tassa di soggiorno (€[IMPORTO TASSA]) sul tavolo prima del checkout. Se non hai il resto esatto, non preoccuparti — arrotonda pure 😊.`;
+    else taxReminder = `\n💰 Como acordamos, mañana por favor deja la tasa turística (€[IMPORTE TASA]) sobre la mesa antes del check-out. Si no tienes el cambio exacto, no te preocupes — redondea al importe más cómodo 😊.`;
+  }
+
+  let checkoutInfo = "";
+  if (tipo === "standard") {
+    if (L === "en") checkoutInfo = `\n🕙 Check-out is by 10:00 AM.\n\n📝 Check-out procedure:\n1️⃣ Leave the keys 🔑 on the table.\n${withTax ? "2️⃣ Leave the city tax cash 💶 on the table.\n3️⃣ Take a photo 📸 of the keys" + (withTax ? " and the cash" : "") + " and send it to me.\n4️⃣ Close the door 🚪." : "2️⃣ Take a photo 📸 of the keys and send it to me.\n3️⃣ Close the door 🚪."}\n\n👉 The cleaning team will arrive shortly after. If you're still inside, they'll simply knock 😉.`;
+    else if (L === "it") checkoutInfo = `\n🕙 Il checkout è entro le 10:00.\n\n📝 Procedura check-out:\n1️⃣ Lascia le chiavi 🔑 sul tavolo.\n${withTax ? "2️⃣ Lascia la tassa di soggiorno 💶 sul tavolo.\n3️⃣ Fai una foto 📸 alle chiavi e ai contanti e mandamela.\n4️⃣ Chiudi la porta 🚪." : "2️⃣ Fai una foto 📸 alle chiavi e mandamela.\n3️⃣ Chiudi la porta 🚪."}\n\n👉 Il team delle pulizie arriverà poco dopo. Se sei ancora dentro, busseranno 😉.`;
+    else checkoutInfo = `\n🕙 El check-out es antes de las 10:00.\n\n📝 Procedimiento de check-out:\n1️⃣ Deja las llaves 🔑 sobre la mesa.\n${withTax ? "2️⃣ Deja la tasa turística 💶 sobre la mesa.\n3️⃣ Hazte una foto 📸 de las llaves y el dinero y envíamela.\n4️⃣ Cierra la puerta 🚪." : "2️⃣ Hazte una foto 📸 de las llaves y envíamela.\n3️⃣ Cierra la puerta 🚪."}\n\n👉 El equipo de limpieza llegará poco después. Si aún estás dentro, simplemente llamarán a la puerta 😉.`;
+  } else if (tipo === "bags13") {
+    if (L === "en") checkoutInfo = `\n🕙 Check-out is by 10:00 AM — however, as agreed, you're welcome to leave your luggage until 1:00 PM.\nI've confirmed with the cleaning team that they'll arrive at 1:00 PM, so you're welcome to stay until then if you prefer 😊.\nAfter 1:00 PM, please drop your bags at a nearby luggage storage.\n\n📝 Check-out procedure:\n1️⃣ At 10:00 AM please vacate the apartment so the cleaning team can start.\n2️⃣ By 1:00 PM (no later — new guests arrive at 1:30 PM 🏃), collect your keys 🔑 and hand them to the cleaning team who will be waiting for you.\n3️⃣ If you can, take a photo 📸 of the keys at handover and send it to me.\n\n👉 The cleaning team will be there, so don't worry — they'll wait for you 😊.`;
+    else if (L === "it") checkoutInfo = `\n🕙 Il checkout è entro le 10:00 — come da accordi, puoi però lasciare i bagagli fino alle 13:00.\nHo confermato con il team delle pulizie che arriveranno alle 13:00, quindi puoi fermarti fino ad allora se preferisci 😊.\nDopo le 13:00 ti chiedo di portare i bagagli a un deposito nelle vicinanze.\n\n📝 Procedura check-out:\n1️⃣ Alle 10:00 lascia libero l'appartamento così i ragazzi delle pulizie possono iniziare.\n2️⃣ Entro le 13:00 (non oltre — abbiamo nuovi ospiti in arrivo alle 13:30 🏃), riporta le chiavi 🔑 e consegnale ai ragazzi delle pulizie che ti aspetteranno.\n3️⃣ Se riesci, fai una foto 📸 delle chiavi alla consegna e inviamela.\n\n👉 Il team sarà lì ad aspettarti, quindi non preoccuparti 😊.`;
+    else checkoutInfo = `\n🕙 El check-out es antes de las 10:00 — sin embargo, como acordamos, puedes dejar el equipaje hasta la 1:00 PM.\nHe confirmado con el equipo de limpieza que llegarán a la 1:00 PM, así que puedes quedarte hasta entonces si prefieres 😊.\nDespués de la 1:00 PM, te pido que lleves el equipaje a una consigna cercana.\n\n📝 Procedimiento de check-out:\n1️⃣ A las 10:00 deja el apartamento libre para que el equipo de limpieza pueda empezar.\n2️⃣ Antes de la 1:00 PM (no más tarde — llegan nuevos huéspedes a la 1:30 PM 🏃), recoge las llaves 🔑 y entrégaselas al equipo de limpieza que te estará esperando.\n3️⃣ Si puedes, hazte una foto 📸 de las llaves al entregarlas y envíamela.\n\n👉 El equipo estará allí esperándote, no te preocupes 😊.`;
+  } else {
+    if (L === "en") checkoutInfo = `\n🕙 As agreed, you can stay until 1:00 PM before checking out.\nPlease vacate the apartment by 1:00 PM at the latest, as new guests will be arriving shortly after.\n\n📝 Check-out procedure:\n1️⃣ Leave the keys 🔑 on the table.\n${withTax ? "2️⃣ Leave the city tax cash 💶 on the table.\n3️⃣ Take a photo 📸 of the keys" + (withTax ? " and the cash" : "") + " and send it to me.\n4️⃣ Close the door 🚪." : "2️⃣ Take a photo 📸 of the keys and send it to me.\n3️⃣ Close the door 🚪."}\n\n👉 The cleaning team will arrive shortly after 😊.`;
+    else if (L === "it") checkoutInfo = `\n🕙 Come da accordi, puoi fermarti fino alle 13:00.\nTi chiedo di lasciare l'appartamento entro le 13:00 al massimo, poiché i nuovi ospiti arriveranno poco dopo.\n\n📝 Procedura check-out:\n1️⃣ Lascia le chiavi 🔑 sul tavolo.\n${withTax ? "2️⃣ Lascia la tassa di soggiorno 💶 sul tavolo.\n3️⃣ Fai una foto 📸 alle chiavi e ai contanti e mandamela.\n4️⃣ Chiudi la porta 🚪." : "2️⃣ Fai una foto 📸 alle chiavi e mandamela.\n3️⃣ Chiudi la porta 🚪."}\n\n👉 Il team delle pulizie arriverà poco dopo 😊.`;
+    else checkoutInfo = `\n🕙 Como acordamos, podéis quedaros hasta la 1:00 PM.\nOs pido que dejéis el apartamento antes de la 1:00 PM, ya que los nuevos huéspedes llegarán poco después.\n\n📝 Procedimiento de check-out:\n1️⃣ Deja las llaves 🔑 sobre la mesa.\n${withTax ? "2️⃣ Deja la tasa turística 💶 sobre la mesa.\n3️⃣ Hazte una foto 📸 de las llaves y el dinero y envíamela.\n4️⃣ Cierra la puerta 🚪." : "2️⃣ Hazte una foto 📸 de las llaves y envíamela.\n3️⃣ Cierra la puerta 🚪."}\n\n👉 El equipo de limpieza llegará poco después 😊.`;
+  }
+
+  return `${intro}${taxReminder}${checkoutInfo}\n\n${reviewBlock[piatt][L]}\n\n${checkoutClosing[L]}`;
+}
+
+var reminderText = {
+  en: `Hi [NOME]! 😊
+Just wanted to reach out ahead of tomorrow — can't believe check-in day is almost here! 🎉🏡
+I'll be sending you the self check-in instructions shortly, so keep an eye out for my message 🗝️📲.
+As a reminder — please remember to send me the photos of all guests' ID documents upon arrival 🪪📸, as required by local regulations.
+[SE BOOKING: Also, a quick reminder about the city tax — just to confirm how we're organising it 😊]
+Feel free to write anytime if you have questions or need anything before you arrive — I'm here! 💬
+Looking forward to welcoming you tomorrow 🇮🇹✨`,
+  it: `Ciao [NOME]! 😊
+Volevo farti un saluto prima di domani — non ci credo che il giorno del check-in è quasi arrivato! 🎉🏡
+Ti invierò a breve le istruzioni per il self check-in, tieniti pronto per il mio messaggio 🗝️📲.
+Ricorda che all'arrivo ti chiedo di inviarmi le foto dei documenti d'identità di tutti gli ospiti 🪪📸, come richiesto dalla normativa.
+[SE BOOKING: Anche un reminder sulla tassa di soggiorno — solo per confermare come ci organizziamo 😊]
+Scrivimi pure per qualsiasi cosa prima dell'arrivo — sono qui! 💬
+Non vedo l'ora di accoglierti domani 🇮🇹✨`,
+  es: `¡Hola [NOMBRE]! 😊
+Quería saludarte antes de mañana — ¡no me puedo creer que el día del check-in esté casi aquí! 🎉🏡
+En breve te enviaré las instrucciones de self check-in, así que estate pendiente de mi mensaje 🗝️📲.
+Recuerda que a la llegada te pediré fotos de los documentos de identidad de todos los huéspedes 🪪📸, como exige la normativa.
+[SI BOOKING: También un recordatorio sobre la tasa turística — solo para confirmar cómo nos organizamos 😊]
+Escríbeme cuando quieras si tienes dudas o necesitas algo antes de llegar — ¡aquí estoy! 💬
+¡Tengo muchas ganas de darte la bienvenida mañana! 🇮🇹✨`
+};
+
+var inhouseText = {
+  lat: {
+    en: `Hi [NOME]! 😊 Welcome to Rome and to your new home for the next few days! 🏡✨
+
+Here's everything you need to know:
+
+📶 Wi-Fi
+Network: Domus Laterani Wifi
+Password: Domuslaterani24!
+(The modem is next to the table in the living room.)
+
+☕🍞 Kitchen
+Help yourself to coffee, breakfast pastries, water, and juice from the fridge! 🧃
+
+📺❄️ Remote Controls
+All remotes (TV and air conditioning) are in each room — very easy to use!
+
+🧺 Washing Machine
+It's on the terrace. Detergent and softener are available! 🫧
+(If you need help, just message me.)
+
+🧼 Iron
+The iron and ironing board are in the closet next to the kitchen.
+
+💇 Hair Dryer
+In the bathroom with the bathtub, in a drawer under the sink.
+
+🛏️ Blankets
+Extra blankets are in the closets.
+
+🗑️♻️ Trash
+Recycling is available but not mandatory — feel free to use all bins as general waste.
+You can throw bags in the bins right in front of the building.
+If not, the cleaning staff will take care of it at checkout.
+
+🛒 Supermarket
+There's a large, well-stocked supermarket right across the street! 🏠
+
+🛎️ A Few Important Things
+1️⃣ Elevator 🔒
+Please always make sure the doors are properly closed and the red light on the keypad turns off before you leave.
+2️⃣ Small Keys 🔑
+They are delicate — use them gently, don't force them.
+I recommend holding the door with one hand while unlocking — the weight can break the key (it has happened! 😅).
+
+[SE NON HANNO ANCORA MANDATO DOCUMENTI: 🪪 Documents — could you please send me the photos of all guests' ID documents when you have a moment? Thank you! 🙏]
+[SE BOOKING E NON HANNO PAGATO TASSA: 💶 City tax — just a quick reminder to organise the payment when convenient 😊]
+
+If you need anything — restaurant tips, transport info, local experiences — just write! 😎
+Enjoy Rome! 🇮🇹✨`,
+    it: `Ciao [NOME]! 😊 Benvenuto a Roma e nella vostra nuova casa per i prossimi giorni! 🏡✨
+
+Ecco tutto quello che ti serve sapere:
+
+📶 Wi-Fi
+Rete: Domus Laterani Wifi
+Password: Domuslaterani24!
+(Il modem è vicino al tavolo in salotto.)
+
+☕🍞 Cucina
+Sentiti libero di prendere caffè, colazione, acqua e succo dal frigo! 🧃
+
+📺❄️ Telecomandi
+Trovi tutti i telecomandi (TV e aria condizionata) nelle rispettive stanze — facilissimi da usare!
+
+🧺 Lavatrice
+È sulla terrazza. Detersivo e ammorbidente disponibili! 🫧
+(Se hai bisogno di aiuto, scrivimi.)
+
+🧼 Ferro da stiro
+Il ferro e la tavola da stiro sono nell'armadio vicino alla cucina.
+
+💇 Phon
+Lo trovi nel bagno con la vasca, in un cassetto sotto il lavandino.
+
+🛏️ Coperte
+Coperte extra negli armadi.
+
+🗑️♻️ Spazzatura
+La raccolta differenziata è disponibile ma non obbligatoria — puoi usare tutti i cestini come indifferenziata.
+Puoi buttare i sacchi nei bidoni davanti al palazzo.
+Altrimenti ci pensano i ragazzi delle pulizie al checkout.
+
+🛒 Supermercato
+C'è un supermercato grande e ben fornito proprio di fronte al palazzo! 🏠
+
+🛎️ Cose Importanti
+1️⃣ Ascensore 🔒
+Assicurati sempre che le porte siano ben chiuse e che la luce rossa sul tastierino si spenga prima di allontanarti.
+2️⃣ Chiavi piccole 🔑
+Sono delicate — usale con gentilezza, non forzarle mai.
+Ti consiglio di tenere la porta con una mano mentre apri — il peso può rompere la chiave (è già successo! 😅).
+
+[SE NON HANNO ANCORA MANDATO DOCUMENTI: 🪪 Documenti — potresti inviarmi le foto dei documenti di tutti gli ospiti appena puoi? Grazie! 🙏]
+[SE BOOKING E NON HANNO PAGATO TASSA: 💶 Tassa di soggiorno — solo un reminder per organizzarci quando comodo 😊]
+
+Per qualsiasi cosa — consigli ristoranti, trasporti, esperienze locali — scrivimi! 😎
+Godetevi Roma! 🇮🇹✨`,
+    es: `¡Hola [NOMBRE]! 😊 ¡Bienvenido a Roma y a tu nuevo hogar para los próximos días! 🏡✨
+
+Aquí tienes todo lo que necesitas saber:
+
+📶 Wi-Fi
+Red: Domus Laterani Wifi
+Contraseña: Domuslaterani24!
+(El módem está al lado de la mesa del salón.)
+
+☕🍞 Cocina
+¡Siéntete libre de tomar café, bollería, agua y zumo del frigorífico! 🧃
+
+📺❄️ Mandos a distancia
+Encontrarás todos los mandos (TV y aire acondicionado) en cada habitación — ¡muy fáciles de usar!
+
+🧺 Lavadora
+Está en la terraza. ¡Detergente y suavizante disponibles! 🫧
+(Si necesitas ayuda, mándame un mensaje.)
+
+🧼 Plancha
+La plancha y la tabla de planchar están en el armario junto a la cocina.
+
+💇 Secador de pelo
+Lo encontrarás en el baño con bañera, en un cajón bajo el lavabo.
+
+🛏️ Mantas
+Mantas extra en los armarios.
+
+🗑️♻️ Basura
+El reciclaje está disponible pero no es obligatorio — puedes usar todos los cubos como basura general.
+Puedes tirar las bolsas en los contenedores frente al edificio.
+Si no, el equipo de limpieza se encargará en el check-out.
+
+🛒 Supermercado
+¡Hay un supermercado grande y bien surtido justo enfrente del edificio! 🏠
+
+🛎️ Cosas Importantes
+1️⃣ Ascensor 🔒
+Asegúrate siempre de que las puertas estén bien cerradas y de que la luz roja del panel se apague antes de marcharte.
+2️⃣ Llaves pequeñas 🔑
+Son delicadas — úsalas con suavidad, no las fuerces.
+Te recomiendo sujetar la puerta con una mano mientras abres — el peso puede romper la llave (¡ya ha pasado! 😅).
+
+[SI AÚN NO HAN ENVIADO DOCUMENTOS: 🪪 Documentos — ¿podrías enviarme las fotos de los documentos de todos los huéspedes cuando puedas? ¡Gracias! 🙏]
+[SI BOOKING Y NO HAN PAGADO TASA: 💶 Tasa turística — solo un recordatorio para organizarnos cuando te venga bien 😊]
+
+Para cualquier cosa — recomendaciones de restaurantes, transporte, experiencias locales — ¡escríbeme! 😎
+¡Disfrutad de Roma! 🇮🇹✨`
+  },
+  col: {
+    en: `Hi [NOME]! 😊 Welcome to Rome and to Domus Colosseum — your new home for the next few days! 🏡✨
+
+Here's everything you need to know:
+
+📶 Wi-Fi
+Network: Domus Colosseum Wifi
+Password: Domuscolosseum26!
+(The modem is next to the sofa in the living room.)
+
+☕🍞 Kitchen
+Help yourself to coffee, breakfast pastries, water, and juice from the fridge! 🧃
+
+📺❄️ Remote Controls
+All remotes (TV and air conditioning) are in each room — very easy to use!
+
+🧼 Iron
+The iron and ironing board are in the closet next to the main door.
+
+💇 Hair Dryer
+In the bathroom, on the left.
+
+🗑️♻️ Trash
+Recycling is available but not mandatory — feel free to use all bins as general waste.
+The nearest bins are in the square — turn right as you exit the main door, about 100 metres.
+If not, the cleaning staff will take care of it at checkout.
+
+🛒 Supermarket
+There's a supermarket down the street — turn left as you exit the main door, about 50 metres 🏠.
+
+🛎️ A Few Important Things
+1️⃣ Elevator 🔒
+Please always make sure the doors are properly closed and the red light on the keypad turns off before you leave.
+
+[SE NON HANNO ANCORA MANDATO DOCUMENTI: 🪪 Documents — could you please send me the photos of all guests' ID documents when you have a moment? Thank you! 🙏]
+[SE BOOKING E NON HANNO PAGATO TASSA: 💶 City tax — just a quick reminder to organise the payment when convenient 😊]
+
+If you need anything — restaurant tips, transport info, local experiences — just write! 😎
+Enjoy Rome! 🇮🇹✨`,
+    it: `Ciao [NOME]! 😊 Benvenuto a Roma e a Domus Colosseum — la vostra nuova casa per i prossimi giorni! 🏡✨
+
+Ecco tutto quello che ti serve sapere:
+
+📶 Wi-Fi
+Rete: Domus Colosseum Wifi
+Password: Domuscolosseum26!
+(Il modem è vicino al divano in salotto.)
+
+☕🍞 Cucina
+Sentiti libero di prendere caffè, colazione, acqua e succo dal frigo! 🧃
+
+📺❄️ Telecomandi
+Trovi tutti i telecomandi (TV e aria condizionata) nelle rispettive stanze — facilissimi da usare!
+
+🧼 Ferro da stiro
+Il ferro e la tavola da stiro sono nell'armadio vicino alla porta principale.
+
+💇 Phon
+Lo trovi nel bagno, a sinistra.
+
+🗑️♻️ Spazzatura
+La raccolta differenziata è disponibile ma non obbligatoria — puoi usare tutti i cestini come indifferenziata.
+I bidoni più vicini sono in piazza — esci dal portone e gira a destra, circa 100 metri.
+Altrimenti ci pensano i ragazzi delle pulizie al checkout.
+
+🛒 Supermercato
+C'è un supermercato scendendo la strada — esci dal portone e gira a sinistra, circa 50 metri 🏠.
+
+🛎️ Cose Importanti
+1️⃣ Ascensore 🔒
+Assicurati sempre che le porte siano ben chiuse e che la luce rossa sul tastierino si spenga prima di allontanarti.
+
+[SE NON HANNO ANCORA MANDATO DOCUMENTI: 🪪 Documenti — potresti inviarmi le foto dei documenti di tutti gli ospiti appena puoi? Grazie! 🙏]
+[SE BOOKING E NON HANNO PAGATO TASSA: 💶 Tassa di soggiorno — solo un reminder per organizzarci quando comodo 😊]
+
+Per qualsiasi cosa — consigli ristoranti, trasporti, esperienze locali — scrivimi! 😎
+Godetevi Roma! 🇮🇹✨`,
+    es: `¡Hola [NOMBRE]! 😊 ¡Bienvenido a Roma y a Domus Colosseum — tu nuevo hogar para los próximos días! 🏡✨
+
+Aquí tienes todo lo que necesitas saber:
+
+📶 Wi-Fi
+Red: Domus Colosseum Wifi
+Contraseña: Domuscolosseum26!
+(El módem está al lado del sofá en el salón.)
+
+☕🍞 Cocina
+¡Siéntete libre de tomar café, bollería, agua y zumo del frigorífico! 🧃
+
+📺❄️ Mandos a distancia
+Encontrarás todos los mandos (TV y aire acondicionado) en cada habitación — ¡muy fáciles de usar!
+
+🧼 Plancha
+La plancha y la tabla de planchar están en el armario junto a la puerta principal.
+
+💇 Secador de pelo
+Lo encontrarás en el baño, a la izquierda.
+
+🗑️♻️ Basura
+El reciclaje está disponible pero no es obligatorio — puedes usar todos los cubos como basura general.
+Los contenedores más cercanos están en la plaza — sal por el portón y gira a la derecha, a unos 100 metros.
+Si no, el equipo de limpieza se encargará en el check-out.
+
+🛒 Supermercado
+Hay un supermercado bajando la calle — sal por el portón y gira a la izquierda, a unos 50 metros 🏠.
+
+🛎️ Cosas Importantes
+1️⃣ Ascensor 🔒
+Asegúrate siempre de que las puertas estén bien cerradas y de que la luz roja del panel se apague antes de marcharte.
+
+[SI AÚN NO HAN ENVIADO DOCUMENTOS: 🪪 Documentos — ¿podrías enviarme las fotos de los documentos de todos los huéspedes cuando puedas? ¡Gracias! 🙏]
+[SI BOOKING Y NO HAN PAGADO TASA: 💶 Tasa turística — solo un recordatorio para organizarnos cuando te venga bien 😊]
+
+Para cualquier cosa — recomendaciones de restaurantes, transporte, experiencias locales — ¡escríbeme! 😎
+¡Disfrutad de Roma! 🇮🇹✨`
+  }
+};
+
+var luggageText = {
+  lat: {
+    en: `Here are some convenient luggage storage options near the apartment and Termini Station 🧳:
+
+🧳 Termini Station Area
+1. Stow Your Bags – Termini Train Station
+📍 Via Filippo Turati 52, 00185 Rome
+🌐 https://www.stowyourbags.com/en/shop/rome/luggage-storage-termini-train-station-rome/
+
+2. Capital Luggage Deposit – Roma Termini
+📍 Via Giovanni Giolitti 127, 00185 Rome
+🌐 https://www.luggagedeposit.com/
+
+3. LuggageHero – Roma Termini
+📍 Near Termini Station (see website for locations)
+🌐 https://luggagehero.com/rome/roma-termini/
+
+🧳 San Giovanni Area (close to the apartment)
+1. Radical Storage – San Giovanni
+🌐 https://radicalstorage.com/luggage-storage/rome/san-giovanni
+
+2. Nannybag – San Giovanni
+🌐 https://www.nannybag.com/en/luggage-storage/san-giovanni-patoni
+
+Let me know if you need anything else! 😊`,
+    it: `Ecco alcune opzioni comode per depositare i bagagli vicino all'appartamento e alla Stazione Termini 🧳:
+
+🧳 Area Stazione Termini
+1. Stow Your Bags – Termini
+📍 Via Filippo Turati 52, 00185 Roma
+🌐 https://www.stowyourbags.com/en/shop/rome/luggage-storage-termini-train-station-rome/
+
+2. Capital Luggage Deposit – Roma Termini
+📍 Via Giovanni Giolitti 127, 00185 Roma
+🌐 https://www.luggagedeposit.com/
+
+3. LuggageHero – Roma Termini
+🌐 https://luggagehero.com/rome/roma-termini/
+
+🧳 Area San Giovanni (vicino all'appartamento)
+1. Radical Storage – San Giovanni
+🌐 https://radicalstorage.com/luggage-storage/rome/san-giovanni
+
+2. Nannybag – San Giovanni
+🌐 https://www.nannybag.com/en/luggage-storage/san-giovanni-patoni
+
+Scrivimi per qualsiasi altra cosa! 😊`,
+    es: `Aquí tienes algunas opciones convenientes para guardar el equipaje cerca del apartamento y de la Estación Termini 🧳:
+
+🧳 Área Estación Termini
+1. Stow Your Bags – Termini
+📍 Via Filippo Turati 52, 00185 Roma
+🌐 https://www.stowyourbags.com/en/shop/rome/luggage-storage-termini-train-station-rome/
+
+2. Capital Luggage Deposit – Roma Termini
+📍 Via Giovanni Giolitti 127, 00185 Roma
+🌐 https://www.luggagedeposit.com/
+
+3. LuggageHero – Roma Termini
+🌐 https://luggagehero.com/rome/roma-termini/
+
+🧳 Área San Giovanni (cerca del apartamento)
+1. Radical Storage – San Giovanni
+🌐 https://radicalstorage.com/luggage-storage/rome/san-giovanni
+
+2. Nannybag – San Giovanni
+🌐 https://www.nannybag.com/en/luggage-storage/san-giovanni-patoni
+
+¡Escríbeme si necesitas cualquier otra cosa! 😊`
+  },
+  col: {
+    en: `Here are some convenient luggage storage options near the apartment and Termini Station 🧳:
+
+🧳 Termini Station Area
+1. Stow Your Bags – Termini Train Station
+📍 Via Filippo Turati 52, 00185 Rome
+🌐 https://www.stowyourbags.com/en/shop/rome/luggage-storage-termini-train-station-rome/
+
+2. Capital Luggage Deposit – Roma Termini
+📍 Via Giovanni Giolitti 127, 00185 Rome
+🌐 https://www.luggagedeposit.com/
+
+3. LuggageHero – Roma Termini
+🌐 https://luggagehero.com/rome/roma-termini/
+
+🧳 Colosseum Area (right near the apartment!)
+1. Luggage Storage – Colosseo by Radical Storage
+📍 Via dei Santi Quattro, 00184 Rome
+🌐 https://radicalstorage.com/luggage-storage/rome/colosseo
+
+Let me know if you need anything else! 😊`,
+    it: `Ecco alcune opzioni comode per depositare i bagagli vicino all'appartamento e alla Stazione Termini 🧳:
+
+🧳 Area Stazione Termini
+1. Stow Your Bags – Termini
+📍 Via Filippo Turati 52, 00185 Roma
+🌐 https://www.stowyourbags.com/en/shop/rome/luggage-storage-termini-train-station-rome/
+
+2. Capital Luggage Deposit – Roma Termini
+📍 Via Giovanni Giolitti 127, 00185 Roma
+🌐 https://www.luggagedeposit.com/
+
+3. LuggageHero – Roma Termini
+🌐 https://luggagehero.com/rome/roma-termini/
+
+🧳 Area Colosseo (vicinissimo all'appartamento!)
+1. Radical Storage – Colosseo
+📍 Via dei Santi Quattro, 00184 Roma
+🌐 https://radicalstorage.com/luggage-storage/rome/colosseo
+
+Scrivimi per qualsiasi altra cosa! 😊`,
+    es: `Aquí tienes algunas opciones convenientes para guardar el equipaje cerca del apartamento y de la Estación Termini 🧳:
+
+🧳 Área Estación Termini
+1. Stow Your Bags – Termini
+📍 Via Filippo Turati 52, 00185 Roma
+🌐 https://www.stowyourbags.com/en/shop/rome/luggage-storage-termini-train-station-rome/
+
+2. Capital Luggage Deposit – Roma Termini
+📍 Via Giovanni Giolitti 127, 00185 Roma
+🌐 https://www.luggagedeposit.com/
+
+3. LuggageHero – Roma Termini
+🌐 https://luggagehero.com/rome/roma-termini/
+
+🧳 Área Coliseo (¡muy cerca del apartamento!)
+1. Radical Storage – Colosseo
+📍 Via dei Santi Quattro, 00184 Roma
+🌐 https://radicalstorage.com/luggage-storage/rome/colosseo
+
+¡Escríbeme si necesitas cualquier otra cosa! 😊`
+  }
+};
+
+var tipsText = {
+  lat: {
+    en: `Here are some tips to make the most of your time in Rome! 🏛️🇮🇹
+
+🗺️ Suggested Itinerary
+
+📅 DAY 1 — Vatican & Surroundings
+Start in the Vatican area — St. Peter's Basilica and the Vatican Museums are unmissable.
+Fun fact: there's a secret underground passage connecting the Vatican to Castel Sant'Angelo, once used by Popes to escape! 😱
+After your visit, walk along the Lungotevere river to the Ara Pacis Augustae — a monument dedicated to peace under Emperor Augustus ✨.
+End the day at the Gianicolo Terrace at sunset 🌅 — the view over Rome and St. Peter's Dome is pure poetry 💖.
+
+📅 DAY 2 — Ancient Rome & the Historic Centre
+Start close to home! Visit the Basilica di San Giovanni in Laterano ⛪️ and the Scala Santa, then walk 15–20 min to the Colosseum 🏟️ and Circus Maximus 🐎.
+Continue to the charming Jewish Ghetto, then along Via del Teatro Marcello to Piazza Venezia 🏛️.
+More magical option: Circus Maximus → Colosseum → Via dei Fori Imperiali — ancient ruins, imperial roads, breathtaking atmosphere! You can also admire the Baths of Caracalla on the way 🏛️.
+
+🌅 Afternoon — Heart of Rome
+From Piazza Venezia, follow Via del Corso and explore:
+➡️ Largo Chigi (Italian Parliament)
+➡️ Trevi Fountain 💧
+➡️ Pantheon ⛪️
+➡️ Piazza Navona 🎨
+➡️ Piazza di Spagna & Piazza del Popolo 🌸
+All walkable and perfect for a relaxing afternoon with coffee or gelato ☕🍦.
+
+🚇 Getting Around
+Metro Line A – San Giovanni → anywhere in the centre
+Taxi apps: Free Now / AppTaxi
+Car sharing: Enjoy | Bike & scooter sharing also available
+📍 Taxi station & bus terminal: https://maps.app.goo.gl/P3nwSnTUBYGuimh78?g_st=ipc
+
+🍽️ Restaurants Near Home (👍 = Fabio's pick)
+1. I Buoni Amici Roma 👍 — Traditional Roman, €20–30 — https://maps.app.goo.gl/QDoVXF5oGiDhusYF7?g_st=ic
+2. Sampietrino - L'Osteria di San Giovanni 👍 — Roman, €20–30 — https://maps.app.goo.gl/1WZTWHZ8RNJff4sG6?g_st=ic
+3. Osteria Faleria 👍 — Traditional Italian, €20–30 — https://maps.app.goo.gl/UGQaBcQvTFpqu4wq8?g_st=ic
+4. Spaccio Pasta 👍 — Homemade pasta specialist, €15–25 — https://maps.app.goo.gl/VAV2twqtDiUX6iot6?g_st=ic
+5. Alle Mura Ristorante 👍 — Traditional Italian, €20–35 — https://maps.app.goo.gl/Xs8XDKZQ5nXHgjFS6?g_st=ic
+6. Contesto Urbano — Contemporary Italian, €25–35 — https://maps.app.goo.gl/UA9NyHp9iY5Y4or99?g_st=ic
+7. Pepe | Ristorante San Giovanni — Classic Italian, €20–35 — https://maps.app.goo.gl/yJvGCavNR5JhSsHv9?g_st=ic
+8. Big Friends Rome — Casual Italian, €15–25 — https://maps.app.goo.gl/L7SSbpmQSh7fqYrP8?g_st=ic
+9. Osteria Feelsgood — Contemporary Italian, €20–30 — https://maps.app.goo.gl/uQwgeyWQQTEfFj39A?g_st=ic
+10. 5e28 - Cucina e Miscele — Creative Italian + cocktails, €25–40 — https://maps.app.goo.gl/sBx3L7eAXCpYy9ZV9?g_st=ic
+11. Hostaria Cannavota — Traditional Roman, €20–35 — https://maps.app.goo.gl/k1ufFq6RhSRAovGH9?g_st=ic
+
+🏛️ Tours & Experiences
+Colosseum official site: https://colosseo.it/visite-guidate/
+Guided tours: https://www.enroma.com/
+Other tours: https://www.tickets-rome.com/
+More options: https://www.civitatis.com/it/roma/
+
+Write me anytime for more tips — I'm always here! 😊🇮🇹`,
+
+    it: `Ecco qualche consiglio per vivere Roma al meglio! 🏛️🇮🇹
+
+🗺️ Itinerario Suggerito
+
+📅 GIORNO 1 — Vaticano e dintorni
+Inizia in zona Vaticano — la Basilica di San Pietro e i Musei Vaticani sono imperdibili.
+Lo sapevi che esiste un tunnel segreto che collega il Vaticano a Castel Sant'Angelo, usato dai Papi in fuga? 😱
+Dopo la visita, passeggia lungo il Lungotevere fino all'Ara Pacis Augustea ✨.
+Chiudi la giornata alla Terrazza del Gianicolo al tramonto 🌅 — la vista sui tetti di Roma è pura poesia 💖.
+
+📅 GIORNO 2 — Roma Antica e Centro Storico
+Parti da vicino a casa! Visita la Basilica di San Giovanni in Laterano ⛪️ e la Scala Santa, poi cammina 15–20 min fino al Colosseo 🏟️ e al Circo Massimo 🐎.
+Prosegui verso il Ghetto Ebraico, poi lungo Via del Teatro Marcello fino a Piazza Venezia 🏛️.
+Opzione magica: Circo Massimo → Colosseo → Via dei Fori Imperiali — rovine antiche, atmosfera imperiale! Puoi anche ammirare le Terme di Caracalla 🏛️.
+
+🌅 Pomeriggio — Cuore di Roma
+Da Piazza Venezia, percorri Via del Corso e scopri:
+➡️ Largo Chigi (sede del Parlamento)
+➡️ Fontana di Trevi 💧
+➡️ Pantheon ⛪️
+➡️ Piazza Navona 🎨
+➡️ Piazza di Spagna & Piazza del Popolo 🌸
+Tutto a piedi, perfetto per un pomeriggio rilassato con caffè o gelato ☕🍦.
+
+🚇 Come Muoversi
+Metro Linea A – San Giovanni → tutto il centro
+App taxi: Free Now / AppTaxi
+Car sharing: Enjoy | Bike e scooter sharing disponibili
+📍 Fermata taxi e terminal bus: https://maps.app.goo.gl/P3nwSnTUBYGuimh78?g_st=ipc
+
+🍽️ Ristoranti Vicino a Casa (👍 = consiglio di Fabio)
+1. I Buoni Amici Roma 👍 — Cucina romana, €20–30 — https://maps.app.goo.gl/QDoVXF5oGiDhusYF7?g_st=ic
+2. Sampietrino - L'Osteria di San Giovanni 👍 — Romana, €20–30 — https://maps.app.goo.gl/1WZTWHZ8RNJff4sG6?g_st=ic
+3. Osteria Faleria 👍 — Italiana tradizionale, €20–30 — https://maps.app.goo.gl/UGQaBcQvTFpqu4wq8?g_st=ic
+4. Spaccio Pasta 👍 — Pasta fresca, €15–25 — https://maps.app.goo.gl/VAV2twqtDiUX6iot6?g_st=ic
+5. Alle Mura Ristorante 👍 — Italiana tradizionale, €20–35 — https://maps.app.goo.gl/Xs8XDKZQ5nXHgjFS6?g_st=ic
+6. Contesto Urbano — Italiana contemporanea, €25–35 — https://maps.app.goo.gl/UA9NyHp9iY5Y4or99?g_st=ic
+7. Pepe | Ristorante San Giovanni — Italiana classica, €20–35 — https://maps.app.goo.gl/yJvGCavNR5JhSsHv9?g_st=ic
+8. Big Friends Rome — Italiana informale, €15–25 — https://maps.app.goo.gl/L7SSbpmQSh7fqYrP8?g_st=ic
+9. Osteria Feelsgood — Italiana contemporanea, €20–30 — https://maps.app.goo.gl/uQwgeyWQQTEfFj39A?g_st=ic
+10. 5e28 - Cucina e Miscele — Creativa + cocktail, €25–40 — https://maps.app.goo.gl/sBx3L7eAXCpYy9ZV9?g_st=ic
+11. Hostaria Cannavota — Romana tradizionale, €20–35 — https://maps.app.goo.gl/k1ufFq6RhSRAovGH9?g_st=ic
+
+🏛️ Tour ed Esperienze
+Sito ufficiale Colosseo: https://colosseo.it/visite-guidate/
+Visite guidate: https://www.enroma.com/
+Altre opzioni: https://www.tickets-rome.com/
+Ancora di più: https://www.civitatis.com/it/roma/
+
+Scrivimi per qualsiasi altra cosa — sono sempre qui! 😊🇮🇹`,
+
+    es: `¡Aquí tienes algunos consejos para disfrutar Roma al máximo! 🏛️🇮🇹
+
+🗺️ Itinerario Sugerido
+
+📅 DÍA 1 — Vaticano y alrededores
+Empieza en la zona del Vaticano — la Basílica de San Pedro y los Museos Vaticanos son imprescindibles.
+¿Sabías que existe un túnel secreto que conecta el Vaticano con el Castel Sant'Angelo, usado por los Papas para escapar? 😱
+Tras la visita, pasea por el Lungotevere hasta el Ara Pacis Augustae ✨.
+Cierra el día en la Terraza del Gianicolo al atardecer 🌅 — las vistas sobre los tejados de Roma son pura poesía 💖.
+
+📅 DÍA 2 — Roma Antigua y Centro Histórico
+¡Empieza cerca de casa! Visita la Basílica de San Giovanni in Laterano ⛪️ y la Scala Santa, luego camina 15–20 min hasta el Coliseo 🏟️ y el Circo Máximo 🐎.
+Sigue hacia el encantador Gueto Judío, luego por Via del Teatro Marcello hasta Piazza Venezia 🏛️.
+Opción mágica: Circo Máximo → Coliseo → Via dei Fori Imperiali — ruinas antiguas, ¡atmósfera imperial! También puedes admirar las Termas de Caracalla 🏛️.
+
+🌅 Tarde — Corazón de Roma
+Desde Piazza Venezia, sigue por Via del Corso y descubre:
+➡️ Largo Chigi (Parlamento italiano)
+➡️ Fontana de Trevi 💧
+➡️ Panteón ⛪️
+➡️ Piazza Navona 🎨
+➡️ Piazza di Spagna & Piazza del Popolo 🌸
+Todo a pie, perfecto para una tarde tranquila con café o helado ☕🍦.
+
+🚇 Cómo Moverse
+Metro Línea A – San Giovanni → todo el centro
+Apps de taxi: Free Now / AppTaxi
+Car sharing: Enjoy | Bicicletas y patinetes también disponibles
+📍 Parada de taxi y terminal de autobús: https://maps.app.goo.gl/P3nwSnTUBYGuimh78?g_st=ipc
+
+🍽️ Restaurantes Cerca de Casa (👍 = recomendación de Fabio)
+1. I Buoni Amici Roma 👍 — Cocina romana, €20–30 — https://maps.app.goo.gl/QDoVXF5oGiDhusYF7?g_st=ic
+2. Sampietrino - L'Osteria di San Giovanni 👍 — Romana, €20–30 — https://maps.app.goo.gl/1WZTWHZ8RNJff4sG6?g_st=ic
+3. Osteria Faleria 👍 — Italiana tradicional, €20–30 — https://maps.app.goo.gl/UGQaBcQvTFpqu4wq8?g_st=ic
+4. Spaccio Pasta 👍 — Pasta artesanal, €15–25 — https://maps.app.goo.gl/VAV2twqtDiUX6iot6?g_st=ic
+5. Alle Mura Ristorante 👍 — Italiana tradicional, €20–35 — https://maps.app.goo.gl/Xs8XDKZQ5nXHgjFS6?g_st=ic
+6. Contesto Urbano — Italiana contemporánea, €25–35 — https://maps.app.goo.gl/UA9NyHp9iY5Y4or99?g_st=ic
+7. Pepe | Ristorante San Giovanni — Italiana clásica, €20–35 — https://maps.app.goo.gl/yJvGCavNR5JhSsHv9?g_st=ic
+8. Big Friends Rome — Italiana informal, €15–25 — https://maps.app.goo.gl/L7SSbpmQSh7fqYrP8?g_st=ic
+9. Osteria Feelsgood — Italiana contemporánea, €20–30 — https://maps.app.goo.gl/uQwgeyWQQTEfFj39A?g_st=ic
+10. 5e28 - Cucina e Miscele — Creativa + cócteles, €25–40 — https://maps.app.goo.gl/sBx3L7eAXCpYy9ZV9?g_st=ic
+11. Hostaria Cannavota — Romana tradicional, €20–35 — https://maps.app.goo.gl/k1ufFq6RhSRAovGH9?g_st=ic
+
+🏛️ Tours y Experiencias
+Web oficial del Coliseo: https://colosseo.it/visite-guidate/
+Visitas guiadas: https://www.enroma.com/
+Más opciones: https://www.tickets-rome.com/
+Aún más: https://www.civitatis.com/it/roma/
+
+¡Escríbeme cuando quieras para más consejos — siempre estoy aquí! 😊🇮🇹`
+  },
+  col: {
+    en: `Here are some tips to make the most of your time in Rome! 🏛️🇮🇹
+
+🗺️ Suggested Itinerary
+
+📅 DAY 1 — Vatican & Surroundings
+Start in the Vatican area — St. Peter's Basilica and the Vatican Museums are unmissable.
+Fun fact: there's a secret underground passage connecting the Vatican to Castel Sant'Angelo, once used by Popes to escape! 😱
+After your visit, walk along the Lungotevere river to the Ara Pacis Augustae ✨.
+End the day at the Gianicolo Terrace at sunset 🌅 — the view is pure poetry 💖.
+
+📅 DAY 2 — Ancient Rome & the Historic Centre
+You're already right next to one of the world's greatest monuments! 🏟️
+Start with the Colosseum and Circus Maximus (both stunning from outside too).
+Then head towards the Jewish Ghetto, Via del Teatro Marcello and Piazza Venezia 🏛️.
+For a truly magical experience: Circus Maximus → Colosseum → Via dei Fori Imperiali — ancient ruins, imperial atmosphere! Also admire the Baths of Caracalla 🏛️.
+
+🌅 Afternoon — Heart of Rome
+From Piazza Venezia, follow Via del Corso:
+➡️ Largo Chigi (Italian Parliament)
+➡️ Trevi Fountain 💧
+➡️ Pantheon ⛪️
+➡️ Piazza Navona 🎨
+➡️ Piazza di Spagna & Piazza del Popolo 🌸
+All walkable — perfect for a relaxed afternoon with coffee or gelato ☕🍦.
+
+🚇 Getting Around
+Metro Line B – Colosseo → anywhere in the centre
+Taxi apps: Free Now / AppTaxi
+Car sharing: Enjoy | Bike & scooter sharing also available
+
+🍽️ Restaurants Near Home (👍 = Fabio's pick)
+1. Hostaria Isidoro — Traditional Roman, €30–50 — https://maps.app.goo.gl/EBgHj3wU6LhZYKHi8
+2. Contrario – Vineria con Cucina — Modern Italian + wine, €31–50 — https://maps.app.goo.gl/2nTg8QqRDsP5qV228
+3. Osteria Il Bocconcino — Authentic Roman, €20–35 — https://maps.app.goo.gl/4uVe2KzG8nBq3MaH9
+4. Trattoria Pizzeria Luzzi — Roman classics + wood-fired pizza, €12–20 — https://maps.app.goo.gl/f3hLxqocchqtYAJj7
+5. Trattoria Pomo D'Oro — Home-style Roman dishes, €20–30 — https://maps.app.goo.gl/nHxP5ad1VJjwNBhy8
+6. Trattoria Da Valentino — Family Roman trattoria, €25–35 — https://maps.app.goo.gl/gC5H1FJsF7Pw3X6cA
+
+🏛️ Tours & Experiences
+Colosseum official site: https://colosseo.it/visite-guidate/
+Guided tours: https://www.enroma.com/
+Other tours: https://www.tickets-rome.com/
+More options: https://www.civitatis.com/it/roma/
+
+Write me anytime for more tips! 😊🇮🇹`,
+
+    it: `Ecco qualche consiglio per vivere Roma al meglio! 🏛️🇮🇹
+
+🗺️ Itinerario Suggerito
+
+📅 GIORNO 1 — Vaticano e dintorni
+Inizia in zona Vaticano — la Basilica di San Pietro e i Musei Vaticani sono imperdibili.
+Lo sapevi che esiste un tunnel segreto che collega il Vaticano a Castel Sant'Angelo? 😱
+Dopo la visita, passeggia lungo il Lungotevere fino all'Ara Pacis ✨.
+Chiudi la giornata alla Terrazza del Gianicolo al tramonto 🌅 — vista mozzafiato 💖.
+
+📅 GIORNO 2 — Roma Antica e Centro Storico
+Sei già a due passi da uno dei monumenti più belli del mondo! 🏟️
+Inizia con il Colosseo e il Circo Massimo.
+Prosegui verso il Ghetto Ebraico, Via del Teatro Marcello e Piazza Venezia 🏛️.
+Opzione magica: Circo Massimo → Colosseo → Via dei Fori Imperiali! Puoi anche ammirare le Terme di Caracalla 🏛️.
+
+🌅 Pomeriggio — Cuore di Roma
+Da Piazza Venezia, percorri Via del Corso:
+➡️ Largo Chigi (sede del Parlamento)
+➡️ Fontana di Trevi 💧
+➡️ Pantheon ⛪️
+➡️ Piazza Navona 🎨
+➡️ Piazza di Spagna & Piazza del Popolo 🌸
+Tutto a piedi — perfetto per un pomeriggio rilassato ☕🍦.
+
+🚇 Come Muoversi
+Metro Linea B – Colosseo → tutto il centro
+App taxi: Free Now / AppTaxi
+Car sharing: Enjoy | Bike e scooter sharing disponibili
+
+🍽️ Ristoranti Vicino a Casa (👍 = consiglio di Fabio)
+1. Hostaria Isidoro — Romana tradizionale, €30–50 — https://maps.app.goo.gl/EBgHj3wU6LhZYKHi8
+2. Contrario – Vineria con Cucina — Italiana moderna + vini, €31–50 — https://maps.app.goo.gl/2nTg8QqRDsP5qV228
+3. Osteria Il Bocconcino — Romana autentica, €20–35 — https://maps.app.goo.gl/4uVe2KzG8nBq3MaH9
+4. Trattoria Pizzeria Luzzi — Classici romani + pizza, €12–20 — https://maps.app.goo.gl/f3hLxqocchqtYAJj7
+5. Trattoria Pomo D'Oro — Cucina casalinga romana, €20–30 — https://maps.app.goo.gl/nHxP5ad1VJjwNBhy8
+6. Trattoria Da Valentino — Trattoria romana familiare, €25–35 — https://maps.app.goo.gl/gC5H1FJsF7Pw3X6cA
+
+🏛️ Tour ed Esperienze
+Sito ufficiale Colosseo: https://colosseo.it/visite-guidate/
+Visite guidate: https://www.enroma.com/
+Altre opzioni: https://www.tickets-rome.com/
+Ancora di più: https://www.civitatis.com/it/roma/
+
+Scrivimi per qualsiasi altra cosa! 😊🇮🇹`,
+
+    es: `¡Aquí tienes algunos consejos para disfrutar Roma al máximo! 🏛️🇮🇹
+
+🗺️ Itinerario Sugerido
+
+📅 DÍA 1 — Vaticano y alrededores
+Empieza en la zona del Vaticano — la Basílica de San Pedro y los Museos Vaticanos son imprescindibles.
+¿Sabías que hay un túnel secreto que conecta el Vaticano con el Castel Sant'Angelo? 😱
+Tras la visita, pasea por el Lungotevere hasta el Ara Pacis ✨.
+Cierra el día en la Terraza del Gianicolo al atardecer 🌅 — vistas increíbles 💖.
+
+📅 DÍA 2 — Roma Antigua y Centro Histórico
+¡Ya estás a dos pasos de uno de los monumentos más impresionantes del mundo! 🏟️
+Empieza con el Coliseo y el Circo Máximo.
+Sigue hacia el Gueto Judío, Via del Teatro Marcello y Piazza Venezia 🏛️.
+Opción mágica: Circo Máximo → Coliseo → Via dei Fori Imperiali. ¡También puedes admirar las Termas de Caracalla! 🏛️
+
+🌅 Tarde — Corazón de Roma
+Desde Piazza Venezia, sigue por Via del Corso:
+➡️ Largo Chigi (Parlamento italiano)
+➡️ Fontana de Trevi 💧
+➡️ Panteón ⛪️
+➡️ Piazza Navona 🎨
+➡️ Piazza di Spagna & Piazza del Popolo 🌸
+Todo a pie — perfecto para una tarde tranquila ☕🍦.
+
+🚇 Cómo Moverse
+Metro Línea B – Colosseo → todo el centro
+Apps de taxi: Free Now / AppTaxi
+Car sharing: Enjoy | Bicicletas y patinetes también disponibles
+
+🍽️ Restaurantes Cerca de Casa (👍 = recomendación de Fabio)
+1. Hostaria Isidoro — Romana tradicional, €30–50 — https://maps.app.goo.gl/EBgHj3wU6LhZYKHi8
+2. Contrario – Vineria con Cucina — Italiana moderna + vinos, €31–50 — https://maps.app.goo.gl/2nTg8QqRDsP5qV228
+3. Osteria Il Bocconcino — Romana auténtica, €20–35 — https://maps.app.goo.gl/4uVe2KzG8nBq3MaH9
+4. Trattoria Pizzeria Luzzi — Clásicos romanos + pizza, €12–20 — https://maps.app.goo.gl/f3hLxqocchqtYAJj7
+5. Trattoria Pomo D'Oro — Cocina casera romana, €20–30 — https://maps.app.goo.gl/nHxP5ad1VJjwNBhy8
+6. Trattoria Da Valentino — Trattoria romana familiar, €25–35 — https://maps.app.goo.gl/gC5H1FJsF7Pw3X6cA
+
+🏛️ Tours y Experiencias
+Web oficial del Coliseo: https://colosseo.it/visite-guidate/
+Visitas guiadas: https://www.enroma.com/
+Más opciones: https://www.tickets-rome.com/
+Aún más: https://www.civitatis.com/it/roma/
+
+¡Escríbeme cuando quieras para más consejos! 😊🇮🇹`
+  }
+};
+
+var templates = [];
+var seenIds = new Set();
+
+function pushUnique(t) {
+  if (seenIds.has(t.id)) return;
+  seenIds.add(t.id);
+  templates.push(t);
+}
+
+var casas = ["lat","col"];
+var langs = ["en","it","es"];
+var arrivals = ["after15","13to15","1130to13","before1130"];
+var piattaforme = ["bkg","abn"];
+var knowns = [false, true];
+
+var arrivalLabels = { after15: "Arrivo dopo le 15:00", "13to15": "Arrivo 13:00–15:00", "1130to13": "Arrivo 11:30–13:00", before1130: "Arrivo prima delle 11:30" };
+var casaLabels = { lat: "Laterani", col: "Colosseum" };
+var langLabels = { en: "🇬🇧 EN", it: "🇮🇹 IT", es: "🇪🇸 ES" };
+var piattLabels = { bkg: "Booking", abn: "Airbnb" };
+
+var checkoutTypes = [
+  { tipo: "standard", withTax: false, label: "Checkout standard · senza tassa" },
+  { tipo: "standard", withTax: true, label: "Checkout standard · con tassa" },
+  { tipo: "bags13", withTax: false, label: "Checkout + bagagli fino alle 13 · senza tassa" },
+  { tipo: "bags13", withTax: true, label: "Checkout + bagagli fino alle 13 · con tassa" },
+  { tipo: "stay13", withTax: false, label: "Checkout alle 13:00 · senza tassa" },
+  { tipo: "stay13", withTax: true, label: "Checkout alle 13:00 · con tassa" },
+];
+
+// New template data
+var restaurantTexts = {
+  lat: {
+    en: `🍽️ Restaurants near home (👍 = Fabio's pick)
+1. I Buoni Amici Roma 👍 — Traditional Roman, €20–30 — https://maps.app.goo.gl/QDoVXF5oGiDhusYF7?g_st=ic
+2. Sampietrino - L'Osteria di San Giovanni 👍 — Roman, €20–30 — https://maps.app.goo.gl/1WZTWHZ8RNJff4sG6?g_st=ic
+3. Osteria Faleria 👍 — Traditional Italian, €20–30 — https://maps.app.goo.gl/UGQaBcQvTFpqu4wq8?g_st=ic
+4. Spaccio Pasta 👍 — Homemade pasta, €15–25 — https://maps.app.goo.gl/VAV2twqtDiUX6iot6?g_st=ic
+5. Alle Mura Ristorante 👍 — Traditional Italian, €20–35 — https://maps.app.goo.gl/Xs8XDKZQ5nXHgjFS6?g_st=ic
+6. Contesto Urbano — Contemporary Italian, €25–35 — https://maps.app.goo.gl/UA9NyHp9iY5Y4or99?g_st=ic
+7. Pepe | Ristorante San Giovanni — Classic Italian, €20–35 — https://maps.app.goo.gl/yJvGCavNR5JhSsHv9?g_st=ic
+8. Big Friends Rome — Casual Italian, €15–25 — https://maps.app.goo.gl/L7SSbpmQSh7fqYrP8?g_st=ic
+9. Osteria Feelsgood — Contemporary Italian, €20–30 — https://maps.app.goo.gl/uQwgeyWQQTEfFj39A?g_st=ic
+10. 5e28 - Cucina e Miscele — Creative + cocktails, €25–40 — https://maps.app.goo.gl/sBx3L7eAXCpYy9ZV9?g_st=ic
+11. Hostaria Cannavota — Traditional Roman, €20–35 — https://maps.app.goo.gl/k1ufFq6RhSRAovGH9?g_st=ic`,
+    it: `🍽️ Ristoranti vicino a casa (👍 = consiglio di Fabio)
+1. I Buoni Amici Roma 👍 — Cucina romana, €20–30 — https://maps.app.goo.gl/QDoVXF5oGiDhusYF7?g_st=ic
+2. Sampietrino - L'Osteria di San Giovanni 👍 — Romana, €20–30 — https://maps.app.goo.gl/1WZTWHZ8RNJff4sG6?g_st=ic
+3. Osteria Faleria 👍 — Italiana tradizionale, €20–30 — https://maps.app.goo.gl/UGQaBcQvTFpqu4wq8?g_st=ic
+4. Spaccio Pasta 👍 — Pasta fresca, €15–25 — https://maps.app.goo.gl/VAV2twqtDiUX6iot6?g_st=ic
+5. Alle Mura Ristorante 👍 — Italiana tradizionale, €20–35 — https://maps.app.goo.gl/Xs8XDKZQ5nXHgjFS6?g_st=ic
+6. Contesto Urbano — Italiana contemporanea, €25–35 — https://maps.app.goo.gl/UA9NyHp9iY5Y4or99?g_st=ic
+7. Pepe | Ristorante San Giovanni — Italiana classica, €20–35 — https://maps.app.goo.gl/yJvGCavNR5JhSsHv9?g_st=ic
+8. Big Friends Rome — Italiana informale, €15–25 — https://maps.app.goo.gl/L7SSbpmQSh7fqYrP8?g_st=ic
+9. Osteria Feelsgood — Italiana contemporanea, €20–30 — https://maps.app.goo.gl/uQwgeyWQQTEfFj39A?g_st=ic
+10. 5e28 - Cucina e Miscele — Creativa + cocktail, €25–40 — https://maps.app.goo.gl/sBx3L7eAXCpYy9ZV9?g_st=ic
+11. Hostaria Cannavota — Romana tradizionale, €20–35 — https://maps.app.goo.gl/k1ufFq6RhSRAovGH9?g_st=ic`,
+    es: `🍽️ Restaurantes cerca de casa (👍 = recomendación de Fabio)
+1. I Buoni Amici Roma 👍 — Cocina romana, €20–30 — https://maps.app.goo.gl/QDoVXF5oGiDhusYF7?g_st=ic
+2. Sampietrino - L'Osteria di San Giovanni 👍 — Romana, €20–30 — https://maps.app.goo.gl/1WZTWHZ8RNJff4sG6?g_st=ic
+3. Osteria Faleria 👍 — Italiana tradicional, €20–30 — https://maps.app.goo.gl/UGQaBcQvTFpqu4wq8?g_st=ic
+4. Spaccio Pasta 👍 — Pasta artesanal, €15–25 — https://maps.app.goo.gl/VAV2twqtDiUX6iot6?g_st=ic
+5. Alle Mura Ristorante 👍 — Italiana tradicional, €20–35 — https://maps.app.goo.gl/Xs8XDKZQ5nXHgjFS6?g_st=ic
+6. Contesto Urbano — Italiana contemporánea, €25–35 — https://maps.app.goo.gl/UA9NyHp9iY5Y4or99?g_st=ic
+7. Pepe | Ristorante San Giovanni — Italiana clásica, €20–35 — https://maps.app.goo.gl/yJvGCavNR5JhSsHv9?g_st=ic
+8. Big Friends Rome — Italiana informal, €15–25 — https://maps.app.goo.gl/L7SSbpmQSh7fqYrP8?g_st=ic
+9. Osteria Feelsgood — Italiana contemporánea, €20–30 — https://maps.app.goo.gl/uQwgeyWQQTEfFj39A?g_st=ic
+10. 5e28 - Cucina e Miscele — Creativa + cócteles, €25–40 — https://maps.app.goo.gl/sBx3L7eAXCpYy9ZV9?g_st=ic
+11. Hostaria Cannavota — Romana tradicional, €20–35 — https://maps.app.goo.gl/k1ufFq6RhSRAovGH9?g_st=ic`,
+  },
+  col: {
+    en: `🍽️ Restaurants near home (👍 = Fabio's pick)
+1. Hostaria Isidoro — Traditional Roman, €30–50 — https://maps.app.goo.gl/EBgHj3wU6LhZYKHi8
+2. Contrario – Vineria con Cucina — Modern Italian + wine, €31–50 — https://maps.app.goo.gl/2nTg8QqRDsP5qV228
+3. Osteria Il Bocconcino — Authentic Roman, €20–35 — https://maps.app.goo.gl/4uVe2KzG8nBq3MaH9
+4. Trattoria Pizzeria Luzzi — Roman classics + wood-fired pizza, €12–20 — https://maps.app.goo.gl/f3hLxqocchqtYAJj7
+5. Trattoria Pomo D'Oro — Home-style Roman dishes, €20–30 — https://maps.app.goo.gl/nHxP5ad1VJjwNBhy8
+6. Trattoria Da Valentino — Family Roman trattoria, €25–35 — https://maps.app.goo.gl/gC5H1FJsF7Pw3X6cA`,
+    it: `🍽️ Ristoranti vicino a casa (👍 = consiglio di Fabio)
+1. Hostaria Isidoro — Romana tradizionale, €30–50 — https://maps.app.goo.gl/EBgHj3wU6LhZYKHi8
+2. Contrario – Vineria con Cucina — Italiana moderna + vini, €31–50 — https://maps.app.goo.gl/2nTg8QqRDsP5qV228
+3. Osteria Il Bocconcino — Romana autentica, €20–35 — https://maps.app.goo.gl/4uVe2KzG8nBq3MaH9
+4. Trattoria Pizzeria Luzzi — Classici romani + pizza, €12–20 — https://maps.app.goo.gl/f3hLxqocchqtYAJj7
+5. Trattoria Pomo D'Oro — Cucina casalinga romana, €20–30 — https://maps.app.goo.gl/nHxP5ad1VJjwNBhy8
+6. Trattoria Da Valentino — Trattoria romana familiare, €25–35 — https://maps.app.goo.gl/gC5H1FJsF7Pw3X6cA`,
+    es: `🍽️ Restaurantes cerca de casa (👍 = recomendación de Fabio)
+1. Hostaria Isidoro — Romana tradicional, €30–50 — https://maps.app.goo.gl/EBgHj3wU6LhZYKHi8
+2. Contrario – Vineria con Cucina — Italiana moderna + vinos, €31–50 — https://maps.app.goo.gl/2nTg8QqRDsP5qV228
+3. Osteria Il Bocconcino — Romana auténtica, €20–35 — https://maps.app.goo.gl/4uVe2KzG8nBq3MaH9
+4. Trattoria Pizzeria Luzzi — Clásicos romanos + pizza, €12–20 — https://maps.app.goo.gl/f3hLxqocchqtYAJj7
+5. Trattoria Pomo D'Oro — Cocina casera romana, €20–30 — https://maps.app.goo.gl/nHxP5ad1VJjwNBhy8
+6. Trattoria Da Valentino — Trattoria romana familiar, €25–35 — https://maps.app.goo.gl/gC5H1FJsF7Pw3X6cA`,
+  },
+};
+
+var locationTexts = {
+  lat: {
+    en: `📍 Here is the exact location of the apartment:
+https://maps.app.goo.gl/ZEEbabueziqNQ9BJ6?g_st=ipc
+
+See you soon! 😊`,
+    it: `📍 Ecco la posizione esatta dell'appartamento:
+https://maps.app.goo.gl/ZEEbabueziqNQ9BJ6?g_st=ipc
+
+A presto! 😊`,
+    es: `📍 Aquí tiene la ubicación exacta del apartamento:
+https://maps.app.goo.gl/ZEEbabueziqNQ9BJ6?g_st=ipc
+
+¡Hasta pronto! 😊`,
+  },
+  col: {
+    en: `📍 Here is the exact location of the apartment:
+https://share.google/eLYWJ4jaXleqEnjGv
+
+See you soon! 😊`,
+    it: `📍 Ecco la posizione esatta dell'appartamento:
+https://share.google/eLYWJ4jaXleqEnjGv
+
+A presto! 😊`,
+    es: `📍 Aquí tiene la ubicación exacta del apartamento:
+https://share.google/eLYWJ4jaXleqEnjGv
+
+¡Hasta pronto! 😊`,
+  },
+};
+
+var warningsTexts = {
+  en: `‼️ 2 very important things before you arrive:
+
+1️⃣ When using the elevator, please always make sure that all doors are completely closed and that the red light on the panel turns off.
+Only 3 people without luggage or 2 with luggage should go up at a time — this helps ensure the elevator works properly 🛗✨
+
+2️⃣ Please be very, very careful when using the small keys, as they can break easily 🔑😅
+Just handle them gently and don't force the lock if it doesn't turn — it might be the wrong key.
+I also recommend holding the gate or door with one hand while opening it, otherwise the weight of the door could snap the key (it already happened twice this week 😬).
+
+Please let me know if everything is clear and don't hesitate to text me if you need anything — I'm always here to help 😊
+And please send me a quick message when you arrive at the apartment 🏡💬`,
+  it: `‼️ 2 cose molto importanti prima che arriviate:
+
+1️⃣ Quando usate l'ascensore, assicuratevi sempre che tutte le porte siano completamente chiuse e che la luce rossa sul pannello si spenga.
+Salite al massimo in 3 persone senza bagagli o in 2 con bagagli — questo aiuta a far funzionare l'ascensore correttamente 🛗✨
+
+2️⃣ Fate molta, molta attenzione quando usate le chiavi piccole, perché si possono rompere facilmente 🔑😅
+Usatele con delicatezza e non forzate la serratura se non gira — potrebbe essere la chiave sbagliata.
+Vi consiglio anche di tenere il cancello o la porta con una mano mentre aprite, altrimenti il peso della porta potrebbe spezzare la chiave (è già successo due volte questa settimana 😬).
+
+Fatemi sapere se è tutto chiaro e non esitate a scrivermi per qualsiasi cosa — sono sempre disponibile 😊
+E mandatemi un messaggio quando arrivate all'appartamento 🏡💬`,
+  es: `‼️ 2 cosas muy importantes antes de que lleguen:
+
+1️⃣ Cuando utilicen el ascensor, asegúrense siempre de que todas las puertas estén completamente cerradas y de que la luz roja del panel se apague.
+Solo deben subir 3 personas sin equipaje o 2 con equipaje a la vez — esto ayuda a que el ascensor funcione correctamente 🛗✨
+
+2️⃣ Por favor, tengan mucho, mucho cuidado al usar las llaves pequeñas, ya que pueden romperse fácilmente 🔑😅
+Manéjenlas con suavidad y no fuercen la cerradura si no gira — puede ser la llave equivocada.
+También les recomiendo sujetar la verja o la puerta con una mano mientras abren, de lo contrario el peso de la puerta podría romper la llave (ya ha ocurrido dos veces esta semana 😬).
+
+Por favor, avísenme si todo está claro y no duden en escribirme para cualquier cosa — siempre estoy disponible 😊
+Y envíenme un mensaje rápido cuando lleguen al apartamento 🏡💬`,
+};
+
+for (const casa of casas) {
+  for (const lang of langs) {
+    // Pre check-in
+    for (const arrivo of arrivals) {
+      for (const piatt of piattaforme) {
+        for (const known of knowns) {
+          pushUnique({
+            id: `precheckin-${casa}-${lang}-${arrivo}-${piatt}-${known?'known':'new'}`,
+            section: "precheckin",
+            casa, lang, piatt,
+            title: `Pre check-in · ${arrivalLabels[arrivo]} · ${piattLabels[piatt]} · ${known ? 'Già conosciuto' : 'Primo contatto'}`,
+            vars: "[NOME], [ORA ARRIVO]" + (piatt === "bkg" ? ", [TOTALE TASSA]" : ""),
+            text: buildPreCheckin(lang, casa, arrivo, piatt, known)
+          });
+        }
+      }
+    }
+    // Reminder
+    pushUnique({
+      id: `reminder-${casa}-${lang}`,
+      section: "reminder",
+      casa, lang, piatt: "all",
+      title: `Reminder giorno prima del check-in`,
+      vars: "[NOME]",
+      text: reminderText[lang]
+    });
+    // In-house
+    pushUnique({
+      id: `inhouse-${casa}-${lang}`,
+      section: "inhouse",
+      casa, lang, piatt: "all",
+      title: `Info in-house`,
+      vars: "[NOME] · parti opzionali in [CORSIVO] da includere/escludere",
+      text: inhouseText[casa][lang]
+    });
+    // Checkout
+    for (const piatt of piattaforme) {
+      for (const ct of checkoutTypes) {
+        pushUnique({
+          id: `checkout-${casa}-${lang}-${piatt}-${ct.tipo}-${ct.withTax?'tax':'notax'}`,
+          section: "checkout",
+          casa, lang, piatt,
+          title: `Pre-checkout · ${ct.label} · ${piattLabels[piatt]}`,
+          vars: "[NOME]" + (ct.withTax ? ", [IMPORTO TASSA]" : ""),
+          text: buildCheckout(lang, piatt, ct.tipo, ct.withTax)
+        });
+      }
+    }
+    // Luggage
+    pushUnique({
+      id: `luggage-${casa}-${lang}`,
+      section: "luggage",
+      casa, lang, piatt: "all",
+      title: `Depositi bagagli`,
+      vars: "—",
+      text: luggageText[casa][lang]
+    });
+    // Restaurants
+    pushUnique({
+      id: `tips_restaurants-${casa}-${lang}`,
+      section: "tips_restaurants",
+      casa, lang, piatt: "all",
+      title: `Ristoranti vicino a casa`,
+      vars: "—",
+      text: restaurantTexts[casa][lang]
+    });
+    // Itinerary
+    pushUnique({
+      id: `tips_itinerary-${casa}-${lang}`,
+      section: "tips_itinerary",
+      casa, lang, piatt: "all",
+      title: `Itinerario Roma`,
+      vars: "—",
+      text: tipsText[casa][lang]
+    });
+    // Location
+    pushUnique({
+      id: `location-${casa}-${lang}`,
+      section: "location",
+      casa, lang, piatt: "all",
+      title: `Posizione appartamento`,
+      vars: "—",
+      text: locationTexts[casa][lang]
+    });
+    // Warnings (Laterani only)
+    if (casa === 'lat') {
+      pushUnique({
+        id: `warnings-lat-${lang}`,
+        section: "warnings",
+        casa: 'lat', lang, piatt: "all",
+        title: `Avvisi chiavi & ascensore`,
+        vars: "—",
+        text: warningsTexts[lang]
+      });
+    }
+  }
+}
+
+var filterCasa = "all", filterLingua = "all", filterSection = "all", filterPiatt = "all";
+
+function getFiltered() {
+  return templates.filter(t => {
+    if (filterCasa !== "all" && t.casa !== filterCasa) return false;
+    if (filterLingua !== "all" && t.lang !== filterLingua) return false;
+    if (filterSection !== "all" && t.section !== filterSection) return false;
+    if (filterPiatt !== "all" && t.piatt !== "all" && t.piatt !== filterPiatt) return false;
+    return true;
+  });
+}
+
+var sectionOrder = ["precheckin","reminder","inhouse","checkout","luggage","tips_restaurants","tips_itinerary","location","warnings"];
+var sectionTitles = {
+  precheckin: "A — Pre check-in",
+  reminder: "B — Reminder giorno prima",
+  inhouse: "C — Info in-house",
+  checkout: "D — Pre-checkout",
+  luggage: "E — Depositi bagagli",
+  tips_restaurants: "F1 — Ristoranti vicino a casa",
+  tips_itinerary: "F2 — Itinerario Roma",
+  location: "A+ — 📍 Posizione appartamento",
+  warnings: "A+ — ⚠️ Avvisi chiavi & ascensore"
+};
+
+
+function renderPDF(casa, lang) {
+  var casas = casa ? [casa] : ['lat','col'];
+  var langs = lang ? [lang] : ['it','en','es'];
+  var casaLabelsL = { lat: 'Laterani', col: 'Colosseum' };
+  var langLabelsL = { it: '🇮🇹 Italiano', en: '🇬🇧 English', es: '🇪🇸 Español' };
+  var html = '<div style="padding:0">';
+  for (var c of casas) {
+    html += '<div class="section-title">' + casaLabelsL[c] + '</div>';
+    html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">';
+    for (var l of langs) {
+      html += '<button onclick="openPDF(\'' + c + '\',\'' + l + '\')" style="padding:10px 18px;border-radius:8px;border:1px solid #d8d6d0;background:#fff;cursor:pointer;font-size:14px;">' + langLabelsL[l] + '</button>';
+    }
+    html += '</div>';
+  }
+  html += '</div>';
+  document.getElementById("main").innerHTML = html;
+}
+
+function render() {
+  const filtered = getFiltered();
+  const main = document.getElementById("main");
+  if (filtered.length === 0) {
+    main.innerHTML = '<div class="empty">Nessun template trovato per i filtri selezionati.</div>';
+    return;
+  }
+  const bySection = {};
+  for (const t of filtered) {
+    if (!bySection[t.section]) bySection[t.section] = [];
+    bySection[t.section].push(t);
+  }
+  let html = "";
+  for (const sec of sectionOrder) {
+    if (!bySection[sec]) continue;
+    html += `<div class="section-title">${sectionTitles[sec]}</div>`;
+    for (const t of bySection[sec]) {
+      const casaTag = `<span class="tag tag-${t.casa}">${casaLabels[t.casa]||t.casa}</span>`;
+      const langTag = `<span class="tag tag-${t.lang}">${langLabels[t.lang]||t.lang}</span>`;
+      const piattTag = t.piatt !== "all" ? `<span class="tag tag-${t.piatt}">${piattLabels[t.piatt]}</span>` : "";
+      html += `<div class="card" id="card-${t.id}">
+        <div class="card-header" onclick="toggle('${t.id}')">
+          <div class="card-title">${casaTag}${langTag}${piattTag} ${t.title}</div>
+          <span class="chevron" id="chev-${t.id}">▾</span>
+        </div>
+        <div class="card-body" id="body-${t.id}">
+          <div class="vars">✏️ <strong>Segnaposti:</strong> ${t.vars}</div>
+          <div class="template-text" id="txt-${t.id}">${escHtml(t.text)}</div>
+          <button class="copy-btn" id="btn-${t.id}" onclick="copyText('${t.id}')">📋 Copia testo</button>
+        </div>
+      </div>`;
+    }
+  }
+  main.innerHTML = html;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function toggle(id) {
+  const body = document.getElementById("body-"+id);
+  const chev = document.getElementById("chev-"+id);
+  body.classList.toggle("open");
+  chev.classList.toggle("open");
+}
+
+function copyText(id) {
+  const t = templates.find(x => x.id === id);
+  if (!t) return;
+  navigator.clipboard.writeText(t.text).then(() => {
+    const btn = document.getElementById("btn-"+id);
+    btn.textContent = "✅ Copiato!";
+    btn.classList.add("copied");
+    setTimeout(() => { btn.textContent = "📋 Copia testo"; btn.classList.remove("copied"); }, 2000);
+  });
+}
+
+document.querySelectorAll(".pill").forEach(pill => {
+  pill.addEventListener("click", function() {
+    const filter = this.dataset.filter;
+    const val = this.dataset.val;
+    document.querySelectorAll(`.pill[data-filter="${filter}"]`).forEach(p => p.classList.remove("active"));
+    this.classList.add("active");
+    if (filter === "casa") filterCasa = val;
+    else if (filter === "lingua") filterLingua = val;
+    else if (filter === "section") filterSection = val;
+    else if (filter === "piatt") filterPiatt = val;
+
+    // If PDF section selected
+    if (filterSection === "pdf") {
+      var casa = filterCasa !== "all" ? filterCasa : null;
+      var lang = filterLingua !== "all" ? filterLingua : null;
+      if (casa && lang) {
+        // Both selected: open PDF directly
+        openPDF(casa, lang);
+        return;
+      }
+      // Show all PDF buttons filtered by what's selected
+      renderPDF(casa, lang);
+      return;
+    }
+    render();
+  });
+});
+
+render();
+
+
+var pdfLinks = {
+  lat: {
+    it: 'https://netorgft16887028-my.sharepoint.com/:b:/g/personal/amministrazione_jfmitalia_com/IQBuk0IZ7_r2Qp9m0raCW93nARqntFdSEupPsUb3UJ4XlwU?e=qftR1T',
+    en: 'https://netorgft16887028-my.sharepoint.com/:b:/g/personal/amministrazione_jfmitalia_com/IQCl6cMitd_GQpdEFCUCR6STAa1Xp-TZxm7sKw3j5f_1k-0?e=LngXfn',
+    es: 'https://netorgft16887028-my.sharepoint.com/:b:/g/personal/amministrazione_jfmitalia_com/IQDeA7krvjGnT7tsZEeFNM5lAdBtRknrxJv_niSB8wz0e2g?e=hDc100'
+  },
+  col: {
+    it: 'https://netorgft16887028-my.sharepoint.com/:b:/g/personal/amministrazione_jfmitalia_com/IQChuQksk6pMSK3OvBVyknP9AaWJH7TQAbBCEqHXeO5HHGA?e=ZslriO',
+    en: 'https://netorgft16887028-my.sharepoint.com/:b:/g/personal/amministrazione_jfmitalia_com/IQC8xsVrGozrTJS19dmwp5IkAQ5vSKFFJY8P0BZxhzWlL3k?e=GgFJE2',
+    es: 'https://netorgft16887028-my.sharepoint.com/:b:/g/personal/amministrazione_jfmitalia_com/IQBbL1DGk5C0QYbo3GXxAarXAQq1jwsFOK81C0_JK9QGaaQ?e=OkIevk'
+  }
+};
+
+
+function openPDF(casa, lang) {
+  window.open(pdfLinks[casa][lang], '_blank');
+}
+
+</script>
+
+</body>
+</html>
