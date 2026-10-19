@@ -240,6 +240,14 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-si
 .taxrow{display:flex;gap:12px;align-items:center}
 .taxrow b{font-family:var(--f-display);font-size:30px;font-weight:800;color:var(--flame);flex:none}
 .lang button{padding:5px 8px}
+.qrgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qrcard{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 12px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);min-width:0}
+.qrcard img{width:100%;max-width:150px;aspect-ratio:1;background:#fff;border-radius:10px;padding:6px}
+.qrcard b{font-family:var(--f-display);font-size:16px;font-weight:800;margin-top:4px}
+.qrcard span{font-size:12.5px;color:var(--muted)}
+.qrimg{width:112px;height:112px;background:#fff;border-radius:10px;padding:6px}
+#recensione{scroll-margin-top:72px}
+.review-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media (max-width:380px){.fares{grid-template-columns:1fr}.nearbar b{font-size:15px}}
 </style>
 
@@ -404,7 +412,7 @@ const HOUSE = {
   key:"laterani", name:"Domus Laterani", place:["Domus Laterani, Via dei Laterani 28","ChIJF7t94cBhLxMRMhL0ZYdlEQA"],
   address:"Via dei Laterani, 28 · 00184 Roma", floor:"1°", hero:"l_living", heroAlt:{it:"Il soggiorno",en:"The living room",es:"El salón"},
   guests:{it:"fino a 8 ospiti · terrazza",en:"up to 8 guests · terrace",es:"hasta 8 huéspedes · terraza"},
-  foodFirst:"sg",
+  foodFirst:"sg", googlePid:"ChIJx2THlBphLxMRUs6Aznzy12g",
   hood:{it:"San Giovanni è un quartiere residenziale e vivace, dove vivono i romani: trattorie vere, bar, mercati e negozi sotto casa. La Basilica di San Giovanni è a pochi passi, la metro A vi porta in centro in pochi minuti e il Colosseo si raggiunge a piedi.",en:"San Giovanni is a lively residential neighbourhood where Romans actually live: real trattorias, cafés, markets and shops on your doorstep. The Basilica of San Giovanni is a short walk away, metro A takes you to the centre in minutes and the Colosseum is within walking distance.",es:"San Giovanni es un barrio residencial y animado, donde viven los romanos: trattorias de verdad, bares, mercados y tiendas al lado de casa. La Basílica de San Giovanni está a pocos pasos, el metro A os lleva al centro en pocos minutos y al Coliseo se llega a pie."},
   near:[["colosseo",{it:"Colosseo",en:"Colosseum",es:"Coliseo"}],["mSG",{it:'Metro <span class="metro A">A</span>',en:'Metro <span class="metro A">A</span>',es:'Metro <span class="metro A">A</span>'}],["castoro",{it:"Supermercato",en:"Supermarket",es:"Supermercado"}]],
   arrival(c){ return `
@@ -608,7 +616,8 @@ function checkoutBlock(){
       <div class="card"><div class="case-h">${IC.clock}<b>Late check-out</b></div>
         <p class="small">${L({it:"Restate in casa fino all'orario concordato, poi seguite la stessa procedura di sempre: chiavi sul tavolo, foto, porta chiusa.",en:"Stay in the apartment until the agreed time, then follow the usual procedure: keys on the table, photo, door closed.",es:"Quedaos en casa hasta la hora acordada y luego seguid el procedimiento de siempre: llaves sobre la mesa, foto y puerta cerrada."})}</p></div>
     </div>
-    <p class="small mt">${L({it:"Per i depositi bagagli in città guardate la sezione Roma.",en:"For luggage storage in town, see the Rome section.",es:"Para consignas en la ciudad, mirad la sección Roma."})}</p>`;
+    <p class="small mt">${L({it:"Per i depositi bagagli in città guardate la sezione Roma.",en:"For luggage storage in town, see the Rome section.",es:"Para consignas en la ciudad, mirad la sección Roma."})}</p>
+    <div class="card mt review-cta"><div><b>${L({it:"Vi è piaciuto il soggiorno?",en:"Enjoyed your stay?",es:"¿Os ha gustado la estancia?"})}</b><p class="small muted">${L({it:"Una recensione ci aiuta tantissimo.",en:"A review helps us so much.",es:"Una reseña nos ayuda muchísimo."})}</p></div><button class="btn flame" type="button" data-go="info" data-anchor="recensione">${IC.star}${L({it:"Lascia una recensione",en:"Leave a review",es:"Dejar una reseña"})}</button></div>`;
 }
 function vCasa(c){
   const h=HOUSE;
@@ -706,8 +715,15 @@ function vInfo(){
         <li><span class="ic">${IC.star}</span><div><b>${L({it:"Visite ed esperienze",en:"Tours and experiences",es:"Visitas y experiencias"})}</b><span>${L({it:"Vi aiutiamo a prenotare visite guidate ed esperienze su misura.",en:"We can help you book guided tours and tailor-made experiences.",es:"Os ayudamos a reservar visitas guiadas y experiencias a medida."})}</span></div></li>
       </ul>
       <div class="row mt"><a class="btn flame" href="${waLink()}" target="_blank" rel="noopener">${IC.chat}${L({it:"Chiedi un preventivo",en:"Ask for a quote",es:"Pedir presupuesto"})}</a></div></section>
-    <section class="sec" ${CFG?.public_url?"":"hidden"}><h2>${L({it:"Condividete la guida",en:"Share this guide",es:"Compartid la guía"})}</h2>
-      <div class="card mt qr"><div id="qrbox"></div><p class="small">${L({it:"Fate inquadrare il QR ai vostri compagni di viaggio: avranno tutto anche loro sul telefono.",en:"Let your travel companions scan the QR code: they'll have everything on their phone too.",es:"Que vuestros compañeros de viaje escaneen el QR: tendrán todo también en su móvil."})}</p></div></section>
+    <section class="sec" id="recensione"><div class="kicker">${L({it:"Vi è piaciuto il soggiorno?",en:"Enjoyed your stay?",es:"¿Os ha gustado la estancia?"})}</div><h2>${L({it:"Lasciateci una recensione",en:"Leave us a review",es:"Dejadnos una reseña"})}</h2>
+      <p class="lead">${L({it:"Per una piccola realtà come la nostra ogni recensione conta tantissimo: ci aiuta a crescere e a far scegliere casa nostra ai prossimi ospiti. Bastano due minuti.",en:"For a small business like ours every review matters a lot: it helps us grow and helps future guests choose our home. It only takes two minutes.",es:"Para un negocio pequeño como el nuestro cada reseña cuenta muchísimo: nos ayuda a crecer y a que los próximos huéspedes elijan nuestra casa. Solo son dos minutos."})}</p>
+      <div class="qrgrid mt">
+        <a class="qrcard" href="https://search.google.com/local/writereview?placeid=${HOUSE.googlePid}" target="_blank" rel="noopener"><img src="img/qr-review.svg" alt="QR"><b>Google</b><span>${L({it:"Inquadrate o toccate per scrivere la recensione",en:"Scan or tap to write your review",es:"Escanead o tocad para escribir la reseña"})}</span></a>
+        <a class="qrcard" href="https://jfmitalia.com/" target="_blank" rel="noopener"><img src="img/qr-site.svg" alt="QR"><b>jfmitalia.com</b><span>${L({it:"Il nostro sito: per tornare a Roma, contattateci direttamente",en:"Our website: next time in Rome, contact us directly",es:"Nuestra web: la próxima vez en Roma, contactadnos directamente"})}</span></a>
+      </div>
+      <div class="tip">${L({it:"<b>Avete prenotato su Airbnb o Booking.com?</b> Dopo la partenza la piattaforma vi manda l'invito a recensire: un 5★ su Airbnb o un 10 su Booking per noi vale moltissimo 🙏",en:"<b>Booked on Airbnb or Booking.com?</b> After you leave, the platform will invite you to review: a 5★ on Airbnb or a 10 on Booking means the world to us 🙏",es:"<b>¿Habéis reservado en Airbnb o Booking.com?</b> Después de la salida la plataforma os invitará a dejar una reseña: un 5★ en Airbnb o un 10 en Booking para nosotros vale muchísimo 🙏"})}</div></section>
+    <section class="sec"><h2>${L({it:"Condividete la guida",en:"Share this guide",es:"Compartid la guía"})}</h2>
+      <div class="card mt qr"><img class="qrimg" src="img/qr-guide.svg" alt="QR"><p class="small">${L({it:"Fate inquadrare il QR ai vostri compagni di viaggio: avranno tutto anche loro sul telefono.",en:"Let your travel companions scan the QR code: they'll have everything on their phone too.",es:"Que vuestros compañeros de viaje escaneen el QR: tendrán todo también en su móvil."})}</p></div></section>
     <section class="sec"><div class="card"><b>JFM · ${L({it:"Ospitalità a Roma",en:"Hospitality in Rome",es:"Hospitalidad en Roma"})}</b>
       <p class="small muted mt">${L({it:"Fabio e Alessandro, nel quartiere di San Giovanni.",en:"Fabio and Alessandro, in the San Giovanni neighbourhood.",es:"Fabio y Alessandro, en el barrio de San Giovanni."})}</p>
       <div class="row mt"><a class="btn" href="https://jfmitalia.com/" target="_blank" rel="noopener">jfmitalia.com</a></div></div></section>`;
@@ -716,7 +732,7 @@ function vInfo(){
 /* ---------- router ---------- */
 const TABS=["home","arrivo","casa","roma","info"];
 const TAB_IC={home:IC.home,arrivo:IC.key,casa:IC.sofa,roma:IC.map,info:IC.info};
-function parseHash(){ const t=(location.hash||"").replace("#","").toLowerCase(); TAB = TABS.includes(t) ? t : "home"; }
+function parseHash(){ const t=(location.hash||"").replace("#","").toLowerCase(); TAB = t==="recensione" ? "info" : (TABS.includes(t) ? t : "home"); }
 function footer(){ return `<footer><b>JF MANAGEMENT S.r.l.s.</b><span>P.IVA 06271030659 · Via Santi Martiri Salernitani 31, Salerno</span><span>jfmitalia.com</span></footer>`; }
 function render(){
   document.documentElement.lang=LANG;
@@ -726,14 +742,13 @@ function render(){
   document.getElementById("navIn").innerHTML=TABS.map(t=>`<button type="button" data-tab="${t}" ${t===TAB?'aria-current="page"':""}>${TAB_IC[t]}<span>${L(UI.tabs[t])}</span></button>`).join("");
   const v={home:vHome,arrivo:vArrivo,casa:vCasa,roma:vRoma,info:vInfo}[TAB](c);
   document.getElementById("main").innerHTML=`<div class="view">${v}</div>${footer()}`;
-  if(TAB==="info" && CFG?.public_url) drawQR(CFG.public_url);
 }
-function drawQR(url){ const box=document.getElementById("qrbox"); if(!box||!window.QRCode) return; box.innerHTML=""; new QRCode(box,{text:url,width:200,height:200,colorDark:"#13203A",colorLight:"#ffffff"}); }
 
 /* ---------- eventi ---------- */
 document.addEventListener("click",e=>{
   const t=e.target.closest("[data-tab],[data-go],[data-sub],[data-seg-btn],[data-copy],[data-zoom]"); if(!t) return;
-  if(t.dataset.tab||t.dataset.go){ const tab=t.dataset.tab||t.dataset.go; history.replaceState(null,"",tab==="home"?location.pathname+location.search:"#"+tab); TAB=tab; render(); window.scrollTo(0,0); }
+  if(t.dataset.tab||t.dataset.go){ const tab=t.dataset.tab||t.dataset.go; history.replaceState(null,"",tab==="home"?location.pathname+location.search:"#"+tab); TAB=tab; render();
+    const a=t.dataset.anchor&&document.getElementById(t.dataset.anchor); if(a){ a.scrollIntoView(); } else window.scrollTo(0,0); }
   else if(t.dataset.sub){ romaSub=t.dataset.sub; render(); }
   else if(t.dataset.segBtn){ const k=t.dataset.segBtn,i=t.dataset.i;
     document.querySelectorAll(`[data-seg-btn="${k}"]`).forEach(b=>b.setAttribute("aria-pressed",b.dataset.i===i));
@@ -754,6 +769,7 @@ window.addEventListener("hashchange",()=>{parseHash();render();});
   const nav=(navigator.language||"").toLowerCase();
   LANG = saved || (nav.startsWith("it")?"it":nav.startsWith("es")?"es":"en");
   parseHash(); render();
+  if(location.hash=="#recensione") setTimeout(()=>document.getElementById("recensione")?.scrollIntoView(),50);
   /* config: prima la copia salvata (funziona offline), poi quella aggiornata dalla rete */
   try{ const saved=localStorage.getItem("jfm-cfg-"+HOUSE.key); if(saved){ CFG=JSON.parse(saved); render(); } }catch(_){}
   fetch("config.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(j=>{ if(j){ CFG=j; try{localStorage.setItem("jfm-cfg-"+HOUSE.key,JSON.stringify(j))}catch(_){} render(); } }).catch(()=>{});
@@ -764,4 +780,3 @@ window.addEventListener("hashchange",()=>{parseHash();render();});
 })();
 
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
