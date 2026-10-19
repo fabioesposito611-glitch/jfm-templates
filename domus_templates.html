@@ -89,6 +89,8 @@
     <div class="pill" data-filter="section" data-val="tips_itinerary">🗺️ Itinerario</div>
     <div class="pill" data-filter="section" data-val="location">📍 Posizione</div>
     <div class="pill" data-filter="section" data-val="warnings">⚠️ Avvisi</div>
+    <div class="pill" data-filter="section" data-val="ncc">🚗 NCC Transfer</div>
+    <div class="pill" data-filter="section" data-val="garage">🅿️ Garage</div>
     <div class="pill" data-filter="section" data-val="pdf">📄 Istruzioni PDF</div>
   </div>
 </div>
@@ -96,13 +98,15 @@
 <div class="main" id="main"></div>
 
 <script>
-var IBAN = "IT79Z0306905285100000008025";
-var BIC = "BCITITMMXXX";
-var PP1 = "https://www.paypal.me/FabioEsposito611";
-var PP2 = "https://paypal.me/FabioEsposito258?locale.x=it_IT&country.x=IT";
+var IBAN_JFM  = "IT79Z0306905285100000008025";
+var BIC_JFM   = "BCITITMMXXX";
+var IBAN_FABIO = "IT05N0503403238000000006593";
+var BIC_FABIO  = "BAPPIT21N96";
+var PP_FABIO   = "https://www.paypal.me/FabioEsposito611";
 var WEB = "www.jfmitalia.com";
 
-var taxBlock = {
+// taxBlock_jfm: tassa intestata a JF Management Srls (Booking)
+var taxBlock_jfm = {
   en: `💶 City tax
 As required by the Municipality of Rome 🏛️, all visitors must pay the city tourist tax.
 It's a mandatory fee and amounts to €5 per person per night.
@@ -115,12 +119,8 @@ If it's more convenient, I can also stop by later to collect it when you're not 
 
 💻 Bank transfer:
 Account holder: JF Management Srls
-IBAN: ${IBAN}
-BIC/SWIFT: ${BIC}
-
-🅿️ PayPal:
-${PP1}
-${PP2}
+IBAN: ${IBAN_JFM}
+BIC/SWIFT: ${BIC_JFM}
 
 👉 Once payment is made, please send me a quick confirmation message 🙏✨.`,
 
@@ -136,12 +136,8 @@ Se preferisci, posso anche passare a ritirare quando non sei in casa 😊.
 
 💻 Bonifico bancario:
 Intestatario: JF Management Srls
-IBAN: ${IBAN}
-BIC/SWIFT: ${BIC}
-
-🅿️ PayPal:
-${PP1}
-${PP2}
+IBAN: ${IBAN_JFM}
+BIC/SWIFT: ${BIC_JFM}
 
 👉 Una volta effettuato il pagamento, mandami un messaggio di conferma 🙏✨.`,
 
@@ -157,12 +153,71 @@ Si lo prefieres, puedo pasarlo a recoger más tarde cuando no estés 😊.
 
 💻 Transferencia bancaria:
 Titular: JF Management Srls
-IBAN: ${IBAN}
-BIC/SWIFT: ${BIC}
+IBAN: ${IBAN_JFM}
+BIC/SWIFT: ${BIC_JFM}
+
+👉 Una vez realizado el pago, envíame un breve mensaje de confirmación 🙏✨.`
+};
+
+// taxBlock_fabio: tassa personale di Fabio (pagamento diretto a Fabio)
+var taxBlock_fabio = {
+  en: `💶 City tax
+As required by the Municipality of Rome 🏛️, all visitors must pay the city tourist tax.
+It's a mandatory fee and amounts to €5 per person per night.
+In your case, the total is €[TOTALE TASSA].
+
+💳 Payment options
+💵 Cash (preferred):
+Since I won't be present at check-in, you can simply leave the cash on the table inside the apartment 🔐💶.
+If it's more convenient, I can also stop by later to collect it when you're not home 😊.
+
+💻 Bank transfer:
+Account holder: Fabio Esposito
+IBAN: ${IBAN_FABIO}
+BIC/SWIFT: ${BIC_FABIO}
 
 🅿️ PayPal:
-${PP1}
-${PP2}
+${PP_FABIO}
+
+👉 Once payment is made, please send me a quick confirmation message 🙏✨.`,
+
+  it: `💶 Tassa di soggiorno
+Come richiesto dal Comune di Roma 🏛️, tutti i visitatori sono tenuti a pagare la tassa turistica.
+Si tratta di una quota obbligatoria di €5 a persona a notte.
+Nel tuo caso, il totale è €[TOTALE TASSA].
+
+💳 Opzioni di pagamento
+💵 Contanti (preferibile):
+Non essendo presente al check-in, puoi lasciare i contanti sul tavolo in casa 🔐💶.
+Se preferisci, posso anche passare a ritirare quando non sei in casa 😊.
+
+💻 Bonifico bancario:
+Intestatario: Fabio Esposito
+IBAN: ${IBAN_FABIO}
+BIC/SWIFT: ${BIC_FABIO}
+
+🅿️ PayPal:
+${PP_FABIO}
+
+👉 Una volta effettuato il pagamento, mandami un messaggio di conferma 🙏✨.`,
+
+  es: `💶 Tasa turística municipal
+Tal como exige el Ayuntamiento de Roma 🏛️, todos los visitantes deben abonar la tasa turística.
+Es una tarifa obligatoria de €5 por persona por noche.
+En tu caso, el total es €[TOTAL TASA].
+
+💳 Opciones de pago
+💵 Efectivo (preferido):
+Como no estaré presente en el check-in, puedes dejar el importe sobre la mesa dentro del apartamento 🔐💶.
+Si lo prefieres, puedo pasarlo a recoger más tarde cuando no estés 😊.
+
+💻 Transferencia bancaria:
+Titular: Fabio Esposito
+IBAN: ${IBAN_FABIO}
+BIC/SWIFT: ${BIC_FABIO}
+
+🅿️ PayPal:
+${PP_FABIO}
 
 👉 Una vez realizado el pago, envíame un breve mensaje de confirmación 🙏✨.`
 };
@@ -207,15 +262,15 @@ var introNew = {
   en: (name) => `Hi [NOME] 😊✨
 I'm Fabio, the host of your apartment here in Rome 🏛️🇮🇹.
 I'm writing here so we can stay in touch easily and quickly throughout your stay 📲💬.
-It will be a real pleasure to welcome you very soon! 🙌🤍`,
+It will be a real pleasure to welcome you very soon! 🤲🤍`,
   it: (name) => `Ciao [NOME] 😊✨
 Sono Fabio, l'host del tuo appartamento qui a Roma 🏛️🇮🇹.
 Ti scrivo qui così possiamo restare facilmente in contatto durante il soggiorno 📲💬.
-Sarà un vero piacere accoglierti molto presto! 🙌🤍`,
+Sarà un vero piacere accoglierti molto presto! 🤲🤍`,
   es: (name) => `¡Hola [NOME]! 😊✨
 Soy Fabio, el anfitrión de tu apartamento aquí en Roma 🏛️🇮🇹.
 Te escribo aquí para que podamos comunicarnos de forma fácil y directa durante tu estancia 📲💬.
-¡Será un verdadero placer darte la bienvenida muy pronto! 🙌🤍`
+¡Será un verdadero placer darte la bienvenida muy pronto! 🤲🤍`
 };
 
 var introKnown = {
@@ -256,6 +311,13 @@ Usually the apartment is fully ready by around 2:30 PM 🏡✨.
 If it's more practical for you, I can also recommend some luggage storage options near Termini or close to the apartment (San Giovanni) 🧳, so you can explore the city without your bags in the meantime!
 Right in front of the building there's a lovely local bar where you can relax with a coffee ☕😊.
 I'll keep you updated as things progress — please also keep me posted when you're at the airport or on your way ✈️🚖.`;
+    else if (arrivo === "unknown") checkinBlock = `🕑 Check-in information
+The official check-in time is from 3:00 PM onwards.
+If you're arriving after 3:00 PM, that's perfect — no issues at all! 🤩👌
+If you're arriving earlier, no worries: all the usual early arrival procedures apply (you can drop off your luggage and pick up the keys, but the apartment may still be in preparation 🧹✨).
+Please note that we cannot accept arrivals before 12:00 PM under any circumstances.
+
+Could you let me know roughly what time you're planning to arrive? 🙏 That way I can prepare everything and stay available for you 😊.`;
     else checkinBlock = `🕑 Check-in information
 The official check-in time is from 3:00 PM onwards.
 Since the previous guests check out at 10:00 AM, we need some time to clean and prepare the apartment carefully 🧹✨.
@@ -290,6 +352,13 @@ Di solito l'appartamento è pronto verso le 14:30 🏡✨.
 Se può esserti più comodo, posso anche consigliarti qualche deposito bagagli vicino a Termini o all'appartamento (San Giovanni) 🧳, così puoi goderti la città senza portarti le valigie dietro!
 Proprio davanti al palazzo c'è anche un bar carino dove rilassarti con un caffè ☕😊.
 Tienimi aggiornato quando sei all'aeroporto o in viaggio ✈️🚖.`;
+    else if (arrivo === "unknown") checkinBlock = `🕑 Informazioni check-in
+L'orario ufficiale di check-in è dalle 15:00 in poi.
+Se arrivi dopo le 15:00, va benissimo — nessun problema! 🤩👌
+Se invece arrivi prima, nessuna preoccupazione: valgono tutte le solite procedure per l'arrivo anticipato (puoi depositare i bagagli e ritirare le chiavi, ma l'appartamento potrebbe essere ancora in preparazione 🧹✨).
+Ti chiedo solo di non arrivare mai prima delle 12:00, in nessun caso.
+
+Potresti dirmi indicativamente a che ora pensi di arrivare? 🙏 Così posso organizzarmi e restare disponibile per te 😊.`;
     else checkinBlock = `🕑 Informazioni check-in
 L'orario ufficiale di check-in è dalle 15:00 in poi.
 Poiché gli ospiti precedenti effettuano il checkout alle 10:00, abbiamo bisogno di tempo per pulire e preparare l'appartamento con cura 🧹✨.
@@ -324,6 +393,13 @@ Normalmente el apartamento está listo hacia las 14:30 🏡✨.
 Si te resulta más cómodo, también puedo recomendarte algunas consignas de equipaje cerca de Termini o del apartamento 🧳.
 Justo enfrente del edificio hay un bar agradable donde puedes tomar un café mientras esperas ☕😊.
 Avísame cuando estés en el aeropuerto o de camino ✈️🚖.`;
+    else if (arrivo === "unknown") checkinBlock = `🕑 Información de check-in
+El horario oficial de check-in es a partir de las 15:00.
+Si llegas después de las 15:00, ¡perfecto, sin problema alguno! 🤩👌
+Si llegas antes, no te preocupes: aplican todos los procedimientos habituales de llegada anticipada (puedes dejar el equipaje y recoger las llaves, pero el apartamento puede estar aún en preparación 🧹✨).
+En ningún caso podemos aceptar llegadas antes de las 12:00.
+
+¿Podrías decirme aproximadamente a qué hora piensas llegar? 🙏 Así me organizo y me quedo disponible para ti 😊.`;
     else checkinBlock = `🕑 Información de check-in
 El horario oficial de check-in es a partir de las 15:00.
 Como los huéspedes anteriores hacen el checkout a las 10:00, necesitamos tiempo para limpiar y preparar el apartamento 🧹✨.
@@ -336,7 +412,7 @@ Justo enfrente hay un bar para tomar un café mientras esperas ☕😊.
 Avísame cuando estés en el aeropuerto o de camino ✈️🚖.`;
   }
 
-  const taxSection = piatt === "bkg" ? "\n\n" + taxBlock[L] : "";
+  const taxSection = piatt === "bkg" ? "\n\n" + taxBlock_jfm[L] : "";
   const recsSection = "\n\n" + recBlock[L];
   const closing = "\n\n" + closingBlock[L];
   const docs = "\n\n" + docsBlock[L];
@@ -1156,6 +1232,171 @@ Aún más: https://www.civitatis.com/it/roma/
   }
 };
 
+// NCC / Transfer privato
+var nccText = {
+  en: `🚗 Private transfer to/from the airport
+If you'd like a comfortable and stress-free journey to or from the airport, I can recommend a reliable private transfer service (NCC).
+
+The driver will be waiting for you at arrivals with a sign with your name, and will take you directly to the apartment — no stress, no searching for taxis 😊✨.
+
+To book, I just need a few details:
+✈️ Flight number
+📅 Date and time of arrival/departure
+👥 Number of passengers
+🧳 Number of bags
+
+Let me know if you're interested and I'll arrange everything for you! 🙏`,
+
+  it: `🚗 Transfer privato da/per l'aeroporto
+Se desideri un trasferimento comodo e senza pensieri da o per l'aeroporto, posso consigliarti un servizio di transfer privato (NCC) affidabile.
+
+L'autista ti aspetterà in arrivo con un cartello con il tuo nome e ti porterà direttamente all'appartamento — nessuno stress, niente taxi da trovare 😊✨.
+
+Per prenotare ho bisogno di alcune informazioni:
+✈️ Numero del volo
+📅 Data e orario di arrivo/partenza
+👥 Numero di passeggeri
+🧳 Numero di bagagli
+
+Fammelo sapere se sei interessato e organizzo tutto io! 🙏`,
+
+  es: `🚗 Transfer privado desde/hacia el aeropuerto
+Si deseas un traslado cómodo y sin complicaciones desde o hacia el aeropuerto, puedo recomendarte un servicio de transfer privado (NCC) de confianza.
+
+El conductor te estará esperando en llegadas con un cartel con tu nombre y te llevará directamente al apartamento — sin estrés, sin buscar taxis 😊✨.
+
+Para reservar, solo necesito algunos datos:
+✈️ Número de vuelo
+📅 Fecha y hora de llegada/salida
+👥 Número de pasajeros
+🧳 Número de maletas
+
+¡Dime si te interesa y lo organizo todo yo! 🙏`
+};
+
+// Garage & Parcheggi
+var garageText = {
+  lat: {
+    en: `🅿️ Garages & parking near the apartment
+
+Here are the closest options to park your car:
+
+1. 🏆 Supergarage Metronio (recommended) — Via dell'Amba Aradam 31/A
+   ⏰ Open: 6:00 AM – 1:00 AM
+   📍 https://maps.app.goo.gl/8nNmX9i6yKW32LiT8
+   ~5 min walk from the apartment
+
+2. Garage President — Via Emanuele Filiberto 167
+   📍 https://maps.app.goo.gl/EmanuFiliberto167Rome
+
+3. Parking Tuscolo — Via Britannia 18
+   📍 https://maps.app.goo.gl/ViaBritannia18Rome
+
+4. Parcheggio Appio — Via Faleria 24
+   📍 https://maps.app.goo.gl/ViaFaleria24Rome
+
+💡 Tip: Metronio is the most convenient — covered, close, and open late 🙏`,
+
+    it: `🅿️ Garage e parcheggi vicino all'appartamento
+
+Ecco le opzioni più vicine per parcheggiare l'auto:
+
+1. 🏆 Supergarage Metronio (consigliato) — Via dell'Amba Aradam 31/A
+   ⏰ Aperto: 6:00 – 1:00
+   📍 https://maps.app.goo.gl/8nNmX9i6yKW32LiT8
+   ~5 minuti a piedi dall'appartamento
+
+2. Garage President — Via Emanuele Filiberto 167
+   📍 https://maps.app.goo.gl/EmanuFiliberto167Rome
+
+3. Parking Tuscolo — Via Britannia 18
+   📍 https://maps.app.goo.gl/ViaBritannia18Rome
+
+4. Parcheggio Appio — Via Faleria 24
+   📍 https://maps.app.goo.gl/ViaFaleria24Rome
+
+💡 Consiglio: il Metronio è il più comodo — coperto, vicino e aperto fino a tardi 🙏`,
+
+    es: `🅿️ Garajes y aparcamientos cerca del apartamento
+
+Aquí tienes las opciones más cercanas para aparcar el coche:
+
+1. 🏆 Supergarage Metronio (recomendado) — Via dell'Amba Aradam 31/A
+   ⏰ Horario: 6:00 – 1:00
+   📍 https://maps.app.goo.gl/8nNmX9i6yKW32LiT8
+   ~5 minutos a pie del apartamento
+
+2. Garage President — Via Emanuele Filiberto 167
+   📍 https://maps.app.goo.gl/EmanuFiliberto167Rome
+
+3. Parking Tuscolo — Via Britannia 18
+   📍 https://maps.app.goo.gl/ViaBritannia18Rome
+
+4. Parcheggio Appio — Via Faleria 24
+   📍 https://maps.app.goo.gl/ViaFaleria24Rome
+
+💡 Consejo: Metronio es el más conveniente — cubierto, cerca y abierto hasta tarde 🙏`
+  },
+  col: {
+    en: `🅿️ Garages & parking near the apartment
+
+Here are the closest options to park your car near Domus Colosseum:
+
+1. 🏆 Park Service Colosseum — Via Capo d'Africa 29
+   📍 https://maps.app.goo.gl/ViaCapodAfrica29Rome
+   ~3 min walk from the apartment
+
+2. Park Colosseo — Via Ostilia 48
+   📍 https://maps.app.goo.gl/ViaOstilia48Rome
+   ~4 min walk from the apartment
+
+3. Supergarage Metronio — Via dell'Amba Aradam 31/A
+   ⏰ Open: 6:00 AM – 1:00 AM
+   📍 https://maps.app.goo.gl/8nNmX9i6yKW32LiT8
+   ~10 min walk from the apartment
+
+💡 Tip: Park Service Colosseum is the most convenient option for this location 🙏`,
+
+    it: `🅿️ Garage e parcheggi vicino all'appartamento
+
+Ecco le opzioni più vicine per parcheggiare l'auto vicino a Domus Colosseum:
+
+1. 🏆 Park Service Colosseum — Via Capo d'Africa 29
+   📍 https://maps.app.goo.gl/ViaCapodAfrica29Rome
+   ~3 minuti a piedi dall'appartamento
+
+2. Park Colosseo — Via Ostilia 48
+   📍 https://maps.app.goo.gl/ViaOstilia48Rome
+   ~4 minuti a piedi dall'appartamento
+
+3. Supergarage Metronio — Via dell'Amba Aradam 31/A
+   ⏰ Aperto: 6:00 – 1:00
+   📍 https://maps.app.goo.gl/8nNmX9i6yKW32LiT8
+   ~10 minuti a piedi dall'appartamento
+
+💡 Consiglio: Park Service Colosseum è l'opzione più comoda per questa zona 🙏`,
+
+    es: `🅿️ Garajes y aparcamientos cerca del apartamento
+
+Aquí tienes las opciones más cercanas para aparcar el coche cerca de Domus Colosseum:
+
+1. 🏆 Park Service Colosseum — Via Capo d'Africa 29
+   📍 https://maps.app.goo.gl/ViaCapodAfrica29Rome
+   ~3 minutos a pie del apartamento
+
+2. Park Colosseo — Via Ostilia 48
+   📍 https://maps.app.goo.gl/ViaOstilia48Rome
+   ~4 minutos a pie del apartamento
+
+3. Supergarage Metronio — Via dell'Amba Aradam 31/A
+   ⏰ Horario: 6:00 – 1:00
+   📍 https://maps.app.goo.gl/8nNmX9i6yKW32LiT8
+   ~10 minutos a pie del apartamento
+
+💡 Consejo: Park Service Colosseum es la opción más conveniente para esta zona 🙏`
+  }
+};
+
 var templates = [];
 var seenIds = new Set();
 
@@ -1167,11 +1408,11 @@ function pushUnique(t) {
 
 var casas = ["lat","col"];
 var langs = ["en","it","es"];
-var arrivals = ["after15","13to15","1130to13","before1130"];
+var arrivals = ["after15","13to15","1130to13","before1130","unknown"];
 var piattaforme = ["bkg","abn"];
 var knowns = [false, true];
 
-var arrivalLabels = { after15: "Arrivo dopo le 15:00", "13to15": "Arrivo 13:00–15:00", "1130to13": "Arrivo 11:30–13:00", before1130: "Arrivo prima delle 11:30" };
+var arrivalLabels = { after15: "Arrivo dopo le 15:00", "13to15": "Arrivo 13:00–15:00", "1130to13": "Arrivo 11:30–13:00", before1130: "Arrivo prima delle 11:30", unknown: "Orario arrivo sconosciuto" };
 var casaLabels = { lat: "Laterani", col: "Colosseum" };
 var langLabels = { en: "🇬🇧 EN", it: "🇮🇹 IT", es: "🇪🇸 ES" };
 var piattLabels = { bkg: "Booking", abn: "Airbnb" };
@@ -1355,6 +1596,8 @@ for (const casa of casas) {
     // Checkout
     for (const piatt of piattaforme) {
       for (const ct of checkoutTypes) {
+        // Airbnb never has city tax
+        if (piatt === "abn" && ct.withTax) continue;
         pushUnique({
           id: `checkout-${casa}-${lang}-${piatt}-${ct.tipo}-${ct.withTax?'tax':'notax'}`,
           section: "checkout",
@@ -1412,6 +1655,24 @@ for (const casa of casas) {
         text: warningsTexts[lang]
       });
     }
+    // NCC Transfer (same for both houses)
+    pushUnique({
+      id: `ncc-${casa}-${lang}`,
+      section: "ncc",
+      casa, lang, piatt: "all",
+      title: `NCC Transfer privato aeroporto`,
+      vars: "—",
+      text: nccText[lang]
+    });
+    // Garage
+    pushUnique({
+      id: `garage-${casa}-${lang}`,
+      section: "garage",
+      casa, lang, piatt: "all",
+      title: `Garage & Parcheggi vicino a casa`,
+      vars: "—",
+      text: garageText[casa][lang]
+    });
   }
 }
 
@@ -1427,7 +1688,7 @@ function getFiltered() {
   });
 }
 
-var sectionOrder = ["precheckin","reminder","inhouse","checkout","luggage","tips_restaurants","tips_itinerary","location","warnings"];
+var sectionOrder = ["precheckin","reminder","inhouse","checkout","luggage","tips_restaurants","tips_itinerary","location","warnings","ncc","garage"];
 var sectionTitles = {
   precheckin: "A — Pre check-in",
   reminder: "B — Reminder giorno prima",
@@ -1437,7 +1698,9 @@ var sectionTitles = {
   tips_restaurants: "F1 — Ristoranti vicino a casa",
   tips_itinerary: "F2 — Itinerario Roma",
   location: "A+ — 📍 Posizione appartamento",
-  warnings: "A+ — ⚠️ Avvisi chiavi & ascensore"
+  warnings: "A+ — ⚠️ Avvisi chiavi & ascensore",
+  ncc: "G — 🚗 NCC / Transfer privato",
+  garage: "H — 🅿️ Garage & Parcheggi"
 };
 
 
