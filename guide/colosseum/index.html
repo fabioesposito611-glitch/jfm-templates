@@ -247,6 +247,15 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-si
 .qrcard span{font-size:12.5px;color:var(--muted)}
 .qrimg{width:112px;height:112px;background:#fff;border-radius:10px;padding:6px}
 #recensione{scroll-margin-top:72px}
+.finds{display:grid;grid-template-columns:1fr;gap:0;margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.find{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center;padding:12px 14px;border-top:1px solid var(--line)}
+.find:first-child{border-top:0}
+.find b{display:block;font-size:15px}
+.find div span{display:block;font-size:14px;color:var(--muted)}
+.fic{width:64px;height:64px;border-radius:12px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center}
+.fic svg{width:28px;height:28px}
+.fimg{width:64px;height:64px;border:0;padding:0;border-radius:12px;overflow:hidden;cursor:zoom-in;background:var(--line)}
+.fimg img{width:100%;height:100%;object-fit:cover;display:block}
 .review-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media (max-width:380px){.fares{grid-template-columns:1fr}.nearbar b{font-size:15px}}
 </style>
@@ -441,26 +450,21 @@ const HOUSE = {
         ${shots(["c_entry","c_hooks"])}</li>
     </ol>`; },
   rooms:[
-    { t:{it:"Ingresso e cucina",en:"Entrance and kitchen",es:"Entrada y cocina"}, img:["c_kitchen","c_kitchen2","c_glasses"],
-      li:{it:["In cucina trovate sempre un piccolo welcome gift: capsule di caffè, acqua e succo nel frigo, dolcetti per la colazione.","Pentole, padelle, piatti e posate sono nei pensili."],
-          en:["There's always a small welcome gift in the kitchen: coffee capsules, water and juice in the fridge, sweet snacks for breakfast.","Pots, pans, plates and cutlery are in the cupboards."],
-          es:["En la cocina siempre hay un pequeño regalo de bienvenida: cápsulas de café, agua y zumo en la nevera, dulces para el desayuno.","Ollas, sartenes, platos y cubiertos están en los armarios."]} },
+    { t:{it:"Ingresso e cucina",en:"Entrance and kitchen",es:"Entrada y cocina"}, img:["c_entry","c_kitchen","c_kitchen2","c_glasses"], li:null },
     { t:{it:"Soggiorno",en:"Living room",es:"Salón"}, img:["c_hero","c_living2","c_living3"],
-      li:{it:["Il divano è un divano letto: se vi serve aperto, scriveteci e vi mostriamo come fare.","Telecomandi di TV e aria condizionata sul mobile TV.","Il modem Wi-Fi è dietro il divano: se la rete non va, spegnetelo e riaccendetelo."],
-          en:["The sofa is a sofa bed: if you need it opened, message us and we'll show you how.","TV and air-conditioning remotes are on the TV unit.","The Wi-Fi router is behind the sofa: if the connection drops, switch it off and on again."],
-          es:["El sofá es un sofá cama: si lo necesitáis abierto, escribidnos y os explicamos cómo.","Los mandos de la tele y del aire acondicionado están en el mueble de la tele.","El router wifi está detrás del sofá: si la conexión falla, apagadlo y volved a encenderlo."]} },
+      li:{it:["Il divano è un divano letto: se vi serve aperto, scriveteci e vi mostriamo come fare."],en:["The sofa is a sofa bed: if you need it opened, message us and we'll show you how."],es:["El sofá es un sofá cama: si lo necesitáis abierto, escribidnos y os explicamos cómo."]} },
     { t:{it:"Camera da letto",en:"Bedroom",es:"Dormitorio"}, img:["c_bed","c_bed2"],
-      li:{it:["L'interruttore della luce dietro il letto è solo sul lato destro.","Telecomandi di TV e aria condizionata sui comodini."],
-          en:["The light switch behind the bed is on the right side only.","TV and air-conditioning remotes are on the bedside tables."],
-          es:["El interruptor de la luz detrás de la cama está solo en el lado derecho.","Los mandos de la tele y del aire acondicionado están en las mesitas de noche."]} },
-    { t:{it:"Bagno",en:"Bathroom",es:"Baño"}, img:["c_bath","c_bath2"],
-      li:{it:["Il phon è in alto a sinistra, appena entrati."],en:["The hairdryer is on the top left as you walk in."],es:["El secador está arriba a la izquierda, nada más entrar."]} }
+      li:{it:["L'interruttore della luce dietro il letto è solo sul lato destro."],en:["The light switch behind the bed is on the right side only."],es:["El interruptor de la luz detrás de la cama está solo en el lado derecho."]} },
+    { t:{it:"Bagno",en:"Bathroom",es:"Baño"}, img:["c_bath","c_bath2"], li:null }
   ],
-  where:{
-    it:[["Wi-Fi","Modem dietro il divano"],["Cucina","Welcome gift: caffè, acqua, succo, dolcetti"],["Ferro e asse","Nell'armadio a destra dell'ingresso"],["Phon","In bagno, in alto a sinistra entrando"],["Appendiabiti","Appena entrati, a sinistra"],["Asciugamani","Sui letti all'arrivo, con il kit di cortesia"],["Spazzatura","Raccolta differenziata facoltativa. Bidoni in strada: uscite dal portone, girate a destra e dopo circa 100 m (la piazzetta con il bar). Oppure lasciatela: ci pensa il team pulizie"]],
-    en:[["Wi-Fi","Router behind the sofa"],["Kitchen","Welcome gift: coffee, water, juice, sweet snacks"],["Iron & board","In the wardrobe to the right of the entrance"],["Hairdryer","In the bathroom, top left as you walk in"],["Coat rack","Right on the left as you come in"],["Towels","On the beds when you arrive, with the toiletries kit"],["Rubbish","Recycling is optional. Street bins: leave the building, turn right and walk about 100 m (the little square with the bar). Or just leave it: the cleaning team takes care of it"]],
-    es:[["Wifi","Router detrás del sofá"],["Cocina","Regalo de bienvenida: café, agua, zumo, dulces"],["Plancha y tabla","En el armario a la derecha de la entrada"],["Secador","En el baño, arriba a la izquierda al entrar"],["Perchero","Nada más entrar, a la izquierda"],["Toallas","Sobre las camas a la llegada, con el kit de cortesía"],["Basura","Reciclaje opcional. Contenedores en la calle: salid del portal, girad a la derecha y a unos 100 m (la placita con el bar). O dejadla: se encarga el equipo de limpieza"]]
-  },
+  find:[
+    {ic:"wifi", t:{it:"Modem Wi-Fi",en:"Wi-Fi router",es:"Router wifi"}, w:{it:"Accanto al divano in soggiorno",en:"Next to the sofa in the living room",es:"Junto al sofá del salón"}, img:null},
+    {ic:"cup", t:{it:"Colazione",en:"Breakfast",es:"Desayuno"}, w:{it:"Caffè, colazione, acqua e succo nel frigo: servitevi pure",en:"Coffee, breakfast, water and juice in the fridge: help yourselves",es:"Café, desayuno, agua y zumo en la nevera: servíos"}, img:"c_kitchen"},
+    {ic:"remote", t:{it:"Telecomandi",en:"Remotes",es:"Mandos"}, w:{it:"TV e aria condizionata: in ogni stanza",en:"TV and air conditioning: in each room",es:"Tele y aire acondicionado: en cada habitación"}, img:null},
+    {ic:"iron", t:{it:"Ferro e asse da stiro",en:"Iron and ironing board",es:"Plancha y tabla"}, w:{it:"Nell'armadio accanto alla porta d'ingresso",en:"In the closet next to the front door",es:"En el armario junto a la puerta de entrada"}, img:null},
+    {ic:"dryer", t:{it:"Phon",en:"Hairdryer",es:"Secador"}, w:{it:"In bagno, sulla sinistra",en:"In the bathroom, on the left",es:"En el baño, a la izquierda"}, img:"c_bath"},
+    {ic:"bin", t:{it:"Spazzatura",en:"Rubbish",es:"Basura"}, w:{it:"Differenziata facoltativa. Bidoni nella piazzetta: uscite dal portone a destra, circa 100 m. Oppure lasciatela: ci pensa il team pulizie",en:"Recycling is optional. Bins in the little square: turn right out of the front door, about 100 m. Or leave it: the cleaning team takes care of it",es:"Reciclaje opcional. Contenedores en la placita: salid del portal a la derecha, unos 100 m. O dejadla: se encarga el equipo de limpieza"}, img:null}
+  ],
   shop:[
     ["minimkt",{it:"Minimarket per le piccole cose: uscite dal portone e girate a sinistra.",en:"Minimarket for small things: leave the building and turn left.",es:"Minimarket para cosas pequeñas: salid del portal y girad a la izquierda."}],
     ["carrefourLab",{it:"Supermercato Carrefour Express, poco più giù verso il Colosseo, in Via Labicana. Aperto tutti i giorni 7–22.",en:"Carrefour Express supermarket, a little further down towards the Colosseum, on Via Labicana. Open daily 7am–10pm.",es:"Supermercado Carrefour Express, un poco más abajo hacia el Coliseo, en Via Labicana. Abierto todos los días de 7 a 22."}]
@@ -505,6 +509,17 @@ const IC = {
   doc:svg('<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/>')
 };
 
+const FIC = {
+  wifi:svg('<path d="M2 9a15 15 0 0120 0M5 12.5a10 10 0 0114 0M8.5 16a5 5 0 017 0"/><circle cx="12" cy="19.5" r="1"/>'),
+  cup:svg('<path d="M4 9h13v5a5 5 0 01-5 5H9a5 5 0 01-5-5z"/><path d="M17 11h2a2 2 0 010 4h-2M8 3v3M12 3v3"/>'),
+  remote:svg('<rect x="8" y="2" width="8" height="20" rx="3"/><circle cx="12" cy="7" r="1.5"/><path d="M11 12h2M11 15h2"/>'),
+  wash:svg('<rect x="4" y="2" width="16" height="20" rx="2"/><circle cx="12" cy="13" r="5"/><path d="M7 5.5h.01M10 5.5h.01"/>'),
+  iron:svg('<path d="M3 17h17a1 1 0 001-1 7 7 0 00-7-7H9"/><path d="M3 17l1.5-6A3 3 0 017.4 9H14"/><path d="M8 13h.01"/>'),
+  dryer:svg('<path d="M14 8a5 5 0 11-5-5h9v6h-4"/><path d="M8 13l-1 8h3l1-7"/>'),
+  blanket:svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 5v14"/>'),
+  bin:svg('<path d="M4 6h16M9 6V4h6v2M6 6l1 14h10l1-14"/>'),
+  boiler:svg('<rect x="5" y="2" width="14" height="16" rx="2"/><circle cx="10" cy="8" r="2"/><circle cx="15" cy="8" r="2"/><path d="M9 18v4M15 18v4M8 13h8"/>')
+};
 /* ---------- distanze ---------- */
 function fmtM(m){ return m>=1000 ? (m/1000).toFixed(1).replace(".",LANG==="en"?".":",")+" km" : m+" m"; }
 function dist(k, opts={}){
@@ -612,15 +627,15 @@ function checkoutBlock(){
 }
 function vCasa(c){
   const h=HOUSE;
-  const where = L(h.where).map(([a,b])=>`<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join("");
+  const finds = h.find.map(f=>`<div class="find">${f.img?`<button type="button" class="fimg" data-zoom="img/${f.img}.webp" aria-label="${L(UI.zoom)}"><img src="img/${f.img}.webp" alt="" loading="lazy"></button>`:`<span class="fic">${FIC[f.ic]||IC.home}</span>`}<div><b>${L(f.t)}</b><span>${L(f.w)}</span></div></div>`).join("");
   return `<section class="sec"><div class="kicker">${h.name}</div><h2>${L({it:"La casa",en:"The apartment",es:"La casa"})}</h2>
       <p class="lead">${L({it:"Tutto quello che serve per sentirvi a casa da subito.",en:"Everything you need to feel at home straight away.",es:"Todo lo necesario para sentiros en casa desde el primer momento."})}</p></section>
     <section class="sec"><div class="kicker">Wi-Fi</div>${wifiCard(c)}</section>
-    <section class="sec"><h2>${L({it:"Dove trovare le cose",en:"Where to find things",es:"Dónde está cada cosa"})}</h2><dl class="where">${where}</dl></section>
+    <section class="sec"><h2>${L({it:"Dove trovare le cose",en:"Where to find things",es:"Dónde está cada cosa"})}</h2><div class="finds">${finds}</div></section>
     <section class="sec"><h2>${L({it:"Fare la spesa",en:"Groceries",es:"Hacer la compra"})}</h2>
       <ul class="plist">${h.shop.map(([k,d])=>placeRow(k, esc(P[k][0].replace(" Supermercati Laterani","").replace(" Via Labicana","").replace(" Via di San Giovanni in Laterano 218","")), L(d))).join("")}</ul></section>
-    <section class="sec"><h2>${L({it:"Stanza per stanza",en:"Room by room",es:"Habitación por habitación"})}</h2><div class="rooms">
-      ${h.rooms.map(r=>`<article class="room">${shots(r.img)}<div class="body"><h3>${L(r.t)}</h3><ul>${L(r.li).map(x=>`<li>${x}</li>`).join("")}</ul></div></article>`).join("")}
+    <section class="sec"><h2>${L({it:"La casa in foto",en:"The apartment in photos",es:"La casa en fotos"})}</h2><div class="rooms">
+      ${h.rooms.map(r=>`<article class="room">${shots(r.img)}<div class="body"><h3>${L(r.t)}</h3>${r.li?`<ul>${L(r.li).map(x=>`<li>${x}</li>`).join("")}</ul>`:""}</div></article>`).join("")}
     </div></section>
     <section class="sec"><h2>${L({it:"Buono a sapersi",en:"Good to know",es:"Conviene saber"})}</h2>
       ${liftWarning()}${(L(h.good)||[]).map(x=>`<div class="tip">${x}</div>`).join("")}</section>

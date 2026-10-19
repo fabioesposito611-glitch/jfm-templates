@@ -247,6 +247,15 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-si
 .qrcard span{font-size:12.5px;color:var(--muted)}
 .qrimg{width:112px;height:112px;background:#fff;border-radius:10px;padding:6px}
 #recensione{scroll-margin-top:72px}
+.finds{display:grid;grid-template-columns:1fr;gap:0;margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.find{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center;padding:12px 14px;border-top:1px solid var(--line)}
+.find:first-child{border-top:0}
+.find b{display:block;font-size:15px}
+.find div span{display:block;font-size:14px;color:var(--muted)}
+.fic{width:64px;height:64px;border-radius:12px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center}
+.fic svg{width:28px;height:28px}
+.fimg{width:64px;height:64px;border:0;padding:0;border-radius:12px;overflow:hidden;cursor:zoom-in;background:var(--line)}
+.fimg img{width:100%;height:100%;object-fit:cover;display:block}
 .review-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media (max-width:380px){.fares{grid-template-columns:1fr}.nearbar b{font-size:15px}}
 </style>
@@ -455,25 +464,26 @@ const HOUSE = {
         ${liftWarning()}</li>
     </ol>`; },
   rooms:[
-    { t:{it:"Soggiorno e terrazza",en:"Living room and terrace",es:"Salón y terraza"}, img:["l_living","l_living2","l_view"],
-      li:{it:["Il modem Wi-Fi è vicino al tavolo del soggiorno.","Il tavolo da pranzo è allungabile.","Lavatrice e stendino sono in terrazza, con detersivo e ammorbidente."],
-          en:["The Wi-Fi router is near the living room table.","The dining table extends.","Washing machine and drying rack are on the terrace, with detergent and softener."],
-          es:["El router wifi está junto a la mesa del salón.","La mesa del comedor es extensible.","La lavadora y el tendedero están en la terraza, con detergente y suavizante."]} },
-    { t:{it:"Camere e bagni",en:"Bedrooms and bathrooms",es:"Dormitorios y baños"}, img:["l_bed"],
-      li:{it:["Telecomandi di TV e aria condizionata in ogni stanza.","Coperte extra negli armadi.","Il phon è nel bagno con la vasca, nel cassetto sotto il lavandino."],
-          en:["TV and air-conditioning remotes are in each room.","Extra blankets are in the wardrobes.","The hairdryer is in the bathroom with the bathtub, in the drawer under the sink."],
-          es:["Los mandos de la tele y del aire acondicionado están en cada habitación.","Mantas extra en los armarios.","El secador está en el baño con bañera, en el cajón debajo del lavabo."]} }
+    { t:{it:"Soggiorno",en:"Living room",es:"Salón"}, img:["l_living","l_living2"], li:null },
+    { t:{it:"Terrazza",en:"Terrace",es:"Terraza"}, img:["l_view"], li:null },
+    { t:{it:"Camere",en:"Bedrooms",es:"Dormitorios"}, img:["l_bed"], li:null }
   ],
-  where:{
-    it:[["Wi-Fi","Modem vicino al tavolo del soggiorno"],["Cucina","Caffè, colazione, acqua e succo nel frigo: servitevi pure"],["Ferro e asse","Nell'armadio vicino alla cucina, insieme a una torcia"],["Phon","Bagno con la vasca, cassetto sotto il lavandino"],["Coperte","Negli armadi"],["Asciugamani","Sui letti all'arrivo, con il kit di cortesia"],["Pentole e piatti","Nei pensili della cucina"],["Lavatrice","In terrazza, con detersivo e ammorbidente"],["Spazzatura","Raccolta differenziata facoltativa. Bidoni davanti al palazzo, oppure lasciatela: ci pensa il team pulizie"]],
-    en:[["Wi-Fi","Router near the living room table"],["Kitchen","Coffee, breakfast, water and juice in the fridge: help yourselves"],["Iron & board","In the cupboard near the kitchen, together with a torch"],["Hairdryer","Bathroom with bathtub, drawer under the sink"],["Blankets","In the wardrobes"],["Towels","On the beds when you arrive, with the toiletries kit"],["Pots & plates","In the kitchen cupboards"],["Washing machine","On the terrace, with detergent and softener"],["Rubbish","Recycling is optional. Bins in front of the building, or just leave it: the cleaning team takes care of it"]],
-    es:[["Wifi","Router junto a la mesa del salón"],["Cocina","Café, desayuno, agua y zumo en la nevera: servíos sin problema"],["Plancha y tabla","En el armario junto a la cocina, con una linterna"],["Secador","Baño con bañera, cajón debajo del lavabo"],["Mantas","En los armarios"],["Toallas","Sobre las camas a la llegada, con el kit de cortesía"],["Ollas y platos","En los armarios de la cocina"],["Lavadora","En la terraza, con detergente y suavizante"],["Basura","Reciclaje opcional. Contenedores delante del edificio, o dejadla: se encarga el equipo de limpieza"]]
-  },
+  find:[
+    {ic:"wifi", t:{it:"Modem Wi-Fi",en:"Wi-Fi router",es:"Router wifi"}, w:{it:"Vicino al tavolo del soggiorno",en:"Next to the living room table",es:"Junto a la mesa del salón"}, img:null},
+    {ic:"cup", t:{it:"Colazione",en:"Breakfast",es:"Desayuno"}, w:{it:"Caffè, colazione, acqua e succo nel frigo: servitevi pure",en:"Coffee, breakfast, water and juice in the fridge: help yourselves",es:"Café, desayuno, agua y zumo en la nevera: servíos"}, img:null},
+    {ic:"remote", t:{it:"Telecomandi",en:"Remotes",es:"Mandos"}, w:{it:"TV e aria condizionata: in ogni stanza",en:"TV and air conditioning: in each room",es:"Tele y aire acondicionado: en cada habitación"}, img:null},
+    {ic:"wash", t:{it:"Lavatrice",en:"Washing machine",es:"Lavadora"}, w:{it:"In terrazza, con detersivo e ammorbidente",en:"On the terrace, with detergent and softener",es:"En la terraza, con detergente y suavizante"}, img:null},
+    {ic:"iron", t:{it:"Ferro e asse da stiro",en:"Iron and ironing board",es:"Plancha y tabla"}, w:{it:"Nell'armadio vicino alla cucina",en:"In the closet next to the kitchen",es:"En el armario junto a la cocina"}, img:null},
+    {ic:"dryer", t:{it:"Phon",en:"Hairdryer",es:"Secador"}, w:{it:"Bagno con la vasca, nel cassetto sotto il lavandino",en:"Bathroom with the bathtub, in the drawer under the sink",es:"Baño con bañera, en el cajón bajo el lavabo"}, img:null},
+    {ic:"blanket", t:{it:"Coperte",en:"Blankets",es:"Mantas"}, w:{it:"Negli armadi",en:"In the closets",es:"En los armarios"}, img:null},
+    {ic:"boiler", t:{it:"Caldaia",en:"Boiler",es:"Caldera"}, w:{it:"Le manopole devono restare nella posizione della foto: non spostatele, altrimenti l'acqua calda non arriva",en:"The knobs must stay in the position shown in the photo: please don't move them, or there will be no hot water",es:"Las ruedas deben quedarse en la posición de la foto: no las mováis, o no habrá agua caliente"}, img:null},
+    {ic:"bin", t:{it:"Spazzatura",en:"Rubbish",es:"Basura"}, w:{it:"Differenziata facoltativa. Bidoni davanti al palazzo, oppure lasciatela: ci pensa il team pulizie",en:"Recycling is optional. Bins in front of the building, or leave it: the cleaning team takes care of it",es:"Reciclaje opcional. Contenedores delante del edificio, o dejadla: se encarga el equipo de limpieza"}, img:null}
+  ],
   shop:[["castoro",{it:"Supermercato Il Castoro, proprio di fronte al palazzo. Aperto tutti i giorni 8–21.",en:"Il Castoro supermarket, right across the street. Open daily 8am–9pm.",es:"Supermercado Il Castoro, justo enfrente del edificio. Abierto todos los días de 8 a 21."}]],
   good:{
-    it:["<b>Il bagno grande</b> ha uno sciacquone che si ricarica molto lentamente: è normale, non è rotto. Nel frattempo usate l'altro bagno.","<b>Le due porte di casa</b> (lato scale e lato ascensore): non chiudetele a chiave dall'interno, così potete sempre entrare da entrambi i lati."],
-    en:["<b>The large bathroom</b> has a flush that refills very slowly: that's normal, it isn't broken. Meanwhile, use the other bathroom.","<b>The two apartment doors</b> (stairs side and elevator side): don't lock them from the inside, so you can always come in from either side."],
-    es:["<b>El baño grande</b> tiene una cisterna que se recarga muy despacio: es normal, no está rota. Mientras tanto, usad el otro baño.","<b>Las dos puertas de casa</b> (lado escalera y lado ascensor): no las cerréis con llave desde dentro, así siempre podréis entrar por cualquiera de los dos lados."]
+    it:["<b>Acqua calda:</b> la casa è grande, quindi l'acqua calda ci mette un po' ad arrivare. Lasciatela scorrere qualche istante, arriva. Le manopole della caldaia vanno lasciate nella posizione indicata (vedi Dove trovare le cose).","<b>Il bagno grande</b> ha uno sciacquone che si ricarica molto lentamente: è normale, non è rotto. Nel frattempo usate l'altro bagno.","<b>Le due porte di casa</b> (lato scale e lato ascensore): non chiudetele a chiave dall'interno, così potete sempre entrare da entrambi i lati."],
+    en:["<b>Hot water:</b> the apartment is big, so hot water takes a little while to arrive. Just let it run for a moment, it will come. Leave the boiler knobs in the position shown (see Where to find things).","<b>The large bathroom</b> has a flush that refills very slowly: that's normal, it isn't broken. Meanwhile, use the other bathroom.","<b>The two apartment doors</b> (stairs side and elevator side): don't lock them from the inside, so you can always come in from either side."],
+    es:["<b>Agua caliente:</b> la casa es grande, así que el agua caliente tarda un poco en llegar. Dejadla correr unos instantes, ya llega. Las ruedas de la caldera deben quedarse en la posición indicada (ved Dónde está cada cosa).","<b>El baño grande</b> tiene una cisterna que se recarga muy despacio: es normal, no está rota. Mientras tanto, usad el otro baño.","<b>Las dos puertas de casa</b> (lado escalera y lado ascensor): no las cerréis con llave desde dentro, así siempre podréis entrar por cualquiera de los dos lados."]
   },
   car:{
     it:"Dal Grande Raccordo Anulare: uscita Appia, poi Via Appia Nuova fino a Piazza San Giovanni in Laterano e da lì Via dei Laterani. La casa non ha parcheggio: il cortile interno è riservato ai residenti. In strada si parcheggia sulle strisce blu, a pagamento con parcometro o app nei giorni e negli orari indicati sui cartelli. Di fronte, il supermercato Il Castoro ha un parcheggio clienti coperto e non custodito: primi 30 minuti gratis, poi 2 € l'ora, aperto 8–21.",
@@ -514,6 +524,17 @@ const IC = {
   doc:svg('<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/>')
 };
 
+const FIC = {
+  wifi:svg('<path d="M2 9a15 15 0 0120 0M5 12.5a10 10 0 0114 0M8.5 16a5 5 0 017 0"/><circle cx="12" cy="19.5" r="1"/>'),
+  cup:svg('<path d="M4 9h13v5a5 5 0 01-5 5H9a5 5 0 01-5-5z"/><path d="M17 11h2a2 2 0 010 4h-2M8 3v3M12 3v3"/>'),
+  remote:svg('<rect x="8" y="2" width="8" height="20" rx="3"/><circle cx="12" cy="7" r="1.5"/><path d="M11 12h2M11 15h2"/>'),
+  wash:svg('<rect x="4" y="2" width="16" height="20" rx="2"/><circle cx="12" cy="13" r="5"/><path d="M7 5.5h.01M10 5.5h.01"/>'),
+  iron:svg('<path d="M3 17h17a1 1 0 001-1 7 7 0 00-7-7H9"/><path d="M3 17l1.5-6A3 3 0 017.4 9H14"/><path d="M8 13h.01"/>'),
+  dryer:svg('<path d="M14 8a5 5 0 11-5-5h9v6h-4"/><path d="M8 13l-1 8h3l1-7"/>'),
+  blanket:svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 5v14"/>'),
+  bin:svg('<path d="M4 6h16M9 6V4h6v2M6 6l1 14h10l1-14"/>'),
+  boiler:svg('<rect x="5" y="2" width="14" height="16" rx="2"/><circle cx="10" cy="8" r="2"/><circle cx="15" cy="8" r="2"/><path d="M9 18v4M15 18v4M8 13h8"/>')
+};
 /* ---------- distanze ---------- */
 function fmtM(m){ return m>=1000 ? (m/1000).toFixed(1).replace(".",LANG==="en"?".":",")+" km" : m+" m"; }
 function dist(k, opts={}){
@@ -621,15 +642,15 @@ function checkoutBlock(){
 }
 function vCasa(c){
   const h=HOUSE;
-  const where = L(h.where).map(([a,b])=>`<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join("");
+  const finds = h.find.map(f=>`<div class="find">${f.img?`<button type="button" class="fimg" data-zoom="img/${f.img}.webp" aria-label="${L(UI.zoom)}"><img src="img/${f.img}.webp" alt="" loading="lazy"></button>`:`<span class="fic">${FIC[f.ic]||IC.home}</span>`}<div><b>${L(f.t)}</b><span>${L(f.w)}</span></div></div>`).join("");
   return `<section class="sec"><div class="kicker">${h.name}</div><h2>${L({it:"La casa",en:"The apartment",es:"La casa"})}</h2>
       <p class="lead">${L({it:"Tutto quello che serve per sentirvi a casa da subito.",en:"Everything you need to feel at home straight away.",es:"Todo lo necesario para sentiros en casa desde el primer momento."})}</p></section>
     <section class="sec"><div class="kicker">Wi-Fi</div>${wifiCard(c)}</section>
-    <section class="sec"><h2>${L({it:"Dove trovare le cose",en:"Where to find things",es:"Dónde está cada cosa"})}</h2><dl class="where">${where}</dl></section>
+    <section class="sec"><h2>${L({it:"Dove trovare le cose",en:"Where to find things",es:"Dónde está cada cosa"})}</h2><div class="finds">${finds}</div></section>
     <section class="sec"><h2>${L({it:"Fare la spesa",en:"Groceries",es:"Hacer la compra"})}</h2>
       <ul class="plist">${h.shop.map(([k,d])=>placeRow(k, esc(P[k][0].replace(" Supermercati Laterani","").replace(" Via Labicana","").replace(" Via di San Giovanni in Laterano 218","")), L(d))).join("")}</ul></section>
-    <section class="sec"><h2>${L({it:"Stanza per stanza",en:"Room by room",es:"Habitación por habitación"})}</h2><div class="rooms">
-      ${h.rooms.map(r=>`<article class="room">${shots(r.img)}<div class="body"><h3>${L(r.t)}</h3><ul>${L(r.li).map(x=>`<li>${x}</li>`).join("")}</ul></div></article>`).join("")}
+    <section class="sec"><h2>${L({it:"La casa in foto",en:"The apartment in photos",es:"La casa en fotos"})}</h2><div class="rooms">
+      ${h.rooms.map(r=>`<article class="room">${shots(r.img)}<div class="body"><h3>${L(r.t)}</h3>${r.li?`<ul>${L(r.li).map(x=>`<li>${x}</li>`).join("")}</ul>`:""}</div></article>`).join("")}
     </div></section>
     <section class="sec"><h2>${L({it:"Buono a sapersi",en:"Good to know",es:"Conviene saber"})}</h2>
       ${liftWarning()}${(L(h.good)||[]).map(x=>`<div class="tip">${x}</div>`).join("")}</section>

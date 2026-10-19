@@ -106,6 +106,7 @@ var IBAN_FABIO = "IT05N0503403238000000006593";
 var BIC_FABIO  = "BAPPIT21N96";
 var PP_FABIO   = "https://www.paypal.me/FabioEsposito611";
 var WEB = "www.jfmitalia.com";
+var GUIDE_URL = { lat: "https://fabioesposito611-glitch.github.io/jfm-templates/guide/laterani/", col: "https://fabioesposito611-glitch.github.io/jfm-templates/guide/colosseum/" };
 
 // taxBlock_jfm: tassa intestata a JF Management Srls (Booking)
 var taxBlock_jfm = {
@@ -541,265 +542,115 @@ Escríbeme cuando quieras si tienes dudas o necesitas algo antes de llegar — �
 
 var inhouseText = {
   lat: {
-    en: `Hi [NOME]! 😊 Welcome to Rome and to your new home for the next few days! 🏡✨
-
-Here's everything you need to know:
+    en: `Hi [NOME]! 😊 Welcome to Rome and to your home for the next few days! 🏡✨
 
 📶 Wi-Fi
 Network: Domus Laterani Wifi
 Password: Domuslaterani24!
-(The modem is next to the table in the living room.)
 
-☕🍞 Kitchen
-Help yourself to coffee, breakfast pastries, water, and juice from the fridge! 🧃
+📲 Where to find everything in the house (iron, hairdryer, blankets, washing machine…) is in your guide, with photos:
+${GUIDE_URL.lat}#casa
 
-📺❄️ Remote Controls
-All remotes (TV and air conditioning) are in each room — very easy to use!
-
-🧺 Washing Machine
-It's on the terrace. Detergent and softener are available! 🫧
-(If you need help, just message me.)
-
-🧼 Iron
-The iron and ironing board are in the closet next to the kitchen.
-
-💇 Hair Dryer
-In the bathroom with the bathtub, in a drawer under the sink.
-
-🛏️ Blankets
-Extra blankets are in the closets.
-
-🗑️♻️ Trash
-Recycling is available but not mandatory — feel free to use all bins as general waste.
-You can throw bags in the bins right in front of the building.
-If not, the cleaning staff will take care of it at checkout.
-
-🛒 Supermarket
-There's a large, well-stocked supermarket right across the street! 🏠
-
-🛎️ A Few Important Things
-1️⃣ Elevator 🔒
-Please always make sure the doors are properly closed and the red light on the keypad turns off before you leave.
-2️⃣ Small Keys 🔑
-They are delicate — use them gently, don't force them.
-I recommend holding the door with one hand while unlocking — the weight can break the key (it has happened! 😅).
+🛎️ A few important things
+1️⃣ Elevator 🔒 Always make sure the doors are properly closed and the red light on the keypad turns off before you leave.
+2️⃣ Small keys 🔑 They're delicate: use them gently and hold the door with one hand while unlocking.
+3️⃣ Hot water 🚿 The apartment is big, so hot water takes a little while to arrive: just let it run for a bit. Please leave the boiler knobs in the position shown in the guide.
 
 [SE NON HANNO ANCORA MANDATO DOCUMENTI: 🪪 Documents — could you please send me the photos of all guests' ID documents when you have a moment? Thank you! 🙏]
 [SE BOOKING E NON HANNO PAGATO TASSA: 💶 City tax — just a quick reminder to organise the payment when convenient 😊]
 
-If you need anything — restaurant tips, transport info, local experiences — just write! 😎
+For anything, I'm here! 😎
 Enjoy Rome! 🇮🇹✨`,
-    it: `Ciao [NOME]! 😊 Benvenuto a Roma e nella vostra nuova casa per i prossimi giorni! 🏡✨
-
-Ecco tutto quello che ti serve sapere:
+    it: `Ciao [NOME]! 😊 Benvenuti a Roma e nella vostra casa per i prossimi giorni! 🏡✨
 
 📶 Wi-Fi
 Rete: Domus Laterani Wifi
 Password: Domuslaterani24!
-(Il modem è vicino al tavolo in salotto.)
 
-☕🍞 Cucina
-Sentiti libero di prendere caffè, colazione, acqua e succo dal frigo! 🧃
+📲 Dove trovare tutto in casa (ferro, phon, coperte, lavatrice…) è nella vostra guida, con le foto:
+${GUIDE_URL.lat}#casa
 
-📺❄️ Telecomandi
-Trovi tutti i telecomandi (TV e aria condizionata) nelle rispettive stanze — facilissimi da usare!
+🛎️ Cose importanti
+1️⃣ Ascensore 🔒 Assicuratevi sempre che le porte siano ben chiuse e che la luce rossa sul tastierino si spenga prima di allontanarvi.
+2️⃣ Chiavi piccole 🔑 Sono delicate: usatele con gentilezza e tenete la porta con una mano mentre aprite.
+3️⃣ Acqua calda 🚿 La casa è grande e l'acqua calda ci mette un po' ad arrivare: lasciatela scorrere qualche istante. Le manopole della caldaia vanno lasciate nella posizione indicata nella guida.
 
-🧺 Lavatrice
-È sulla terrazza. Detersivo e ammorbidente disponibili! 🫧
-(Se hai bisogno di aiuto, scrivimi.)
-
-🧼 Ferro da stiro
-Il ferro e la tavola da stiro sono nell'armadio vicino alla cucina.
-
-💇 Phon
-Lo trovi nel bagno con la vasca, in un cassetto sotto il lavandino.
-
-🛏️ Coperte
-Coperte extra negli armadi.
-
-🗑️♻️ Spazzatura
-La raccolta differenziata è disponibile ma non obbligatoria — puoi usare tutti i cestini come indifferenziata.
-Puoi buttare i sacchi nei bidoni davanti al palazzo.
-Altrimenti ci pensano i ragazzi delle pulizie al checkout.
-
-🛒 Supermercato
-C'è un supermercato grande e ben fornito proprio di fronte al palazzo! 🏠
-
-🛎️ Cose Importanti
-1️⃣ Ascensore 🔒
-Assicurati sempre che le porte siano ben chiuse e che la luce rossa sul tastierino si spenga prima di allontanarti.
-2️⃣ Chiavi piccole 🔑
-Sono delicate — usale con gentilezza, non forzarle mai.
-Ti consiglio di tenere la porta con una mano mentre apri — il peso può rompere la chiave (è già successo! 😅).
-
-[SE NON HANNO ANCORA MANDATO DOCUMENTI: 🪪 Documenti — potresti inviarmi le foto dei documenti di tutti gli ospiti appena puoi? Grazie! 🙏]
+[SE NON HANNO ANCORA MANDATO DOCUMENTI: 🪪 Documenti — potreste inviarmi le foto dei documenti di tutti gli ospiti appena potete? Grazie! 🙏]
 [SE BOOKING E NON HANNO PAGATO TASSA: 💶 Tassa di soggiorno — solo un reminder per organizzarci quando comodo 😊]
 
-Per qualsiasi cosa — consigli ristoranti, trasporti, esperienze locali — scrivimi! 😎
+Per qualsiasi cosa sono qui! 😎
 Godetevi Roma! 🇮🇹✨`,
-    es: `¡Hola [NOMBRE]! 😊 ¡Bienvenido a Roma y a tu nuevo hogar para los próximos días! 🏡✨
-
-Aquí tienes todo lo que necesitas saber:
+    es: `¡Hola [NOMBRE]! 😊 ¡Bienvenidos a Roma y a vuestra casa para los próximos días! 🏡✨
 
 📶 Wi-Fi
 Red: Domus Laterani Wifi
 Contraseña: Domuslaterani24!
-(El módem está al lado de la mesa del salón.)
 
-☕🍞 Cocina
-¡Siéntete libre de tomar café, bollería, agua y zumo del frigorífico! 🧃
+📲 Dónde está cada cosa en casa (plancha, secador, mantas, lavadora…) lo tenéis en vuestra guía, con fotos:
+${GUIDE_URL.lat}#casa
 
-📺❄️ Mandos a distancia
-Encontrarás todos los mandos (TV y aire acondicionado) en cada habitación — ¡muy fáciles de usar!
+🛎️ Cosas importantes
+1️⃣ Ascensor 🔒 Aseguraos siempre de que las puertas estén bien cerradas y de que la luz roja del panel se apague antes de iros.
+2️⃣ Llaves pequeñas 🔑 Son delicadas: usadlas con suavidad y sujetad la puerta con una mano mientras abrís.
+3️⃣ Agua caliente 🚿 La casa es grande y el agua caliente tarda un poco en llegar: dejadla correr unos instantes. Las ruedas de la caldera deben quedarse en la posición indicada en la guía.
 
-🧺 Lavadora
-Está en la terraza. ¡Detergente y suavizante disponibles! 🫧
-(Si necesitas ayuda, mándame un mensaje.)
+[SI AÚN NO HAN ENVIADO DOCUMENTOS: 🪪 Documentos — ¿podríais enviarme las fotos de los documentos de todos los huéspedes cuando podáis? ¡Gracias! 🙏]
+[SI BOOKING Y NO HAN PAGADO TASA: 💶 Tasa turística — solo un recordatorio para organizarnos cuando os venga bien 😊]
 
-🧼 Plancha
-La plancha y la tabla de planchar están en el armario junto a la cocina.
-
-💇 Secador de pelo
-Lo encontrarás en el baño con bañera, en un cajón bajo el lavabo.
-
-🛏️ Mantas
-Mantas extra en los armarios.
-
-🗑️♻️ Basura
-El reciclaje está disponible pero no es obligatorio — puedes usar todos los cubos como basura general.
-Puedes tirar las bolsas en los contenedores frente al edificio.
-Si no, el equipo de limpieza se encargará en el check-out.
-
-🛒 Supermercado
-¡Hay un supermercado grande y bien surtido justo enfrente del edificio! 🏠
-
-🛎️ Cosas Importantes
-1️⃣ Ascensor 🔒
-Asegúrate siempre de que las puertas estén bien cerradas y de que la luz roja del panel se apague antes de marcharte.
-2️⃣ Llaves pequeñas 🔑
-Son delicadas — úsalas con suavidad, no las fuerces.
-Te recomiendo sujetar la puerta con una mano mientras abres — el peso puede romper la llave (¡ya ha pasado! 😅).
-
-[SI AÚN NO HAN ENVIADO DOCUMENTOS: 🪪 Documentos — ¿podrías enviarme las fotos de los documentos de todos los huéspedes cuando puedas? ¡Gracias! 🙏]
-[SI BOOKING Y NO HAN PAGADO TASA: 💶 Tasa turística — solo un recordatorio para organizarnos cuando te venga bien 😊]
-
-Para cualquier cosa — recomendaciones de restaurantes, transporte, experiencias locales — ¡escríbeme! 😎
+Para cualquier cosa, ¡aquí estoy! 😎
 ¡Disfrutad de Roma! 🇮🇹✨`
   },
   col: {
-    en: `Hi [NOME]! 😊 Welcome to Rome and to Domus Colosseum — your new home for the next few days! 🏡✨
-
-Here's everything you need to know:
+    en: `Hi [NOME]! 😊 Welcome to Rome and to Domus Colosseum, your home for the next few days! 🏡✨
 
 📶 Wi-Fi
 Network: Domus Colosseum Wifi
 Password: Domuscolosseum26!
-(The modem is next to the sofa in the living room.)
 
-☕🍞 Kitchen
-Help yourself to coffee, breakfast pastries, water, and juice from the fridge! 🧃
+📲 Where to find everything in the house (iron, hairdryer, rubbish bins, supermarket…) is in your guide, with photos:
+${GUIDE_URL.col}#casa
 
-📺❄️ Remote Controls
-All remotes (TV and air conditioning) are in each room — very easy to use!
-
-🧼 Iron
-The iron and ironing board are in the closet next to the main door.
-
-💇 Hair Dryer
-In the bathroom, on the left.
-
-🗑️♻️ Trash
-Recycling is available but not mandatory — feel free to use all bins as general waste.
-The nearest bins are in the square — turn right as you exit the main door, about 100 metres.
-If not, the cleaning staff will take care of it at checkout.
-
-🛒 Supermarket
-There's a supermarket down the street — turn left as you exit the main door, about 50 metres 🏠.
-
-🛎️ A Few Important Things
-1️⃣ Elevator 🔒
-Please always make sure the doors are properly closed and the red light on the keypad turns off before you leave.
+🛎️ One important thing
+Elevator 🔒 Always make sure the doors are properly closed and the red light on the keypad turns off before you leave.
 
 [SE NON HANNO ANCORA MANDATO DOCUMENTI: 🪪 Documents — could you please send me the photos of all guests' ID documents when you have a moment? Thank you! 🙏]
 [SE BOOKING E NON HANNO PAGATO TASSA: 💶 City tax — just a quick reminder to organise the payment when convenient 😊]
 
-If you need anything — restaurant tips, transport info, local experiences — just write! 😎
+For anything, I'm here! 😎
 Enjoy Rome! 🇮🇹✨`,
-    it: `Ciao [NOME]! 😊 Benvenuto a Roma e a Domus Colosseum — la vostra nuova casa per i prossimi giorni! 🏡✨
-
-Ecco tutto quello che ti serve sapere:
+    it: `Ciao [NOME]! 😊 Benvenuti a Roma e a Domus Colosseum, la vostra casa per i prossimi giorni! 🏡✨
 
 📶 Wi-Fi
 Rete: Domus Colosseum Wifi
 Password: Domuscolosseum26!
-(Il modem è vicino al divano in salotto.)
 
-☕🍞 Cucina
-Sentiti libero di prendere caffè, colazione, acqua e succo dal frigo! 🧃
+📲 Dove trovare tutto in casa (ferro, phon, bidoni, supermercato…) è nella vostra guida, con le foto:
+${GUIDE_URL.col}#casa
 
-📺❄️ Telecomandi
-Trovi tutti i telecomandi (TV e aria condizionata) nelle rispettive stanze — facilissimi da usare!
+🛎️ Una cosa importante
+Ascensore 🔒 Assicuratevi sempre che le porte siano ben chiuse e che la luce rossa sul tastierino si spenga prima di allontanarvi.
 
-🧼 Ferro da stiro
-Il ferro e la tavola da stiro sono nell'armadio vicino alla porta principale.
-
-💇 Phon
-Lo trovi nel bagno, a sinistra.
-
-🗑️♻️ Spazzatura
-La raccolta differenziata è disponibile ma non obbligatoria — puoi usare tutti i cestini come indifferenziata.
-I bidoni più vicini sono in piazza — esci dal portone e gira a destra, circa 100 metri.
-Altrimenti ci pensano i ragazzi delle pulizie al checkout.
-
-🛒 Supermercato
-C'è un supermercato scendendo la strada — esci dal portone e gira a sinistra, circa 50 metri 🏠.
-
-🛎️ Cose Importanti
-1️⃣ Ascensore 🔒
-Assicurati sempre che le porte siano ben chiuse e che la luce rossa sul tastierino si spenga prima di allontanarti.
-
-[SE NON HANNO ANCORA MANDATO DOCUMENTI: 🪪 Documenti — potresti inviarmi le foto dei documenti di tutti gli ospiti appena puoi? Grazie! 🙏]
+[SE NON HANNO ANCORA MANDATO DOCUMENTI: 🪪 Documenti — potreste inviarmi le foto dei documenti di tutti gli ospiti appena potete? Grazie! 🙏]
 [SE BOOKING E NON HANNO PAGATO TASSA: 💶 Tassa di soggiorno — solo un reminder per organizzarci quando comodo 😊]
 
-Per qualsiasi cosa — consigli ristoranti, trasporti, esperienze locali — scrivimi! 😎
+Per qualsiasi cosa sono qui! 😎
 Godetevi Roma! 🇮🇹✨`,
-    es: `¡Hola [NOMBRE]! 😊 ¡Bienvenido a Roma y a Domus Colosseum — tu nuevo hogar para los próximos días! 🏡✨
-
-Aquí tienes todo lo que necesitas saber:
+    es: `¡Hola [NOMBRE]! 😊 ¡Bienvenidos a Roma y a Domus Colosseum, vuestra casa para los próximos días! 🏡✨
 
 📶 Wi-Fi
 Red: Domus Colosseum Wifi
 Contraseña: Domuscolosseum26!
-(El módem está al lado del sofá en el salón.)
 
-☕🍞 Cocina
-¡Siéntete libre de tomar café, bollería, agua y zumo del frigorífico! 🧃
+📲 Dónde está cada cosa en casa (plancha, secador, contenedores, supermercado…) lo tenéis en vuestra guía, con fotos:
+${GUIDE_URL.col}#casa
 
-📺❄️ Mandos a distancia
-Encontrarás todos los mandos (TV y aire acondicionado) en cada habitación — ¡muy fáciles de usar!
+🛎️ Una cosa importante
+Ascensor 🔒 Aseguraos siempre de que las puertas estén bien cerradas y de que la luz roja del panel se apague antes de iros.
 
-🧼 Plancha
-La plancha y la tabla de planchar están en el armario junto a la puerta principal.
+[SI AÚN NO HAN ENVIADO DOCUMENTOS: 🪪 Documentos — ¿podríais enviarme las fotos de los documentos de todos los huéspedes cuando podáis? ¡Gracias! 🙏]
+[SI BOOKING Y NO HAN PAGADO TASA: 💶 Tasa turística — solo un recordatorio para organizarnos cuando os venga bien 😊]
 
-💇 Secador de pelo
-Lo encontrarás en el baño, a la izquierda.
-
-🗑️♻️ Basura
-El reciclaje está disponible pero no es obligatorio — puedes usar todos los cubos como basura general.
-Los contenedores más cercanos están en la plaza — sal por el portón y gira a la derecha, a unos 100 metros.
-Si no, el equipo de limpieza se encargará en el check-out.
-
-🛒 Supermercado
-Hay un supermercado bajando la calle — sal por el portón y gira a la izquierda, a unos 50 metros 🏠.
-
-🛎️ Cosas Importantes
-1️⃣ Ascensor 🔒
-Asegúrate siempre de que las puertas estén bien cerradas y de que la luz roja del panel se apague antes de marcharte.
-
-[SI AÚN NO HAN ENVIADO DOCUMENTOS: 🪪 Documentos — ¿podrías enviarme las fotos de los documentos de todos los huéspedes cuando puedas? ¡Gracias! 🙏]
-[SI BOOKING Y NO HAN PAGADO TASA: 💶 Tasa turística — solo un recordatorio para organizarnos cuando te venga bien 😊]
-
-Para cualquier cosa — recomendaciones de restaurantes, transporte, experiencias locales — ¡escríbeme! 😎
+Para cualquier cosa, ¡aquí estoy! 😎
 ¡Disfrutad de Roma! 🇮🇹✨`
   }
 };
@@ -1710,7 +1561,6 @@ https://share.google/eLYWJ4jaXleqEnjGv
   },
 };
 
-var GUIDE_URL = { lat: "https://fabioesposito611-glitch.github.io/jfm-templates/guide/laterani/", col: "https://fabioesposito611-glitch.github.io/jfm-templates/guide/colosseum/" };
 var guideTexts = {
   en: (u) => `Hii [NOME]! 😊
 Here's your digital guide to the apartment 📲👇
