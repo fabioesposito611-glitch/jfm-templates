@@ -1395,41 +1395,20 @@ Aquí tienes las opciones más cercanas para aparcar el coche cerca de Domus Col
   }
 };
 
-// Messaggio separato: documenti + tassa
-var docsReqIntro = {
-  en: `Hi [NOME]! 😊
-Just a couple of quick things whenever you have a moment 🙏
-
-🪪 Documents
-As required by Italian law, I need a photo of the passport or ID of all guests (front and back if possible) 📸.`,
-  it: `Ciao [NOME]! 😊
-Ti chiedo solo un paio di cose veloci quando hai un attimo 🙏
-
-🪪 Documenti
-Come richiesto dalla normativa italiana, mi serve la foto del passaporto o del documento d'identità di tutti gli ospiti (fronte e retro se possibile) 📸.`,
-  es: `¡Hola [NOME]! 😊
-Solo un par de cosas rápidas cuando tengas un momento 🙏
-
-🪪 Documentos
-Como exige la normativa italiana, necesito una foto del pasaporte o documento de identidad de todos los huéspedes (anverso y reverso si es posible) 📸.`
+// Messaggio separato: promemoria breve documenti + tassa
+var docsReqShort = {
+  tax: {
+    en: `Please when you can, send me a picture of all the passports and how you prefer to manage the city tax payment 😊`,
+    it: `Quando puoi, mandami una foto di tutti i passaporti e fammi sapere come preferisci gestire il pagamento della tassa di soggiorno 😊`,
+    es: `Cuando puedas, envíame una foto de todos los pasaportes y dime cómo prefieres gestionar el pago de la tasa turística 😊`
+  },
+  none: {
+    en: `Please when you can, send me a picture of all the passports 😊`,
+    it: `Quando puoi, mandami una foto di tutti i passaporti 😊`,
+    es: `Cuando puedas, envíame una foto de todos los pasaportes 😊`
+  }
 };
-var docsReqClosing = {
-  en: `For the documents, whenever you can — ideally by tomorrow 😊 I'm here for anything!`,
-  it: `Per i documenti, quando puoi — l'ideale sarebbe entro domani 😊 Per qualsiasi cosa sono qui!`,
-  es: `Para los documentos, cuando puedas — lo ideal sería antes de mañana 😊 ¡Estoy aquí para lo que necesites!`
-};
-var docsReqTax = {
-  en: `💶 City tax
-Just a little reminder about the city tax (€[TOTALE TASSA]) — no rush at all, you can settle it anytime before check-out, whenever is easiest for you 😊`,
-  it: `💶 Tassa di soggiorno
-Solo un piccolo promemoria per la tassa di soggiorno (€[TOTALE TASSA]) — nessuna fretta, puoi saldarla quando ti è più comodo entro il checkout 😊`,
-  es: `💶 Tasa turística
-Solo un pequeño recordatorio sobre la tasa turística (€[TOTAL TASA]) — sin ninguna prisa, puedes abonarla cuando te venga mejor antes del check-out 😊`
-};
-function buildDocsReq(L, tax) {
-  var mid = tax ? "\n\n" + docsReqTax[L] : "";
-  return docsReqIntro[L] + mid + "\n\n" + docsReqClosing[L];
-}
+function buildDocsReq(L, tax) { return docsReqShort[tax ? "tax" : "none"][L]; }
 
 var templates = [];
 var seenIds = new Set();
@@ -1784,13 +1763,13 @@ for (const casa of casas) {
       }
     }
     // Documenti + tassa (messaggio separato)
-    [["none","Solo documenti","all"],["tax","Documenti + promemoria tassa","bkg"]].forEach(function(v){
+    [["none","Promemoria passaporti","all"],["tax","Promemoria passaporti + tassa","bkg"]].forEach(function(v){
       pushUnique({
         id: `docs_tax-${casa}-${lang}-${v[0]}`,
         section: "docs_tax",
         casa, lang, piatt: v[2],
         title: v[1],
-        vars: "[NOME]" + (v[0] !== "none" ? ", [TOTALE TASSA]" : ""),
+        vars: "—",
         text: buildDocsReq(lang, v[0] === "tax")
       });
     });
@@ -1910,7 +1889,7 @@ function getFiltered() {
 var sectionOrder = ["precheckin","docs_tax","reminder","inhouse","checkout","luggage","tips_restaurants","tips_itinerary","location","warnings","ncc","garage"];
 var sectionTitles = {
   precheckin: "A — Pre check-in",
-  docs_tax: "A2 — 🪪 Documenti & tassa (messaggio separato)",
+  docs_tax: "A2 — 🪪 Promemoria passaporti & tassa",
   reminder: "B — Reminder giorno prima",
   inhouse: "C — Info in-house",
   checkout: "D — Pre-checkout",
