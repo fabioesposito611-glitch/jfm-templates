@@ -289,6 +289,10 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-si
 .faq.urg summary{color:var(--flame)}
 .fa{padding:0 16px 14px;display:flex;flex-direction:column;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--muted)}
 #faq{scroll-margin-top:72px}
+.leg{display:inline-flex!important;align-items:center;gap:5px;font-size:12.5px!important;color:var(--brand)!important;font-weight:600;margin-top:3px}
+.leg svg{width:14px;height:14px}
+.startfrom{display:flex;align-items:center;gap:8px;margin-top:12px;padding:10px 12px;border-radius:12px;background:var(--brand-soft);font-size:14px}
+.startfrom svg{width:18px;height:18px;color:var(--brand);flex:none}
 .review-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media (max-width:380px){.fares{grid-template-columns:1fr}.nearbar b{font-size:15px}}
 </style>
@@ -314,7 +318,7 @@ const HOME_LL=[41.8839493, 12.5029854];
 const LL={"buoni": [41.8880539, 12.5044937], "sampietrino": [41.8877872, 12.5067718], "contesto": [41.8811974, 12.5041073], "pepe": [41.8805052, 12.5077314], "bigfriends": [41.8798666, 12.5076133], "faleria": [41.8823921, 12.5094244], "spaccio": [41.8869859, 12.5086629], "feelsgood": [41.8877834, 12.5082657], "allemura": [41.8827505, 12.5006237], "e528": [41.8812823, 12.5033824], "cannavota": [41.8876174, 12.5061634], "isidoro": [41.888923, 12.498553], "contrario": [41.888943, 12.495256], "bocconcino": [41.888602, 12.494971], "luzzi": [41.8893098, 12.4966286], "valentino": [41.898154, 12.4901306], "castoro": [41.8833914, 12.5033078], "sgMetronio": [41.883732, 12.5005075], "sgItalia": [41.8799612, 12.5044736], "mSG": [41.8852755, 12.5099769], "mCol": [41.8914771, 12.4914684], "taxiSG": [41.886638, 12.5078409], "kipoint": [41.8989068, 12.5033463], "clemente": [41.8893347, 12.4975757], "coronati": [41.8882559, 12.4985048], "aranci": [41.8851338, 12.48039], "serratura": [41.8829829, 12.4784752], "pincio": [41.9111207, 12.4779391], "gianicolo": [41.891305, 12.4614318], "basilicaSG": [41.8858811, 12.505673], "scala": [41.8871437, 12.5066274], "colosseo": [41.8902102, 12.4922309], "circo": [41.8858762, 12.4857578], "fori": [41.8932453, 12.487146], "castel": [41.9030632, 12.466276], "arapacis": [41.9058408, 12.4754092], "trevi": [41.9009325, 12.483313], "pantheon": [41.8986108, 12.4768729], "navona": [41.8991633, 12.4730742], "vaticani": [41.9064878, 12.4536413], "sanpietro": [41.9021667, 12.4539367], "caracalla": [41.8790382, 12.4924394], "vittoriano": [41.894891, 12.4829541], "marcello": [41.8919308, 12.4799083], "ottavia": [41.8925126, 12.4785372], "spagna": [41.9056978, 12.482327], "popolo": [41.9107038, 12.4763579], "termini": [41.9012873, 12.5015756], "ps": [41.8861101, 12.502633], "minimkt": [41.8879191, 12.501177], "carrefourLab": [41.8898642, 12.4995802], "conad": [41.8909967, 12.5016216], "parkServ": [41.8884773, 12.4960676], "parkCol": [41.8879245, 12.4950107], "president": [41.8900356, 12.5066684], "appio": [41.8836623, 12.5107839], "tuscolo": [41.87964, 12.508015]};
 /* ===== testi interfaccia (IT / EN / ES) ===== */
 const UI = {
-  tabs:{home:{it:"Home",en:"Home",es:"Inicio"},arrivo:{it:"Arrivo",en:"Arrival",es:"Llegada"},casa:{it:"Casa",en:"Home guide",es:"La casa"},roma:{it:"Roma",en:"Rome",es:"Roma"},info:{it:"Info",en:"Info",es:"Info"}},
+  tabs:{home:{it:"Home",en:"Home",es:"Inicio"},arrivo:{it:"Arrivo",en:"Arrival",es:"Llegada"},casa:{it:"Casa",en:"Home guide",es:"La casa"},roma:{it:"Roma",en:"Rome",es:"Roma"},info:{it:"Aiuto",en:"Help",es:"Ayuda"}},
   checkin:{it:"Check-in",en:"Check-in",es:"Check-in"}, checkout:{it:"Check-out",en:"Check-out",es:"Check-out"},
   copy:{it:"Copia",en:"Copy",es:"Copiar"}, copied:{it:"Copiato",en:"Copied",es:"Copiado"},
   network:{it:"Rete",en:"Network",es:"Red"}, password:{it:"Password",en:"Password",es:"Contraseña"},
@@ -671,6 +675,12 @@ function placeRow(k, label, desc, extra){
     <a class="btn go" href="${gm(P[k][0],P[k][1])}" target="_blank" rel="noopener">${IC.pin}${L(UI.maps)}</a></li>`;
 }
 
+/* ---------- distanza tra due punti (stima a piedi, come per la casa) ---------- */
+function legKm(a,b){ const R=6371, r=x=>x*Math.PI/180; const dLa=r(b[0]-a[0]), dLo=r(b[1]-a[1]);
+  const h=Math.sin(dLa/2)**2+Math.cos(r(a[0]))*Math.cos(r(b[0]))*Math.sin(dLo/2)**2; return 2*R*Math.asin(Math.sqrt(h))*1.2; }
+function legHTML(from,to){ if(!LL[from]||!LL[to]) return ""; const km=legKm(LL[from],LL[to]), min=Math.max(1,Math.round(km*1000/78));
+  if(min>30) return `<span class="leg">${IC.taxi}${L({it:"dalla tappa precedente: meglio in taxi o metro",en:"from the previous stop: best by taxi or metro",es:"desde la parada anterior: mejor en taxi o metro"})}</span>`;
+  return `<span class="leg">${IC.walk}${min} ${L(UI.min)} ${L({it:"dalla tappa precedente",en:"from the previous stop",es:"desde la parada anterior"})}</span>`; }
 /* ---------- mappe ---------- */
 const MAPCAT = {
   home:{c:"#1C5DAA",t:{it:"Casa",en:"Home",es:"Casa"}},
@@ -802,7 +812,8 @@ function vRoma(){
     body = `<div class="itin">${ITIN.map(it=>`<article class="card"><h3>${L(it.title)}</h3><div class="when">${L(it.when)}</div>
       ${it.intro?`<p class="mt small">${L(it.intro)}</p>`:""}
       ${it.pre?`<p class="mt small">${L(it.pre)}</p>`:""}
-      <ol class="route">${it.stops.map(([k,d],i)=>`<li>${link(k)}<span>${L(d)}</span>${i===0?dist(k,{alwaysWalk:true}):""}</li>`).join("")}</ol>
+      <div class="startfrom">${IC.home}<span>${L({it:"Da casa alla prima tappa",en:"From home to the first stop",es:"De casa a la primera parada"})}: ${DIST[it.stops[0][0]].walk<=25?`<b>${DIST[it.stops[0][0]].walk} ${L(UI.min)} ${L(UI.walk)}</b>`:`<b>${L(VIA[it.stops[0][0]]||{it:"metro o taxi",en:"metro or taxi",es:"metro o taxi"})}</b>`}</span></div>
+      <ol class="route">${it.stops.map(([k,d],i)=>`<li>${link(k)}<span>${L(d)}</span>${i>0?legHTML(it.stops[i-1][0],k):""}</li>`).join("")}</ol>
       ${it.alt?`<p class="small muted">${L(it.alt)}</p><div class="row mt">${it.altLinks.map(k=>`<a class="chip" href="${gm(P[k][0],P[k][1])}" target="_blank" rel="noopener">${esc(P[k][0])}</a>`).join("")}</div>`:""}
       ${it.fact?`<p class="fact">${L(it.fact)}</p>`:""}</article>`).join("")}</div>`;
   } else if(romaSub==="views"){
@@ -886,7 +897,7 @@ function vInfo(){
 
 /* ---------- router ---------- */
 const TABS=["home","arrivo","casa","roma","info"];
-const TAB_IC={home:IC.home,arrivo:IC.key,casa:IC.sofa,roma:IC.map,info:IC.info};
+const TAB_IC={home:IC.home,arrivo:IC.key,casa:IC.sofa,roma:IC.map,info:svg('<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>')};
 function parseHash(){ const t=(location.hash||"").replace("#","").toLowerCase(); REVIEW_PLAT = t==="recensione-airbnb"?"airbnb":t==="recensione-booking"?"booking":null; TAB = (t.startsWith("recensione")||t==="faq") ? "info" : (TABS.includes(t) ? t : "home"); }
 function footer(){ return `<footer><b>JF MANAGEMENT S.r.l.s.</b><span>P.IVA 06271030659 · Via Santi Martiri Salernitani 31, Salerno</span><span>jfmitalia.com</span></footer>`; }
 function render(){
