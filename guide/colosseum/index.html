@@ -1,0 +1,758 @@
+<meta charset="utf-8">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1C5DAA">
+<link rel="apple-touch-icon" href="img/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Domus Colosseum by JFM</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: app-style single column (max 600px) — photo hero, then one tab at a time, bottom tab bar like a native app */
+:root{
+  --paper:#F3F6FB; --card:#FFFFFF; --ink:#13203A; --muted:#58647E; --line:#DCE3EF;
+  --brand:#1C5DAA; --brand-ink:#FFFFFF; --flame:#E9572A; --flame-soft:#FDEBE3; --brand-soft:#E6EEF9;
+  --warn-bg:#FFF4DA; --warn-ink:#6B4A00; --shadow:0 1px 2px rgba(19,32,58,.06),0 6px 20px rgba(19,32,58,.06);
+  --mA:#E8541C; --mB:#1F5BA6; --mC:#2A9D4B;
+  --f-display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --f-body:"Instrument Sans","Helvetica Neue",Arial,system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --r:14px; --nav-h:64px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0C1322; --card:#151F36; --ink:#E8EDF7; --muted:#9BA7C2; --line:#253151;
+  --brand:#78A8EC; --brand-ink:#0C1322; --flame:#FF7B4D; --flame-soft:#3A2016; --brand-soft:#1A2A4A;
+  --warn-bg:#3A2E10; --warn-ink:#F7D98A; --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0C1322; --card:#151F36; --ink:#E8EDF7; --muted:#9BA7C2; --line:#253151;
+  --brand:#78A8EC; --brand-ink:#0C1322; --flame:#FF7B4D; --flame-soft:#3A2016; --brand-soft:#1A2A4A;
+  --warn-bg:#3A2E10; --warn-ink:#F7D98A; --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25); color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{background:var(--paper)}
+body{color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
+a{color:var(--brand)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--flame);outline-offset:2px;border-radius:6px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.1}
+p{margin:0}
+.app{max-width:600px;margin:0 auto;min-height:100%;padding-bottom:calc(var(--nav-h) + 24px + env(safe-area-inset-bottom,0px))}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top-in{display:flex;align-items:center;gap:10px;height:56px}
+.logo{width:34px;height:34px;flex:none}
+.brandname{display:flex;flex-direction:column;min-width:0;flex:1}
+.brandname b{font-family:var(--f-display);font-weight:800;font-size:17px;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brandname span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--card)}
+.lang button{border:0;background:none;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.06em;cursor:pointer;color:var(--muted)}
+.lang button[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink)}
+
+/* hero */
+.hero{position:relative;margin-top:14px;border-radius:20px;overflow:hidden;aspect-ratio:4/3;max-height:420px;width:100%;background:var(--line)}
+.hero img{width:100%;height:100%;object-fit:cover;display:block}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,16,34,0) 35%,rgba(8,16,34,.78) 100%)}
+.hero-txt{position:absolute;left:18px;right:18px;bottom:16px;z-index:1;color:#fff}
+.hero-txt .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.9}
+.hero-txt h1{font-size:clamp(34px,10vw,48px);font-weight:800;letter-spacing:-.03em;margin-top:4px}
+.hero-txt h1 em{font-style:normal;color:#FF8A5E}
+.hero-txt p{font-size:14px;opacity:.92;margin-top:4px}
+
+.facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:-1px;background:var(--card);border:1px solid var(--line);border-radius:16px;margin-top:12px;box-shadow:var(--shadow)}
+.facts div{padding:12px 10px;text-align:center;border-left:1px solid var(--line)}
+.facts div:first-child{border-left:0}
+.facts small{display:block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.facts b{font-family:var(--f-display);font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
+
+/* sections */
+.sec{margin-top:28px}
+.sec>h2{font-size:24px;font-weight:800;letter-spacing:-.02em}
+.sec>.lead{color:var(--muted);margin-top:6px}
+.kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--flame);font-weight:600;margin-bottom:6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
+.stack{display:flex;flex-direction:column;gap:12px}
+.mt{margin-top:14px}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+
+/* quick actions */
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.qa{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;cursor:pointer;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);min-width:0}
+.qa svg{width:22px;height:22px;color:var(--brand)}
+.qa b{font-weight:600;font-size:15px}
+.qa span{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.qa.hot{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.qa.hot svg,.qa.hot span{color:var(--brand-ink)}
+
+/* wifi */
+.wifi{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center}
+.wifi .lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.wifi .val{font-family:var(--f-mono);font-weight:700;font-size:17px;overflow-wrap:anywhere;min-width:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;color:var(--ink);white-space:nowrap}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.btn.flame{background:var(--flame);border-color:var(--flame);color:#fff}
+.btn svg{width:16px;height:16px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+
+/* steps */
+.steps{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:14px;counter-reset:s}
+.step{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);counter-increment:s}
+.step::before{content:counter(s);position:absolute;left:16px;top:16px;width:32px;height:32px;border-radius:50%;background:var(--brand);color:var(--brand-ink);font-family:var(--f-display);font-weight:800;display:grid;place-items:center;font-size:16px}
+.step h3{font-size:18px;font-weight:800;letter-spacing:-.01em;padding-left:44px;min-height:32px;display:flex;align-items:center}
+.step p{margin-top:6px}
+.shots{display:flex;gap:8px;overflow-x:auto;margin-top:12px;padding-bottom:4px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.shots button{flex:0 0 auto;border:0;padding:0;background:none;cursor:zoom-in;scroll-snap-align:start;border-radius:10px;overflow:hidden}
+.shots img{display:block;height:180px;width:auto;max-width:none;border-radius:10px;background:var(--line)}
+.code{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.code .k{width:44px;height:52px;border-radius:10px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--f-mono);font-weight:700;font-size:24px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.25)}
+.code .k.arrow{background:var(--flame);color:#fff}
+.code .cap{font-size:13px;color:var(--muted);margin-left:6px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--paper);margin-top:12px}
+.seg button{border:0;background:none;padding:6px 14px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+
+.note{border-radius:12px;padding:12px 14px;font-size:14.5px;margin-top:12px;background:var(--warn-bg);color:var(--warn-ink)}
+.note b{font-weight:600}
+.tip{border-radius:12px;padding:12px 14px;font-size:14.5px;margin-top:12px;background:var(--brand-soft)}
+
+/* key sets */
+.keys{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.keyset{border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0}
+.keyset h4{margin:0 0 6px;font-size:14px;display:flex;align-items:center;gap:8px}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex:none}
+.keyset ul{margin:0;padding-left:18px;font-size:13.5px}
+
+/* lists */
+.where{display:grid;grid-template-columns:1fr;gap:0;margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.where div{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:12px 14px;border-top:1px solid var(--line)}
+.where div:first-child{border-top:0}
+.where dt{font-weight:600;font-size:14.5px}
+.where dd{margin:0;font-size:14.5px;color:var(--muted);min-width:0}
+.rooms{display:flex;flex-direction:column;gap:14px;margin-top:14px}
+.room{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.room .shots{margin:0;padding:12px 12px 0}
+.room .shots img{height:150px}
+.room .body{padding:12px 16px 16px}
+.room h3{font-size:18px;font-weight:800}
+.room ul{margin:8px 0 0;padding-left:18px}
+.room li+li{margin-top:4px}
+
+/* places */
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 6px;margin-top:14px}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 14px;font-size:14px;font-weight:600;cursor:pointer;color:var(--ink);text-decoration:none}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.plist{list-style:none;margin:12px 0 0;padding:0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.plist li{display:grid;grid-template-columns:1fr auto;gap:12px;padding:12px 14px;border-top:1px solid var(--line);align-items:center}
+.plist li:first-child{border-top:0}
+.plist .nm{font-weight:600;min-width:0}
+.plist .fav{display:inline-block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:var(--flame-soft);color:var(--flame);padding:2px 7px;border-radius:999px;margin-left:6px;vertical-align:2px;font-weight:700}
+.plist .meta{grid-column:1;font-size:13.5px;color:var(--muted)}
+.plist .go{grid-row:1/3;grid-column:2}
+.plist .mins{font-variant-numeric:tabular-nums}
+.route{list-style:none;margin:12px 0 0;padding:0;position:relative}
+.route li{position:relative;padding:0 0 14px 28px}
+.route li::before{content:"";position:absolute;left:6px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--card);border:3px solid var(--flame)}
+.route li::after{content:"";position:absolute;left:10.5px;top:20px;bottom:0;width:1px;background:var(--line)}
+.route li:last-child::after{display:none}
+.route a{font-weight:600;text-decoration:none}
+.route span{display:block;font-size:14px;color:var(--muted)}
+.itin{display:flex;flex-direction:column;gap:14px;margin-top:14px}
+.itin .card h3{font-size:19px;font-weight:800}
+.itin .when{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.fact{margin-top:10px;font-size:14px;border-left:3px solid var(--flame);padding-left:10px;color:var(--muted)}
+.metro{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:5px;color:#fff;font-weight:800;font-size:13px;font-family:var(--f-display);vertical-align:-4px;margin-right:4px}
+.metro.A{background:var(--mA)}.metro.B{background:var(--mB)}.metro.C{background:var(--mC)}
+.tlist{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.tlist li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+.tlist .ic{width:36px;height:36px;border-radius:10px;background:var(--brand-soft);display:grid;place-items:center;color:var(--brand)}
+.tlist .ic svg{width:18px;height:18px}
+.tlist b{display:block}
+.tlist span{font-size:14px;color:var(--muted)}
+
+/* contact */
+.contact{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.avatar{width:56px;height:56px;border-radius:50%;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:24px}
+.sel{user-select:all;font-family:var(--f-mono);font-size:15px}
+.emerg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.emerg div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+.emerg b{display:block;font-family:var(--f-display);font-size:24px;font-weight:800;color:var(--flame)}
+.emerg span{font-size:12.5px;color:var(--muted)}
+.qr{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.qr #qrbox{width:112px;height:112px;background:#fff;border-radius:10px;padding:6px}
+.qr #qrbox img,.qr #qrbox canvas{width:100%!important;height:100%!important}
+
+footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+
+/* bottom nav */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:25;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.nav-in{max-width:600px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);height:var(--nav-h)}
+.nav button{border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11.5px;font-weight:600;color:var(--muted);cursor:pointer;position:relative}
+.nav button svg{width:22px;height:22px}
+.nav button[aria-current="page"]{color:var(--brand)}
+.nav button[aria-current="page"]::before{content:"";position:absolute;top:0;left:30%;right:30%;height:3px;border-radius:0 0 3px 3px;background:var(--flame)}
+
+/* chooser */
+.choose{display:grid;gap:14px;margin-top:20px}
+.house{display:block;position:relative;border-radius:20px;overflow:hidden;aspect-ratio:16/10;max-width:100%;text-decoration:none;color:#fff}
+.house img{width:100%;height:100%;object-fit:cover;display:block}
+.house::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,16,34,0) 40%,rgba(8,16,34,.8))}
+.house div{position:absolute;left:16px;bottom:14px;z-index:1}
+.house b{font-family:var(--f-display);font-size:28px;font-weight:800;letter-spacing:-.02em}
+.house span{display:block;font-size:14px;opacity:.9}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(6,10,20,.92);display:grid;place-items:center;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px))}
+.lb img{max-width:100%;max-height:100%;border-radius:12px}
+.lb button{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:22px;cursor:pointer}
+.toast{position:fixed;left:50%;bottom:calc(var(--nav-h) + 16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;z-index:40}
+@media (prefers-reduced-motion:no-preference){
+  .view{animation:in .28s ease-out}
+  @keyframes in{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+}
+@media (max-width:380px){.where div{grid-template-columns:1fr;gap:2px}.keys{grid-template-columns:1fr}}
+
+.pl-main{display:flex;flex-direction:column;gap:2px;min-width:0}
+.dists{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:4px}
+.dist{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--brand);font-weight:600;font-variant-numeric:tabular-nums}
+.dist svg{width:15px;height:15px;flex:none}
+.route .dists{margin-top:4px}
+.nearbar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.nearbar a{display:flex;flex-direction:column;gap:2px;padding:10px 12px;background:var(--brand-soft);border-radius:12px;text-decoration:none;color:var(--ink);min-width:0}
+.nearbar span{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nearbar b{display:flex;align-items:center;gap:5px;font-family:var(--f-display);font-size:17px;font-weight:800;font-variant-numeric:tabular-nums}
+.nearbar b svg{width:16px;height:16px;color:var(--brand)}
+.h3s{font-size:18px;font-weight:800}
+.cases{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+.case-h{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.case-h svg{width:20px;height:20px;color:var(--flame)}
+.fares{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 10px}
+.fares div{border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.fares div.ours{border-color:var(--flame);background:var(--flame-soft)}
+.fares small{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.fares b{font-family:var(--f-display);font-size:16px;font-weight:800;color:var(--ink)}
+.fares span{font-size:12.5px;color:var(--muted)}
+.ref{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+.taxrow{display:flex;gap:12px;align-items:center}
+.taxrow b{font-family:var(--f-display);font-size:30px;font-weight:800;color:var(--flame);flex:none}
+.lang button{padding:5px 8px}
+@media (max-width:380px){.fares{grid-template-columns:1fr}.nearbar b{font-size:15px}}
+</style>
+
+<div class="app">
+  <header class="top"><div class="top-in gut">
+    <img class="logo" src="img/logo.png" alt="JFM">
+    <div class="brandname"><b>Domus Colosseum</b><span>by JFM</span></div>
+    <div class="lang" role="group" aria-label="Lingua / Language / Idioma">
+      <button id="lang-it" type="button" aria-pressed="true">IT</button>
+      <button id="lang-en" type="button" aria-pressed="false">EN</button>
+      <button id="lang-es" type="button" aria-pressed="false">ES</button>
+    </div>
+  </div></header>
+  <main id="main" class="gut"></main>
+</div>
+<nav class="nav"><div class="nav-in" id="navIn"></div></nav>
+<div class="lb" id="lb" hidden><img id="lbImg" alt=""><button type="button" aria-label="Close">✕</button></div>
+<div class="toast" id="toast" hidden></div>
+<script>
+const DIST={"buoni": {"m": 250, "walk": 3, "taxi": [6, 8], "taxiMin": 5}, "sampietrino": {"m": 450, "walk": 6, "taxi": [6, 8], "taxiMin": 5}, "contesto": {"m": 850, "walk": 11, "taxi": [7, 9], "taxiMin": 5}, "pepe": {"m": 1100, "walk": 14, "taxi": [7, 9], "taxiMin": 10}, "bigfriends": {"m": 1150, "walk": 15, "taxi": [7, 10], "taxiMin": 10}, "faleria": {"m": 1000, "walk": 13, "taxi": [7, 9], "taxiMin": 10}, "spaccio": {"m": 650, "walk": 8, "taxi": [7, 9], "taxiMin": 5}, "feelsgood": {"m": 600, "walk": 8, "taxi": [6, 8], "taxiMin": 5}, "allemura": {"m": 650, "walk": 8, "taxi": [7, 9], "taxiMin": 5}, "e528": {"m": 850, "walk": 11, "taxi": [7, 9], "taxiMin": 5}, "cannavota": {"m": 400, "walk": 5, "taxi": [6, 8], "taxiMin": 5}, "isidoro": {"m": 350, "walk": 4, "taxi": [6, 8], "taxiMin": 5}, "contrario": {"m": 600, "walk": 8, "taxi": [6, 8], "taxiMin": 5}, "bocconcino": {"m": 650, "walk": 8, "taxi": [7, 8], "taxiMin": 5}, "luzzi": {"m": 500, "walk": 7, "taxi": [6, 8], "taxiMin": 5}, "valentino": {"m": 1850, "walk": 25, "taxi": [8, 11], "taxiMin": 10}, "castoro": {"m": 550, "walk": 7, "taxi": [6, 8], "taxiMin": 5}, "sgMetronio": {"m": 550, "walk": 7, "taxi": [6, 8], "taxiMin": 5}, "sgItalia": {"m": 1050, "walk": 13, "taxi": [7, 9], "taxiMin": 10}, "mSG": {"m": 850, "walk": 11, "taxi": [7, 9], "taxiMin": 5}, "mCol": {"m": 1050, "walk": 13, "taxi": [7, 9], "taxiMin": 10}, "taxiSG": {"m": 600, "walk": 7, "taxi": [6, 8], "taxiMin": 5}, "kipoint": {"m": 1500, "walk": 20, "taxi": [8, 10], "taxiMin": 10}, "clemente": {"m": 450, "walk": 6, "taxi": [6, 8], "taxiMin": 5}, "coronati": {"m": 350, "walk": 4, "taxi": [6, 8], "taxiMin": 5}, "aranci": {"m": 2200, "walk": 30, "taxi": [9, 12], "taxiMin": 10}, "serratura": {"m": 2450, "walk": 30, "taxi": [9, 12], "taxiMin": 15}, "pincio": {"m": 3950, "walk": 50, "taxi": [12, 15], "taxiMin": 20}, "gianicolo": {"m": 4050, "walk": 50, "taxi": [12, 16], "taxiMin": 20}, "basilicaSG": {"m": 400, "walk": 5, "taxi": [6, 8], "taxiMin": 5}, "scala": {"m": 450, "walk": 6, "taxi": [6, 8], "taxiMin": 5}, "colosseo": {"m": 900, "walk": 12, "taxi": [7, 9], "taxiMin": 5}, "circo": {"m": 1650, "walk": 20, "taxi": [8, 11], "taxiMin": 10}, "fori": {"m": 1650, "walk": 20, "taxi": [8, 11], "taxiMin": 10}, "castel": {"m": 4100, "walk": 55, "taxi": [12, 16], "taxiMin": 20}, "arapacis": {"m": 3600, "walk": 45, "taxi": [11, 15], "taxiMin": 20}, "trevi": {"m": 2600, "walk": 35, "taxi": [10, 13], "taxiMin": 15}, "pantheon": {"m": 2900, "walk": 35, "taxi": [10, 13], "taxiMin": 15}, "navona": {"m": 3250, "walk": 40, "taxi": [11, 14], "taxiMin": 15}, "vaticani": {"m": 5450, "walk": 70, "taxi": [14, 18], "taxiMin": 25}, "sanpietro": {"m": 5150, "walk": 65, "taxi": [14, 18], "taxiMin": 25}, "caracalla": {"m": 1500, "walk": 20, "taxi": [8, 10], "taxiMin": 10}, "vittoriano": {"m": 2150, "walk": 25, "taxi": [9, 12], "taxiMin": 10}, "marcello": {"m": 2300, "walk": 30, "taxi": [9, 12], "taxiMin": 15}, "ottavia": {"m": 2450, "walk": 30, "taxi": [9, 12], "taxiMin": 15}, "spagna": {"m": 3100, "walk": 40, "taxi": [10, 14], "taxiMin": 15}, "popolo": {"m": 4000, "walk": 50, "taxi": [12, 15], "taxiMin": 20}, "termini": {"m": 1850, "walk": 25, "taxi": [8, 11], "taxiMin": 10}, "ps": {"m": 200, "walk": 3, "taxi": [6, 8], "taxiMin": 5}, "minimkt": {"m": 90, "walk": 1, "taxi": [6, 7], "taxiMin": 5}, "carrefourLab": {"m": 400, "walk": 5, "taxi": [6, 8], "taxiMin": 5}, "conad": {"m": 450, "walk": 6, "taxi": [6, 8], "taxiMin": 5}, "parkServ": {"m": 550, "walk": 7, "taxi": [6, 8], "taxiMin": 5}, "parkCol": {"m": 600, "walk": 8, "taxi": [6, 8], "taxiMin": 5}, "president": {"m": 550, "walk": 7, "taxi": [6, 8], "taxiMin": 5}, "appio": {"m": 1000, "walk": 13, "taxi": [7, 9], "taxiMin": 10}, "tuscolo": {"m": 1200, "walk": 15, "taxi": [7, 10], "taxiMin": 10}};
+/* ===== testi interfaccia (IT / EN / ES) ===== */
+const UI = {
+  tabs:{home:{it:"Home",en:"Home",es:"Inicio"},arrivo:{it:"Arrivo",en:"Arrival",es:"Llegada"},casa:{it:"Casa",en:"Home guide",es:"La casa"},roma:{it:"Roma",en:"Rome",es:"Roma"},info:{it:"Info",en:"Info",es:"Info"}},
+  checkin:{it:"Check-in",en:"Check-in",es:"Check-in"}, checkout:{it:"Check-out",en:"Check-out",es:"Check-out"},
+  copy:{it:"Copia",en:"Copy",es:"Copiar"}, copied:{it:"Copiato",en:"Copied",es:"Copiado"},
+  network:{it:"Rete",en:"Network",es:"Red"}, password:{it:"Password",en:"Password",es:"Contraseña"},
+  open_maps:{it:"Apri in Maps",en:"Open in Maps",es:"Abrir en Maps"}, maps:{it:"Maps",en:"Maps",es:"Maps"},
+  write:{it:"Scrivici su WhatsApp",en:"Message us on WhatsApp",es:"Escríbenos por WhatsApp"},
+  lift:{it:"Ascensore",en:"Elevator",es:"Ascensor"}, stairs:{it:"Scale",en:"Stairs",es:"Escaleras"},
+  code_wait:{it:"Il codice compare qui il giorno dell'arrivo. Se non lo vedete, scriveteci su WhatsApp.",en:"The code shows up here on your arrival day. If you can't see it, message us on WhatsApp.",es:"El código aparece aquí el día de vuestra llegada. Si no lo veis, escribidnos por WhatsApp."},
+  fav:{it:"Preferito",en:"Our pick",es:"Favorito"},
+  walk:{it:"a piedi",en:"walk",es:"a pie"}, min:{it:"min",en:"min",es:"min"},
+  welcome:{it:"Benvenuti a Roma",en:"Welcome to Rome",es:"Bienvenidos a Roma"},
+  zoom:{it:"Ingrandisci foto",en:"Enlarge photo",es:"Ampliar foto"},
+  code:{it:"codice",en:"code",es:"código"}, codeArrow:{it:"codice + freccia su",en:"code + up arrow",es:"código + flecha arriba"}
+};
+const DAYS = {it:"15:00",en:"3 PM",es:"15:00"}, DAYS_OUT = {it:"10:00",en:"10 AM",es:"10:00"};
+
+/* ===== luoghi: [nome, place_id, indicazioni con i mezzi] ===== */
+const P = {
+  buoni:["I Buoni Amici Roma","ChIJc6gxqb9hLxMRsxGp716dXOo"], sampietrino:["Sampietrino - L'Osteria di San Giovanni","ChIJBWxlfP5hLxMRfbvgHdiAsyY"],
+  contesto:["Contesto Urbano","ChIJZegGVcFhLxMRqZsZkL3DLzE"], pepe:["Pepe Ristorante San Giovanni","ChIJ9dfg8OlhLxMRr2nz82HIHiw"],
+  bigfriends:["Big Friends Rome - Eat and Drink","ChIJw8314A5hLxMR_xkPZY8i-es"], faleria:["Osteria Faleria","ChIJVX6dqyVhLxMRGVjfOXva7cA"],
+  spaccio:["Spaccio Pasta","ChIJOZjp7L1hLxMRm0U6OWDJQLk"], feelsgood:["Ristorante Feelsgood","ChIJC2OJHoNhLxMRN_L5YmZjKLk"],
+  allemura:["Alle Mura Ristorante","ChIJLVGPtsZhLxMR4uPnkdTV0-Y"], e528:["5e28 - cucina e miscele","ChIJX0Lf18NhLxMR-VA3Az00MN4"],
+  cannavota:["Hostaria Cannavota","ChIJE4Lslr9hLxMRSxBEIV-rU9g"], isidoro:["Hostaria Isidoro","ChIJM5UH_LhhLxMRFjHu7u-MgQI"],
+  contrario:["Contrario Vineria con Cucina","ChIJj6TOsmBhLxMRWuWlaCYWmDQ"], bocconcino:["Il Bocconcino Osteria","ChIJD01MibdhLxMRpZDUxhLD5DY"],
+  luzzi:["Trattoria Luzzi","ChIJC2NPNbhhLxMRf0qXePNRGn4"], valentino:["Trattoria Valentino","ChIJpWIIC65hLxMR2rgobAOXPH4"],
+  castoro:["Il Castoro Supermercati Laterani","ChIJzRh7HcFhLxMRgkTnFlnrwjk"], carrefourLab:["Carrefour Express Via Labicana","ChIJCfDFvBJhLxMRrGDIpo3dzt8"],
+  minimkt:["Minimarket Via di San Giovanni in Laterano 218","ChIJc2VfNL9hLxMRxLaRJHXr0B0"],
+  sgMetronio:["Supergarage Metronio","ChIJQQaw1sZhLxMRs3IvKl75Y7A"], sgItalia:["Supergarage Italia","ChIJTWskNsJhLxMRj4ygwMdJAcg"],
+  parkServ:["Park Services Colosseum","ChIJWzm8JLhhLxMRKO0CSOVWIuc"], parkCol:["Parcheggio Colosseo Via Ostilia","ChIJH9xr8LdhLxMRZeM3PcckXqw"],
+  president:["Autorimessa President","ChIJwcIiHb5hLxMRJ94DxPd33Ac"], appio:["Parcheggio Appio","ChIJS41DEuthLxMRW1gX-nlbsmY"], tuscolo:["Parking Tuscolo Via Britannia","ChIJ_5ia6ulhLxMRqEin7fFyAOo"],
+  mSG:["Metro San Giovanni","ChIJvVZM1ZRhLxMR2kTZptiqQq0"], mCol:["Metro Colosseo","ChIJe9JHwrZhLxMRg8n__8hn8MI"],
+  taxiSG:["Posteggio taxi San Giovanni","ChIJ9YlXUQBhLxMR301OmbMGXJ4"], kipoint:["Deposito Bagagli KiBag Roma Termini","ChIJQ_3Z7c9hLxMRej75PR72GZo"],
+  clemente:["Basilica di San Clemente","ChIJ6V1-TbhhLxMRUbEhbeY44Zc"], coronati:["Santi Quattro Coronati","ChIJ92l6XLhhLxMRzK_FgT5R2wo"],
+  aranci:["Giardino degli Aranci","ChIJ2dxWXTRgLxMR-Ug5hzOYuQM"], serratura:["Buco della Serratura Aventino","ChIJJ4Pd3zNgLxMReH4_nkETmwU"],
+  pincio:["Terrazza del Pincio","ChIJxTF2FABhLxMRMCggaPaPG6s"], gianicolo:["Terrazza del Gianicolo","ChIJh5oNdKxhLxMR0vgtnsHPDoQ"],
+  basilicaSG:["Basilica di San Giovanni in Laterano","ChIJc6vKf79hLxMR-JBUkZ--MAE"], scala:["Scala Santa","ChIJj1F33r9hLxMR6uRzQemnTD4"],
+  colosseo:["Colosseo","ChIJrRMgU7ZhLxMRxAOFkC7I8Sg"], circo:["Circo Massimo","ChIJxcVH3MphLxMRbNmoLfoNEWg"],
+  fori:["Via dei Fori Imperiali","ChIJT5yj8LNhLxMRx1c73-kM9EI"], castel:["Castel Sant'Angelo","ChIJ0aTnEYeKJRMRiUF95xwRbDY"],
+  arapacis:["Museo dell'Ara Pacis","ChIJgciXqkRgLxMRT8Pu1MtrIxE"], trevi:["Fontana di Trevi","ChIJ1UCDJ1NgLxMRtrsCzOHxdvY"],
+  pantheon:["Pantheon","ChIJqUCGZ09gLxMRLM42IPpl0co"], navona:["Piazza Navona","ChIJPRydwYNgLxMRSjOCLlYkV6M"],
+  vaticani:["Musei Vaticani","ChIJKcGbg2NgLxMRthZkUqDs4M8"], sanpietro:["Basilica di San Pietro","ChIJWZsUt2FgLxMRg1KHzXfwS3I"],
+  caracalla:["Terme di Caracalla","ChIJ1YU-M85hLxMR3Jhb6gZAK2o"], vittoriano:["Altare della Patria Vittoriano","ChIJTYk8xExgLxMRtf6pDniJ9cg"],
+  marcello:["Teatro di Marcello","ChIJp3-BzEtgLxMRMyxlHO3Qw3Y"], ottavia:["Portico d'Ottavia","ChIJpTF0RUlgLxMRUMm5Pi9Tc10"],
+  spagna:["Piazza di Spagna","ChIJ4_TEG1VgLxMROFkd29jWdug"], popolo:["Piazza del Popolo","ChIJhxbo5fhgLxMRUEPO_f-f7kM"],
+  termini:["Roma Termini","ChIJ7__AOaRhLxMRlKlh8r59MKQ"], ps:["Pronto Soccorso San Giovanni Addolorata","ChIJ90c_vcBhLxMRtBFdLgALcNs"]
+};
+/* come arrivarci con i mezzi (per i luoghi oltre ~25 min a piedi) */
+const VIA = {
+  termini:{it:'<span class="metro A">A</span> San Giovanni → Termini, 3 fermate',en:'<span class="metro A">A</span> San Giovanni → Termini, 3 stops',es:'<span class="metro A">A</span> San Giovanni → Termini, 3 paradas'},
+  kipoint:{it:'<span class="metro A">A</span> San Giovanni → Termini, 3 fermate',en:'<span class="metro A">A</span> San Giovanni → Termini, 3 stops',es:'<span class="metro A">A</span> San Giovanni → Termini, 3 paradas'},
+  trevi:{it:'<span class="metro A">A</span> → Barberini (5 fermate) + 8 min a piedi',en:'<span class="metro A">A</span> → Barberini (5 stops) + 8 min walk',es:'<span class="metro A">A</span> → Barberini (5 paradas) + 8 min a pie'},
+  spagna:{it:'<span class="metro A">A</span> → Spagna, 6 fermate',en:'<span class="metro A">A</span> → Spagna, 6 stops',es:'<span class="metro A">A</span> → Spagna, 6 paradas'},
+  popolo:{it:'<span class="metro A">A</span> → Flaminio, 7 fermate',en:'<span class="metro A">A</span> → Flaminio, 7 stops',es:'<span class="metro A">A</span> → Flaminio, 7 paradas'},
+  pincio:{it:'<span class="metro A">A</span> → Flaminio (7 fermate) + 10 min in salita',en:'<span class="metro A">A</span> → Flaminio (7 stops) + 10 min uphill',es:'<span class="metro A">A</span> → Flaminio (7 paradas) + 10 min de subida'},
+  arapacis:{it:'<span class="metro A">A</span> → Flaminio (7 fermate) + 10 min a piedi',en:'<span class="metro A">A</span> → Flaminio (7 stops) + 10 min walk',es:'<span class="metro A">A</span> → Flaminio (7 paradas) + 10 min a pie'},
+  vaticani:{it:'<span class="metro A">A</span> → Ottaviano (9 fermate) + 10 min a piedi',en:'<span class="metro A">A</span> → Ottaviano (9 stops) + 10 min walk',es:'<span class="metro A">A</span> → Ottaviano (9 paradas) + 10 min a pie'},
+  sanpietro:{it:'<span class="metro A">A</span> → Ottaviano (9 fermate) + 10 min a piedi',en:'<span class="metro A">A</span> → Ottaviano (9 stops) + 10 min walk',es:'<span class="metro A">A</span> → Ottaviano (9 paradas) + 10 min a pie'},
+  castel:{it:'<span class="metro A">A</span> → Lepanto (8 fermate) + 15 min a piedi',en:'<span class="metro A">A</span> → Lepanto (8 stops) + 15 min walk',es:'<span class="metro A">A</span> → Lepanto (8 paradas) + 15 min a pie'},
+  pantheon:{it:'Comodo in taxi, oppure 10 min a piedi dalla Fontana di Trevi',en:'Easiest by taxi, or a 10 min walk from the Trevi Fountain',es:'Mejor en taxi, o 10 min a pie desde la Fontana di Trevi'},
+  navona:{it:'Comodo in taxi, oppure 5 min a piedi dal Pantheon',en:'Easiest by taxi, or a 5 min walk from the Pantheon',es:'Mejor en taxi, o 5 min a pie desde el Panteón'},
+  gianicolo:{it:'Meglio in taxi: la salita a piedi è lunga',en:'Best by taxi: it is a long climb on foot',es:'Mejor en taxi: a pie es una subida larga'},
+  aranci:{it:'<span class="metro B">B</span> Colosseo → Circo Massimo + 10 min in salita',en:'<span class="metro B">B</span> Colosseo → Circo Massimo + 10 min uphill',es:'<span class="metro B">B</span> Colosseo → Circo Massimo + 10 min de subida'},
+  serratura:{it:'<span class="metro B">B</span> Colosseo → Circo Massimo + 12 min in salita',en:'<span class="metro B">B</span> Colosseo → Circo Massimo + 12 min uphill',es:'<span class="metro B">B</span> Colosseo → Circo Massimo + 12 min de subida'},
+  circo:{it:'oppure <span class="metro B">B</span> Colosseo → Circo Massimo, 1 fermata',en:'or <span class="metro B">B</span> Colosseo → Circo Massimo, 1 stop',es:'o <span class="metro B">B</span> Colosseo → Circo Massimo, 1 parada'},
+  caracalla:{it:'oppure <span class="metro B">B</span> Colosseo → Circo Massimo + 8 min a piedi',en:'or <span class="metro B">B</span> Colosseo → Circo Massimo + 8 min walk',es:'o <span class="metro B">B</span> Colosseo → Circo Massimo + 8 min a pie'},
+  valentino:{it:'oppure <span class="metro B">B</span> Colosseo → Cavour, 1 fermata',en:'or <span class="metro B">B</span> Colosseo → Cavour, 1 stop',es:'o <span class="metro B">B</span> Colosseo → Cavour, 1 parada'}
+};
+
+const FOOD = {
+  sg:{ title:{it:"Zona San Giovanni",en:"San Giovanni area",es:"Zona San Giovanni"}, items:[
+    ["buoni",1,{it:"Romana tradizionale",en:"Traditional Roman",es:"Romana tradicional"},"€20–30"],
+    ["sampietrino",1,{it:"Romana",en:"Roman",es:"Romana"},"€20–30"],
+    ["faleria",1,{it:"Romana, carne e pesce",en:"Roman, meat and fish",es:"Romana, carne y pescado"},"€20–30"],
+    ["allemura",1,{it:"Italiana tradizionale",en:"Traditional Italian",es:"Italiana tradicional"},"€20–35"],
+    ["spaccio",1,{it:"Pasta fresca fatta in casa",en:"Fresh homemade pasta",es:"Pasta fresca casera"},"€15–25"],
+    ["contesto",0,{it:"Italiana contemporanea",en:"Contemporary Italian",es:"Italiana contemporánea"},"€25–35"],
+    ["e528",0,{it:"Creativa e cocktail",en:"Creative food and cocktails",es:"Creativa y cócteles"},"€25–40"],
+    ["cannavota",0,{it:"Romana tradizionale",en:"Traditional Roman",es:"Romana tradicional"},"€20–35"],
+    ["pepe",0,{it:"Italiana classica e pizza",en:"Classic Italian and pizza",es:"Italiana clásica y pizza"},"€20–35"],
+    ["feelsgood",0,{it:"Italiana contemporanea",en:"Contemporary Italian",es:"Italiana contemporánea"},"€20–30"],
+    ["bigfriends",0,{it:"Italiana informale",en:"Casual Italian",es:"Italiana informal"},"€15–25"]
+  ]},
+  col:{ title:{it:"Verso il Colosseo e Monti",en:"Towards the Colosseum and Monti",es:"Hacia el Coliseo y Monti"}, items:[
+    ["isidoro",0,{it:"Romana tradizionale",en:"Traditional Roman",es:"Romana tradicional"},"€30–50"],
+    ["contrario",0,{it:"Cucina italiana e vini",en:"Italian food and wine",es:"Cocina italiana y vinos"},"€30–50"],
+    ["bocconcino",0,{it:"Romana",en:"Roman",es:"Romana"},"€20–35"],
+    ["luzzi",0,{it:"Romana e pizza al forno a legna",en:"Roman and wood-fired pizza",es:"Romana y pizza al horno de leña"},"€12–20"],
+    ["valentino",0,{it:"Trattoria romana di famiglia, a Monti",en:"Family-run Roman trattoria in Monti",es:"Trattoria romana familiar, en Monti"},"€25–35"]
+  ]}
+};
+
+const ITIN = [
+  { title:{it:"Roma antica, dalla porta di casa",en:"Ancient Rome, from your doorstep",es:"La Roma antigua, desde la puerta de casa"},
+    when:{it:"Mezza giornata · a piedi",en:"Half day · on foot",es:"Medio día · a pie"},
+    stops:[
+      ["basilicaSG",{it:"La cattedrale del Papa, la più antica delle basiliche di Roma.",en:"The Pope's cathedral and the oldest of Rome's basilicas.",es:"La catedral del Papa, la más antigua de las basílicas de Roma."}],
+      ["scala",{it:"Proprio di fronte: secondo la tradizione, la scala salita da Gesù nel palazzo di Pilato.",en:"Right opposite: by tradition, the stairs Jesus climbed in Pilate's palace.",es:"Justo enfrente: según la tradición, la escalera que subió Jesús en el palacio de Pilato."}],
+      ["colosseo",{it:"Lungo Via di San Giovanni in Laterano, sempre dritto.",en:"Straight down Via di San Giovanni in Laterano.",es:"Todo recto por Via di San Giovanni in Laterano."}],
+      ["fori",{it:"Templi, fori e strade imperiali fino a Piazza Venezia.",en:"Temples, forums and imperial roads all the way to Piazza Venezia.",es:"Templos, foros y calzadas imperiales hasta Piazza Venezia."}],
+      ["vittoriano",{it:"L'Altare della Patria, con l'Ara Coeli accanto.",en:"The Altare della Patria, with the Ara Coeli next to it.",es:"El Altar de la Patria, con el Ara Coeli al lado."}]
+    ],
+    alt:{it:"Variante: dal Colosseo scendete al Circo Massimo (le Terme di Caracalla sono lì vicino), poi Via del Teatro di Marcello e il Ghetto Ebraico fino a Piazza Venezia.",en:"Alternative: from the Colosseum walk down to the Circus Maximus (the Baths of Caracalla are close by), then Via del Teatro di Marcello and the Jewish Ghetto up to Piazza Venezia.",es:"Variante: desde el Coliseo bajad al Circo Máximo (las Termas de Caracalla están cerca), luego Via del Teatro di Marcello y el Gueto judío hasta Piazza Venezia."},
+    altLinks:["circo","caracalla","marcello","ottavia"] },
+  { title:{it:"Il centro storico a piedi",en:"The historic centre on foot",es:"El centro histórico a pie"},
+    when:{it:"Pomeriggio · a piedi",en:"Afternoon · on foot",es:"Tarde · a pie"},
+    stops:[
+      ["vittoriano",{it:"Si parte da Piazza Venezia e si prende Via del Corso.",en:"Start at Piazza Venezia and follow Via del Corso.",es:"Se empieza en Piazza Venezia y se sigue por Via del Corso."}],
+      ["trevi",{it:"Passando per Largo Chigi, sede del Governo.",en:"Passing Largo Chigi, seat of the Italian government.",es:"Pasando por Largo Chigi, sede del Gobierno."}],
+      ["pantheon",{it:"Il tempio romano meglio conservato al mondo.",en:"The best-preserved Roman temple in the world.",es:"El templo romano mejor conservado del mundo."}],
+      ["navona",{it:"Le fontane del Bernini sul vecchio stadio di Domiziano.",en:"Bernini's fountains on the old Stadium of Domitian.",es:"Las fuentes de Bernini sobre el antiguo estadio de Domiciano."}],
+      ["spagna",{it:"La scalinata di Trinità dei Monti.",en:"The Spanish Steps.",es:"La escalinata de Trinità dei Monti."}],
+      ["popolo",{it:"Si chiude qui, magari con un caffè o un gelato. Per tornare: metro A da Flaminio.",en:"Finish here, maybe with a coffee or a gelato. To get back: metro A from Flaminio.",es:"Se termina aquí, quizá con un café o un helado. Para volver: metro A desde Flaminio."}]
+    ] },
+  { title:{it:"Vaticano e Lungotevere",en:"Vatican and the Tiber",es:"Vaticano y orillas del Tíber"},
+    when:{it:"Giornata intera · metro + a piedi",en:"Full day · metro + on foot",es:"Día completo · metro + a pie"},
+    pre:{it:'Da casa: <span class="metro A">A</span> da San Giovanni, direzione Battistini, fino a Ottaviano (9 fermate, circa 20 minuti).',en:'From home: <span class="metro A">A</span> from San Giovanni, towards Battistini, to Ottaviano (9 stops, about 20 minutes).',es:'Desde casa: <span class="metro A">A</span> desde San Giovanni, dirección Battistini, hasta Ottaviano (9 paradas, unos 20 minutos).'},
+    stops:[
+      ["vaticani",{it:"Biglietti solo sul sito ufficiale, con largo anticipo.",en:"Book on the official website, well in advance.",es:"Entradas solo en la web oficial, con mucha antelación."}],
+      ["sanpietro",{it:"La Basilica e la Cupola.",en:"The Basilica and the Dome.",es:"La Basílica y la Cúpula."}],
+      ["castel",{it:"15 minuti a piedi lungo Via della Conciliazione.",en:"A 15-minute walk along Via della Conciliazione.",es:"15 minutos a pie por Via della Conciliazione."}],
+      ["arapacis",{it:"20 minuti lungo il Tevere: l'altare voluto da Augusto per celebrare la pace.",en:"20 minutes along the Tiber: the altar Augustus built to celebrate peace.",es:"20 minutos por el Tíber: el altar que Augusto dedicó a la paz."}],
+      ["gianicolo",{it:"Per chiudere, al tramonto, in taxi (circa 10 minuti): la vista sui tetti e sulla Cupola.",en:"To finish, at sunset, by taxi (about 10 minutes): the view over the rooftops and the Dome.",es:"Para terminar, al atardecer, en taxi (unos 10 minutos): la vista sobre los tejados y la Cúpula."}]
+    ],
+    fact:{it:"Lo sapevate? Un passaggio sopraelevato, il Passetto di Borgo, collega il Vaticano a Castel Sant'Angelo: i Papi lo usavano per mettersi in salvo.",en:"Did you know? An elevated passage, the Passetto di Borgo, links the Vatican to Castel Sant'Angelo: Popes used it to escape in times of danger.",es:"¿Lo sabíais? Un pasaje elevado, el Passetto di Borgo, une el Vaticano con Castel Sant'Angelo: los Papas lo usaban para ponerse a salvo."} }
+];
+const VIEWS = [
+  ["gianicolo",{it:"Il panorama classico su tutta Roma, meglio al tramonto.",en:"The classic view over the whole city, best at sunset.",es:"La vista clásica de toda Roma, mejor al atardecer."}],
+  ["aranci",{it:"Sull'Aventino, sopra il Circo Massimo. A due passi c'è il Buco della Serratura dei Cavalieri di Malta.",en:"On the Aventine, above the Circus Maximus. The Knights of Malta keyhole is a few steps away.",es:"En el Aventino, sobre el Circo Máximo. A dos pasos está el Ojo de la Cerradura de los Caballeros de Malta."}],
+  ["pincio",{it:"Sopra Piazza del Popolo, vista sui tetti e su San Pietro.",en:"Above Piazza del Popolo, looking over the rooftops to St Peter's.",es:"Sobre Piazza del Popolo, con vistas a los tejados y a San Pedro."}],
+  ["vittoriano",{it:"Ascensore panoramico fino alla terrazza in cima (a pagamento).",en:"Panoramic lift up to the top terrace (ticketed).",es:"Ascensor panorámico hasta la terraza superior (de pago)."}]
+];
+const GEMS = [
+  ["clemente",{it:"Tre chiese una sopra l'altra: basilica medievale, chiesa paleocristiana e, sotto, case romane e un tempio di Mitra.",en:"Three churches stacked on top of each other: medieval basilica, early-Christian church and, beneath, Roman houses and a temple of Mithras.",es:"Tres iglesias una sobre otra: basílica medieval, iglesia paleocristiana y, debajo, casas romanas y un templo de Mitra."}],
+  ["coronati",{it:"Monastero fortificato con un chiostro silenzioso.",en:"A fortified monastery with a quiet cloister.",es:"Un monasterio fortificado con un claustro silencioso."}],
+  ["caracalla",{it:"Le terme imperiali, enormi e poco affollate.",en:"The imperial baths, huge and rarely crowded.",es:"Las termas imperiales, enormes y poco concurridas."}]
+];
+
+const HOUSE = {
+  key:"colosseum", name:"Domus Colosseum", place:["Domus Colosseum, Via di San Giovanni in Laterano 262","ChIJqY5oR79hLxMRr9gHm4ltjsc"],
+  address:"Via di San Giovanni in Laterano, 262 · 00184 Roma", floor:"2°", hero:"c_hero", heroAlt:{it:"Il soggiorno",en:"The living room",es:"El salón"},
+  guests:{it:"fino a 4 ospiti",en:"up to 4 guests",es:"hasta 4 huéspedes"},
+  foodFirst:"col",
+  hood:{it:"Siete sulla strada che collega la Basilica di San Giovanni al Colosseo, nel rione Celio: una zona tranquilla la sera, piena di trattorie, a due passi da San Clemente e dai Santi Quattro Coronati. La metro A e la metro B sono entrambe raggiungibili a piedi.",en:"You're on the street that links the Basilica of San Giovanni to the Colosseum, in the Celio district: quiet in the evening, full of trattorias, a short walk from San Clemente and the Santi Quattro Coronati. Both metro A and metro B are within walking distance.",es:"Estáis en la calle que une la Basílica de San Giovanni con el Coliseo, en el barrio del Celio: tranquilo por la noche, lleno de trattorias, a dos pasos de San Clemente y de los Santi Quattro Coronati. El metro A y el metro B están a poca distancia a pie."},
+  near:[["colosseo",{it:"Colosseo",en:"Colosseum",es:"Coliseo"}],["mSG",{it:'Metro <span class="metro A">A</span>',en:'Metro <span class="metro A">A</span>',es:'Metro <span class="metro A">A</span>'}],["mCol",{it:'Metro <span class="metro B">B</span>',en:'Metro <span class="metro B">B</span>',es:'Metro <span class="metro B">B</span>'}]],
+  arrival(c){ return `
+    <ol class="steps">
+      <li class="step"><h3>${L({it:"Il portone n. 262",en:"Front door no. 262",es:"El portal n.º 262"})}</h3>
+        <p>${L({it:"Siete in Via di San Giovanni in Laterano, la strada che porta dritta al Colosseo. Il portone è quello con il numero 262.",en:"You're on Via di San Giovanni in Laterano, the street that runs straight to the Colosseum. Look for the front door with number 262.",es:"Estáis en Via di San Giovanni in Laterano, la calle que lleva recto al Coliseo. El portal es el del número 262."})}</p>
+        ${shots(["c_street","c_portone"])}
+        <div class="row mt">${mapsBtnH()}</div></li>
+      <li class="step"><h3>${L({it:"Il tastierino",en:"The keypad",es:"El teclado"})}</h3>
+        <p>${L({it:"Sulla destra del portone c'è un piccolo tastierino: inserite il codice e premete la <b>freccia in su</b>. Il portone si apre.",en:"On the right of the front door there's a small keypad: enter the code and press the <b>up arrow</b>. The door opens.",es:"A la derecha del portal hay un pequeño teclado: introducid el código y pulsad la <b>flecha hacia arriba</b>. El portal se abre."})}</p>
+        ${codeTiles(c?.portone, true)}
+        ${shots(["c_keypad"])}</li>
+      <li class="step"><h3>${L({it:"Al 2° piano",en:"Up to the 2nd floor",es:"Al 2.º piso"})}</h3>
+        ${seg([
+          [UI.lift, `<p class="mt">${L({it:"Entrati nel portone, l'ascensore è sulla destra. Salite al <b>2° piano</b>: la porta di casa è <b>a sinistra</b>.",en:"Once inside, the elevator is on the right. Go up to the <b>2nd floor</b>: the apartment door is <b>on the left</b>.",es:"Al entrar, el ascensor está a la derecha. Subid al <b>2.º piso</b>: la puerta de casa está <b>a la izquierda</b>."})}</p>${shots(["c_lift1","c_lift2","c_door"])}`],
+          [UI.stairs, `<p class="mt">${L({it:"Attenzione alla strada giusta: dopo la prima rampa <b>girate a destra</b>, poi seguite le scale fino al <b>2° piano</b>. La porta è sempre <b>a sinistra</b>.",en:"Take the right way: after the first flight <b>turn right</b>, then follow the stairs up to the <b>2nd floor</b>. The door is <b>on the left</b>.",es:"Atención al camino: después del primer tramo <b>girad a la derecha</b> y seguid la escalera hasta el <b>2.º piso</b>. La puerta está <b>a la izquierda</b>."})}</p>${shots(["c_st1","c_st2","c_st3","c_st4","c_st5"])}`]
+        ])}
+        ${liftWarning()}</li>
+      <li class="step"><h3>${L({it:"La key box",en:"The key box",es:"La caja de llaves"})}</h3>
+        <p>${L({it:"Accanto alla porta, sulla sinistra, c'è una key box nera a forma di casetta. Inserite il codice e <b>girate la manopola in alto verso destra</b>: dentro trovate le chiavi.",en:"Next to the door, on the left, there's a black house-shaped key box. Enter the code and <b>turn the top knob to the right</b>: the keys are inside.",es:"Junto a la puerta, a la izquierda, hay una caja de llaves negra con forma de casita. Introducid el código y <b>girad la rueda de arriba hacia la derecha</b>: dentro están las llaves."})}</p>
+        ${codeTiles(c?.keybox)}
+        ${shots(["c_box","c_boxcode","c_boxopen","c_keys"])}
+        <div class="tip">${L({it:"Prese le chiavi, richiudete la key box e mescolate i numeri.",en:"Once you have the keys, close the key box and scramble the numbers.",es:"Cuando tengáis las llaves, cerrad la caja y mezclad los números."})}</div></li>
+      <li class="step"><h3>${L({it:"Benvenuti a casa",en:"Welcome home",es:"Bienvenidos a casa"})}</h3>
+        <p>${L({it:"Aprite la porta: appena entrati, a sinistra, c'è l'appendiabiti.",en:"Open the door: the coat rack is right on your left as you come in.",es:"Abrid la puerta: nada más entrar, a la izquierda, está el perchero."})}</p>
+        ${shots(["c_entry","c_hooks"])}</li>
+    </ol>`; },
+  rooms:[
+    { t:{it:"Ingresso e cucina",en:"Entrance and kitchen",es:"Entrada y cocina"}, img:["c_kitchen","c_kitchen2","c_glasses"],
+      li:{it:["In cucina trovate sempre un piccolo welcome gift: capsule di caffè, acqua e succo nel frigo, dolcetti per la colazione.","Pentole, padelle, piatti e posate sono nei pensili."],
+          en:["There's always a small welcome gift in the kitchen: coffee capsules, water and juice in the fridge, sweet snacks for breakfast.","Pots, pans, plates and cutlery are in the cupboards."],
+          es:["En la cocina siempre hay un pequeño regalo de bienvenida: cápsulas de café, agua y zumo en la nevera, dulces para el desayuno.","Ollas, sartenes, platos y cubiertos están en los armarios."]} },
+    { t:{it:"Soggiorno",en:"Living room",es:"Salón"}, img:["c_hero","c_living2","c_living3"],
+      li:{it:["Il divano è un divano letto: se vi serve aperto, scriveteci e vi mostriamo come fare.","Telecomandi di TV e aria condizionata sul mobile TV.","Il modem Wi-Fi è dietro il divano: se la rete non va, spegnetelo e riaccendetelo."],
+          en:["The sofa is a sofa bed: if you need it opened, message us and we'll show you how.","TV and air-conditioning remotes are on the TV unit.","The Wi-Fi router is behind the sofa: if the connection drops, switch it off and on again."],
+          es:["El sofá es un sofá cama: si lo necesitáis abierto, escribidnos y os explicamos cómo.","Los mandos de la tele y del aire acondicionado están en el mueble de la tele.","El router wifi está detrás del sofá: si la conexión falla, apagadlo y volved a encenderlo."]} },
+    { t:{it:"Camera da letto",en:"Bedroom",es:"Dormitorio"}, img:["c_bed","c_bed2"],
+      li:{it:["L'interruttore della luce dietro il letto è solo sul lato destro.","Telecomandi di TV e aria condizionata sui comodini."],
+          en:["The light switch behind the bed is on the right side only.","TV and air-conditioning remotes are on the bedside tables."],
+          es:["El interruptor de la luz detrás de la cama está solo en el lado derecho.","Los mandos de la tele y del aire acondicionado están en las mesitas de noche."]} },
+    { t:{it:"Bagno",en:"Bathroom",es:"Baño"}, img:["c_bath","c_bath2"],
+      li:{it:["Il phon è in alto a sinistra, appena entrati."],en:["The hairdryer is on the top left as you walk in."],es:["El secador está arriba a la izquierda, nada más entrar."]} }
+  ],
+  where:{
+    it:[["Wi-Fi","Modem dietro il divano"],["Cucina","Welcome gift: caffè, acqua, succo, dolcetti"],["Ferro e asse","Nell'armadio a destra dell'ingresso"],["Phon","In bagno, in alto a sinistra entrando"],["Appendiabiti","Appena entrati, a sinistra"],["Asciugamani","Sui letti all'arrivo, con il kit di cortesia"],["Spazzatura","Raccolta differenziata facoltativa. Bidoni in strada: uscite dal portone, girate a destra e dopo circa 100 m (la piazzetta con il bar). Oppure lasciatela: ci pensa il team pulizie"]],
+    en:[["Wi-Fi","Router behind the sofa"],["Kitchen","Welcome gift: coffee, water, juice, sweet snacks"],["Iron & board","In the wardrobe to the right of the entrance"],["Hairdryer","In the bathroom, top left as you walk in"],["Coat rack","Right on the left as you come in"],["Towels","On the beds when you arrive, with the toiletries kit"],["Rubbish","Recycling is optional. Street bins: leave the building, turn right and walk about 100 m (the little square with the bar). Or just leave it: the cleaning team takes care of it"]],
+    es:[["Wifi","Router detrás del sofá"],["Cocina","Regalo de bienvenida: café, agua, zumo, dulces"],["Plancha y tabla","En el armario a la derecha de la entrada"],["Secador","En el baño, arriba a la izquierda al entrar"],["Perchero","Nada más entrar, a la izquierda"],["Toallas","Sobre las camas a la llegada, con el kit de cortesía"],["Basura","Reciclaje opcional. Contenedores en la calle: salid del portal, girad a la derecha y a unos 100 m (la placita con el bar). O dejadla: se encarga el equipo de limpieza"]]
+  },
+  shop:[
+    ["minimkt",{it:"Minimarket per le piccole cose: uscite dal portone e girate a sinistra.",en:"Minimarket for small things: leave the building and turn left.",es:"Minimarket para cosas pequeñas: salid del portal y girad a la izquierda."}],
+    ["carrefourLab",{it:"Supermercato Carrefour Express, poco più giù verso il Colosseo, in Via Labicana. Aperto tutti i giorni 7–22.",en:"Carrefour Express supermarket, a little further down towards the Colosseum, on Via Labicana. Open daily 7am–10pm.",es:"Supermercado Carrefour Express, un poco más abajo hacia el Coliseo, en Via Labicana. Abierto todos los días de 7 a 22."}]
+  ],
+  good:null,
+  car:{
+    it:"Dal Grande Raccordo Anulare: uscita Appia, poi Via Appia Nuova fino a Piazza San Giovanni in Laterano e da lì Via di San Giovanni in Laterano. La casa non ha parcheggio. In strada, lungo Via di San Giovanni in Laterano e nelle vie laterali, si parcheggia sulle strisce blu, a pagamento con parcometro o app nei giorni e negli orari indicati sui cartelli; nelle ore di punta trovare posto è difficile. Per lasciare l'auto qualche giorno conviene un garage: chiamatelo prima per disponibilità e prezzi. Potete fermarvi pochi minuti davanti al portone per scaricare i bagagli, poi spostate subito l'auto.",
+    en:"From the GRA ring road: exit Appia, then Via Appia Nuova to Piazza San Giovanni in Laterano and from there Via di San Giovanni in Laterano. The apartment has no parking. On the street, along Via di San Giovanni in Laterano and the side streets, park in the blue bays, paid by meter or app on the days and hours shown on the signs; at rush hour spaces are hard to find. To leave the car for a few days, a garage is the better option: call ahead for availability and prices. You can stop for a couple of minutes outside the door to unload luggage, then move the car straight away.",
+    es:"Desde el anillo GRA: salida Appia, luego Via Appia Nuova hasta Piazza San Giovanni in Laterano y desde allí Via di San Giovanni in Laterano. La casa no tiene aparcamiento. En la calle, por Via di San Giovanni in Laterano y las calles laterales, se aparca en las plazas azules, de pago con parquímetro o app en los días y horarios indicados en las señales; en hora punta es difícil encontrar sitio. Para dejar el coche varios días conviene un garaje: llamad antes para disponibilidad y precios. Podéis parar unos minutos delante del portal para descargar las maletas y luego mover el coche enseguida."
+  },
+  parking:["parkServ","parkCol","sgMetronio"]
+};
+
+/* ===== motore della guida (uguale per tutte le case) ===== */
+let CFG = null, LANG = "it", TAB = "home", romaSub = "food";
+const FALLBACK_CONTACT = {fabio_tel:"+39 352 057 5278", fabio_wa:"393520575278", email:"amministrazione@jfmitalia.com"};
+const gm = (name, pid) => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(name) + "&query_place_id=" + pid;
+const L = v => (v && typeof v === "object" && !Array.isArray(v)) ? (v[LANG] ?? v.en ?? v.it) : v;
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const svg = p => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const IC = {
+  home:svg('<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/>'),
+  key:svg('<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M15 8l2 2"/>'),
+  sofa:svg('<path d="M4 11V8a3 3 0 013-3h10a3 3 0 013 3v3"/><path d="M2 13a2 2 0 014 0v2h12v-2a2 2 0 014 0v5H2z"/><path d="M5 18v2M19 18v2"/>'),
+  map:svg('<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>'),
+  info:svg('<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>'),
+  chat:svg('<path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z"/>'),
+  pin:svg('<path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),
+  door:svg('<path d="M5 21V4a1 1 0 011-1h12a1 1 0 011 1v17"/><path d="M3 21h18M15 12h.01"/>'),
+  copy:svg('<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/>'),
+  train:svg('<rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M8 21l2-4M16 21l-2-4"/>'),
+  car:svg('<path d="M3 13l2-6h14l2 6v5H3z"/><circle cx="7.5" cy="15.5" r="1"/><circle cx="16.5" cy="15.5" r="1"/>'),
+  taxi:svg('<path d="M10 4h4l1 3M3 14l2-7h14l2 7v4H3z"/><circle cx="7.5" cy="15" r="1"/><circle cx="16.5" cy="15" r="1"/>'),
+  van:svg('<path d="M2 16V7a1 1 0 011-1h11l5 4h2a1 1 0 011 1v5z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>'),
+  bag:svg('<rect x="4" y="7" width="16" height="13" rx="2"/><path d="M9 7V4h6v3M9 11v5M15 11v5"/>'),
+  plane:svg('<path d="M2 15l20-7-3 9-6-2-3 5-1-6z"/>'),
+  bike:svg('<circle cx="6" cy="16" r="3.5"/><circle cx="18" cy="16" r="3.5"/><path d="M6 16l4-7h5l3 7M10 9l-1-3H7"/>'),
+  star:svg('<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>'),
+  cart:svg('<circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/><path d="M3 4h2l2.5 11h11L21 8H6.5"/>'),
+  walk:svg('<circle cx="13" cy="4" r="2"/><path d="M10 21l2-6 3 3v3M9 12l2-4 4 2 2 3M11 8L8 10v3"/>'),
+  clock:svg('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
+  doc:svg('<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/>')
+};
+
+/* ---------- distanze ---------- */
+function fmtM(m){ return m>=1000 ? (m/1000).toFixed(1).replace(".",LANG==="en"?".":",")+" km" : m+" m"; }
+function dist(k, opts={}){
+  const d = DIST[k]; if(!d) return "";
+  const far = d.walk > 25;
+  let s = "";
+  if(!far || opts.alwaysWalk) s += `<span class="dist">${IC.walk}${d.walk} ${L(UI.min)} · ${fmtM(d.m)}</span>`;
+  if(far && VIA[k]) s += `<span class="dist">${IC.train}${L(VIA[k])}</span>`;
+  else if(!far && VIA[k] && opts.showVia) s += `<span class="dist">${IC.train}${L(VIA[k])}</span>`;
+  if(far) s += `<span class="dist">${IC.taxi}${L({it:"taxi",en:"taxi",es:"taxi"})} ~${d.taxiMin} ${L(UI.min)} · €${d.taxi[0]}–${d.taxi[1]}</span>`;
+  return `<span class="dists">${s}</span>`;
+}
+const link = (k, label) => `<a href="${gm(P[k][0],P[k][1])}" target="_blank" rel="noopener">${esc(label ?? P[k][0])}</a>`;
+const contact = () => Object.assign({}, FALLBACK_CONTACT, CFG?.contatti||{});
+const waLink = () => "https://wa.me/" + contact().fabio_wa;
+
+/* ---------- blocchi ---------- */
+function shots(list){
+  return `<div class="shots">${list.map(n=>`<button type="button" data-zoom="img/${n}.webp" aria-label="${L(UI.zoom)}"><img src="img/${n}.webp" alt="" loading="lazy"></button>`).join("")}</div>`;
+}
+function mapsBtnH(){ return `<a class="btn primary" href="${gm(HOUSE.place[0],HOUSE.place[1])}" target="_blank" rel="noopener">${IC.pin}${L(UI.open_maps)}</a>`; }
+function codeTiles(code, arrow){
+  if(!code) return `<div class="note">${L(UI.code_wait)}</div>`;
+  const ks=[...String(code)].map(d=>`<span class="k">${esc(d)}</span>`).join("");
+  return `<div class="code">${ks}${arrow?'<span class="k arrow">↑</span>':''}<span class="cap">${arrow?L(UI.codeArrow):L(UI.code)}</span></div>`;
+}
+let segN=0;
+function seg(opts){
+  const k="s"+(segN++);
+  return `<div class="seg" role="group">${opts.map((o,i)=>`<button type="button" aria-pressed="${i===0}" data-seg-btn="${k}" data-i="${i}">${L(o[0])}</button>`).join("")}</div>
+    ${opts.map((o,i)=>`<div data-seg-pane="${k}" data-i="${i}" ${i?"hidden":""}>${o[1]}</div>`).join("")}`;
+}
+function liftWarning(){
+  return `<div class="note">${L({it:"<b>Ascensore: un'attenzione importante.</b> Quando uscite, controllate che le porte interne siano ben chiuse (a volte rimbalzano) e che la <b>luce rossa sul tastierino esterno sia spenta</b>. Altrimenti l'ascensore si blocca per tutto il palazzo. Grazie!",en:"<b>Elevator: one important thing.</b> When you get out, check that the inner doors are fully closed (they sometimes bounce back) and that the <b>red light on the outside keypad is off</b>. Otherwise the elevator stops working for the whole building. Thank you!",es:"<b>Ascensor: una cosa importante.</b> Al salir, comprobad que las puertas interiores queden bien cerradas (a veces rebotan) y que la <b>luz roja del teclado exterior esté apagada</b>. Si no, el ascensor se bloquea para todo el edificio. ¡Gracias!"})}</div>`;
+}
+function wifiCard(c){
+  if(!c) return `<div class="card"><p class="muted">${L(UI.code_wait)}</p></div>`;
+  return `<div class="card wifi">
+    <span class="lbl">${L(UI.network)}</span><span></span>
+    <span class="val">${esc(c.wifi_rete)}</span><span></span>
+    <span class="lbl" style="margin-top:6px">${L(UI.password)}</span><span></span>
+    <span class="val">${esc(c.wifi_password)}</span>
+    <button class="btn primary" type="button" data-copy="${esc(c.wifi_password)}">${IC.copy}${L(UI.copy)}</button></div>`;
+}
+function placeRow(k, label, desc, extra){
+  return `<li><div class="pl-main"><span class="nm">${label}</span>${desc?`<span class="meta">${desc}</span>`:""}${dist(k, extra)}</div>
+    <a class="btn go" href="${gm(P[k][0],P[k][1])}" target="_blank" rel="noopener">${IC.pin}${L(UI.maps)}</a></li>`;
+}
+
+/* ---------- viste ---------- */
+function vHome(c){
+  const h=HOUSE;
+  return `
+  <div class="hero"><img src="img/${h.hero}.webp" alt="${esc(L(h.heroAlt))}"><div class="hero-txt">
+    <div class="eyebrow">${L(UI.welcome)}</div>
+    <h1>Domus <em>${h.name.replace("Domus ","")}</em></h1>
+    <p>${esc(h.address)} · ${L(h.guests)}</p></div></div>
+  <div class="facts">
+    <div><small>${L(UI.checkin)}</small><b>${L(DAYS)}</b></div>
+    <div><small>${L(UI.checkout)}</small><b>${L(DAYS_OUT)}</b></div>
+    <div><small>${L({it:"Piano",en:"Floor",es:"Piso"})}</small><b>${h.floor}</b></div>
+  </div>
+  <div class="nearbar">${h.near.map(([k,lbl])=>`<a href="${gm(P[k][0],P[k][1])}" target="_blank" rel="noopener"><span>${L(lbl)}</span><b>${IC.walk}${DIST[k].walk} ${L(UI.min)}</b></a>`).join("")}</div>
+  <div class="quick">
+    <button class="qa hot" type="button" data-go="arrivo">${IC.key}<b>${L({it:"Come entrare",en:"How to get in",es:"Cómo entrar"})}</b><span>${L({it:"Self check-in passo passo",en:"Step-by-step self check-in",es:"Self check-in paso a paso"})}</span></button>
+    <a class="qa" href="${waLink()}" target="_blank" rel="noopener">${IC.chat}<b>WhatsApp</b><span>Fabio · ${esc(contact().fabio_tel)}</span></a>
+    <a class="qa" href="${gm(h.place[0],h.place[1])}" target="_blank" rel="noopener">${IC.pin}<b>${L({it:"La casa su Maps",en:"Home on Maps",es:"La casa en Maps"})}</b><span>${esc(h.address.split(" · ")[0])}</span></a>
+    <button class="qa" type="button" data-go="roma">${IC.map}<b>${L({it:"Cosa fare a Roma",en:"Things to do in Rome",es:"Qué hacer en Roma"})}</b><span>${L({it:"Itinerari e ristoranti",en:"Walks and restaurants",es:"Rutas y restaurantes"})}</span></button>
+  </div>
+  <section class="sec"><div class="kicker">Wi-Fi</div>${wifiCard(c)}</section>
+  <section class="sec"><h2>${L({it:"Il quartiere",en:"The neighbourhood",es:"El barrio"})}</h2><p class="lead">${L(h.hood)}</p></section>
+  <section class="sec"><h2>${L({it:"Prima di arrivare",en:"Before you arrive",es:"Antes de llegar"})}</h2>
+    <ul class="tlist">
+      <li><span class="ic">${IC.chat}</span><div><b>${L({it:"Diteci l'orario di arrivo",en:"Tell us your arrival time",es:"Decidnos la hora de llegada"})}</b><span>${L({it:"Su WhatsApp, così organizziamo pulizie e consegna chiavi. Se viaggiate con un neonato e vi serve la culla, chiedetecela.",en:"On WhatsApp, so we can plan cleaning and key handover. Travelling with a baby? Ask us for the cot.",es:"Por WhatsApp, así organizamos la limpieza y la entrega de llaves. Si viajáis con un bebé y necesitáis cuna, pedídnosla."})}</span></div></li>
+      <li><span class="ic">${IC.clock}</span><div><b>${L({it:"Arrivate prima delle 15?",en:"Arriving before 3 PM?",es:"¿Llegáis antes de las 15:00?"})}</b><span>${L({it:"La casa è pronta dalle 15:00. Se arrivate prima, scriveteci: quando possibile vi facciamo lasciare i bagagli, altrimenti trovate i depositi bagagli nella sezione Roma.",en:"The apartment is ready from 3 PM. If you arrive earlier, let us know: when possible you can drop your luggage, otherwise see the luggage storage in the Rome section.",es:"La casa está lista a partir de las 15:00. Si llegáis antes, escribidnos: cuando es posible podéis dejar las maletas; si no, tenéis las consignas en la sección Roma."})}</span></div></li>
+      <li><span class="ic">${IC.doc}</span><div><b>${L({it:"Documenti",en:"ID documents",es:"Documentos"})}</b><span>${L({it:"La legge ci chiede di registrare tutti gli ospiti: mandateci su WhatsApp una foto del documento di ognuno. Trovate i dettagli nella sezione Info.",en:"By law we must register every guest: send us a photo of each guest's ID or passport on WhatsApp. Details in the Info section.",es:"La ley nos obliga a registrar a todos los huéspedes: enviadnos por WhatsApp una foto del documento de cada uno. Más detalles en la sección Info."})}</span></div></li>
+    </ul></section>`;
+}
+function vArrivo(c){
+  return `<section class="sec"><div class="kicker">Self check-in · ${L({it:"dalle 15:00",en:"from 3 PM",es:"desde las 15:00"})}</div>
+    <h2>${L({it:"Come entrare",en:"How to get in",es:"Cómo entrar"})}</h2><p class="lead">${esc(HOUSE.address)}</p>
+    ${HOUSE.arrival(c)}</section>
+    <section class="sec">${checkoutBlock()}</section>`;
+}
+function checkoutBlock(){
+  return `<div class="kicker">${L(UI.checkout)} · ${L({it:"entro le 10:00",en:"by 10 AM",es:"antes de las 10:00"})}</div>
+    <h2>${L({it:"Il giorno della partenza",en:"On departure day",es:"El día de la salida"})}</h2>
+    <p class="lead">${L({it:"Lo stesso giorno arrivano quasi sempre altri ospiti: per questo l'orario va rispettato.",en:"New guests usually arrive the same day, so please keep to the time.",es:"Casi siempre llegan otros huéspedes el mismo día: por eso hay que respetar la hora."})}</p>
+    <ol class="steps">
+      <li class="step"><h3>${L({it:"Spegnete e chiudete",en:"Switch off and close",es:"Apagad y cerrad"})}</h3><p>${L({it:"Aria condizionata, luci e finestre. La spazzatura potete lasciarla: ci pensa il team pulizie.",en:"Air conditioning, lights and windows. You can leave the rubbish: the cleaning team takes care of it.",es:"Aire acondicionado, luces y ventanas. La basura podéis dejarla: se encarga el equipo de limpieza."})}</p></li>
+      <li class="step"><h3>${L({it:"Lasciate le chiavi sul tavolo",en:"Leave the keys on the table",es:"Dejad las llaves sobre la mesa"})}</h3><p>${L({it:"Tutti i mazzi, entro le 10:00.",en:"All sets, by 10 AM.",es:"Todos los juegos, antes de las 10:00."})}</p></li>
+      <li class="step"><h3>${L({it:"Tassa di soggiorno, se non è inclusa",en:"City tax, if not included",es:"Tasa turística, si no está incluida"})}</h3><p>${L({it:"Con Booking.com o con una prenotazione diretta, lasciate i contanti sul tavolo accanto alle chiavi (se non avete il resto esatto, arrotondate pure). Preferite il bonifico? Vi mandiamo i dati su WhatsApp. Con Airbnb saltate questo passaggio: è già inclusa.",en:"With Booking.com or a direct booking, leave the cash on the table next to the keys (no exact change? just round it). Prefer a bank transfer? We'll send you the details on WhatsApp. With Airbnb, skip this step: it's already included.",es:"Con Booking.com o con una reserva directa, dejad el dinero en efectivo sobre la mesa junto a las llaves (si no tenéis el cambio exacto, redondead). ¿Preferís transferencia? Os mandamos los datos por WhatsApp. Con Airbnb saltad este paso: ya está incluida."})}</p></li>
+      <li class="step"><h3>${L({it:"Una foto e via",en:"One photo and you're done",es:"Una foto y listo"})}</h3><p>${L({it:"Fate una foto alle chiavi (e ai contanti, se li lasciate), mandatecela su WhatsApp e chiudete la porta. Il team pulizie arriva poco dopo: se siete ancora dentro, busserà.",en:"Take a photo of the keys (and the cash, if you leave it), send it to us on WhatsApp and close the door. The cleaning team arrives shortly after: if you're still inside, they'll knock.",es:"Haced una foto de las llaves (y del dinero, si lo dejáis), mandádnosla por WhatsApp y cerrad la puerta. El equipo de limpieza llega poco después: si seguís dentro, llamará a la puerta."})}</p></li>
+    </ol>
+    <h3 class="mt h3s">${L({it:"Vi serve più tempo?",en:"Need more time?",es:"¿Necesitáis más tiempo?"})}</h3>
+    <p class="small muted mt">${L({it:"Si può fare solo se concordato con noi qualche giorno prima, in base agli ospiti in arrivo.",en:"Only possible if agreed with us a few days in advance, depending on incoming guests.",es:"Solo es posible si lo acordáis con nosotros unos días antes, según los huéspedes que lleguen."})}</p>
+    <div class="cases">
+      <div class="card"><div class="case-h">${IC.bag}<b>${L({it:"Lasciare solo le valigie",en:"Leaving just your luggage",es:"Dejar solo las maletas"})}</b></div>
+        <p class="small">${L({it:"Alle 10:00 liberate la casa, così il team pulizie può iniziare, e lasciate dentro le valigie. Tornate a prenderle entro l'orario concordato e consegnate le chiavi al team pulizie, che vi aspetta in casa.",en:"At 10 AM leave the apartment so the cleaning team can start, and leave your bags inside. Come back for them by the agreed time and hand the keys to the cleaning team, who will be waiting in the apartment.",es:"A las 10:00 dejad libre la casa para que el equipo de limpieza pueda empezar, y dejad dentro las maletas. Volved a por ellas antes de la hora acordada y entregad las llaves al equipo de limpieza, que os esperará en casa."})}</p></div>
+      <div class="card"><div class="case-h">${IC.clock}<b>Late check-out</b></div>
+        <p class="small">${L({it:"Restate in casa fino all'orario concordato, poi seguite la stessa procedura di sempre: chiavi sul tavolo, foto, porta chiusa.",en:"Stay in the apartment until the agreed time, then follow the usual procedure: keys on the table, photo, door closed.",es:"Quedaos en casa hasta la hora acordada y luego seguid el procedimiento de siempre: llaves sobre la mesa, foto y puerta cerrada."})}</p></div>
+    </div>
+    <p class="small mt">${L({it:"Per i depositi bagagli in città guardate la sezione Roma.",en:"For luggage storage in town, see the Rome section.",es:"Para consignas en la ciudad, mirad la sección Roma."})}</p>`;
+}
+function vCasa(c){
+  const h=HOUSE;
+  const where = L(h.where).map(([a,b])=>`<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join("");
+  return `<section class="sec"><div class="kicker">${h.name}</div><h2>${L({it:"La casa",en:"The apartment",es:"La casa"})}</h2>
+      <p class="lead">${L({it:"Tutto quello che serve per sentirvi a casa da subito.",en:"Everything you need to feel at home straight away.",es:"Todo lo necesario para sentiros en casa desde el primer momento."})}</p></section>
+    <section class="sec"><div class="kicker">Wi-Fi</div>${wifiCard(c)}</section>
+    <section class="sec"><h2>${L({it:"Dove trovare le cose",en:"Where to find things",es:"Dónde está cada cosa"})}</h2><dl class="where">${where}</dl></section>
+    <section class="sec"><h2>${L({it:"Fare la spesa",en:"Groceries",es:"Hacer la compra"})}</h2>
+      <ul class="plist">${h.shop.map(([k,d])=>placeRow(k, esc(P[k][0].replace(" Supermercati Laterani","").replace(" Via Labicana","").replace(" Via di San Giovanni in Laterano 218","")), L(d))).join("")}</ul></section>
+    <section class="sec"><h2>${L({it:"Stanza per stanza",en:"Room by room",es:"Habitación por habitación"})}</h2><div class="rooms">
+      ${h.rooms.map(r=>`<article class="room">${shots(r.img)}<div class="body"><h3>${L(r.t)}</h3><ul>${L(r.li).map(x=>`<li>${x}</li>`).join("")}</ul></div></article>`).join("")}
+    </div></section>
+    <section class="sec"><h2>${L({it:"Buono a sapersi",en:"Good to know",es:"Conviene saber"})}</h2>
+      ${liftWarning()}${(L(h.good)||[]).map(x=>`<div class="tip">${x}</div>`).join("")}</section>
+    <section class="sec">${checkoutBlock()}</section>`;
+}
+function vRoma(){
+  const subs=[["food",{it:"Mangiare",en:"Eat",es:"Comer"}],["walks",{it:"Itinerari",en:"Walks",es:"Rutas"}],["views",{it:"Panorami",en:"Views",es:"Miradores"}],["move",{it:"Muoversi",en:"Getting around",es:"Moverse"}],["bags",{it:"Bagagli e tour",en:"Luggage & tours",es:"Maletas y tours"}]];
+  let body="";
+  if(romaSub==="food"){
+    const order = HOUSE.foodFirst==="col" ? ["col","sg"] : ["sg","col"];
+    body = `<p class="lead mt">${L({it:"Solo posti dove mangiamo anche noi: cucina vera, niente trappole per turisti. Prezzi a persona, distanze a piedi da casa.",en:"Only places where we eat ourselves: real food, no tourist traps. Prices per person, walking distances from home.",es:"Solo sitios donde comemos nosotros: cocina de verdad, nada de trampas para turistas. Precios por persona, distancias a pie desde casa."})}</p>` +
+      order.map(g=>{
+        const items=[...FOOD[g].items].sort((a,b)=>DIST[a[0]].walk-DIST[b[0]].walk);
+        return `<h3 class="mt h3s">${L(FOOD[g].title)}</h3><ul class="plist">${items.map(([p,fav,cuis,price])=>
+          placeRow(p, esc(P[p][0].replace(" Ristorante San Giovanni","").replace(" - L'Osteria di San Giovanni"," · L'Osteria di San Giovanni")) + (fav?`<span class="fav">${L(UI.fav)}</span>`:""), `${L(cuis)} · ${price}`, {showVia: p==="valentino"})).join("")}</ul>`;
+      }).join("");
+  } else if(romaSub==="walks"){
+    body = `<div class="itin">${ITIN.map(it=>`<article class="card"><h3>${L(it.title)}</h3><div class="when">${L(it.when)}</div>
+      ${it.pre?`<p class="mt small">${L(it.pre)}</p>`:""}
+      <ol class="route">${it.stops.map(([k,d],i)=>`<li>${link(k)}<span>${L(d)}</span>${i===0?dist(k,{alwaysWalk:true}):""}</li>`).join("")}</ol>
+      ${it.alt?`<p class="small muted">${L(it.alt)}</p><div class="row mt">${it.altLinks.map(k=>`<a class="chip" href="${gm(P[k][0],P[k][1])}" target="_blank" rel="noopener">${esc(P[k][0])}</a>`).join("")}</div>`:""}
+      ${it.fact?`<p class="fact">${L(it.fact)}</p>`:""}</article>`).join("")}</div>`;
+  } else if(romaSub==="views"){
+    body = `<h3 class="mt h3s">${L({it:"Roma dall'alto",en:"Rome from above",es:"Roma desde arriba"})}</h3>
+      <ul class="plist">${VIEWS.map(([k,d])=>placeRow(k, esc(P[k][0].replace(" Vittoriano","")), L(d))).join("")}</ul>
+      <h3 class="mt h3s">${L({it:"Vicino casa, lontano dalla folla",en:"Near home, away from the crowds",es:"Cerca de casa, lejos de las multitudes"})}</h3>
+      <ul class="plist">${GEMS.map(([k,d])=>placeRow(k, esc(P[k][0]), L(d), {showVia:true})).join("")}</ul>`;
+  } else if(romaSub==="move"){
+    body = `<ul class="tlist mt">
+      <li><span class="ic">${IC.train}</span><div><b>Metro</b><span>${L({it:`<span class="metro A">A</span> ${link("mSG","San Giovanni")} (${DIST.mSG.walk} min a piedi): Termini, Piazza di Spagna, Vaticano. <span class="metro B">B</span> ${link("mCol","Colosseo")} (${DIST.mCol.walk} min a piedi): Termini, Circo Massimo. Biglietto singolo 1,50 €, valido 100 minuti; si paga anche con la carta contactless ai tornelli.`,en:`<span class="metro A">A</span> ${link("mSG","San Giovanni")} (${DIST.mSG.walk} min walk): Termini, Spanish Steps, Vatican. <span class="metro B">B</span> ${link("mCol","Colosseo")} (${DIST.mCol.walk} min walk): Termini, Circus Maximus. Single ticket €1.50, valid 100 minutes; you can also tap a contactless card at the gates.`,es:`<span class="metro A">A</span> ${link("mSG","San Giovanni")} (${DIST.mSG.walk} min a pie): Termini, Plaza de España, Vaticano. <span class="metro B">B</span> ${link("mCol","Colosseo")} (${DIST.mCol.walk} min a pie): Termini, Circo Máximo. Billete sencillo 1,50 €, válido 100 minutos; también se paga con tarjeta contactless en los tornos.`})}</span></div></li>
+      <li><span class="ic">${IC.taxi}</span><div><b>Taxi</b><span>${L({it:`Prima le app (FreeNow, Uber, itTaxi), poi il ${link("taxiSG","posteggio taxi di San Giovanni")} (${DIST.taxiSG.walk} min a piedi), e solo come ultima scelta il Radio Taxi <span class="sel">06 3570</span>. In città il tassametro parte da 3,50 € nei feriali di giorno, 5 € nei festivi e 7,50 € di notte (tariffe ufficiali di Roma Capitale): una corsa fino a Termini costa circa ${DIST.termini.taxi[0]}–${DIST.termini.taxi[1]} €, fino al Vaticano circa ${DIST.vaticani.taxi[0]}–${DIST.vaticani.taxi[1]} €.`,en:`Apps first (FreeNow, Uber, itTaxi), then the ${link("taxiSG","San Giovanni taxi rank")} (${DIST.taxiSG.walk} min walk), and only as a last resort Radio Taxi <span class="sel">06 3570</span>. In town the meter starts at €3.50 on weekdays by day, €5 on public holidays and €7.50 at night (official Rome tariffs): a ride to Termini costs about €${DIST.termini.taxi[0]}–${DIST.termini.taxi[1]}, to the Vatican about €${DIST.vaticani.taxi[0]}–${DIST.vaticani.taxi[1]}.`,es:`Primero las apps (FreeNow, Uber, itTaxi), luego la ${link("taxiSG","parada de taxis de San Giovanni")} (${DIST.taxiSG.walk} min a pie) y solo como última opción Radio Taxi <span class="sel">06 3570</span>. En la ciudad el taxímetro empieza en 3,50 € los laborables de día, 5 € los festivos y 7,50 € de noche (tarifas oficiales de Roma): un trayecto a Termini cuesta unos ${DIST.termini.taxi[0]}–${DIST.termini.taxi[1]} €, al Vaticano unos ${DIST.vaticani.taxi[0]}–${DIST.vaticani.taxi[1]} €.`})}</span></div></li>
+      <li><span class="ic">${IC.plane}</span><div><b>${L({it:"Da e per gli aeroporti",en:"To and from the airports",es:"Desde y hacia los aeropuertos"})}</b>
+        <div class="fares">
+          <div><small>Taxi · ${L({it:"spesa reale",en:"what you'll pay",es:"gasto real"})}</small><b>Fiumicino 65–70 €</b><b>Ciampino 45–55 €</b><span>${L({it:"La tariffa ufficiale è fissa (55 € e 40 €), ma nella pratica, tra traffico e supplementi, si spende di più. Fino a 4 persone per auto.",en:"The official fare is fixed (€55 and €40), but in practice, with traffic and extras, you'll pay more. Up to 4 people per car.",es:"La tarifa oficial es fija (55 € y 40 €), pero en la práctica, entre tráfico y suplementos, se paga más. Hasta 4 personas por coche."})}</span></div>
+          <div class="ours"><small>${L({it:"Il nostro transfer NCC",en:"Our private transfer",es:"Nuestro traslado privado"})}</small><b>${L({it:"Aeroporto 70–100 €",en:"Airport €70–100",es:"Aeropuerto 70–100 €"})}</b><b>${L({it:"Stazione 60–80 €",en:"Station €60–80",es:"Estación 60–80 €"})}</b><span>${L({it:"Minivan con autista per 5–7 persone, su preventivo: un solo mezzo invece di due taxi.",en:"Minivan with driver for 5–7 people, on quote: one vehicle instead of two taxis.",es:"Monovolumen con conductor para 5–7 personas, con presupuesto: un solo vehículo en lugar de dos taxis."})}</span></div>
+        </div>
+        <span>${L({it:`In treno da Fiumicino: Leonardo Express fino a Termini (32 minuti, da 14 €), poi <span class="metro A">A</span> direzione Anagnina fino a San Giovanni${HOUSE.key==="colosseum"?' oppure <span class="metro B">B</span> direzione Laurentina fino a Colosseo':''}. Da Ciampino: bus diretti per Termini, poi la metro.`,en:`By train from Fiumicino: Leonardo Express to Termini (32 minutes, from €14), then <span class="metro A">A</span> towards Anagnina to San Giovanni${HOUSE.key==="colosseum"?' or <span class="metro B">B</span> towards Laurentina to Colosseo':''}. From Ciampino: direct buses to Termini, then the metro.`,es:`En tren desde Fiumicino: Leonardo Express hasta Termini (32 minutos, desde 14 €), luego <span class="metro A">A</span> dirección Anagnina hasta San Giovanni${HOUSE.key==="colosseum"?' o <span class="metro B">B</span> dirección Laurentina hasta Colosseo':''}. Desde Ciampino: autobuses directos a Termini y luego el metro.`})}</span></div></li>
+      <li><span class="ic">${IC.bike}</span><div><b>Sharing</b><span>${L({it:"Auto in car sharing (Enjoy), bici e monopattini (Lime e altri) ovunque in zona.",en:"Car sharing (Enjoy), bikes and e-scooters (Lime and others) all around the area.",es:"Coches compartidos (Enjoy), bicis y patinetes (Lime y otros) por toda la zona."})}</span></div></li>
+      <li><span class="ic">${IC.car}</span><div><b>${L({it:"In auto",en:"By car",es:"En coche"})}</b><span>${L(HOUSE.car)} ${L({it:"Il centro storico è zona a traffico limitato (ZTL): non superate i varchi attivi, le multe arrivano in automatico.",en:"The historic centre is a limited traffic zone (ZTL): don't drive through active gates, fines are issued automatically.",es:"El centro histórico es zona de tráfico limitado (ZTL): no paséis por los accesos activos, las multas llegan automáticamente."})}</span>
+        <ul class="plist mt">${HOUSE.parking.map(k=>placeRow(k, esc(P[k][0]), "")).join("")}</ul></div></li>
+    </ul>`;
+  } else {
+    body = `<h3 class="mt h3s">${L({it:"Depositi bagagli",en:"Luggage storage",es:"Consignas"})}</h3>
+      <ul class="plist">${placeRow("kipoint","KiBag Kipoint · Roma Termini",L({it:"Dentro la stazione, aperto 7–21. Il più comodo se partite in treno o per l'aeroporto.",en:"Inside the station, open 7am–9pm. Easiest if you're leaving by train or for the airport.",es:"Dentro de la estación, abierto de 7 a 21. Lo más cómodo si os vais en tren o al aeropuerto."}))}</ul>
+      <p class="small mt">${L({it:`Vicino casa ci sono negozi convenzionati, prenotabili online: <a href="https://radicalstorage.com/luggage-storage/rome/san-giovanni" target="_blank" rel="noopener">Radical Storage</a> e <a href="https://www.nannybag.com/en/luggage-storage/san-giovanni-patoni" target="_blank" rel="noopener">Nannybag</a> (zona San Giovanni, l'indirizzo esatto arriva con la prenotazione).`,en:`Near home there are partner shops you can book online: <a href="https://radicalstorage.com/luggage-storage/rome/san-giovanni" target="_blank" rel="noopener">Radical Storage</a> and <a href="https://www.nannybag.com/en/luggage-storage/san-giovanni-patoni" target="_blank" rel="noopener">Nannybag</a> (San Giovanni area, the exact address comes with the booking).`,es:`Cerca de casa hay tiendas asociadas que se reservan online: <a href="https://radicalstorage.com/luggage-storage/rome/san-giovanni" target="_blank" rel="noopener">Radical Storage</a> y <a href="https://www.nannybag.com/en/luggage-storage/san-giovanni-patoni" target="_blank" rel="noopener">Nannybag</a> (zona San Giovanni, la dirección exacta llega con la reserva).`})}</p>
+      <h3 class="mt h3s">${L({it:"Biglietti e visite",en:"Tickets and tours",es:"Entradas y visitas"})}</h3>
+      <ul class="tlist mt">
+        <li><span class="ic">${IC.star}</span><div><b>${L({it:"Biglietti ufficiali",en:"Official tickets",es:"Entradas oficiales"})}</b><span>${L({it:`Colosseo, Foro Romano e Palatino: <a href="https://colosseo.it/" target="_blank" rel="noopener">colosseo.it</a>. Musei Vaticani: <a href="https://www.museivaticani.va/" target="_blank" rel="noopener">museivaticani.va</a>. Prenotate con anticipo.`,en:`Colosseum, Roman Forum and Palatine: <a href="https://colosseo.it/" target="_blank" rel="noopener">colosseo.it</a>. Vatican Museums: <a href="https://www.museivaticani.va/" target="_blank" rel="noopener">museivaticani.va</a>. Book ahead.`,es:`Coliseo, Foro Romano y Palatino: <a href="https://colosseo.it/" target="_blank" rel="noopener">colosseo.it</a>. Museos Vaticanos: <a href="https://www.museivaticani.va/" target="_blank" rel="noopener">museivaticani.va</a>. Reservad con antelación.`})}</span></div></li>
+        <li><span class="ic">${IC.map}</span><div><b>${L({it:"Tour guidati",en:"Guided tours",es:"Visitas guiadas"})}</b><span>${L({it:`Visite guidate in tutte le lingue, Colosseo compreso: <a href="https://www.enroma.com/" target="_blank" rel="noopener">enroma.com</a>.`,en:`Guided tours in every language, Colosseum included: <a href="https://www.enroma.com/" target="_blank" rel="noopener">enroma.com</a>.`,es:`Visitas guiadas en todos los idiomas, Coliseo incluido: <a href="https://www.enroma.com/" target="_blank" rel="noopener">enroma.com</a>.`})}</span></div></li>
+      </ul>`;
+  }
+  return `<section class="sec"><div class="kicker">${L({it:"I nostri consigli",en:"Our tips",es:"Nuestros consejos"})}</div><h2>${L({it:"Roma, a modo nostro",en:"Rome, our way",es:"Roma, a nuestra manera"})}</h2></section>
+    <div class="chips" role="group">${subs.map(([k,t])=>`<button class="chip" type="button" data-sub="${k}" aria-pressed="${romaSub===k}">${L(t)}</button>`).join("")}</div>
+    <div class="view">${body}</div>`;
+}
+function vInfo(){
+  const ct=contact();
+  return `<section class="sec"><div class="kicker">${L({it:"Sempre raggiungibili",en:"Always reachable",es:"Siempre disponibles"})}</div><h2>${L({it:"Contatti",en:"Contacts",es:"Contacto"})}</h2>
+      <div class="card mt"><div class="contact"><div class="avatar">F</div><div>
+        <b style="font-size:18px">Fabio</b><p class="muted small">${L({it:"Il vostro host",en:"Your host",es:"Vuestro anfitrión"})}</p>
+        <p class="sel mt">${esc(ct.fabio_tel)}</p></div></div>
+        <div class="row mt"><a class="btn primary" href="${waLink()}" target="_blank" rel="noopener">${IC.chat}${L(UI.write)}</a>
+        <button class="btn" type="button" data-copy="${esc(ct.fabio_tel)}">${IC.copy}${L(UI.copy)}</button></div>
+        <p class="small muted mt">E-mail: <span class="sel">${esc(ct.email)}</span></p></div></section>
+    <section class="sec"><h2>${L({it:"Emergenze",en:"Emergencies",es:"Emergencias"})}</h2>
+      <div class="emerg"><div><b>112</b><span>${L({it:"Numero unico di emergenza",en:"European emergency number",es:"Número único de emergencias"})}</span></div><div><b>118</b><span>${L({it:"Emergenza sanitaria",en:"Medical emergency",es:"Emergencia sanitaria"})}</span></div><div><b>115</b><span>${L({it:"Vigili del fuoco",en:"Fire brigade",es:"Bomberos"})}</span></div></div>
+      <ul class="plist mt">${placeRow("ps", L({it:"Pronto soccorso San Giovanni Addolorata",en:"San Giovanni Addolorata A&E",es:"Urgencias San Giovanni Addolorata"}), L({it:"Il più vicino, aperto 24 ore su 24.",en:"The nearest one, open 24 hours.",es:"El más cercano, abierto las 24 horas."}))}</ul></section>
+    <section class="sec"><h2>${L({it:"Documenti",en:"ID documents",es:"Documentos"})}</h2>
+      <div class="card mt stack small">
+        <p>${L({it:"Ogni struttura che ospita turisti deve registrare tutti gli ospiti e comunicarne i dati alla Questura entro 24 ore dall'arrivo, tramite il portale Alloggiati Web della Polizia di Stato. Per questo vi chiediamo una foto del documento di ognuno: vanno bene carta d'identità o passaporto. Per i bambini senza documento bastano nome e cognome, data e luogo di nascita, nazionalità.",en:"Every accommodation hosting tourists must register all guests and send their details to the police (Questura) within 24 hours of arrival, through the State Police Alloggiati Web portal. That's why we ask for a photo of each guest's document: ID card or passport are both fine. For children without a document, full name, date and place of birth and nationality are enough.",es:"Todo alojamiento turístico debe registrar a todos los huéspedes y comunicar sus datos a la policía (Questura) en las 24 horas siguientes a la llegada, a través del portal Alloggiati Web de la Policía del Estado. Por eso os pedimos una foto del documento de cada uno: valen DNI o pasaporte. Para los niños sin documento basta con nombre y apellidos, fecha y lugar de nacimiento y nacionalidad."})}</p>
+        <p>${L({it:"I dati servono solo a questo adempimento e sono trattati secondo il Regolamento UE 2016/679 (GDPR).",en:"Your data is used only for this purpose and handled under EU Regulation 2016/679 (GDPR).",es:"Los datos se usan solo para este trámite y se tratan según el Reglamento UE 2016/679 (RGPD)."})}</p>
+        <p class="ref">${L({it:"Riferimenti: art. 109 del Testo Unico delle Leggi di Pubblica Sicurezza (R.D. 18 giugno 1931, n. 773); D.M. Interno 7 gennaio 2013 (Alloggiati Web).",en:"References: art. 109 of the Italian Public Security Act (TULPS, Royal Decree no. 773 of 18 June 1931); Ministry of the Interior Decree of 7 January 2013 (Alloggiati Web).",es:"Referencias: art. 109 del Texto Único de las Leyes de Seguridad Pública (TULPS, R.D. n.º 773 de 18 de junio de 1931); Decreto del Ministerio del Interior de 7 de enero de 2013 (Alloggiati Web)."})}</p>
+      </div></section>
+    <section class="sec"><h2>${L({it:"Tassa di soggiorno",en:"City tax",es:"Tasa turística"})}</h2>
+      <div class="card mt stack small">
+        <div class="taxrow"><b>5 €</b><span>${L({it:"a persona, a notte, per le prime 10 notti consecutive. Esenti i bambini fino a 10 anni.",en:"per person, per night, for the first 10 consecutive nights. Children up to 10 are exempt.",es:"por persona y noche, durante las primeras 10 noches consecutivas. Exentos los niños hasta 10 años."})}</span></div>
+        <p>${L({it:"Con Airbnb è già inclusa e la versa la piattaforma. Con Booking.com e con le prenotazioni dirette è calcolata ma non incassata, quindi si salda a noi durante il soggiorno, entro la partenza.",en:"Airbnb bookings already include it and the platform pays it. For Booking.com and direct bookings it's calculated but not collected, so it's settled with us during your stay, before you leave.",es:"Con Airbnb ya está incluida y la abona la plataforma. Con Booking.com y con las reservas directas se calcula pero no se cobra, así que se nos abona durante la estancia, antes de la salida."})}</p>
+        <p class="ref">${L({it:"Riferimenti: contributo di soggiorno di Roma Capitale, art. 14, comma 16, lett. e) del D.L. 78/2010; Regolamento approvato con Deliberazione dell'Assemblea Capitolina n. 87/2022; tariffe in vigore dal 1° ottobre 2023 con Deliberazione della Giunta Capitolina n. 255/2023.",en:"References: Rome city tax (contributo di soggiorno), art. 14(16)(e) of Decree-Law 78/2010; Regulation approved by Rome City Council Resolution no. 87/2022; rates in force since 1 October 2023 under City Executive Resolution no. 255/2023.",es:"Referencias: contributo di soggiorno de Roma Capitale, art. 14, apartado 16, letra e) del D.L. 78/2010; Reglamento aprobado por Deliberación de la Asamblea Capitolina n.º 87/2022; tarifas vigentes desde el 1 de octubre de 2023 por Deliberación de la Junta Capitolina n.º 255/2023."})}</p>
+      </div></section>
+    <section class="sec"><h2>${L({it:"Servizi extra",en:"Extra services",es:"Servicios extra"})}</h2>
+      <ul class="tlist">
+        <li><span class="ic">${IC.van}</span><div><b>${L({it:"Transfer privato NCC",en:"Private transfer",es:"Traslado privado"})}</b><span>${L({it:"Minivan con autista da e per aeroporti e stazioni, per 5–7 persone: aeroporto 70–100 €, stazione 60–80 €, su preventivo.",en:"Minivan with driver to and from airports and stations, for 5–7 people: airport €70–100, station €60–80, on quote.",es:"Monovolumen con conductor desde y hacia aeropuertos y estaciones, para 5–7 personas: aeropuerto 70–100 €, estación 60–80 €, con presupuesto."})}</span></div></li>
+        <li><span class="ic">${IC.star}</span><div><b>${L({it:"Visite ed esperienze",en:"Tours and experiences",es:"Visitas y experiencias"})}</b><span>${L({it:"Vi aiutiamo a prenotare visite guidate ed esperienze su misura.",en:"We can help you book guided tours and tailor-made experiences.",es:"Os ayudamos a reservar visitas guiadas y experiencias a medida."})}</span></div></li>
+      </ul>
+      <div class="row mt"><a class="btn flame" href="${waLink()}" target="_blank" rel="noopener">${IC.chat}${L({it:"Chiedi un preventivo",en:"Ask for a quote",es:"Pedir presupuesto"})}</a></div></section>
+    <section class="sec" ${CFG?.public_url?"":"hidden"}><h2>${L({it:"Condividete la guida",en:"Share this guide",es:"Compartid la guía"})}</h2>
+      <div class="card mt qr"><div id="qrbox"></div><p class="small">${L({it:"Fate inquadrare il QR ai vostri compagni di viaggio: avranno tutto anche loro sul telefono.",en:"Let your travel companions scan the QR code: they'll have everything on their phone too.",es:"Que vuestros compañeros de viaje escaneen el QR: tendrán todo también en su móvil."})}</p></div></section>
+    <section class="sec"><div class="card"><b>JFM · ${L({it:"Ospitalità a Roma",en:"Hospitality in Rome",es:"Hospitalidad en Roma"})}</b>
+      <p class="small muted mt">${L({it:"Fabio e Alessandro, nel quartiere di San Giovanni.",en:"Fabio and Alessandro, in the San Giovanni neighbourhood.",es:"Fabio y Alessandro, en el barrio de San Giovanni."})}</p>
+      <div class="row mt"><a class="btn" href="https://jfmitalia.com/" target="_blank" rel="noopener">jfmitalia.com</a></div></div></section>`;
+}
+
+/* ---------- router ---------- */
+const TABS=["home","arrivo","casa","roma","info"];
+const TAB_IC={home:IC.home,arrivo:IC.key,casa:IC.sofa,roma:IC.map,info:IC.info};
+function parseHash(){ const t=(location.hash||"").replace("#","").toLowerCase(); TAB = TABS.includes(t) ? t : "home"; }
+function footer(){ return `<footer><b>JF MANAGEMENT S.r.l.s.</b><span>P.IVA 06271030659 · Via Santi Martiri Salernitani 31, Salerno</span><span>jfmitalia.com</span></footer>`; }
+function render(){
+  document.documentElement.lang=LANG;
+  ["it","en","es"].forEach(l=>document.getElementById("lang-"+l).setAttribute("aria-pressed",LANG===l));
+  segN=0;
+  const c=CFG?.casa||null;
+  document.getElementById("navIn").innerHTML=TABS.map(t=>`<button type="button" data-tab="${t}" ${t===TAB?'aria-current="page"':""}>${TAB_IC[t]}<span>${L(UI.tabs[t])}</span></button>`).join("");
+  const v={home:vHome,arrivo:vArrivo,casa:vCasa,roma:vRoma,info:vInfo}[TAB](c);
+  document.getElementById("main").innerHTML=`<div class="view">${v}</div>${footer()}`;
+  if(TAB==="info" && CFG?.public_url) drawQR(CFG.public_url);
+}
+function drawQR(url){ const box=document.getElementById("qrbox"); if(!box||!window.QRCode) return; box.innerHTML=""; new QRCode(box,{text:url,width:200,height:200,colorDark:"#13203A",colorLight:"#ffffff"}); }
+
+/* ---------- eventi ---------- */
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-tab],[data-go],[data-sub],[data-seg-btn],[data-copy],[data-zoom]"); if(!t) return;
+  if(t.dataset.tab||t.dataset.go){ const tab=t.dataset.tab||t.dataset.go; history.replaceState(null,"",tab==="home"?location.pathname+location.search:"#"+tab); TAB=tab; render(); window.scrollTo(0,0); }
+  else if(t.dataset.sub){ romaSub=t.dataset.sub; render(); }
+  else if(t.dataset.segBtn){ const k=t.dataset.segBtn,i=t.dataset.i;
+    document.querySelectorAll(`[data-seg-btn="${k}"]`).forEach(b=>b.setAttribute("aria-pressed",b.dataset.i===i));
+    document.querySelectorAll(`[data-seg-pane="${k}"]`).forEach(p=>p.hidden=p.dataset.i!==i); }
+  else if(t.dataset.copy!==undefined){ const txt=t.dataset.copy, done=()=>toast(L(UI.copied));
+    try{ navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done)); }catch(_){ fallbackCopy(txt,done); } }
+  else if(t.dataset.zoom){ document.getElementById("lbImg").src=t.dataset.zoom; document.getElementById("lb").hidden=false; }
+});
+function fallbackCopy(txt,done){ const ta=document.createElement("textarea"); ta.value=txt; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy");done();}catch(_){} ta.remove(); }
+document.getElementById("lb").addEventListener("click",()=>{document.getElementById("lb").hidden=true});
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") document.getElementById("lb").hidden=true; });
+let toastT; function toast(m){ const el=document.getElementById("toast"); el.textContent=m; el.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>el.hidden=true,1600); }
+function setLang(l){ LANG=l; try{localStorage.setItem("jfm-lang",l)}catch(_){} render(); }
+["it","en","es"].forEach(l=>document.getElementById("lang-"+l).onclick=()=>setLang(l));
+window.addEventListener("hashchange",()=>{parseHash();render();});
+(function start(){
+  let saved=null; try{saved=localStorage.getItem("jfm-lang")}catch(_){}
+  const nav=(navigator.language||"").toLowerCase();
+  LANG = saved || (nav.startsWith("it")?"it":nav.startsWith("es")?"es":"en");
+  parseHash(); render();
+  /* config: prima la copia salvata (funziona offline), poi quella aggiornata dalla rete */
+  try{ const saved=localStorage.getItem("jfm-cfg-"+HOUSE.key); if(saved){ CFG=JSON.parse(saved); render(); } }catch(_){}
+  fetch("config.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(j=>{ if(j){ CFG=j; try{localStorage.setItem("jfm-cfg-"+HOUSE.key,JSON.stringify(j))}catch(_){} render(); } }).catch(()=>{});
+  /* versione offline: salva la guida sul telefono dopo la prima apertura */
+  if("serviceWorker" in navigator && location.protocol==="https:" && !/claude|anthropic/.test(location.hostname)){
+    navigator.serviceWorker.register("sw.js").catch(()=>{});
+  }
+})();
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
