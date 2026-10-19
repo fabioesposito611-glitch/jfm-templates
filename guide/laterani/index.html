@@ -599,8 +599,7 @@ function reviewCards(){
   };
   const google = `<a class="qrcard" href="https://search.google.com/local/writereview?placeid=${HOUSE.googlePid}" target="_blank" rel="noopener"><img src="img/qr-review.svg" alt="QR"><b>Google</b><span>${L({it:"Inquadrate o toccate per scrivere la recensione",en:"Scan or tap to write your review",es:"Escanead o tocad para escribir la reseña"})}</span></a>`;
   const site = `<a class="qrcard" href="https://jfmitalia.com/" target="_blank" rel="noopener"><img src="img/qr-site.svg" alt="QR"><b>jfmitalia.com</b><span>${L({it:"Il nostro sito: per tornare a Roma, contattateci direttamente",en:"Our website: next time in Rome, contact us directly",es:"Nuestra web: la próxima vez en Roma, contactadnos directamente"})}</span></a>`;
-  const top = REVIEW_PLAT ? plat[REVIEW_PLAT] : `<div class="revrow">${plat.airbnb}${plat.booking}</div>`;
-  return `<div class="mt">${top}</div><div class="qrgrid mt">${google}${site}</div>`;
+  return `<div class="qrgrid mt">${google}${site}</div>`;
 }
 /* ---------- viste ---------- */
 function vHome(c){
