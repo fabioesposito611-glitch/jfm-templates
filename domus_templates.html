@@ -1414,12 +1414,20 @@ Solo un par de cosas rápidas cuando tengas un momento 🙏
 Como exige la normativa italiana, necesito una foto del pasaporte o documento de identidad de todos los huéspedes (anverso y reverso si es posible) 📸.`
 };
 var docsReqClosing = {
-  en: `No rush — just send them over whenever you can 😊 I'm here for anything!`,
-  it: `Nessuna fretta — mandameli pure quando puoi 😊 Per qualsiasi cosa sono qui!`,
-  es: `Sin prisa — envíamelos cuando puedas 😊 ¡Estoy aquí para lo que necesites!`
+  en: `No rush — whenever you can, ideally by tomorrow 😊 I'm here for anything!`,
+  it: `Nessuna fretta — quando puoi, l'ideale sarebbe entro domani 😊 Per qualsiasi cosa sono qui!`,
+  es: `Sin prisa — cuando puedas, lo ideal sería antes de mañana 😊 ¡Estoy aquí para lo que necesites!`
+};
+var docsReqTax = {
+  en: `💶 City tax
+Just a little reminder about the city tax (€[TOTALE TASSA]) — no rush at all, you can settle it anytime before check-out, whenever is easiest for you 😊`,
+  it: `💶 Tassa di soggiorno
+Solo un piccolo promemoria per la tassa di soggiorno (€[TOTALE TASSA]) — nessuna fretta, puoi saldarla quando ti è più comodo entro il checkout 😊`,
+  es: `💶 Tasa turística
+Solo un pequeño recordatorio sobre la tasa turística (€[TOTAL TASA]) — sin ninguna prisa, puedes abonarla cuando te venga mejor antes del check-out 😊`
 };
 function buildDocsReq(L, tax) {
-  var mid = tax === "jfm" ? "\n\n" + taxBlock_jfm[L] : tax === "fabio" ? "\n\n" + taxBlock_fabio[L] : "";
+  var mid = tax ? "\n\n" + docsReqTax[L] : "";
   return docsReqIntro[L] + mid + "\n\n" + docsReqClosing[L];
 }
 
@@ -1776,14 +1784,14 @@ for (const casa of casas) {
       }
     }
     // Documenti + tassa (messaggio separato)
-    [["none","Solo documenti (Airbnb / tassa già gestita)","all"],["jfm","Documenti + tassa → JFM","bkg"],["fabio","Documenti + tassa → Fabio","all"]].forEach(function(v){
+    [["none","Solo documenti","all"],["tax","Documenti + promemoria tassa","bkg"]].forEach(function(v){
       pushUnique({
         id: `docs_tax-${casa}-${lang}-${v[0]}`,
         section: "docs_tax",
         casa, lang, piatt: v[2],
         title: v[1],
         vars: "[NOME]" + (v[0] !== "none" ? ", [TOTALE TASSA]" : ""),
-        text: buildDocsReq(lang, v[0])
+        text: buildDocsReq(lang, v[0] === "tax")
       });
     });
     // Reminder
