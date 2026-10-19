@@ -82,6 +82,7 @@
     <div class="pill active" data-filter="section" data-val="all">Tutte</div>
     <div class="pill" data-filter="section" data-val="precheckin">Pre check-in</div>
     <div class="pill" data-filter="section" data-val="docs_tax">🪪 Documenti & tassa</div>
+    <div class="pill" data-filter="section" data-val="guide">📲 Guida ospite</div>
     <div class="pill" data-filter="section" data-val="reminder">Reminder</div>
     <div class="pill" data-filter="section" data-val="inhouse">In-house</div>
     <div class="pill" data-filter="section" data-val="checkout">Pre-checkout</div>
@@ -1709,6 +1710,34 @@ https://share.google/eLYWJ4jaXleqEnjGv
   },
 };
 
+var GUIDE_URL = { lat: "https://fabioesposito611-glitch.github.io/jfm-templates/guide/laterani/", col: "https://fabioesposito611-glitch.github.io/jfm-templates/guide/colosseum/" };
+var guideTexts = {
+  en: (u) => `Hii [NOME]! 😊
+Here's your digital guide to the apartment 📲👇
+${u}
+
+Inside you'll find everything: how to get in step by step with photos 🗝️, Wi-Fi, how the house works, my favourite restaurants 🍝 and tips to enjoy Rome ✨
+It also works offline once you've opened it, so you can use it anytime 🙌
+
+Feel free to share it with the people travelling with you. For anything else, I'm here! 😊`,
+  it: (u) => `Ciao [NOME]! 😊
+Ecco la guida digitale dell'appartamento 📲👇
+${u}
+
+Dentro trovate tutto: come entrare passo passo con le foto 🗝️, Wi-Fi, come funziona la casa, i miei ristoranti preferiti 🍝 e i consigli per godervi Roma ✨
+Una volta aperta funziona anche senza internet, quindi potete usarla quando volete 🙌
+
+Condividetela pure con chi viaggia con voi. Per qualsiasi altra cosa sono qui! 😊`,
+  es: (u) => `¡Holaa [NOMBRE]! 😊
+Aquí tenéis la guía digital del apartamento 📲👇
+${u}
+
+Dentro está todo: cómo entrar paso a paso con fotos 🗝️, wifi, cómo funciona la casa, mis restaurantes favoritos 🍝 y consejos para disfrutar Roma ✨
+Una vez abierta funciona también sin internet, así que podéis usarla cuando queráis 🙌
+
+Compartidla con quien viaja con vosotros. Para cualquier otra cosa, ¡aquí estoy! 😊`
+};
+
 var warningsTexts = {
   en: `‼️ 2 very important things before you arrive:
 
@@ -1842,6 +1871,15 @@ for (const casa of casas) {
       vars: "—",
       text: locationTexts[casa][lang]
     });
+    // Guida ospite digitale (link fisso per casa)
+    pushUnique({
+      id: `guide-${casa}-${lang}`,
+      section: "guide",
+      casa, lang, piatt: "all",
+      title: `Link guida ospite digitale`,
+      vars: "[NOME]",
+      text: guideTexts[lang](GUIDE_URL[casa])
+    });
     // Warnings (Laterani only)
     if (casa === 'lat') {
       pushUnique({
@@ -1886,10 +1924,11 @@ function getFiltered() {
   });
 }
 
-var sectionOrder = ["precheckin","docs_tax","reminder","inhouse","checkout","luggage","tips_restaurants","tips_itinerary","location","warnings","ncc","garage"];
+var sectionOrder = ["precheckin","docs_tax","guide","reminder","inhouse","checkout","luggage","tips_restaurants","tips_itinerary","location","warnings","ncc","garage"];
 var sectionTitles = {
   precheckin: "A — Pre check-in",
   docs_tax: "A2 — 🪪 Promemoria passaporti & tassa",
+  guide: "A3 — 📲 Guida ospite digitale",
   reminder: "B — Reminder giorno prima",
   inhouse: "C — Info in-house",
   checkout: "D — Pre-checkout",
