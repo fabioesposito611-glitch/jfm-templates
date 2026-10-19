@@ -301,6 +301,10 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-si
 .phrases div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 .phrases b{display:block;font-size:15px}.phrases span{display:block;font-size:13px;color:var(--muted)}
 #sos{scroll-margin-top:72px}
+.vid{padding:12px 12px 0}.vid video{width:100%;max-height:420px;object-fit:contain;border-radius:12px;background:#000;display:block}
+.hascover{padding-top:0;overflow:hidden}
+.cover{display:block;width:calc(100% + 32px);margin:0 -16px 14px;border:0;padding:0;cursor:zoom-in;aspect-ratio:16/9;overflow:hidden;background:var(--line)}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
 .review-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media (max-width:380px){.fares{grid-template-columns:1fr}.nearbar b{font-size:15px}}
 </style>
@@ -480,7 +484,7 @@ const FOOD = {
 };
 
 const ITIN = [
-  { title:{it:"A due passi da casa",en:"Right on your doorstep",es:"A dos pasos de casa"},
+  { cover:"n_church", title:{it:"A due passi da casa",en:"Right on your doorstep",es:"A dos pasos de casa"},
     when:{it:"Mezza giornata · a piedi",en:"Half day · on foot",es:"Medio día · a pie"},
     intro:{it:"Il quartiere di casa nasconde alcuni dei luoghi più antichi e meno affollati di Roma: si visitano senza fretta, prima o dopo il Colosseo.",en:"Your neighbourhood hides some of Rome's oldest and least crowded sights: enjoy them at your own pace, before or after the Colosseum.",es:"El barrio de casa esconde algunos de los lugares más antiguos y menos concurridos de Roma: se visitan sin prisa, antes o después del Coliseo."},
     stops:[
@@ -490,7 +494,7 @@ const ITIN = [
       ["clemente",{it:"Tre chiese una sopra l'altra: si scende dalla basilica medievale fino alle case romane e a un tempio di Mitra.",en:"Three churches stacked on top of each other: go down from the medieval basilica to Roman houses and a temple of Mithras.",es:"Tres iglesias una sobre otra: se baja desde la basílica medieval hasta casas romanas y un templo de Mitra."}],
       ["colosseo",{it:"Da qui, sempre dritto lungo Via di San Giovanni in Laterano: siete arrivati al Colosseo.",en:"From here, straight down Via di San Giovanni in Laterano: you've reached the Colosseum.",es:"Desde aquí, todo recto por Via di San Giovanni in Laterano: habéis llegado al Coliseo."}]
     ] },
-  { title:{it:"Roma antica e centro storico",en:"Ancient Rome and the historic centre",es:"Roma antigua y centro histórico"},
+  { cover:"n_colnight", title:{it:"Roma antica e centro storico",en:"Ancient Rome and the historic centre",es:"Roma antigua y centro histórico"},
     when:{it:"Giornata intera · a piedi",en:"Full day · on foot",es:"Día completo · a pie"},
     intro:{it:"Il percorso più suggestivo della città: dal Colosseo alle piazze barocche, tutto a piedi, con una pausa per un caffè o un gelato tra una piazza e l'altra.",en:"The city's most striking walk: from the Colosseum to the baroque squares, all on foot, with a stop for coffee or gelato along the way.",es:"El recorrido más impresionante de la ciudad: del Coliseo a las plazas barrocas, todo a pie, con una pausa para un café o un helado entre plaza y plaza."},
     stops:[
@@ -628,7 +632,7 @@ function FAQS(c){
     {go:"casa", kw:"acqua calda hot water agua caliente doccia shower ducha caldaia boiler caldera fredda cold", q:{it:"Non arriva l'acqua calda",en:"There's no hot water",es:"No sale agua caliente"}, a:{it:"La casa è grande: lasciate scorrere l'acqua qualche istante, arriva. Controllate che le manopole della caldaia siano nella posizione della foto (sezione Casa).",en:"The apartment is big: let the water run for a moment, it will come. Check that the boiler knobs are in the position shown in the photo (Home guide section).",es:"La casa es grande: dejad correr el agua unos instantes, ya llega. Comprobad que las ruedas de la caldera estén en la posición de la foto (sección La casa)."}},
     {go:"casa", kw:"sciacquone flush cisterna wc bagno toilet bathroom baño", q:{it:"Lo sciacquone del bagno grande non si ricarica",en:"The large bathroom flush won't refill",es:"La cisterna del baño grande no se recarga"}, a:{it:"È normale: si ricarica molto lentamente, non è rotto. Nel frattempo usate l'altro bagno.",en:"That's normal: it refills very slowly, it isn't broken. Meanwhile, use the other bathroom.",es:"Es normal: se recarga muy despacio, no está roto. Mientras tanto, usad el otro baño."}}
     ] : [
-    {go:"casa", kw:"divano letto sofa bed sofá cama aprire open abrir", q:{it:"Come si apre il divano letto?",en:"How do we open the sofa bed?",es:"¿Cómo se abre el sofá cama?"}, a:{it:"Trovate le indicazioni nella sezione Casa, sotto le foto del soggiorno.",en:"See the Home guide section, under the living room photos.",es:"Lo tenéis en la sección La casa, debajo de las fotos del salón."}}
+    {go:"casa", kw:"divano letto sofa bed sofá cama aprire open abrir", q:{it:"Come si apre il divano letto?",en:"How do we open the sofa bed?",es:"¿Cómo se abre el sofá cama?"}, a:{it:"C'è un video nella sezione Casa, sotto le foto del soggiorno.",en:"There's a video in the Home guide section, under the living room photos.",es:"Hay un vídeo en la sección La casa, debajo de las fotos del salón."}}
     ]),
     {go:"casa", kw:"ferro iron plancha phon hairdryer secador coperte blankets mantas lavatrice washing lavadora dove where donde", q:{it:"Dove trovo ferro, phon, coperte…?",en:"Where are the iron, hairdryer, blankets…?",es:"¿Dónde están la plancha, el secador, las mantas…?"}, a:{it:"Nella sezione Casa, sotto \"Dove trovare le cose\", con le foto.",en:"In the Home guide section, under \"Where to find things\", with photos.",es:"En la sección La casa, en \"Dónde está cada cosa\", con fotos."}},
     {go:"casa", kw:"spazzatura rubbish trash garbage basura bidoni bins", q:{it:"Dove butto la spazzatura?",en:"Where do we put the rubbish?",es:"¿Dónde tiramos la basura?"}, a:{it:"La differenziata è facoltativa. Potete lasciarla in casa alla partenza: ci pensa il team pulizie. Dove sono i bidoni: sezione Casa.",en:"Recycling is optional. You can leave it in the apartment when you leave: the cleaning team takes care of it. Where the bins are: Home guide section.",es:"El reciclaje es opcional. Podéis dejarla en casa al salir: se encarga el equipo de limpieza. Dónde están los contenedores: sección La casa."}},
@@ -820,6 +824,7 @@ function vHome(c){
   </div>
   <section class="sec"><div class="kicker">Wi-Fi</div>${wifiCard(c)}</section>
   <section class="sec"><h2>${L({it:"Dove siamo",en:"Where we are",es:"Dónde estamos"})}</h2><p class="lead">${L(h.hood)}</p>
+    ${h.hoodImgs?shots(h.hoodImgs):""}
     ${mapBox("map-home",["home","sight","metro","shop"])}
     <div class="row mt">${mapsBtnH()}</div></section>
   <section class="sec"><h2>${L({it:"Prima di arrivare",en:"Before you arrive",es:"Antes de llegar"})}</h2>
@@ -866,7 +871,7 @@ function vCasa(c){
     <section class="sec"><h2>${L({it:"Fare la spesa",en:"Groceries",es:"Hacer la compra"})}</h2>
       <ul class="plist">${h.shop.map(([k,d])=>placeRow(k, esc(P[k][0].replace(" Supermercati Laterani","").replace(" Via Labicana","").replace(" Via di San Giovanni in Laterano 218","")), L(d))).join("")}</ul></section>
     <section class="sec"><h2>${L({it:"La casa in foto",en:"The apartment in photos",es:"La casa en fotos"})}</h2><div class="rooms">
-      ${h.rooms.map(r=>`<article class="room">${shots(r.img)}<div class="body"><h3>${L(r.t)}</h3>${r.li?`<ul>${L(r.li).map(x=>`<li>${x}</li>`).join("")}</ul>`:""}</div></article>`).join("")}
+      ${h.rooms.map(r=>`<article class="room">${shots(r.img)}${r.video?`<div class="vid"><video src="img/${r.video}.mp4" poster="img/${r.video}_poster.jpg" controls playsinline muted preload="none"></video></div>`:""}<div class="body"><h3>${L(r.t)}</h3>${r.li?`<ul>${L(r.li).map(x=>`<li>${x}</li>`).join("")}</ul>`:""}</div></article>`).join("")}
     </div></section>
     <section class="sec"><h2>${L({it:"Buono a sapersi",en:"Good to know",es:"Conviene saber"})}</h2>
       ${liftWarning()}${(L(h.good)||[]).map(x=>`<div class="tip">${x}</div>`).join("")}</section>
@@ -887,7 +892,7 @@ function vRoma(){
     body = `<p class="lead mt">${L({it:"Colazione, gelato, aperitivo e serate: i posti più apprezzati della zona, ordinati per distanza da casa.",en:"Breakfast, gelato, aperitivo and nights out: the best-rated places around, sorted by distance from home.",es:"Desayuno, helado, aperitivo y noches: los sitios mejor valorados de la zona, ordenados por distancia desde casa."})}</p>` +
       DRINK.map(g=>`<h3 class="mt h3s grp">${FIC[g.ic]||""}${L(g.t)}</h3><ul class="plist">${[...g.items].sort((a,b)=>DIST[a[0]].walk-DIST[b[0]].walk).map(([k,d])=>placeRow(k, esc(P[k][0]), L(d), {showVia:true})).join("")}</ul>`).join("");
   } else if(romaSub==="walks"){
-    body = `<div class="itin">${ITIN.map(it=>`<article class="card"><h3>${L(it.title)}</h3><div class="when">${L(it.when)}</div>
+    body = `<div class="itin">${ITIN.map(it=>`<article class="card${it.cover?" hascover":""}">${it.cover?`<button type="button" class="cover" data-zoom="img/${it.cover}.webp" aria-label="${L(UI.zoom)}"><img src="img/${it.cover}.webp" alt="" loading="lazy"></button>`:""}<h3>${L(it.title)}</h3><div class="when">${L(it.when)}</div>
       ${it.intro?`<p class="mt small">${L(it.intro)}</p>`:""}
       ${it.pre?`<p class="mt small">${L(it.pre)}</p>`:""}
       <div class="startfrom">${IC.home}<span>${L({it:"Da casa alla prima tappa",en:"From home to the first stop",es:"De casa a la primera parada"})}: ${DIST[it.stops[0][0]].walk<=25?`<b>${DIST[it.stops[0][0]].walk} ${L(UI.min)} ${L(UI.walk)}</b>`:`<b>${L(VIA[it.stops[0][0]]||{it:"metro o taxi",en:"metro or taxi",es:"metro o taxi"})}</b>`}</span></div>
