@@ -1919,7 +1919,7 @@ function render() {
           <span class="chevron" id="chev-${t.id}">▾</span>
         </div>
         <div class="card-body" id="body-${t.id}">
-          <div class="vars">✏️ <strong>Segnaposti:</strong> ${t.vars}</div>
+          ${t.vars && t.vars !== "—" ? `<div class="vars">✏️ <strong>Da compilare:</strong> ${t.vars}</div>` : ""}
           <div class="template-text" id="txt-${t.id}">${escHtml(t.text)}</div>
           <button class="copy-btn" id="btn-${t.id}" onclick="copyText('${t.id}')">📋 Copia testo</button>
         </div>
