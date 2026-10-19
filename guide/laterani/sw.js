@@ -1,4 +1,4 @@
-const CACHE="jfm-laterani-20261019211251";
+const CACHE="jfm-laterani-20261019211347";
 const FILES=["./", "index.html", "config.json", "manifest.webmanifest", "img/l_bed.webp", "img/l_box.webp", "img/l_boxes.webp", "img/l_boxopen.webp", "img/l_btn1.webp", "img/l_btn2.webp", "img/l_code.webp", "img/l_doorlift.webp", "img/l_gate.webp", "img/l_gates.webp", "img/l_keys_lift.webp", "img/l_keys_stairs.webp", "img/l_lift.webp", "img/l_liftin.webp", "img/l_living.webp", "img/l_living2.webp", "img/l_path1.webp", "img/l_path2.webp", "img/l_path3.webp", "img/l_railing.webp", "img/l_st1.webp", "img/l_st2.webp", "img/l_st3.webp", "img/l_st4.webp", "img/l_view.webp", "img/logo.png", "img/qr-guide.svg", "img/qr-review.svg", "img/qr-site.svg", "img/icon-192.png", "img/icon-512.png"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()));});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});

@@ -256,6 +256,12 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-si
 .fic svg{width:28px;height:28px}
 .fimg{width:64px;height:64px;border:0;padding:0;border-radius:12px;overflow:hidden;cursor:zoom-in;background:var(--line)}
 .fimg img{width:100%;height:100%;object-fit:cover;display:block}
+.revrow{display:grid;grid-template-columns:1fr;gap:10px}
+.revbtn{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border-radius:var(--r);text-decoration:none;color:#fff;box-shadow:var(--shadow)}
+.revbtn.airbnb{background:#E0484E}.revbtn.booking{background:#003B95}
+.revbtn b{font-family:var(--f-display);font-size:19px;font-weight:800}
+.revbtn span{font-size:13.5px;opacity:.92}
+.revbtn em{font-style:normal;font-weight:700;font-size:14.5px;margin-top:4px}
 .review-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media (max-width:380px){.fares{grid-template-columns:1fr}.nearbar b{font-size:15px}}
 </style>
@@ -569,6 +575,18 @@ function placeRow(k, label, desc, extra){
     <a class="btn go" href="${gm(P[k][0],P[k][1])}" target="_blank" rel="noopener">${IC.pin}${L(UI.maps)}</a></li>`;
 }
 
+/* ---------- recensioni ---------- */
+let REVIEW_PLAT = null; // "airbnb" | "booking" | null (da link #recensione-airbnb / #recensione-booking)
+function reviewCards(){
+  const plat = {
+    airbnb:`<a class="revbtn airbnb" href="https://www.airbnb.com/trips" target="_blank" rel="noopener"><b>Airbnb</b><span>${L({it:"Viaggi → il vostro soggiorno → \"Inizia\". Avete 14 giorni dal check-out.",en:"Trips → your stay → \"Get started\". You have 14 days after check-out.",es:"Viajes → vuestra estancia → \"Empezar\". Tenéis 14 días desde el check-out."})}</span><em>${L({it:"Scrivi la recensione",en:"Write your review",es:"Escribir la reseña"})} →</em></a>`,
+    booking:`<a class="revbtn booking" href="https://secure.booking.com/mytrips.html" target="_blank" rel="noopener"><b>Booking.com</b><span>${L({it:"Prenotazioni → Passate → \"Valuta il soggiorno\". Anche dall'app.",en:"Bookings → Past → \"Rate your stay\". Also in the app.",es:"Reservas → Pasadas → \"Valora tu estancia\". También desde la app."})}</span><em>${L({it:"Scrivi la recensione",en:"Write your review",es:"Escribir la reseña"})} →</em></a>`
+  };
+  const google = `<a class="qrcard" href="https://search.google.com/local/writereview?placeid=${HOUSE.googlePid}" target="_blank" rel="noopener"><img src="img/qr-review.svg" alt="QR"><b>Google</b><span>${L({it:"Inquadrate o toccate per scrivere la recensione",en:"Scan or tap to write your review",es:"Escanead o tocad para escribir la reseña"})}</span></a>`;
+  const site = `<a class="qrcard" href="https://jfmitalia.com/" target="_blank" rel="noopener"><img src="img/qr-site.svg" alt="QR"><b>jfmitalia.com</b><span>${L({it:"Il nostro sito: per tornare a Roma, contattateci direttamente",en:"Our website: next time in Rome, contact us directly",es:"Nuestra web: la próxima vez en Roma, contactadnos directamente"})}</span></a>`;
+  const top = REVIEW_PLAT ? plat[REVIEW_PLAT] : `<div class="revrow">${plat.airbnb}${plat.booking}</div>`;
+  return `<div class="mt">${top}</div><div class="qrgrid mt">${google}${site}</div>`;
+}
 /* ---------- viste ---------- */
 function vHome(c){
   const h=HOUSE;
@@ -723,11 +741,8 @@ function vInfo(){
       <div class="row mt"><a class="btn flame" href="${waLink()}" target="_blank" rel="noopener">${IC.chat}${L({it:"Chiedi un preventivo",en:"Ask for a quote",es:"Pedir presupuesto"})}</a></div></section>
     <section class="sec" id="recensione"><div class="kicker">${L({it:"Vi è piaciuto il soggiorno?",en:"Enjoyed your stay?",es:"¿Os ha gustado la estancia?"})}</div><h2>${L({it:"Lasciateci una recensione",en:"Leave us a review",es:"Dejadnos una reseña"})}</h2>
       <p class="lead">${L({it:"Per una piccola realtà come la nostra ogni recensione conta tantissimo: ci aiuta a crescere e a far scegliere casa nostra ai prossimi ospiti. Bastano due minuti.",en:"For a small business like ours every review matters a lot: it helps us grow and helps future guests choose our home. It only takes two minutes.",es:"Para un negocio pequeño como el nuestro cada reseña cuenta muchísimo: nos ayuda a crecer y a que los próximos huéspedes elijan nuestra casa. Solo son dos minutos."})}</p>
-      <div class="qrgrid mt">
-        <a class="qrcard" href="https://search.google.com/local/writereview?placeid=${HOUSE.googlePid}" target="_blank" rel="noopener"><img src="img/qr-review.svg" alt="QR"><b>Google</b><span>${L({it:"Inquadrate o toccate per scrivere la recensione",en:"Scan or tap to write your review",es:"Escanead o tocad para escribir la reseña"})}</span></a>
-        <a class="qrcard" href="https://jfmitalia.com/" target="_blank" rel="noopener"><img src="img/qr-site.svg" alt="QR"><b>jfmitalia.com</b><span>${L({it:"Il nostro sito: per tornare a Roma, contattateci direttamente",en:"Our website: next time in Rome, contact us directly",es:"Nuestra web: la próxima vez en Roma, contactadnos directamente"})}</span></a>
-      </div>
-</section>
+      ${reviewCards()}
+      </section>
     <section class="sec"><h2>${L({it:"Condividete la guida",en:"Share this guide",es:"Compartid la guía"})}</h2>
       <div class="card mt qr"><img class="qrimg" src="img/qr-guide.svg" alt="QR"><p class="small">${L({it:"Fate inquadrare il QR ai vostri compagni di viaggio: avranno tutto anche loro sul telefono.",en:"Let your travel companions scan the QR code: they'll have everything on their phone too.",es:"Que vuestros compañeros de viaje escaneen el QR: tendrán todo también en su móvil."})}</p></div></section>
     <section class="sec"><div class="card"><b>JFM · ${L({it:"Ospitalità a Roma",en:"Hospitality in Rome",es:"Hospitalidad en Roma"})}</b>
@@ -738,7 +753,7 @@ function vInfo(){
 /* ---------- router ---------- */
 const TABS=["home","arrivo","casa","roma","info"];
 const TAB_IC={home:IC.home,arrivo:IC.key,casa:IC.sofa,roma:IC.map,info:IC.info};
-function parseHash(){ const t=(location.hash||"").replace("#","").toLowerCase(); TAB = t==="recensione" ? "info" : (TABS.includes(t) ? t : "home"); }
+function parseHash(){ const t=(location.hash||"").replace("#","").toLowerCase(); REVIEW_PLAT = t==="recensione-airbnb"?"airbnb":t==="recensione-booking"?"booking":null; TAB = t.startsWith("recensione") ? "info" : (TABS.includes(t) ? t : "home"); }
 function footer(){ return `<footer><b>JF MANAGEMENT S.r.l.s.</b><span>P.IVA 06271030659 · Via Santi Martiri Salernitani 31, Salerno</span><span>jfmitalia.com</span></footer>`; }
 function render(){
   document.documentElement.lang=LANG;
@@ -775,7 +790,7 @@ window.addEventListener("hashchange",()=>{parseHash();render();});
   const nav=(navigator.language||"").toLowerCase();
   LANG = saved || (nav.startsWith("it")?"it":nav.startsWith("es")?"es":"en");
   parseHash(); render();
-  if(location.hash=="#recensione") setTimeout(()=>document.getElementById("recensione")?.scrollIntoView(),50);
+  if(location.hash.startsWith("#recensione")) setTimeout(()=>document.getElementById("recensione")?.scrollIntoView(),50);
   /* config: prima la copia salvata (funziona offline), poi quella aggiornata dalla rete */
   try{ const saved=localStorage.getItem("jfm-cfg-"+HOUSE.key); if(saved){ CFG=JSON.parse(saved); render(); } }catch(_){}
   fetch("config.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(j=>{ if(j){ CFG=j; try{localStorage.setItem("jfm-cfg-"+HOUSE.key,JSON.stringify(j))}catch(_){} render(); } }).catch(()=>{});
