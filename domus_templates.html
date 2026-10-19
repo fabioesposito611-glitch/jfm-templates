@@ -81,6 +81,7 @@
   <div class="filter-group" id="filter-section">
     <div class="pill active" data-filter="section" data-val="all">Tutte</div>
     <div class="pill" data-filter="section" data-val="precheckin">Pre check-in</div>
+    <div class="pill" data-filter="section" data-val="docs_tax">🪪 Documenti & tassa</div>
     <div class="pill" data-filter="section" data-val="reminder">Reminder</div>
     <div class="pill" data-filter="section" data-val="inhouse">In-house</div>
     <div class="pill" data-filter="section" data-val="checkout">Pre-checkout</div>
@@ -1394,6 +1395,34 @@ Aquí tienes las opciones más cercanas para aparcar el coche cerca de Domus Col
   }
 };
 
+// Messaggio separato: documenti + tassa
+var docsReqIntro = {
+  en: `Hi [NOME]! 😊
+Just a couple of quick things whenever you have a moment 🙏
+
+🪪 Documents
+As required by Italian law, I need a photo of the passport or ID of all guests (front and back if possible) 📸.`,
+  it: `Ciao [NOME]! 😊
+Ti chiedo solo un paio di cose veloci quando hai un attimo 🙏
+
+🪪 Documenti
+Come richiesto dalla normativa italiana, mi serve la foto del passaporto o del documento d'identità di tutti gli ospiti (fronte e retro se possibile) 📸.`,
+  es: `¡Hola [NOME]! 😊
+Solo un par de cosas rápidas cuando tengas un momento 🙏
+
+🪪 Documentos
+Como exige la normativa italiana, necesito una foto del pasaporte o documento de identidad de todos los huéspedes (anverso y reverso si es posible) 📸.`
+};
+var docsReqClosing = {
+  en: `No rush — just send them over whenever you can 😊 I'm here for anything!`,
+  it: `Nessuna fretta — mandameli pure quando puoi 😊 Per qualsiasi cosa sono qui!`,
+  es: `Sin prisa — envíamelos cuando puedas 😊 ¡Estoy aquí para lo que necesites!`
+};
+function buildDocsReq(L, tax) {
+  var mid = tax === "jfm" ? "\n\n" + taxBlock_jfm[L] : tax === "fabio" ? "\n\n" + taxBlock_fabio[L] : "";
+  return docsReqIntro[L] + mid + "\n\n" + docsReqClosing[L];
+}
+
 var templates = [];
 var seenIds = new Set();
 
@@ -1746,6 +1775,17 @@ for (const casa of casas) {
         }
       }
     }
+    // Documenti + tassa (messaggio separato)
+    [["none","Solo documenti (Airbnb / tassa già gestita)","all"],["jfm","Documenti + tassa → JFM","bkg"],["fabio","Documenti + tassa → Fabio","all"]].forEach(function(v){
+      pushUnique({
+        id: `docs_tax-${casa}-${lang}-${v[0]}`,
+        section: "docs_tax",
+        casa, lang, piatt: v[2],
+        title: v[1],
+        vars: "[NOME]" + (v[0] !== "none" ? ", [TOTALE TASSA]" : ""),
+        text: buildDocsReq(lang, v[0])
+      });
+    });
     // Reminder
     pushUnique({
       id: `reminder-${casa}-${lang}`,
@@ -1859,9 +1899,10 @@ function getFiltered() {
   });
 }
 
-var sectionOrder = ["precheckin","reminder","inhouse","checkout","luggage","tips_restaurants","tips_itinerary","location","warnings","ncc","garage"];
+var sectionOrder = ["precheckin","docs_tax","reminder","inhouse","checkout","luggage","tips_restaurants","tips_itinerary","location","warnings","ncc","garage"];
 var sectionTitles = {
   precheckin: "A — Pre check-in",
+  docs_tax: "A2 — 🪪 Documenti & tassa (messaggio separato)",
   reminder: "B — Reminder giorno prima",
   inhouse: "C — Info in-house",
   checkout: "D — Pre-checkout",
