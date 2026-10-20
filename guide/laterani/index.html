@@ -319,23 +319,86 @@ main{max-width:720px;margin:0 auto;padding:16px 16px 40px}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--card);padding:10px 18px;border-radius:999px;font-weight:700;z-index:60}
 @media (max-width:370px){.fares{grid-template-columns:1fr}.hero-t h1{font-size:28px}.nearbar b{font-size:16px}}
 .car.navtop .carnav{margin:0 0 10px}
+
+/* ===== v3: home stile app, testi e foto più grandi ===== */
+body{font-size:17px}
+.brandlink{display:flex;align-items:center;gap:10px;flex:1;min-width:0;text-decoration:none;color:var(--ink)}
+.top-in{padding:10px 16px}
+.langbtn{display:inline-flex;align-items:center;gap:7px;border:2px solid var(--ink);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 12px;font:700 15px var(--f-body);cursor:pointer}
+.langbtn svg{width:18px;height:18px;color:var(--or)}
+.pbar{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:0 16px 10px}
+.pbar b{font-family:var(--f-display);font-size:17px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.backbtn{display:inline-flex;align-items:center;gap:4px;padding:8px 14px 8px 8px;border-radius:12px;background:var(--or);color:#fff;text-decoration:none;font-weight:700;font-size:15px;flex:none}
+.backbtn svg{width:20px;height:20px}
+.langsheet{position:fixed;inset:0;z-index:70;background:var(--bg);display:grid;place-items:center;padding:24px}
+.ls-in{width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.ls-in img{border-radius:50%}
+.ls-in h2{font-size:28px;font-weight:800}
+.ls-in p{color:var(--muted);font-size:15px;margin:0 0 8px}
+.lbtn{width:100%;display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:18px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:700 20px var(--f-body);cursor:pointer;box-shadow:var(--shadow)}
+.lbtn.on{border-color:var(--or)}
+.lbtn .flag{font-size:30px;line-height:1}
+.lbtn b{flex:1;text-align:left}
+.lbtn .chev{width:22px;height:22px;color:var(--or)}
+.hero{aspect-ratio:16/10}
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 6px;margin:22px 0 8px}
+.appi{display:flex;flex-direction:column;align-items:center;gap:7px;text-decoration:none;color:var(--ink);text-align:center;min-width:0}
+.appi b{font-size:13px;font-weight:700;line-height:1.2}
+.ai{width:62px;height:62px;border-radius:20px;display:grid;place-items:center;color:#fff;box-shadow:0 4px 12px rgba(22,33,58,.12);flex:none}
+.ai svg{width:32px;height:32px}
+.ai.or{background:var(--or)}.ai.bl{background:var(--blue)}.ai.gr{background:#1F7A6B}.ai.rd{background:var(--red)}
+.appi:active .ai{transform:scale(.94)}
+@media (max-width:350px){.ai{width:54px;height:54px}.appi b{font-size:12px}}
+.homecard{background:var(--card);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);margin-top:14px}
+.hc-h{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.hc-h>svg{width:24px;height:24px;color:var(--or)}
+.hc-h b{display:block}.hc-h span{font-size:14px;color:var(--muted)}
+.gmap.small{aspect-ratio:16/10;margin-top:0}
+.btn.wa{background:#1FA855;color:#fff;box-shadow:0 3px 0 #168142}
+.homecard .row .btn{flex:1}
+.phead{align-items:center}
+.phead .ai{width:56px;height:56px;border-radius:17px}
+.phead .ai svg{width:28px;height:28px}
+.phead h1{font-size:26px}
+.zimg{position:relative}
+.zb{position:absolute;right:10px;bottom:10px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);display:grid;place-items:center}
+.zb svg{width:20px;height:20px}
+.zimg.cov .zb{display:none}
+.finds2{display:flex;flex-direction:column;gap:14px}
+.find2{background:var(--card);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.find2 .zimg{border-radius:0}
+.find2 .zimg.ph{aspect-ratio:4/3}
+.find2>div{padding:14px 16px 16px}
+.find2 h4{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:800;margin-bottom:6px}
+.find2 h4 svg{width:24px;height:24px;color:var(--or)}
+.find2 p{margin:0;font-size:17px;line-height:1.45}
+.finds3{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.find3{display:flex;gap:14px;align-items:center;background:var(--card);border-radius:14px;padding:14px;box-shadow:var(--shadow)}
+.find3 .fci{width:52px;height:52px;border-radius:14px;aspect-ratio:auto;flex:none}
+.find3 .fci svg{width:28px;height:28px}
+.find3 b{display:block;font-size:17px}.find3 span{font-size:15px;color:var(--muted)}
+.ftx p{font-size:18px}
+.code .k{width:52px;height:62px;font-size:32px}
+.note{font-size:16px}
+.slide{flex-basis:92%}
+.pathbox .slide{flex-basis:94%}
+.costeps b{font-size:16.5px}
+.prow-m b{font-size:16.5px}
+.pfoot{margin-top:32px}
 </style>
 
 <div class="app">
   <header class="top"><div class="top-in">
-    <img class="logo" src="img/logo.png" alt="JFM">
-    <div class="brandname"><b>Domus Laterani</b><span>by JFM</span></div>
-    <div class="lang" role="group" aria-label="Lingua / Language / Idioma">
-      <button id="lang-it" type="button" aria-pressed="true">IT</button>
-      <button id="lang-en" type="button" aria-pressed="false">EN</button>
-      <button id="lang-es" type="button" aria-pressed="false">ES</button>
-    </div>
-  </div><nav class="snav" id="snav" aria-label="Sezioni"></nav></header>
+    <a href="#home" class="brandlink"><img class="logo" src="img/logo.png" alt="JFM"><div class="brandname"><b>Domus Laterani</b><span>by JFM</span></div></a>
+    <button id="langBtn" class="langbtn" type="button" aria-label="Lingua / Language / Idioma"></button>
+  </div><div class="pbar" id="pbar" hidden></div></header>
   <main id="main"></main>
 </div>
+<div class="langsheet" id="langSheet" hidden></div>
 <div class="lb" id="lb" hidden><img id="lbImg" alt=""><button type="button" aria-label="Close">✕</button></div>
 <div class="toast" id="toast" hidden></div>
 <script>
+const PUBLIC_URL="https://fabioesposito611-glitch.github.io/jfm-templates/guide/laterani/";
 const DIST={"buoni": {"m": 550, "walk": 7, "taxi": [6, 8], "taxiMin": 5}, "sampietrino": {"m": 650, "walk": 8, "taxi": [7, 8], "taxiMin": 5}, "contesto": {"m": 400, "walk": 5, "taxi": [6, 8], "taxiMin": 5}, "pepe": {"m": 650, "walk": 8, "taxi": [7, 9], "taxiMin": 5}, "bigfriends": {"m": 700, "walk": 9, "taxi": [7, 9], "taxiMin": 5}, "faleria": {"m": 650, "walk": 9, "taxi": [7, 9], "taxiMin": 5}, "spaccio": {"m": 700, "walk": 9, "taxi": [7, 9], "taxiMin": 5}, "feelsgood": {"m": 750, "walk": 9, "taxi": [7, 9], "taxiMin": 5}, "allemura": {"m": 300, "walk": 4, "taxi": [6, 8], "taxiMin": 5}, "e528": {"m": 350, "walk": 5, "taxi": [6, 8], "taxiMin": 5}, "cannavota": {"m": 600, "walk": 7, "taxi": [6, 8], "taxiMin": 5}, "isidoro": {"m": 800, "walk": 10, "taxi": [7, 9], "taxiMin": 5}, "contrario": {"m": 1000, "walk": 13, "taxi": [7, 9], "taxiMin": 10}, "bocconcino": {"m": 1000, "walk": 13, "taxi": [7, 9], "taxiMin": 10}, "luzzi": {"m": 950, "walk": 12, "taxi": [7, 9], "taxiMin": 10}, "valentino": {"m": 2300, "walk": 30, "taxi": [9, 12], "taxiMin": 15}, "castoro": {"m": 80, "walk": 1, "taxi": [6, 7], "taxiMin": 5}, "sgMetronio": {"m": 250, "walk": 3, "taxi": [6, 8], "taxiMin": 5}, "sgItalia": {"m": 550, "walk": 7, "taxi": [6, 8], "taxiMin": 5}, "mSG": {"m": 700, "walk": 9, "taxi": [7, 9], "taxiMin": 5}, "mCol": {"m": 1500, "walk": 20, "taxi": [8, 10], "taxiMin": 10}, "taxiSG": {"m": 600, "walk": 8, "taxi": [6, 8], "taxiMin": 5}, "kipoint": {"m": 2000, "walk": 25, "taxi": [9, 11], "taxiMin": 10}, "clemente": {"m": 900, "walk": 12, "taxi": [7, 9], "taxiMin": 5}, "coronati": {"m": 750, "walk": 9, "taxi": [7, 9], "taxiMin": 5}, "aranci": {"m": 2250, "walk": 30, "taxi": [9, 12], "taxiMin": 10}, "serratura": {"m": 2450, "walk": 30, "taxi": [9, 12], "taxiMin": 15}, "pincio": {"m": 4400, "walk": 55, "taxi": [13, 16], "taxiMin": 20}, "gianicolo": {"m": 4250, "walk": 55, "taxi": [12, 16], "taxiMin": 20}, "basilicaSG": {"m": 350, "walk": 5, "taxi": [6, 8], "taxiMin": 5}, "scala": {"m": 550, "walk": 7, "taxi": [6, 8], "taxiMin": 5}, "colosseo": {"m": 1350, "walk": 15, "taxi": [8, 10], "taxiMin": 10}, "circo": {"m": 1750, "walk": 20, "taxi": [8, 11], "taxiMin": 10}, "fori": {"m": 2000, "walk": 25, "taxi": [9, 11], "taxiMin": 10}, "castel": {"m": 4450, "walk": 55, "taxi": [13, 16], "taxiMin": 20}, "arapacis": {"m": 4000, "walk": 50, "taxi": [12, 15], "taxiMin": 20}, "trevi": {"m": 3000, "walk": 40, "taxi": [10, 13], "taxiMin": 15}, "pantheon": {"m": 3250, "walk": 40, "taxi": [11, 14], "taxiMin": 15}, "navona": {"m": 3600, "walk": 45, "taxi": [11, 15], "taxiMin": 15}, "vaticani": {"m": 5750, "walk": 75, "taxi": [15, 19], "taxiMin": 25}, "sanpietro": {"m": 5450, "walk": 70, "taxi": [14, 18], "taxiMin": 25}, "caracalla": {"m": 1250, "walk": 15, "taxi": [7, 10], "taxiMin": 10}, "vittoriano": {"m": 2450, "walk": 30, "taxi": [9, 12], "taxiMin": 15}, "marcello": {"m": 2550, "walk": 30, "taxi": [10, 12], "taxiMin": 15}, "ottavia": {"m": 2700, "walk": 35, "taxi": [10, 13], "taxiMin": 15}, "spagna": {"m": 3550, "walk": 45, "taxi": [11, 15], "taxiMin": 15}, "popolo": {"m": 4450, "walk": 55, "taxi": [13, 16], "taxiMin": 20}, "termini": {"m": 2300, "walk": 30, "taxi": [9, 12], "taxiMin": 15}, "ps": {"m": 300, "walk": 4, "taxi": [6, 8], "taxiMin": 5}, "minimkt": {"m": 550, "walk": 7, "taxi": [6, 8], "taxiMin": 5}, "carrefourLab": {"m": 850, "walk": 11, "taxi": [7, 9], "taxiMin": 5}, "conad": {"m": 950, "walk": 12, "taxi": [7, 9], "taxiMin": 10}, "parkServ": {"m": 900, "walk": 12, "taxi": [7, 9], "taxiMin": 5}, "parkCol": {"m": 950, "walk": 12, "taxi": [7, 9], "taxiMin": 10}, "president": {"m": 900, "walk": 11, "taxi": [7, 9], "taxiMin": 5}, "appio": {"m": 800, "walk": 10, "taxi": [7, 9], "taxiMin": 5}, "tuscolo": {"m": 750, "walk": 10, "taxi": [7, 9], "taxiMin": 5}, "lateranoCaffe": {"m": 500, "walk": 6, "taxi": [6, 8], "taxiMin": 5}, "spazio800": {"m": 450, "walk": 6, "taxi": [6, 8], "taxiMin": 5}, "corsini": {"m": 450, "walk": 6, "taxi": [6, 8], "taxiMin": 5}, "disa": {"m": 1000, "walk": 13, "taxi": [7, 9], "taxiMin": 10}, "rivareno": {"m": 650, "walk": 8, "taxi": [7, 9], "taxiMin": 5}, "laromana": {"m": 650, "walk": 8, "taxi": [7, 8], "taxiMin": 5}, "costanza": {"m": 1100, "walk": 14, "taxi": [7, 9], "taxiMin": 10}, "dematteis": {"m": 850, "walk": 11, "taxi": [7, 9], "taxiMin": 5}, "angeletto": {"m": 1850, "walk": 25, "taxi": [8, 11], "taxiMin": 10}, "enoteca86": {"m": 600, "walk": 7, "taxi": [6, 8], "taxiMin": 5}, "pianoc": {"m": 800, "walk": 10, "taxi": [7, 9], "taxiMin": 5}, "ruvido": {"m": 300, "walk": 4, "taxi": [6, 8], "taxiMin": 5}, "aicolli": {"m": 550, "walk": 7, "taxi": [6, 8], "taxiMin": 5}, "drop": {"m": 1800, "walk": 25, "taxi": [8, 11], "taxiMin": 10}, "konforme": {"m": 1850, "walk": 25, "taxi": [8, 11], "taxiMin": 10}, "exgalleria": {"m": 2000, "walk": 25, "taxi": [9, 11], "taxiMin": 10}, "blackmarket": {"m": 1950, "walk": 25, "taxi": [9, 11], "taxiMin": 10}, "hoppiness": {"m": 850, "walk": 11, "taxi": [7, 9], "taxiMin": 5}, "artisan": {"m": 1950, "walk": 25, "taxi": [9, 11], "taxiMin": 10}, "scrocchia": {"m": 600, "walk": 8, "taxi": [6, 8], "taxiMin": 5}, "sesamo": {"m": 650, "walk": 9, "taxi": [7, 9], "taxiMin": 5}, "sannio": {"m": 600, "walk": 8, "taxi": [6, 8], "taxiMin": 5}, "esquilino": {"m": 1600, "walk": 20, "taxi": [8, 11], "taxiMin": 10}, "farmCel": {"m": 950, "walk": 12, "taxi": [7, 9], "taxiMin": 5}, "farmSG": {"m": 900, "walk": 12, "taxi": [7, 9], "taxiMin": 5}, "farmPrim": {"m": 1600, "walk": 20, "taxi": [8, 10], "taxiMin": 10}, "polCelio": {"m": 950, "walk": 12, "taxi": [7, 9], "taxiMin": 10}, "carabSG": {"m": 900, "walk": 11, "taxi": [7, 9], "taxiMin": 5}, "bambino": {"m": 4500, "walk": 60, "taxi": [13, 17], "taxiMin": 20}};
 const HOME_LL=[41.8839493, 12.5029854];
 const LL={"buoni": [41.8880539, 12.5044937], "sampietrino": [41.8877872, 12.5067718], "contesto": [41.8811974, 12.5041073], "pepe": [41.8805052, 12.5077314], "bigfriends": [41.8798666, 12.5076133], "faleria": [41.8823921, 12.5094244], "spaccio": [41.8869859, 12.5086629], "feelsgood": [41.8877834, 12.5082657], "allemura": [41.8827505, 12.5006237], "e528": [41.8812823, 12.5033824], "cannavota": [41.8876174, 12.5061634], "isidoro": [41.888923, 12.498553], "contrario": [41.888943, 12.495256], "bocconcino": [41.888602, 12.494971], "luzzi": [41.8893098, 12.4966286], "valentino": [41.898154, 12.4901306], "castoro": [41.8833914, 12.5033078], "sgMetronio": [41.883732, 12.5005075], "sgItalia": [41.8799612, 12.5044736], "mSG": [41.8852755, 12.5099769], "mCol": [41.8914771, 12.4914684], "taxiSG": [41.886638, 12.5078409], "kipoint": [41.8989068, 12.5033463], "clemente": [41.8893347, 12.4975757], "coronati": [41.8882559, 12.4985048], "aranci": [41.8851338, 12.48039], "serratura": [41.8829829, 12.4784752], "pincio": [41.9111207, 12.4779391], "gianicolo": [41.891305, 12.4614318], "basilicaSG": [41.8858811, 12.505673], "scala": [41.8871437, 12.5066274], "colosseo": [41.8902102, 12.4922309], "circo": [41.8858762, 12.4857578], "fori": [41.8932453, 12.487146], "castel": [41.9030632, 12.466276], "arapacis": [41.9058408, 12.4754092], "trevi": [41.9009325, 12.483313], "pantheon": [41.8986108, 12.4768729], "navona": [41.8991633, 12.4730742], "vaticani": [41.9064878, 12.4536413], "sanpietro": [41.9021667, 12.4539367], "caracalla": [41.8790382, 12.4924394], "vittoriano": [41.894891, 12.4829541], "marcello": [41.8919308, 12.4799083], "ottavia": [41.8925126, 12.4785372], "spagna": [41.9056978, 12.482327], "popolo": [41.9107038, 12.4763579], "termini": [41.9012873, 12.5015756], "ps": [41.8861101, 12.502633], "minimkt": [41.8879191, 12.501177], "carrefourLab": [41.8898642, 12.4995802], "conad": [41.8909967, 12.5016216], "parkServ": [41.8884773, 12.4960676], "parkCol": [41.8879245, 12.4950107], "president": [41.8900356, 12.5066684], "appio": [41.8836623, 12.5107839], "tuscolo": [41.87964, 12.508015], "lateranoCaffe": [41.88739, 12.50512], "spazio800": [41.88741, 12.5027], "corsini": [41.88074, 12.50486], "disa": [41.88948, 12.49596], "rivareno": [41.88463, 12.50959], "laromana": [41.8842, 12.50944], "costanza": [41.88976, 12.49519], "dematteis": [41.88792, 12.49642], "angeletto": [41.89481, 12.49155], "enoteca86": [41.88177, 12.50802], "pianoc": [41.88385, 12.51115], "ruvido": [41.88174, 12.50435], "aicolli": [41.88422, 12.50874], "drop": [41.89578, 12.49422], "konforme": [41.8952, 12.49222], "exgalleria": [41.89451, 12.48885], "blackmarket": [41.89679, 12.49358], "hoppiness": [41.88719, 12.51046], "artisan": [41.89589, 12.5139], "scrocchia": [41.88031, 12.5064], "sesamo": [41.88024, 12.50755], "sannio": [41.88501, 12.50876], "esquilino": [41.8957, 12.50694], "farmCel": [41.8889585, 12.496523], "farmSG": [41.8837382, 12.5121356], "farmPrim": [41.8792721, 12.5176285], "polCelio": [41.8881268, 12.495205], "carabSG": [41.8788544, 12.508556], "bambino": [41.8967164, 12.4609553]};
@@ -348,7 +411,7 @@ const UI = {
   open_maps:{it:"Apri in Maps",en:"Open in Maps",es:"Abrir en Maps"}, maps:{it:"Maps",en:"Maps",es:"Maps"},
   write:{it:"Scrivici su WhatsApp",en:"Message us on WhatsApp",es:"Escríbenos por WhatsApp"},
   lift:{it:"Ascensore",en:"Elevator",es:"Ascensor"}, stairs:{it:"Scale",en:"Stairs",es:"Escaleras"},
-  code_wait:{it:"Il codice compare qui il giorno dell'arrivo. Se non lo vedete, scriveteci su WhatsApp.",en:"The code shows up here on your arrival day. If you can't see it, message us on WhatsApp.",es:"El código aparece aquí el día de vuestra llegada. Si no lo veis, escribidnos por WhatsApp."},
+  code_wait:{it:"Il codice è nel link che vi mandiamo il giorno dell'arrivo: aprite la guida da quel link e comparirà qui.",en:"The code is in the link we send you on your arrival day: open the guide from that link and it will show up here.",es:"El código está en el enlace que os mandamos el día de llegada: abrid la guía desde ese enlace y aparecerá aquí."},
   fav:{it:"Preferito",en:"Our pick",es:"Favorito"},
   walk:{it:"a piedi",en:"walk",es:"a pie"}, min:{it:"min",en:"min",es:"min"},
   welcome:{it:"Benvenuti a Roma",en:"Welcome to Rome",es:"Bienvenidos a Roma"},
@@ -805,30 +868,42 @@ function reviewCards(){
   return `<div class="qrgrid mt">${google}${site}</div>`;
 }
 
-/* ================== GUIDA A SEZIONI (schermate) ================== */
+/* ================== GUIDA "APP": home con icone, una pagina per argomento ================== */
 const CHEV='<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
+const BACK=svg('<path d="M15 5l-7 7 7 7"/>');
 const WARN=svg('<path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/>');
-const MICON={ lift:svg('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 8l3-3 3 3M9 16l3 3 3-3"/>'), stairs:svg('<path d="M3 20h4v-4h4v-4h4V8h4V4"/>'), key:IC.key, boiler:FIC.boiler, door:IC.door };
-const SOS_IC=svg('<circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/>');
-
-/* sezioni: titolo + "cosa c'è dentro" */
-const SEC={
-  arrivo:{ic:IC.key, t:{it:"Arrivo",en:"Arrival",es:"Llegada"}, h:{it:"Come entrare in casa",en:"How to get in",es:"Cómo entrar en casa"},
-    d:{it:"Codice, key box, chiavi, ascensore o scale: foto passo passo",en:"Code, key box, keys, elevator or stairs: step-by-step photos",es:"Código, caja de llaves, llaves, ascensor o escalera: fotos paso a paso"}},
-  casa:{ic:IC.home, t:{it:"Casa",en:"Apartment",es:"Casa"}, h:{it:"La casa",en:"The apartment",es:"La casa"},
-    d:{it:"Dove trovare le cose, foto delle stanze, divano letto, spesa",en:"Where things are, room photos, sofa bed, groceries",es:"Dónde está cada cosa, fotos, sofá cama, compra"}},
-  checkout:{ic:IC.clock, t:{it:"Check-out",en:"Check-out",es:"Check-out"}, h:{it:"Check-out entro le 10:00",en:"Check-out by 10 AM",es:"Check-out antes de las 10:00"},
-    d:{it:"Cosa fare prima di uscire, valigie e late check-out",en:"What to do before leaving, luggage and late check-out",es:"Qué hacer antes de salir, maletas y late check-out"}},
-  zona:{ic:IC.pin, t:{it:"Zona",en:"Area",es:"Zona"}, h:{it:"Dove siamo",en:"Where we are",es:"Dónde estamos"},
-    d:{it:"Mappa, distanze da Colosseo e metro, il quartiere",en:"Map, distance to the Colosseum and metro, the neighbourhood",es:"Mapa, distancia al Coliseo y al metro, el barrio"}},
-  roma:{ic:IC.map, t:{it:"Roma",en:"Rome",es:"Roma"}, h:{it:"Roma, a modo nostro",en:"Rome, our way",es:"Roma, a nuestra manera"},
-    d:{it:"Itinerari, ristoranti, bar e gelato, panorami, trasporti, bagagli",en:"Walks, restaurants, cafés and gelato, views, transport, luggage",es:"Rutas, restaurantes, bares y helado, miradores, transporte, maletas"}},
-  info:{ic:IC.doc, t:{it:"Info",en:"Info",es:"Info"}, h:{it:"Info utili",en:"Useful info",es:"Información útil"},
-    d:{it:"Tassa di soggiorno, documenti, transfer, recensione",en:"City tax, ID documents, transfers, review",es:"Tasa turística, documentos, traslados, reseña"}},
-  aiuto:{ic:SOS_IC, t:{it:"Aiuto",en:"Help",es:"Ayuda"}, h:{it:"Qualcosa non va?",en:"Something wrong?",es:"¿Algo no va bien?"},
-    d:{it:"Soluzioni rapide, contatti, emergenze 112",en:"Quick fixes, contacts, emergency 112",es:"Soluciones rápidas, contactos, emergencias 112"}}
+const PHONE=svg('<path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/>');
+const CASH=svg('<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>');
+const GLOBE=svg('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/>');
+const XI={
+  photo:svg('<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 16l-5-5-8 8"/>'),
+  search:svg('<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>'),
+  tool:svg('<path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"/>'),
+  sos:svg('<circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/>'),
+  view:svg('<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>'),
+  out:svg('<path d="M14 4h5v16h-5"/><path d="M10 12H3M6 8l-4 4 4 4"/>')
 };
-const ORDER=["arrivo","casa","checkout","zona","roma","info","aiuto"];
+
+/* le "app" della home: nome corto + titolo pagina + cosa contiene */
+const APPS={
+  arrivo:{ic:IC.key, c:"or", t:{it:"Check-in",en:"Check-in",es:"Check-in"}, h:{it:"Come entrare in casa",en:"How to get in",es:"Cómo entrar en casa"}, d:{it:"Seguite le foto una alla volta, dalla strada fino alla porta.",en:"Follow the photos one at a time, from the street to the door.",es:"Seguid las fotos una a una, de la calle a la puerta."}},
+  casa:{ic:IC.home, c:"bl", t:{it:"La casa",en:"The apartment",es:"La casa"}, h:{it:"La casa: dove trovare le cose",en:"Where to find things",es:"Dónde está cada cosa"}, d:{it:"Ogni cosa con la sua foto.",en:"Everything with a photo.",es:"Cada cosa con su foto."}},
+  foto:{ic:XI.photo, c:"bl", t:{it:"Foto e video",en:"Photos & videos",es:"Fotos y vídeos"}, h:{it:"La casa in foto",en:"The apartment in photos",es:"La casa en fotos"}, d:{it:"Le stanze e il video del divano letto.",en:"The rooms and the sofa bed video.",es:"Las habitaciones y el vídeo del sofá cama."}},
+  checkout:{ic:XI.out, c:"or", t:{it:"Check-out",en:"Check-out",es:"Check-out"}, h:{it:"Check-out entro le 10:00",en:"Check-out by 10 AM",es:"Check-out antes de las 10:00"}, d:{it:"Cosa fare prima di uscire.",en:"What to do before you leave.",es:"Qué hacer antes de salir."}},
+  zona:{ic:IC.pin, c:"bl", t:{it:"Dove siamo",en:"Where we are",es:"Dónde estamos"}, h:{it:"Dove siamo",en:"Where we are",es:"Dónde estamos"}, d:{it:"Mappa, distanze e il quartiere.",en:"Map, distances and the neighbourhood.",es:"Mapa, distancias y el barrio."}},
+  itinerari:{ic:IC.map, c:"gr", t:{it:"Itinerari",en:"Walks",es:"Rutas"}, h:{it:"Itinerari a piedi",en:"Walking routes",es:"Rutas a pie"}, d:{it:"Tappa per tappa, con i minuti a piedi.",en:"Stop by stop, with walking minutes.",es:"Parada a parada, con los minutos a pie."}},
+  mangiare:{ic:FIC.pizza, c:"gr", t:{it:"Mangiare",en:"Eat",es:"Comer"}, h:{it:"Dove mangiare",en:"Where to eat",es:"Dónde comer"}, d:{it:"Cucina vera, niente trappole per turisti.",en:"Real food, no tourist traps.",es:"Cocina de verdad, nada de trampas."}},
+  bar:{ic:FIC.gelato, c:"gr", t:{it:"Bar e gelato",en:"Cafés & gelato",es:"Bares y helado"}, h:{it:"Bar, gelato e serate",en:"Cafés, gelato and nights out",es:"Bares, helado y noches"}, d:{it:"Colazione, aperitivo, gelato, cocktail.",en:"Breakfast, aperitivo, gelato, cocktails.",es:"Desayuno, aperitivo, helado, cócteles."}},
+  vedere:{ic:XI.view, c:"gr", t:{it:"Cosa vedere",en:"Things to see",es:"Qué ver"}, h:{it:"Panorami e posti speciali",en:"Views and special places",es:"Miradores y sitios especiales"}, d:{it:"I posti più belli, anche quelli poco conosciuti.",en:"The best spots, including the lesser-known ones.",es:"Los mejores sitios, también los menos conocidos."}},
+  trasporti:{ic:IC.train, c:"bl", t:{it:"Trasporti",en:"Transport",es:"Transporte"}, h:{it:"Muoversi a Roma",en:"Getting around",es:"Moverse por Roma"}, d:{it:"Metro, taxi, aeroporti, auto.",en:"Metro, taxi, airports, car.",es:"Metro, taxi, aeropuertos, coche."}},
+  spesa:{ic:IC.cart, c:"bl", t:{it:"Spesa",en:"Groceries",es:"Compra"}, h:{it:"Fare la spesa",en:"Groceries",es:"Hacer la compra"}, d:{it:"Supermercati vicino casa.",en:"Supermarkets near the apartment.",es:"Supermercados cerca de casa."}},
+  bagagli:{ic:IC.bag, c:"bl", t:{it:"Bagagli e biglietti",en:"Luggage & tickets",es:"Maletas y entradas"}, h:{it:"Bagagli e biglietti",en:"Luggage and tickets",es:"Maletas y entradas"}, d:{it:"Depositi bagagli, biglietti dei musei.",en:"Luggage storage, museum tickets.",es:"Consignas, entradas de museos."}},
+  info:{ic:IC.doc, c:"bl", t:{it:"Info utili",en:"Useful info",es:"Info útil"}, h:{it:"Info utili",en:"Useful info",es:"Información útil"}, d:{it:"Tassa di soggiorno, documenti, transfer.",en:"City tax, ID documents, transfers.",es:"Tasa turística, documentos, traslados."}},
+  recensione:{ic:IC.star, c:"or", t:{it:"Recensione",en:"Review",es:"Reseña"}, h:{it:"Lasciateci una recensione",en:"Leave us a review",es:"Dejadnos una reseña"}, d:{it:"Ci aiuta tantissimo, grazie!",en:"It helps us a lot, thank you!",es:"Nos ayuda muchísimo, ¡gracias!"}},
+  aiuto:{ic:XI.tool, c:"or", t:{it:"Problemi?",en:"Problems?",es:"¿Problemas?"}, h:{it:"Qualcosa non va?",en:"Something wrong?",es:"¿Algo no va bien?"}, d:{it:"Le soluzioni ai problemi più comuni.",en:"Fixes for the most common problems.",es:"Soluciones a los problemas más comunes."}},
+  sos:{ic:XI.sos, c:"rd", t:{it:"Emergenze",en:"Emergency",es:"Emergencias"}, h:{it:"Emergenze",en:"Emergency",es:"Emergencias"}, d:{it:"112, ospedali, farmacie, polizia.",en:"112, hospitals, pharmacies, police.",es:"112, hospitales, farmacias, policía."}}
+};
+const ORDER=Object.keys(APPS);
 let PAGE="home", SUB=null;
 
 /* ---------- mattoncini ---------- */
@@ -841,29 +916,28 @@ function moreList(id,items,show){
   return `<div class="plist2" id="${id}">${items.map((x,i)=>i<show?x:x.replace('class="prow"','class="prow extra" hidden')).join("")}</div>
     <button type="button" class="btn ghost full mt" data-more="${id}" data-n="${items.length}"><span>${L({it:"Mostra tutti",en:"Show all",es:"Ver todos"})} (${items.length})</span>${CHEV}</button>`;
 }
-function zoomImg(n,cls=""){ return `<button type="button" class="zimg ${cls}" data-zoom="img/${n}.webp" aria-label="${L(UI.zoom)}"><img src="img/${n}.webp" alt="" loading="lazy"></button>`; }
+function zoomImg(n,cls=""){ return `<button type="button" class="zimg ${cls}" data-zoom="img/${n}.webp" aria-label="${L(UI.zoom)}"><img src="img/${n}.webp" alt="" loading="lazy"><span class="zb">${XI.search}</span></button>`; }
 function video(n,label){ return `<div class="vbox">${label?`<div class="vlabel">${svg('<polygon points="7 4 20 12 7 20 7 4"/>')}<span>${L(label)}</span></div>`:""}<video src="img/${n}.mp4" poster="img/${n}_poster.jpg" controls playsinline muted preload="none"></video></div>`; }
 function note(t,cls=""){ return `<div class="note ${cls}">${WARN}<span>${L(t)}</span></div>`; }
 function h3(ic,t,id){ return `<h3 class="h3b"${id?` id="${id}"`:""}>${ic}<span>${L(t)}</span></h3>`; }
 let carN=0;
 function carousel(slides,label,navTop){
   const id="car"+(++carN);
-  const nav = slides.length>1?`<div class="carnav"><button type="button" class="cbtn" data-car="${id}" data-dir="-1" aria-label="prev" disabled>${svg('<path d="M15 6l-6 6 6 6"/>')}</button><span class="cnt"><b>1</b> / ${slides.length}${label?` ${label}`:""}</span><button type="button" class="cbtn next" data-car="${id}" data-dir="1"><span>${L({it:"Avanti",en:"Next",es:"Siguiente"})}</span>${CHEV}</button></div>`:"";
-  return `<div class="car${slides.length>1?"":" one"}${navTop?" navtop":""}" id="${id}">
-    ${navTop?nav:""}<div class="track">${slides.map(s=>`<div class="slide">${s}</div>`).join("")}</div>
-    ${!navTop&&slides.length>1?`<div class="carnav"><button type="button" class="cbtn" data-car="${id}" data-dir="-1" aria-label="prev" disabled>${svg('<path d="M15 6l-6 6 6 6"/>')}</button>
-      <span class="cnt"><b>1</b> / ${slides.length}${label?` ${label}`:""}</span>
-      <button type="button" class="cbtn next" data-car="${id}" data-dir="1"><span>${L({it:"Avanti",en:"Next",es:"Siguiente"})}</span>${CHEV}</button></div>`:""}
-  </div>`;
+  const nav = slides.length>1?`<div class="carnav"><button type="button" class="cbtn" data-car="${id}" data-dir="-1" aria-label="prev" disabled>${BACK}</button><span class="cnt"><b>1</b> / ${slides.length}${label?` ${label}`:""}</span><button type="button" class="cbtn next" data-car="${id}" data-dir="1"><span>${L({it:"Avanti",en:"Next",es:"Siguiente"})}</span>${CHEV}</button></div>`:"";
+  return `<div class="car${slides.length>1?"":" one"}${navTop?" navtop":""}" id="${id}">${navTop?nav:""}<div class="track">${slides.map(s=>`<div class="slide">${s}</div>`).join("")}</div>${navTop?"":nav}</div>`;
 }
 const photoSlides = list => list.map(n=>zoomImg(n,"ph"));
 
+/* ---------- codici: arrivano solo dal link personale (?k= key box, ?p= portone) ---------- */
+let CODES={};
+function codeOf(k){ return CODES[k] || null; }
+
 /* ---------- HOME ---------- */
 function vHome(c){
-  const h=HOUSE;
+  const h=HOUSE, ct=contact(), q=encodeURIComponent(h.address.split(" · ")[0]+", Roma");
   return `<section class="hero">
     <img src="img/${h.hero}.webp" alt="${esc(L(h.heroAlt))}">
-    <div class="hero-t"><span>${L(UI.welcome)}</span><h1>${esc(h.name)}</h1><p>${esc(h.address.split(" · ")[0])}</p></div>
+    <div class="hero-t"><span>${L(UI.welcome)}</span><h1>${esc(h.name)}</h1></div>
   </section>
   <div class="facts2">
     <div><small>${L(UI.checkin)}</small><b>${L(DAYS)}</b></div>
@@ -871,26 +945,30 @@ function vHome(c){
     <div><small>${L({it:"Piano",en:"Floor",es:"Piso"})}</small><b>${h.floor}</b></div>
   </div>
   ${c?`<div class="wifi2"><span class="wic">${FIC.wifi}</span><div class="wtx"><small>Wi-Fi</small><b>${esc(c.wifi_rete)}</b><span class="mono">${esc(c.wifi_password)}</span></div><button class="btn primary sm" type="button" data-copy="${esc(c.wifi_password)}">${IC.copy}<span>${L(UI.copy)}</span></button></div>`:""}
-  <section class="musts">
-    <h2 class="mh">${WARN}<span>${L({it:"Da sapere subito",en:"Know this first",es:"Lo primero que hay que saber"})}</span></h2>
-    <div class="mgrid">${h.musts.map(m=>`<div class="must"><span class="mi">${MICON[m.ic]||IC.info}</span><div><b>${L(m.t)}</b><span>${L(m.d)}</span></div></div>`).join("")}</div>
-  </section>
-  <h2 class="tiles-h">${L({it:"Cosa trovate nella guida",en:"What's in this guide",es:"Qué hay en esta guía"})}</h2>
-  <div class="tiles">${ORDER.map(s=>`<a class="tile${s==="arrivo"?" hot":""}${s==="aiuto"?" help":""}" href="#${s}"><span class="ti">${SEC[s].ic}</span><div><b>${L(SEC[s].t)}</b><span>${L(SEC[s].d)}</span></div>${CHEV}</a>`).join("")}</div>
-  <p class="escal">${IC.chat}<span>${L({it:"Qui c'è tutto. Se non trovate la risposta, scriveteci dalla sezione Aiuto.",en:"Everything is here. If you can't find the answer, message us from the Help section.",es:"Aquí está todo. Si no encontráis la respuesta, escribidnos desde la sección Ayuda."})}</span></p>`;
+  <div class="apps">${ORDER.map(s=>`<a class="appi" href="#${s}"><span class="ai ${APPS[s].c}">${APPS[s].ic}</span><b>${L(APPS[s].t)}</b></a>`).join("")}</div>
+  <div class="homecard">
+    <div class="hc-h">${IC.pin}<div><b>${esc(h.address.split(" · ")[0])}</b><span>00184 Roma</span></div></div>
+    <div class="gmap small"><iframe title="Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${q}&z=16&hl=${LANG}&output=embed"></iframe></div>
+    <div class="mt">${btn(gm(h.place[0],h.place[1]),L(UI.open_maps),"ghost full")}</div>
+  </div>
+  <div class="homecard">
+    <div class="ctop"><img src="img/logo.png" alt=""><div><b>Fabio · JFM</b><span class="mono">${esc(ct.fabio_tel)}</span></div></div>
+    <p class="small muted mt">${L({it:"Prima guardate nella guida: c'è quasi tutto. Per il resto scriveteci.",en:"Check the guide first: almost everything is there. For anything else, message us.",es:"Mirad primero la guía: está casi todo. Para lo demás, escribidnos."})}</p>
+    <div class="row">${btn(waLink(),"WhatsApp","wa",IC.chat)}${btn("tel:"+ct.fabio_tel.replace(/\s/g,""),L({it:"Chiama",en:"Call",es:"Llamar"}),"ghost",PHONE)}</div>
+  </div>`;
 }
 
-/* ---------- ARRIVO ---------- */
-function frameHTML(f,n,c){
+/* ---------- CHECK-IN ---------- */
+function frameHTML(f,n){
   return `<div class="fwrap">${zoomImg(f.img,"ph")}<span class="fnum">${n}</span></div>
     <div class="ftx"><p>${L(f.t)}</p>
-      ${f.code?codeTiles(c?.[f.code],f.arrow):""}
+      ${f.code?codeTiles(codeOf(f.code),f.arrow):""}
       ${f.maps?`<div class="mt">${btn(gm(HOUSE.place[0],HOUSE.place[1]),L(UI.open_maps),"ghost")}</div>`:""}
       ${f.warn?note(f.warn,"red"):""}
       ${f.video?video(f.video,f.vlabel):""}
     </div>`;
 }
-function vArrivo(c){
+function vArrivo(){
   const G=HOUSE.arrival; let out="", step=0, i=0;
   while(i<G.length){
     const g=G[i];
@@ -898,44 +976,37 @@ function vArrivo(c){
       const paths=[]; while(i<G.length && G[i].path){ paths.push(G[i]); i++; }
       step++;
       out+=`<div class="astep"><div class="ash"><span class="sn">${step}</span><h3>${L({it:"Salite fino alla porta di casa",en:"Go up to the apartment door",es:"Subid hasta la puerta de casa"})}</h3></div>
-        <p class="small muted">${L({it:`Due modi, scegliete voi: <b>A ascensore</b> oppure <b>B scale</b>.`,en:`Two ways, your choice: <b>A elevator</b> or <b>B stairs</b>.`,es:`Dos formas, elegid: <b>A ascensor</b> o <b>B escalera</b>.`})}</p>
+        <p>${L({it:`Scegliete: <b>A con l'ascensore</b> oppure <b>B a piedi</b>.`,en:`Choose: <b>A by elevator</b> or <b>B on foot</b>.`,es:`Elegid: <b>A en ascensor</b> o <b>B a pie</b>.`})}</p>
         ${paths.map(p=>`<div class="pathbox ${p.path}"><div class="pth"><span class="pl">${p.path}</span><b>${L(p.title).replace(/^.*·\s*/,"")}</b></div>
           ${p.warn?note(p.warn,"red"):""}
-          ${carousel(p.frames.map((f,k)=>frameHTML(f,k+1,c)))}</div>`).join("")}
+          ${carousel(p.frames.map((f,k)=>frameHTML(f,k+1)))}</div>`).join("")}
       </div>`;
       continue;
     }
     step++;
     out+=`<div class="astep"><div class="ash"><span class="sn">${step}</span><h3>${L(g.title)}</h3></div>
       ${g.warn?note(g.warn,"red"):""}
-      ${carousel(g.frames.map((f,k)=>frameHTML(f,k+1,c)))}</div>`;
+      ${carousel(g.frames.map((f,k)=>frameHTML(f,k+1)))}</div>`;
     i++;
   }
   return out;
 }
 
-/* sotto-sezioni con pulsanti parlanti */
-function subnav(list){
-  const cur = list.find(x=>x[0]===SUB) ? SUB : list[0][0];
-  return `<div class="subnav">${list.map(([k,t])=>`<a href="#${PAGE}/${k}" class="${k===cur?"on":""}">${L(t)}</a>`).join("")}</div>
-    ${list.filter(x=>x[0]===cur).map(x=>`<div class="subbody">${x[2]}</div>`).join("")}`;
-}
-
 /* ---------- CASA ---------- */
 function vCasa(){
   const h=HOUSE;
-  const finds=h.find.map(f=>`<div class="fcard">${f.img?zoomImg(f.img,"fc"):`<span class="fci">${FIC[f.ic]||IC.home}</span>`}<div><b>${L(f.t)}</b><span>${L(f.w)}</span></div></div>`).join("");
-  const rooms=h.rooms.map(r=>`<div class="room2"><h4>${L(r.t)}</h4>${carousel(photoSlides(r.img))}${r.video?video(r.video,{it:"Video: come si apre il divano letto",en:"Video: how to open the sofa bed",es:"Vídeo: cómo se abre el sofá cama"}):""}${r.li?`<p class="small muted">${L(r.li).join(" ")}</p>`:""}</div>`).join("");
-  return subnav([
-    ["trova",{it:"Dove trovo…",en:"Where is…",es:"Dónde está…"}, `<p class="small muted">${L({it:"Tocca la foto per ingrandirla.",en:"Tap a photo to enlarge it.",es:"Toca la foto para ampliarla."})}</p><div class="fgrid">${finds}</div>${h.good?h3(WARN,{it:"Da sapere in casa",en:"Good to know",es:"Bueno saber"})+L(h.good).map(x=>`<div class="note">${WARN}<span>${x}</span></div>`).join(""):""}`],
-    ["foto",{it:"Foto stanze",en:"Room photos",es:"Fotos"}, rooms],
-    ["spesa",{it:"Spesa",en:"Groceries",es:"Compra"}, `<div class="plist2">${h.shop.map(([k,d])=>row(k,esc(P[k][0]),L(d))).join("")}</div>`]
-  ]);
+  const withImg=h.find.filter(f=>f.img), noImg=h.find.filter(f=>!f.img);
+  return `${h.good?h3(WARN,{it:"Prima di tutto",en:"First of all",es:"Antes de nada"})+L(h.good).map(x=>`<div class="note">${WARN}<span>${x}</span></div>`).join(""):""}
+    ${h3(XI.search,{it:"Dove trovo…",en:"Where is…",es:"Dónde está…"})}
+    <div class="finds2">${withImg.map(f=>`<article class="find2">${zoomImg(f.img,"ph")}<div><h4>${FIC[f.ic]||""}<span>${L(f.t)}</span></h4><p>${L(f.w)}</p></div></article>`).join("")}</div>
+    ${noImg.length?`<div class="finds3">${noImg.map(f=>`<div class="find3"><span class="fci">${FIC[f.ic]||IC.home}</span><div><b>${L(f.t)}</b><span>${L(f.w)}</span></div></div>`).join("")}</div>`:""}`;
+}
+function vFoto(){
+  return HOUSE.rooms.map(r=>`<div class="room2"><h3 class="h3b">${XI.photo}<span>${L(r.t)}</span></h3>${carousel(photoSlides(r.img))}${r.video?video(r.video,{it:"Video: come si apre il divano letto",en:"Video: how to open the sofa bed",es:"Vídeo: cómo se abre el sofá cama"}):""}${r.li?`<p class="small muted">${L(r.li).join(" ")}</p>`:""}</div>`).join("");
 }
 
 /* ---------- CHECK-OUT ---------- */
 function vCheckout(){
-  const CASH=svg('<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>');
   const steps=[
     [svg('<path d="M12 3v9"/><path d="M6.4 7.4a8 8 0 1011.2 0"/>'),{it:"Spegnete luci e aria condizionata, chiudete le finestre",en:"Switch off lights and air conditioning, close the windows",es:"Apagad luces y aire acondicionado, cerrad las ventanas"}],
     [IC.key,{it:"Lasciate tutte le chiavi sul tavolo",en:"Leave all the keys on the table",es:"Dejad todas las llaves sobre la mesa"}],
@@ -944,14 +1015,13 @@ function vCheckout(){
     [IC.door,{it:"Chiudete la porta dietro di voi. Fatto!",en:"Close the door behind you. Done!",es:"Cerrad la puerta al salir. ¡Listo!"}]
   ];
   return `${note({it:"Lo stesso giorno arrivano altri ospiti: alle 10:00 la casa deve essere libera.",en:"New guests arrive the same day: the apartment must be free at 10 AM.",es:"El mismo día llegan otros huéspedes: a las 10:00 la casa debe estar libre."})}
-    ${h3(svg('<path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>'),{it:"Prima di uscire",en:"Before you leave",es:"Antes de salir"})}
     <ol class="costeps">${steps.map(([ic,t],i)=>`<li><span class="cn">${i+1}</span><span class="ci">${ic}</span><b>${L(t)}</b></li>`).join("")}</ol>
     ${h3(IC.bag,{it:"Partite più tardi?",en:"Leaving later?",es:"¿Os vais más tarde?"})}
     <div class="cases2">
       <div class="case2"><b>${IC.bag}<span>${L({it:"Solo valigie",en:"Luggage only",es:"Solo maletas"})}</span></b><span>${L({it:"Se concordato con noi: liberate la casa alle 10, le valigie restano dentro e tornate a prenderle all'orario concordato.",en:"If agreed with us: leave the apartment at 10, your bags stay inside and you pick them up at the agreed time.",es:"Si lo acordamos: dejad la casa a las 10, las maletas se quedan dentro y volvéis a por ellas a la hora acordada."})}</span></div>
       <div class="case2"><b>${IC.clock}<span>Late check-out</span></b><span>${L({it:"Restare in casa dopo le 10 solo se ve lo confermiamo noi, qualche giorno prima.",en:"Staying in after 10 only if we confirm it, a few days before.",es:"Quedarse en casa después de las 10 solo si lo confirmamos, unos días antes."})}</span></div>
     </div>
-    <div class="row mt"><a class="btn ghost" href="#roma/bagagli">${IC.bag}<span>${L({it:"Depositi bagagli in città",en:"Luggage storage in town",es:"Consignas en la ciudad"})}</span>${CHEV}</a></div>`;
+    <div class="mt"><a class="btn ghost full" href="#bagagli">${IC.bag}<span>${L({it:"Depositi bagagli in città",en:"Luggage storage in town",es:"Consignas en la ciudad"})}</span>${CHEV}</a></div>`;
 }
 
 /* ---------- ZONA ---------- */
@@ -959,25 +1029,30 @@ function vZona(){
   const h=HOUSE, q=encodeURIComponent(h.address.split(" · ")[0]+", Roma");
   return `<div class="nearbar">${h.near.map(([k,lbl])=>`<a href="${gm(P[k][0],P[k][1])}" target="_blank" rel="noopener"><span>${L(lbl)}</span><b>${IC.walk}${DIST[k].walk} ${L(UI.min)}</b></a>`).join("")}</div>
     <div class="gmap"><iframe title="Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${q}&z=15&hl=${LANG}&output=embed"></iframe></div>
-    <div class="row mt">${btn(gm(h.place[0],h.place[1]),L(UI.open_maps),"primary")}</div>
+    <div class="mt">${btn(gm(h.place[0],h.place[1]),L(UI.open_maps),"primary full")}</div>
     ${h3(IC.home,{it:"Il quartiere",en:"The neighbourhood",es:"El barrio"})}
     <p>${L(h.hood)}</p>
     ${h.hoodImgs?carousel(photoSlides(h.hoodImgs)):""}`;
 }
 
 /* ---------- ROMA ---------- */
-function vRoma(){
-  const order = HOUSE.foodFirst==="col" ? ["col","sg"] : ["sg","col"];
-  const food=order.flatMap(g=>FOOD[g].items).sort((a,b)=>DIST[a[0]].walk-DIST[b[0]].walk)
-    .map(([p,fav,cuis,price])=>row(p, esc(P[p][0])+(fav?` <span class="fav">${L(UI.fav)}</span>`:""), `${L(cuis)} · ${price}`, {showVia:true}));
-  const itin=carousel(ITIN.map(it=>`<article class="it2">${it.cover?zoomImg(it.cover,"cov"):""}<div class="it2b"><h4>${L(it.title)}</h4><div class="when">${L(it.when)}</div>
+function vItinerari(){
+  return carousel(ITIN.map(it=>`<article class="it2">${it.cover?zoomImg(it.cover,"cov"):""}<div class="it2b"><h4>${L(it.title)}</h4><div class="when">${L(it.when)}</div>
       ${it.intro?`<p class="small">${L(it.intro)}</p>`:""}
       <ol class="route">${it.stops.map(([k,d],i)=>`<li><a href="${gm(P[k][0],P[k][1])}" target="_blank" rel="noopener"><span>${esc(P[k][0])}</span>${CHEV}</a><span class="rd">${L(d)}</span>${i>0?legHTML(it.stops[i-1][0],k):dist(k,{showVia:true})}</li>`).join("")}</ol>
       ${it.alt?`<p class="small muted">${L(it.alt)}</p>`:""}
       ${it.fact?`<p class="fact">💡 ${L(it.fact)}</p>`:""}</div></article>`),L({it:"itinerari",en:"walks",es:"rutas"}),true);
-  const drink=DRINK.map((g,gi)=>`<h4 class="grp2">${FIC[g.ic]||""}<span>${L(g.t)}</span></h4>${moreList("dr"+gi,[...g.items].sort((a,b)=>DIST[a[0]].walk-DIST[b[0]].walk).map(([k,d])=>row(k,esc(P[k][0]),L(d),{showVia:true})),3)}`).join("");
-  const views=[...VIEWS,...GEMS].map(([k,d])=>row(k,esc(P[k][0]),L(d),{showVia:true}));
-  const move=`<div class="mvgrid">
+}
+function vMangiare(){
+  const order = HOUSE.foodFirst==="col" ? ["col","sg"] : ["sg","col"];
+  const food=order.flatMap(g=>FOOD[g].items).sort((a,b)=>DIST[a[0]].walk-DIST[b[0]].walk)
+    .map(([p,fav,cuis,price])=>row(p, esc(P[p][0])+(fav?` <span class="fav">${L(UI.fav)}</span>`:""), `${L(cuis)} · ${price}`, {showVia:true}));
+  return `<p class="small muted">${L({it:"Dal più vicino. Prezzi a persona. Toccate un posto per aprirlo in Maps.",en:"Nearest first. Prices per person. Tap a place to open it in Maps.",es:"Del más cercano. Precios por persona. Toca un sitio para abrirlo en Maps."})}</p>${moreList("food",food,8)}`;
+}
+function vBar(){ return DRINK.map((g,gi)=>`<h3 class="h3b">${FIC[g.ic]||""}<span>${L(g.t)}</span></h3>${moreList("dr"+gi,[...g.items].sort((a,b)=>DIST[a[0]].walk-DIST[b[0]].walk).map(([k,d])=>row(k,esc(P[k][0]),L(d),{showVia:true})),4)}`).join(""); }
+function vVedere(){ return `<div class="plist2">${[...VIEWS,...GEMS].map(([k,d])=>row(k,esc(P[k][0]),L(d),{showVia:true})).join("")}</div>`; }
+function vTrasporti(){
+  return `<div class="mvgrid">
       <div class="mv"><b>${IC.train}<span>Metro</span></b><span>${L({it:`<span class="metro A">A</span> San Giovanni · ${DIST.mSG.walk} min a piedi<br><span class="metro B">B</span> Colosseo · ${DIST.mCol.walk} min a piedi<br>Biglietto 1,50 € (100 min), o carta contactless ai tornelli.`,en:`<span class="metro A">A</span> San Giovanni · ${DIST.mSG.walk} min walk<br><span class="metro B">B</span> Colosseo · ${DIST.mCol.walk} min walk<br>Ticket €1.50 (100 min), or tap a contactless card.`,es:`<span class="metro A">A</span> San Giovanni · ${DIST.mSG.walk} min a pie<br><span class="metro B">B</span> Colosseo · ${DIST.mCol.walk} min a pie<br>Billete 1,50 € (100 min), o tarjeta contactless.`})}</span></div>
       <div class="mv"><b>${IC.taxi}<span>Taxi</span></b><span>${L({it:"App FreeNow, Uber o itTaxi. In città partenza da 3,50 €.",en:"FreeNow, Uber or itTaxi apps. In town the meter starts at €3.50.",es:"Apps FreeNow, Uber o itTaxi. En la ciudad desde 3,50 €."})}</span></div>
     </div>
@@ -987,58 +1062,58 @@ function vRoma(){
       <div class="ours"><small>${L({it:"Il nostro transfer",en:"Our transfer",es:"Nuestro traslado"})}</small><b>${L({it:"Aeroporto 70–100 €",en:"Airport €70–100",es:"Aeropuerto 70–100 €"})}</b><b>${L({it:"Stazione 60–80 €",en:"Station €60–80",es:"Estación 60–80 €"})}</b><span>${L({it:"Minivan con autista, 5–7 persone.",en:"Minivan with driver, 5–7 people.",es:"Monovolumen con conductor, 5–7 personas."})}</span></div>
     </div>
     <p class="small">${L({it:`Treno: Leonardo Express Fiumicino → Termini (32 min, da 14 €), poi metro <span class="metro A">A</span> direzione Anagnina fino a San Giovanni.`,en:`Train: Leonardo Express Fiumicino → Termini (32 min, from €14), then metro <span class="metro A">A</span> towards Anagnina to San Giovanni.`,es:`Tren: Leonardo Express Fiumicino → Termini (32 min, desde 14 €), luego metro <span class="metro A">A</span> dirección Anagnina hasta San Giovanni.`})}</p>
+    <div class="mt">${btn(waLink(),L({it:"Prenota il transfer",en:"Book the transfer",es:"Reservar el traslado"}),"primary full",IC.van)}</div>
     ${h3(IC.car,{it:"In auto e parcheggi",en:"By car and parking",es:"En coche y aparcamiento"})}
     <p class="small">${L(HOUSE.car)}</p><div class="plist2">${HOUSE.parking.map(k=>row(k,esc(P[k][0]),"")).join("")}</div>`;
-  const bags=`${h3(IC.bag,{it:"Depositi bagagli",en:"Luggage storage",es:"Consignas"})}
+}
+function vSpesa(){ return `<div class="plist2">${HOUSE.shop.map(([k,d])=>row(k,esc(P[k][0]),L(d))).join("")}</div>`; }
+function vBagagli(){
+  return `${h3(IC.bag,{it:"Depositi bagagli",en:"Luggage storage",es:"Consignas"})}
     <div class="plist2">${row("kipoint","KiBag Kipoint · Roma Termini",L({it:"Dentro la stazione, 7–21",en:"Inside the station, 7am–9pm",es:"Dentro de la estación, 7–21"}))}</div>
     <div class="col mt">${btn("https://radicalstorage.com/luggage-storage/rome/san-giovanni","Radical Storage · San Giovanni","ghost",IC.bag)}${btn("https://www.nannybag.com/en/luggage-storage/san-giovanni-patoni","Nannybag · San Giovanni","ghost",IC.bag)}</div>
     ${h3(IC.star,{it:"Biglietti e tour",en:"Tickets and tours",es:"Entradas y visitas"})}
     <div class="col">${btn("https://colosseo.it/",L({it:"Biglietti Colosseo (sito ufficiale)",en:"Colosseum tickets (official site)",es:"Entradas Coliseo (web oficial)"}),"ghost",IC.star)}${btn("https://www.museivaticani.va/",L({it:"Musei Vaticani (sito ufficiale)",en:"Vatican Museums (official site)",es:"Museos Vaticanos (web oficial)"}),"ghost",IC.star)}${btn(waLink(),L({it:"Tour guidati: chiedete a noi",en:"Guided tours: ask us",es:"Visitas guiadas: preguntadnos"}),"ghost",IC.chat)}</div>`;
-  return subnav([
-    ["itinerari",{it:"Itinerari",en:"Walks",es:"Rutas"}, `<p class="small muted">${L({it:"Scorrete per vedere gli altri itinerari. Ogni tappa si apre in Maps.",en:"Swipe for more walks. Every stop opens in Maps.",es:"Deslizad para ver más rutas. Cada parada se abre en Maps."})}</p>${itin}`],
-    ["mangiare",{it:"Mangiare",en:"Eat",es:"Comer"}, `<p class="small muted">${L({it:"Cucina vera, niente trappole per turisti. Dal più vicino. Prezzi a persona.",en:"Real food, no tourist traps. Nearest first. Prices per person.",es:"Cocina de verdad, nada de trampas. Del más cercano. Precios por persona."})}</p>${moreList("food",food,6)}`],
-    ["bar",{it:"Bar e gelato",en:"Cafés & gelato",es:"Bares y helado"}, drink],
-    ["panorami",{it:"Panorami",en:"Views",es:"Miradores"}, moreList("views",views,5)],
-    ["trasporti",{it:"Trasporti",en:"Transport",es:"Transporte"}, move],
-    ["bagagli",{it:"Bagagli e biglietti",en:"Luggage & tickets",es:"Maletas y entradas"}, bags]
-  ]);
 }
 
 /* ---------- INFO ---------- */
 function vInfo(){
-  const url=location.href.split("#")[0];
-  return `<div class="icard"><h4>${svg('<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>')}<span>${L({it:"Tassa di soggiorno",en:"City tax",es:"Tasa turística"})}</span></h4>
+  const url=PUBLIC_URL;
+  return `<div class="icard"><h4>${CASH}<span>${L({it:"Tassa di soggiorno",en:"City tax",es:"Tasa turística"})}</span></h4>
       <div class="taxrow"><b>5 €</b><span>${L({it:"a persona, a notte, prime 10 notti. Bambini fino a 10 anni esenti.",en:"per person, per night, first 10 nights. Children up to 10 exempt.",es:"por persona y noche, primeras 10 noches. Niños hasta 10 años exentos."})}</span></div>
       <div class="pay2"><div><b>Airbnb</b><span>${L({it:"Già pagata",en:"Already paid",es:"Ya pagada"})}</span></div><div><b>Booking · ${L({it:"diretta",en:"direct",es:"directa"})}</b><span>${L({it:"In contanti entro la partenza",en:"In cash before you leave",es:"En efectivo antes de salir"})}</span></div></div>
       <p class="ref">${L({it:"Rif.: art. 14, c. 16, lett. e) D.L. 78/2010; Regolamento Delib. Assemblea Capitolina n. 87/2022; tariffe Delib. Giunta Capitolina n. 255/2023.",en:"Ref.: art. 14(16)(e) Decree-Law 78/2010; Rome City Council Resolution 87/2022; City Executive Resolution 255/2023.",es:"Ref.: art. 14.16.e) D.L. 78/2010; Delib. Asamblea Capitolina 87/2022; Delib. Junta Capitolina 255/2023."})}</p></div>
     <div class="icard"><h4>${IC.doc}<span>${L({it:"Documenti",en:"ID documents",es:"Documentos"})}</span></h4>
       <p>${L({it:"Mandateci su WhatsApp la foto di un documento per ogni ospite, prima dell'arrivo o appena entrati.",en:"Send us a WhatsApp photo of an ID for every guest, before arrival or as soon as you're in.",es:"Mandadnos por WhatsApp la foto de un documento de cada huésped, antes de llegar o nada más entrar."})}</p>
       <p class="small muted">${L({it:"La legge ci obbliga a comunicare i nomi alla Questura entro 24 ore dall'arrivo.",en:"By law we must register guests with the police within 24 hours of arrival.",es:"La ley nos obliga a comunicar los nombres a la policía en 24 horas."})}</p>
+      <div class="mt">${btn(waLink(),L({it:"Invia le foto su WhatsApp",en:"Send the photos on WhatsApp",es:"Enviar las fotos por WhatsApp"}),"wa full",IC.chat)}</div>
       <p class="ref">${L({it:"Rif.: art. 109 TULPS (R.D. 773/1931); D.M. Interno 7/1/2013 (Alloggiati Web); dati trattati secondo il GDPR.",en:"Ref.: art. 109 TULPS (R.D. 773/1931); Ministry of the Interior Decree 7/1/2013; data handled under GDPR.",es:"Ref.: art. 109 TULPS (R.D. 773/1931); D.M. Interior 7/1/2013; datos tratados según el RGPD."})}</p></div>
     <div class="icard"><h4>${IC.van}<span>${L({it:"Servizi extra",en:"Extra services",es:"Servicios extra"})}</span></h4>
       <p>${L({it:"Transfer privato da e per aeroporti e stazioni, visite guidate, esperienze su misura.",en:"Private transfers to and from airports and stations, guided tours, tailor-made experiences.",es:"Traslados privados desde y hacia aeropuertos y estaciones, visitas guiadas, experiencias a medida."})}</p>
-      <div class="row mt">${btn(waLink(),L({it:"Chiedi un preventivo",en:"Ask for a quote",es:"Pedir presupuesto"}),"primary",IC.chat)}</div></div>
-    <div class="icard" id="recensione"><h4>${IC.star}<span>${L({it:"Vi è piaciuto? Lasciateci una recensione",en:"Enjoyed it? Leave us a review",es:"¿Os ha gustado? Dejadnos una reseña"})}</span></h4>
-      <div class="qrgrid">
-        <a class="qrcard" href="https://search.google.com/local/writereview?placeid=${HOUSE.googlePid}" target="_blank" rel="noopener"><img src="img/qr-review.svg" alt="QR"><b>Google</b><span>${L({it:"Inquadra o tocca",en:"Scan or tap",es:"Escanea o toca"})} ›</span></a>
-        <a class="qrcard" href="https://jfmitalia.com/" target="_blank" rel="noopener"><img src="img/qr-site.svg" alt="QR"><b>jfmitalia.com</b><span>${L({it:"Per tornare a Roma con noi",en:"Come back to Rome with us",es:"Vuelve a Roma con nosotros"})} ›</span></a>
-      </div></div>
+      <div class="mt">${btn(waLink(),L({it:"Chiedi un preventivo",en:"Ask for a quote",es:"Pedir presupuesto"}),"primary full",IC.chat)}</div></div>
     <div class="icard"><h4>${svg('<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>')}<span>${L({it:"Condividete la guida con chi viaggia con voi",en:"Share this guide with your travel companions",es:"Compartid la guía con quien viaja con vosotros"})}</span></h4>
       <div class="share"><img src="img/qr-guide.svg" alt="QR"><div class="col">${btn("https://wa.me/?text="+encodeURIComponent(url),L({it:"Invia su WhatsApp",en:"Send on WhatsApp",es:"Enviar por WhatsApp"}),"ghost",IC.chat)}<button type="button" class="btn ghost" data-copy="${esc(url)}">${IC.copy}<span>${L({it:"Copia link",en:"Copy link",es:"Copiar enlace"})}</span>${CHEV}</button></div></div></div>`;
 }
+function vRecensione(){
+  return `<p>${L({it:"Se vi siete trovati bene, una recensione su Google ci aiuta tantissimo. Bastano due righe!",en:"If you enjoyed your stay, a Google review helps us a lot. Just a couple of lines!",es:"Si os ha gustado, una reseña en Google nos ayuda muchísimo. ¡Bastan dos líneas!"})}</p>
+    <div class="qrgrid">
+      <a class="qrcard" href="https://search.google.com/local/writereview?placeid=${HOUSE.googlePid}" target="_blank" rel="noopener"><img src="img/qr-review.svg" alt="QR"><b>Google</b><span>${L({it:"Inquadra o tocca",en:"Scan or tap",es:"Escanea o toca"})} ›</span></a>
+      <a class="qrcard" href="https://jfmitalia.com/" target="_blank" rel="noopener"><img src="img/qr-site.svg" alt="QR"><b>jfmitalia.com</b><span>${L({it:"Per tornare a Roma con noi",en:"Come back to Rome with us",es:"Vuelve a Roma con nosotros"})} ›</span></a>
+    </div>`;
+}
 
-/* ---------- AIUTO ---------- */
+/* ---------- AIUTO / EMERGENZE ---------- */
 function vAiuto(c){
   const ct=contact();
-  const PHONE=svg('<path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/>');
-  return `<a class="sos112" href="tel:112"><b>112</b><div><strong>${L({it:"Emergenza: ambulanza, polizia, pompieri",en:"Emergency: ambulance, police, fire",es:"Emergencia: ambulancia, policía, bomberos"})}</strong><span>${L({it:"Gratis, 24 ore su 24. Tocca per chiamare.",en:"Free, 24/7. Tap to call.",es:"Gratis, 24 horas. Toca para llamar."})}</span></div>${PHONE}</a>
-    ${h3(svg('<path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"/>'),{it:"Soluzioni rapide",en:"Quick fixes",es:"Soluciones rápidas"},"faq")}
-    <input id="faq-q" class="search" type="search" autocomplete="off" placeholder="${L({it:"Cerca: wifi, acqua calda, chiavi…",en:"Search: wifi, hot water, keys…",es:"Buscar: wifi, agua caliente, llaves…"})}" value="${esc(FAQ_Q)}">
+  return `<input id="faq-q" class="search" type="search" autocomplete="off" placeholder="${L({it:"Cerca: wifi, acqua calda, chiavi…",en:"Search: wifi, hot water, keys…",es:"Buscar: wifi, agua caliente, llaves…"})}" value="${esc(FAQ_Q)}">
     <div id="faq-list" class="faqs mt">${faqHTML(c)}</div>
     ${h3(IC.chat,{it:"Non avete trovato la risposta?",en:"Couldn't find the answer?",es:"¿No encontrasteis la respuesta?"})}
-    <div class="contact2"><div class="ctop"><img src="img/logo.png" alt=""><div><b>Fabio · JFM</b><span>${L({it:"Scriveteci su WhatsApp. Per urgenze (non riuscite a entrare, un guasto) chiamate.",en:"Message us on WhatsApp. For urgent issues (can't get in, something broken) call.",es:"Escribidnos por WhatsApp. Para urgencias (no podéis entrar, una avería) llamad."})}</span></div></div>
-      <div class="row mt">${btn(waLink(),"WhatsApp","primary",IC.chat)}${btn("tel:"+ct.fabio_tel.replace(/\s/g,""),L({it:"Chiama",en:"Call",es:"Llamar"}),"ghost",PHONE)}</div></div>
-    ${h3(SOS_IC,{it:"Medici, farmacie, polizia",en:"Doctors, pharmacies, police",es:"Médicos, farmacias, policía"},"sos")}
+    <div class="homecard"><p class="small">${L({it:"Scriveteci su WhatsApp. Per urgenze (non riuscite a entrare, un guasto) chiamate.",en:"Message us on WhatsApp. For urgent issues (can't get in, something broken) call.",es:"Escribidnos por WhatsApp. Para urgencias (no podéis entrar, una avería) llamad."})}</p>
+      <div class="row">${btn(waLink(),"WhatsApp","wa",IC.chat)}${btn("tel:"+ct.fabio_tel.replace(/\s/g,""),L({it:"Chiama",en:"Call",es:"Llamar"}),"ghost",PHONE)}</div></div>
+    <div class="mt"><a class="btn ghost full" href="#sos">${XI.sos}<span>${L({it:"Emergenze mediche o di sicurezza",en:"Medical or safety emergencies",es:"Emergencias médicas o de seguridad"})}</span>${CHEV}</a></div>`;
+}
+function vSos(){
+  return `<a class="sos112" href="tel:112"><b>112</b><div><strong>${L({it:"Ambulanza, polizia, pompieri",en:"Ambulance, police, fire",es:"Ambulancia, policía, bomberos"})}</strong><span>${L({it:"Gratis, 24 ore su 24. Tocca per chiamare.",en:"Free, 24/7. Tap to call.",es:"Gratis, 24 horas. Toca para llamar."})}</span></div>${PHONE}</a>
+    ${h3(XI.sos,{it:"Ospedali, farmacie, polizia",en:"Hospitals, pharmacies, police",es:"Hospitales, farmacias, policía"})}
     <div class="plist2">
       ${row("ps",L({it:"Pronto soccorso San Giovanni",en:"San Giovanni A&E",es:"Urgencias San Giovanni"}),L({it:"Il più vicino, 24h",en:"The nearest, 24/7",es:"El más cercano, 24h"}))}
       ${row("bambino",L({it:"Bambino Gesù · ospedale pediatrico",en:"Bambino Gesù · children's hospital",es:"Bambino Gesù · hospital pediátrico"}),L({it:"Pronto soccorso bambini, 24h",en:"Children's A&E, 24/7",es:"Urgencias pediátricas, 24h"}))}
@@ -1050,40 +1125,43 @@ function vAiuto(c){
     <div class="phrases">${[["Ho bisogno di un medico",{en:"I need a doctor",es:"Necesito un médico"}],["Chiamate un'ambulanza!",{en:"Call an ambulance!",es:"¡Llamen a una ambulancia!"}],["Dov'è la farmacia più vicina?",{en:"Where's the nearest pharmacy?",es:"¿Dónde está la farmacia más cercana?"}],["Mi hanno rubato il portafoglio",{en:"My wallet has been stolen",es:"Me han robado la cartera"}]].map(([it,tr])=>`<div><b>${it}</b>${LANG!=="it"?`<span>${tr[LANG]}</span>`:""}</div>`).join("")}</div>`;
 }
 
-/* ---------- pagina sezione ---------- */
+/* ---------- pagina ---------- */
+const VIEWS_BY={arrivo:vArrivo,casa:vCasa,foto:vFoto,checkout:vCheckout,zona:vZona,itinerari:vItinerari,mangiare:vMangiare,bar:vBar,vedere:vVedere,trasporti:vTrasporti,spesa:vSpesa,bagagli:vBagagli,info:vInfo,recensione:vRecensione,aiuto:vAiuto,sos:vSos};
 function vPage(s,c){
-  const body={arrivo:vArrivo,casa:vCasa,checkout:vCheckout,zona:vZona,roma:vRoma,info:vInfo,aiuto:vAiuto}[s](c);
-  const i=ORDER.indexOf(s), nx=ORDER[i+1];
-  return `<header class="phead"><span class="pic">${SEC[s].ic}</span><div><small>${String(i+1).padStart(2,"0")} / 07</small><h1>${L(SEC[s].h)}</h1><p>${L(SEC[s].d)}</p></div></header>
-    ${body}
-    <div class="pfoot">${nx?`<a class="btn primary full" href="#${nx}"><span>${L({it:"Sezione successiva",en:"Next section",es:"Siguiente sección"})}: ${L(SEC[nx].t)}</span>${CHEV}</a>`:""}
-    <a class="btn ghost full" href="#home">${IC.home}<span>${L({it:"Torna all'inizio",en:"Back to start",es:"Volver al inicio"})}</span>${CHEV}</a></div>`;
+  const i=ORDER.indexOf(s), nx=ORDER[i+1], a=APPS[s];
+  return `<header class="phead"><span class="ai ${a.c}">${a.ic}</span><div><h1>${L(a.h)}</h1><p>${L(a.d)}</p></div></header>
+    ${VIEWS_BY[s](c)}
+    <div class="pfoot"><a class="btn primary full" href="#home">${IC.home}<span>${L({it:"Torna alla home",en:"Back to home",es:"Volver al inicio"})}</span>${CHEV}</a>
+    ${nx?`<a class="btn ghost full" href="#${nx}">${APPS[nx].ic}<span>${L(APPS[nx].t)}</span>${CHEV}</a>`:""}</div>`;
 }
 
 /* ---------- render ---------- */
+const LANGS=[["it","Italiano","🇮🇹"],["en","English","🇬🇧"],["es","Español","🇪🇸"]];
 function footer2(){ return `<footer class="foot2"><img src="img/logo.png" alt="" width="28" height="28"><div><b>JF MANAGEMENT S.r.l.s.</b><span>jfmitalia.com</span></div></footer>`; }
 function parseHash(){
   let h=decodeURIComponent((location.hash||"").replace("#",""));
-  const alias={faq:"aiuto/faq",sos:"aiuto/sos",contatti:"aiuto",recensione:"info/recensione","recensione-airbnb":"info/recensione","recensione-booking":"info/recensione",dove:"zona"};
+  const alias={faq:"aiuto",contatti:"aiuto",roma:"itinerari",dove:"zona","recensione-airbnb":"recensione","recensione-booking":"recensione","roma/trasporti":"trasporti","roma/mangiare":"mangiare","roma/bagagli":"bagagli"};
   h=alias[h]||h;
   const [p,s]=h.split("/");
-  PAGE = SEC[p] ? p : "home"; SUB = s||null;
+  PAGE = APPS[p] ? p : "home"; SUB=s||null;
 }
 function render(keepY){
   const y=window.scrollY; carN=0;
   document.documentElement.lang=LANG;
-  ["it","en","es"].forEach(l=>document.getElementById("lang-"+l).setAttribute("aria-pressed",LANG===l));
+  const cur=LANGS.find(x=>x[0]===LANG);
+  document.getElementById("langBtn").innerHTML=`${GLOBE}<span>${cur[2]} ${cur[1]}</span>`;
   const c=CFG?.casa||null;
-  document.getElementById("snav").innerHTML=`<a href="#home" class="${PAGE==="home"?"on":""}" aria-label="Home">${IC.home}</a>`+ORDER.map(s=>`<a href="#${s}" class="${PAGE===s?"on":""}${s==="aiuto"?" help":""}">${L(SEC[s].t)}</a>`).join("");
+  document.getElementById("pbar").innerHTML = PAGE==="home" ? "" : `<a class="backbtn" href="#home">${BACK}<span>Home</span></a><b>${L(APPS[PAGE].t)}</b>`;
+  document.getElementById("pbar").hidden = PAGE==="home";
   document.getElementById("main").innerHTML=(PAGE==="home"?vHome(c):vPage(PAGE,c))+footer2();
-  const nav=document.getElementById("snav"), on=nav.querySelector("a.on");
-  if(on) nav.scrollLeft = on.offsetLeft - nav.clientWidth/2 + on.clientWidth/2;
   if(keepY) window.scrollTo(0,y);
 }
-function route(){
-  parseHash(); render();
-  const a = SUB && document.getElementById(SUB);
-  if(a) a.scrollIntoView(); else window.scrollTo(0,0);
+function route(){ parseHash(); render(); const a=SUB&&document.getElementById(SUB); if(a) a.scrollIntoView(); else window.scrollTo(0,0); }
+function langSheet(first){
+  const el=document.getElementById("langSheet");
+  el.innerHTML=`<div class="ls-in"><img src="img/logo.png" alt="" width="56" height="56"><h2>${esc(HOUSE.name)}</h2><p>Scegli la lingua · Choose your language · Elige tu idioma</p>
+    ${LANGS.map(([k,n,f])=>`<button type="button" class="lbtn${k===LANG&&!first?" on":""}" data-lang="${k}"><span class="flag">${f}</span><b>${n}</b>${CHEV}</button>`).join("")}</div>`;
+  el.hidden=false;
 }
 
 /* carosello */
@@ -1098,13 +1176,15 @@ function carUpdate(car){
 document.addEventListener("scroll",e=>{ const t=e.target; if(t.classList && t.classList.contains("track")){ clearTimeout(t._t); t._t=setTimeout(()=>carUpdate(t.parentElement),60); } },true);
 
 document.addEventListener("click",e=>{
-  const t=e.target.closest("[data-copy],[data-zoom],[data-more],[data-car],[data-go]"); if(!t) return;
+  const t=e.target.closest("[data-copy],[data-zoom],[data-more],[data-car],[data-go],[data-lang],#langBtn"); if(!t) return;
+  if(t.id==="langBtn"){ langSheet(false); return; }
+  if(t.dataset.lang){ setLang(t.dataset.lang); document.getElementById("langSheet").hidden=true; return; }
   if(t.dataset.copy!==undefined){ const txt=t.dataset.copy, done=()=>toast(L(UI.copied));
     try{ navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done)); }catch(_){ fallbackCopy(txt,done); } }
   else if(t.dataset.zoom){ document.getElementById("lbImg").src=t.dataset.zoom; document.getElementById("lb").hidden=false; }
   else if(t.dataset.car){ const tr=document.getElementById(t.dataset.car).querySelector(".track"); tr.scrollBy({left:(tr.children[0].getBoundingClientRect().width+12)*(+t.dataset.dir),behavior:"smooth"}); }
   else if(t.dataset.go){ const sub={move:"trasporti",food:"mangiare",bags:"bagagli"};
-    location.hash = (SEC[t.dataset.go]?t.dataset.go:"home") + (t.dataset.sub2?"/"+(sub[t.dataset.sub2]||t.dataset.sub2):""); }
+    location.hash = t.dataset.sub2 ? (sub[t.dataset.sub2]||"home") : (APPS[t.dataset.go]?t.dataset.go:t.dataset.go==="roma"?"itinerari":"home"); }
   else if(t.dataset.more){ const box=document.getElementById(t.dataset.more), open=t.dataset.open==="1";
     box.querySelectorAll(".extra").forEach(x=>x.hidden=open); t.dataset.open=open?"0":"1";
     t.innerHTML=`<span>${open?`${L({it:"Mostra tutti",en:"Show all",es:"Ver todos"})} (${t.dataset.n})`:L({it:"Mostra meno",en:"Show less",es:"Ver menos"})}</span>${CHEV}`; }
@@ -1112,17 +1192,27 @@ document.addEventListener("click",e=>{
 document.addEventListener("input",e=>{ if(e.target.id==="faq-q"){ FAQ_Q=e.target.value; document.getElementById("faq-list").innerHTML=faqHTML(CFG?.casa); } });
 function fallbackCopy(txt,done){ const ta=document.createElement("textarea"); ta.value=txt; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy");done();}catch(_){} ta.remove(); }
 document.getElementById("lb").addEventListener("click",()=>{document.getElementById("lb").hidden=true});
-document.addEventListener("keydown",e=>{ if(e.key==="Escape") document.getElementById("lb").hidden=true; });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ document.getElementById("lb").hidden=true; } });
 let toastT; function toast(m){ const el=document.getElementById("toast"); el.textContent=m; el.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>el.hidden=true,1600); }
 function setLang(l){ LANG=l; try{localStorage.setItem("jfm-lang",l)}catch(_){} render(true); }
-["it","en","es"].forEach(l=>document.getElementById("lang-"+l).onclick=()=>setLang(l));
 window.addEventListener("hashchange",route);
 (function start(){
+  /* codici dal link personale: si salvano sul telefono e spariscono dalla barra degli indirizzi */
+  const qs=new URLSearchParams(location.search);
+  try{ CODES=JSON.parse(localStorage.getItem("jfm-codes-"+HOUSE.key)||"{}"); }catch(_){}
+  if(qs.get("k")||qs.get("p")){
+    if(qs.get("k")) CODES.keybox=qs.get("k"); if(qs.get("p")) CODES.portone=qs.get("p");
+    try{ localStorage.setItem("jfm-codes-"+HOUSE.key,JSON.stringify(CODES)); }catch(_){}
+  }
+  const qlang=qs.get("l");
+  if(qs.toString()) history.replaceState(null,"",location.pathname+location.hash);
   let saved=null; try{saved=localStorage.getItem("jfm-lang")}catch(_){}
+  if(qlang && ["it","en","es"].includes(qlang)){ saved=qlang; try{localStorage.setItem("jfm-lang",qlang)}catch(_){} }
   const nav=(navigator.language||"").toLowerCase();
   LANG = saved || (nav.startsWith("it")?"it":nav.startsWith("es")?"es":"en");
   try{ const s=localStorage.getItem("jfm-cfg-"+HOUSE.key); if(s) CFG=JSON.parse(s); }catch(_){}
   route();
+  if(!saved) langSheet(true);
   fetch("config.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(j=>{ if(j){ CFG=j; try{localStorage.setItem("jfm-cfg-"+HOUSE.key,JSON.stringify(j))}catch(_){} render(true); } }).catch(()=>{});
   if("serviceWorker" in navigator && location.protocol==="https:") navigator.serviceWorker.register("sw.js").catch(()=>{});
 })();

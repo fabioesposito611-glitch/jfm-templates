@@ -1,5 +1,5 @@
 {
-  "_nota": "Unico file da modificare quando cambiano codici o Wi-Fi.",
+  "_nota": "Unico file da modificare quando cambia il Wi-Fi. I codici NON vanno qui: viaggiano solo nel link personale mandato da Lodgify (?k=keybox&p=portone).",
   "public_url": "https://fabioesposito611-glitch.github.io/jfm-templates/guide/colosseum/",
   "contatti": {
     "fabio_tel": "+39 352 057 5278",
@@ -7,8 +7,6 @@
     "email": "amministrazione@jfmitalia.com"
   },
   "casa": {
-    "portone": "456",
-    "keybox": "0611",
     "wifi_rete": "Domus Colosseum Wifi",
     "wifi_password": "Domuscolosseum26!"
   }
