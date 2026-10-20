@@ -285,7 +285,7 @@ Come va? Tutto pronto per l'arrivo?`,
 ¿Cómo estás? ¿Todo listo para la llegada?`
 };
 
-function buildPreCheckin(lang, casa, arrivo, piatt, known) {
+function buildPreCheckin(lang, casa, arrivo, piatt, known, taxTo) {
   const L = lang;
   const intro = known ? introKnown[L]() : introNew[L]();
 
@@ -415,7 +415,7 @@ Justo enfrente hay un bar para tomar un café mientras esperas ☕😊.
 Avísame cuando estés en el aeropuerto o de camino ✈️🚖.`;
   }
 
-  const taxSection = piatt === "bkg" ? "\n\n" + taxBlock_jfm[L] : "";
+  const taxSection = piatt === "bkg" ? "\n\n" + (taxTo === "fabio" ? taxBlock_fabio[L] : taxBlock_jfm[L]) : "";
   const recsSection = "\n\n" + recBlock[L];
   const closing = "\n\n" + closingBlock[L];
   const docs = "\n\n" + docsBlock[L];
@@ -1636,14 +1636,16 @@ for (const casa of casas) {
     for (const arrivo of arrivals) {
       for (const piatt of piattaforme) {
         for (const known of knowns) {
-          pushUnique({
-            id: `precheckin-${casa}-${lang}-${arrivo}-${piatt}-${known?'known':'new'}`,
-            section: "precheckin",
-            casa, lang, piatt,
-            title: `Pre check-in · ${arrivalLabels[arrivo]} · ${piattLabels[piatt]} · ${known ? 'Già conosciuto' : 'Primo contatto'}`,
-            vars: "[NOME], [ORA ARRIVO]" + (piatt === "bkg" ? ", [TOTALE TASSA]" : ""),
-            text: buildPreCheckin(lang, casa, arrivo, piatt, known)
-          });
+          for (const taxTo of (piatt === "bkg" ? ["jfm","fabio"] : [null])) {
+            pushUnique({
+              id: `precheckin-${casa}-${lang}-${arrivo}-${piatt}-${known?'known':'new'}${taxTo ? '-'+taxTo : ''}`,
+              section: "precheckin",
+              casa, lang, piatt,
+              title: `Pre check-in · ${arrivalLabels[arrivo]} · ${piattLabels[piatt]}${taxTo ? (taxTo === 'fabio' ? ' · Tassa → IBAN Fabio' : ' · Tassa → IBAN JFM') : ''} · ${known ? 'Già conosciuto' : 'Primo contatto'}`,
+              vars: "[NOME], [ORA ARRIVO]" + (piatt === "bkg" ? ", [TOTALE TASSA]" : ""),
+              text: buildPreCheckin(lang, casa, arrivo, piatt, known, taxTo)
+            });
+          }
         }
       }
     }
