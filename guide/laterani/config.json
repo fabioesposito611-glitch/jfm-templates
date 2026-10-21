@@ -1,6 +1,6 @@
 {
-  "_nota": "Unico file da modificare quando cambia il Wi-Fi. I codici NON vanno qui: viaggiano solo nel link personale mandato da Lodgify (?k=keybox&p=portone).",
-  "public_url": "https://fabioesposito611-glitch.github.io/jfm-templates/guide/laterani/",
+  "_nota": "Unico file da modificare quando cambia il Wi-Fi. I codici NON vanno qui: stanno nei segreti di Cloudflare (CODES) e la guida li riceve solo durante il soggiorno.",
+  "public_url": "https://guida.jfmitalia.com/laterani/",
   "contatti": {
     "fabio_tel": "+39 352 057 5278",
     "fabio_wa": "393520575278",

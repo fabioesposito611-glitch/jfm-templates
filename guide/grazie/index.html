@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grazie · JFM</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Instrument+Sans:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#F5F3EF;--card:#fff;--ink:#16213A;--muted:#5F6878;--or:#E9572A;--blue:#1C5DAA}
+@media (prefers-color-scheme:dark){:root{--bg:#0F1524;--card:#18213A;--ink:#EEF1F7;--muted:#A3ACBE}}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font:17px/1.5 "Instrument Sans",system-ui,sans-serif;display:grid;place-items:center;padding:24px}
+.c{max-width:420px;width:100%;background:var(--card);border-radius:22px;padding:28px 22px;text-align:center;box-shadow:0 6px 24px rgba(22,33,58,.08)}
+img{width:64px;height:64px;border-radius:50%}
+h1{font:800 28px/1.15 "Bricolage Grotesque",system-ui,sans-serif;margin:14px 0 8px}
+p{color:var(--muted);margin:0 0 18px}
+a.b{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;border-radius:14px;font-weight:700;text-decoration:none;margin-top:10px}
+a.p{background:var(--or);color:#fff}a.g{border:2px solid var(--ink);color:var(--ink)}
+small{display:block;margin-top:18px;color:var(--muted);font-size:13px}
+</style></head>
+<body><main class="c">
+<img src="logo.png" alt="JFM">
+<h1 id="t"></h1><p id="d"></p>
+<a class="b p" id="rev" target="_blank" rel="noopener"></a>
+<a class="b g" href="https://jfmitalia.com/" target="_blank" rel="noopener" id="site"></a>
+<small id="s"></small>
+</main>
+<script>
+var T={it:{t:"Grazie per essere stati nostri ospiti!",d:"Il vostro soggiorno è concluso, quindi questa guida non è più disponibile. Speriamo di rivedervi presto a Roma 😊",r:"Lasciateci una recensione su Google",w:"Prenota di nuovo su jfmitalia.com",s:"Se avete una prenotazione attiva, aprite la guida dal link che vi abbiamo mandato."},
+en:{t:"Thank you for staying with us!",d:"Your stay has ended, so this guide is no longer available. We hope to see you again in Rome soon 😊",r:"Leave us a Google review",w:"Book again on jfmitalia.com",s:"If you have an active booking, open the guide from the link we sent you."},
+es:{t:"¡Gracias por alojaros con nosotros!",d:"Vuestra estancia ha terminado, así que esta guía ya no está disponible. Esperamos veros pronto en Roma 😊",r:"Dejadnos una reseña en Google",w:"Reservad de nuevo en jfmitalia.com",s:"Si tenéis una reserva activa, abrid la guía desde el enlace que os mandamos."}};
+var l=(navigator.language||"en").slice(0,2);try{l=localStorage.getItem("jfm-lang")||l}catch(e){}
+var L=T[l]||T.en; document.documentElement.lang=T[l]?l:"en";
+["t","d","s"].forEach(function(k){document.getElementById(k).textContent=L[k]});
+document.getElementById("rev").textContent="⭐ "+L.r; document.getElementById("site").textContent=L.w;
+var h=new URLSearchParams(location.search).get("h");
+var PID={laterani:"ChIJx2THlBphLxMRUs6Aznzy12g",colosseum:"ChIJ1dGmxCZhLxMR4xTyDV0QUow"};
+if(PID[h]) document.getElementById("rev").href="https://search.google.com/local/writereview?placeid="+PID[h]; else document.getElementById("rev").style.display="none";
+// pulizia: niente copie offline né codici rimasti sul telefono
+try{Object.keys(localStorage).forEach(function(k){if(/^jfm-(codes|cfg|b)-/.test(k))localStorage.removeItem(k)})}catch(e){}
+if("serviceWorker" in navigator){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister()})}).catch(function(){})}
+if(window.caches){caches.keys().then(function(ks){ks.forEach(function(k){if(/^jfm-/.test(k))caches.delete(k)})}).catch(function(){})}
+</script></body></html>

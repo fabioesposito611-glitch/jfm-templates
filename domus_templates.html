@@ -111,7 +111,7 @@ var IBAN_FABIO = "IT05N0503403238000000006593";
 var BIC_FABIO  = "BAPPIT21N96";
 var PP_FABIO   = "https://www.paypal.me/FabioEsposito611";
 var WEB = "www.jfmitalia.com";
-var GUIDE_URL = { lat: "https://fabioesposito611-glitch.github.io/jfm-templates/guide/laterani/", col: "https://fabioesposito611-glitch.github.io/jfm-templates/guide/colosseum/" };
+var GUIDE_URL = { lat: "https://guida.jfmitalia.com/laterani/", col: "https://guida.jfmitalia.com/colosseum/" };
 
 // taxBlock_jfm: tassa intestata a JF Management Srls (Booking)
 var taxBlock_jfm = {
@@ -560,7 +560,7 @@ Network: Domus Laterani Wifi
 Password: Domuslaterani24!
 
 📲 Where to find everything in the house (iron, hairdryer, blankets, washing machine…) is in your guide, with photos:
-${GUIDE_URL.lat}#casa
+${GUIDE_URL.lat}?b=[NUMERO PRENOTAZIONE]#casa
 
 🛎️ A few important things
 1️⃣ Elevator 🔒 Always make sure the doors are properly closed and the red light on the keypad turns off before you leave.
@@ -579,7 +579,7 @@ Rete: Domus Laterani Wifi
 Password: Domuslaterani24!
 
 📲 Dove trovare tutto in casa (ferro, phon, coperte, lavatrice…) è nella vostra guida, con le foto:
-${GUIDE_URL.lat}#casa
+${GUIDE_URL.lat}?b=[NUMERO PRENOTAZIONE]#casa
 
 🛎️ Cose importanti
 1️⃣ Ascensore 🔒 Assicuratevi sempre che le porte siano ben chiuse e che la luce rossa sul tastierino si spenga prima di allontanarvi.
@@ -598,7 +598,7 @@ Red: Domus Laterani Wifi
 Contraseña: Domuslaterani24!
 
 📲 Dónde está cada cosa en casa (plancha, secador, mantas, lavadora…) lo tenéis en vuestra guía, con fotos:
-${GUIDE_URL.lat}#casa
+${GUIDE_URL.lat}?b=[NUMERO PRENOTAZIONE]#casa
 
 🛎️ Cosas importantes
 1️⃣ Ascensor 🔒 Aseguraos siempre de que las puertas estén bien cerradas y de que la luz roja del panel se apague antes de iros.
@@ -619,7 +619,7 @@ Network: Domus Colosseum Wifi
 Password: Domuscolosseum26!
 
 📲 Where to find everything in the house (iron, hairdryer, rubbish bins, supermarket…) is in your guide, with photos:
-${GUIDE_URL.col}#casa
+${GUIDE_URL.col}?b=[NUMERO PRENOTAZIONE]#casa
 
 🛎️ One important thing
 Elevator 🔒 Always make sure the doors are properly closed and the red light on the keypad turns off before you leave.
@@ -636,7 +636,7 @@ Rete: Domus Colosseum Wifi
 Password: Domuscolosseum26!
 
 📲 Dove trovare tutto in casa (ferro, phon, bidoni, supermercato…) è nella vostra guida, con le foto:
-${GUIDE_URL.col}#casa
+${GUIDE_URL.col}?b=[NUMERO PRENOTAZIONE]#casa
 
 🛎️ Una cosa importante
 Ascensore 🔒 Assicuratevi sempre che le porte siano ben chiuse e che la luce rossa sul tastierino si spenga prima di allontanarvi.
@@ -653,7 +653,7 @@ Red: Domus Colosseum Wifi
 Contraseña: Domuscolosseum26!
 
 📲 Dónde está cada cosa en casa (plancha, secador, contenedores, supermercado…) lo tenéis en vuestra guía, con fotos:
-${GUIDE_URL.col}#casa
+${GUIDE_URL.col}?b=[NUMERO PRENOTAZIONE]#casa
 
 🛎️ Una cosa importante
 Ascensor 🔒 Aseguraos siempre de que las puertas estén bien cerradas y de que la luz roja del panel se apague antes de iros.
@@ -1604,20 +1604,20 @@ Compartidla con quien viaja con vosotros. Para cualquier otra cosa, ¡aquí esto
 var WA_FABIO = "https://wa.me/393520575278";
 var PID_GOOGLE = { lat: "ChIJx2THlBphLxMRUs6Aznzy12g", col: "ChIJ1dGmxCZhLxMR4xTyDV0QUow" };
 var HOUSE_NAME = { lat: "Domus Laterani", col: "Domus Colosseum" };
-function codeLink(casa){ return GUIDE_URL[casa] + (casa === "lat" ? "?k=[CODICE KEYBOX]" : "?k=[CODICE KEYBOX]&p=[CODICE PORTONE]"); }
+function codesText(casa){ return casa === "lat" ? "🗝️ Key box: [CODICE KEYBOX]" : "🚪 Portone: [CODICE PORTONE] + freccia su ⬆️\n🗝️ Key box: [CODICE KEYBOX]"; }
 function lodgifyMsgs(casa, L){
-  var G = GUIDE_URL[casa], H = HOUSE_NAME[casa], lat = casa === "lat";
+  var G = GUIDE_URL[casa] + "?b={{BookingId}}", H = HOUSE_NAME[casa], lat = casa === "lat";
   var rev = "https://search.google.com/local/writereview?placeid=" + PID_GOOGLE[casa];
   var T = {
   en: [
    ["1","Alla conferma della prenotazione","Subito dopo la prenotazione (0 giorni dopo)","all",
-`Hii [NOME]! 😊
+`Hii {{GuestFirstName}}! 😊
 Thank you so much for booking ${H}, we can't wait to welcome you to Rome! 🇮🇹
 
 Here's your digital guide to the apartment, with everything you'll need 📲👇
 ${G}
 
-🗝️ Check-in will be from 3 PM and it will be a self check-in: there's no reception, so you'll get in on your own by following the photos in the guide, step by step. On your arrival day I'll send you your personal link with the access codes.
+🗝️ Check-in will be from 3 PM and it will be a self check-in: there's no reception, so you'll get in on your own by following the photos in the guide, step by step. On your arrival day the access codes will appear in this same guide.
 🕙 Check-out will be by 10 AM.
 
 To get everything ready, please send me on WhatsApp 👉 ${WA_FABIO}
@@ -1627,7 +1627,7 @@ To get everything ready, please send me on WhatsApp 👉 ${WA_FABIO}
 For anything else, I'm here! 😊
 Fabio · JFM`],
    ["2","Come arrivare","3 giorni prima dell'arrivo, ore 10:00","all",
-`Hii [NOME]! 😊 Only a few days to go! ✈️
+`Hii {{GuestFirstName}}! 😊 Only a few days to go! ✈️
 
 Here's how to get to the apartment from the airport or the station, with times and prices 👇
 ${G}#trasporti
@@ -1638,13 +1638,13 @@ If you haven't yet, please send me your arrival time and the ID photos on WhatsA
 📌 The apartment will be ready from 3 PM: if you're arriving earlier, let me know and we'll see together what we can do 😉
 
 See you soon!`],
-   ["3","Link personale con i codici","Giorno dell'arrivo, ore 13:00","all",
-`Hii [NOME]! Today's the day! 🎉
+   ["3","Oggi si entra: codici visibili nella guida","Giorno dell'arrivo, ore 13:00","all",
+`Hii {{GuestFirstName}}! Today's the day! 🎉
 
-Here's your personal link to get in: the access codes are already inside 🗝️👇
-${codeLink(casa)}
+From today, the access codes are visible inside your guide 🗝️👇
+${G}
 
-Please open the guide from this link and tap "Check-in": you'll find every step with a photo, from the street to the apartment door. It only takes a few minutes 😊
+Please open it from this link and tap "Check-in": you'll find every step with a photo, from the street to the apartment door. It only takes a few minutes 😊
 The apartment will be ready from 3 PM.
 ${lat ? `
 ‼️ Before going up, please read the 3 golden rules at the top of the Check-in page (elevator, keys and doors): they're really important for us and for the neighbours 🙏
@@ -1654,7 +1654,7 @@ ${lat ? `
 If you get stuck at any point, call or message me 👉 ${WA_FABIO}
 Welcome to Rome! 🇮🇹`],
    ["4","Benvenuti in casa","Giorno dell'arrivo, ore 20:00","all",
-`Hii [NOME]! I hope you've settled in well 😊🏠
+`Hii {{GuestFirstName}}! I hope you've settled in well 😊🏠
 
 Everything about the apartment (Wi-Fi, where to find things, how the house works) is in your guide 👇
 ${G}#casa
@@ -1665,7 +1665,7 @@ ${lat ? `
 
 Enjoy your first evening in Rome! ✨`],
    ["5","Consigli su Roma","1 giorno dopo l'arrivo, ore 11:00","all",
-`Hii [NOME]! ☀️ Ready to explore?
+`Hii {{GuestFirstName}}! ☀️ Ready to explore?
 
 In the guide you'll find our favourite walks, stop by stop, and where to buy official tickets 👇
 ${G}#itinerari
@@ -1675,7 +1675,7 @@ ${G}#mangiare
 
 Have a wonderful day! 😊`],
    ["6a","Check-out · Airbnb","1 giorno prima della partenza, ore 18:00","abn",
-`Hii [NOME]! 😊 I hope you're having a great time in Rome!
+`Hii {{GuestFirstName}}! 😊 I hope you're having a great time in Rome!
 
 Just a reminder: tomorrow check-out will be by 10 AM 🕙, because a few hours later the next guests will arrive.
 Before leaving you'll:
@@ -1691,7 +1691,7 @@ ${G}#checkout
 
 Thank you so much! 🙏`],
    ["6b","Check-out · Booking e diretti (con tassa)","1 giorno prima della partenza, ore 18:00","bkg",
-`Hii [NOME]! 😊 I hope you're having a great time in Rome!
+`Hii {{GuestFirstName}}! 😊 I hope you're having a great time in Rome!
 
 Just a reminder: tomorrow check-out will be by 10 AM 🕙, because a few hours later the next guests will arrive.
 Before leaving you'll:
@@ -1708,7 +1708,7 @@ ${G}#checkout
 
 Thank you so much! 🙏`],
    ["7","Grazie e recensione","1 giorno dopo la partenza, ore 11:00","all",
-`Hii [NOME]! Thank you so much for staying with us 🙏😊
+`Hii {{GuestFirstName}}! Thank you so much for staying with us 🙏😊
 We hope you loved Rome and the apartment!
 
 If you have a minute, a Google review would mean a lot to us ⭐👇
@@ -1720,13 +1720,13 @@ Have a safe trip home! ✈️`]
   ],
   it: [
    ["1","Alla conferma della prenotazione","Subito dopo la prenotazione (0 giorni dopo)","all",
-`Ciao [NOME]! 😊
+`Ciao {{GuestFirstName}}! 😊
 Grazie mille per aver prenotato ${H}, non vediamo l'ora di accoglierti a Roma! 🇮🇹
 
 Ecco la guida digitale dell'appartamento, con tutto quello che ti servirà 📲👇
 ${G}
 
-🗝️ Il check-in sarà dalle 15:00 e sarà un self check-in: non c'è una reception, quindi entrerete in autonomia seguendo le foto della guida, passo passo. Il giorno dell'arrivo ti manderò il tuo link personale con i codici di accesso.
+🗝️ Il check-in sarà dalle 15:00 e sarà un self check-in: non c'è una reception, quindi entrerete in autonomia seguendo le foto della guida, passo passo. Il giorno dell'arrivo i codici di accesso compariranno in questa stessa guida.
 🕙 Il check-out sarà entro le 10:00.
 
 Per preparare tutto, mandami su WhatsApp 👉 ${WA_FABIO}
@@ -1736,7 +1736,7 @@ Per preparare tutto, mandami su WhatsApp 👉 ${WA_FABIO}
 Per qualsiasi altra cosa sono qui! 😊
 Fabio · JFM`],
    ["2","Come arrivare","3 giorni prima dell'arrivo, ore 10:00","all",
-`Ciao [NOME]! 😊 Mancano pochi giorni! ✈️
+`Ciao {{GuestFirstName}}! 😊 Mancano pochi giorni! ✈️
 
 Ecco come arrivare in appartamento dall'aeroporto o dalla stazione, con tempi e prezzi 👇
 ${G}#trasporti
@@ -1747,13 +1747,13 @@ Se non l'hai ancora fatto, mandami su WhatsApp l'orario di arrivo e le foto dei 
 📌 La casa sarà pronta dalle 15:00: se arrivate prima fammelo sapere e vediamo insieme cosa si può fare 😉
 
 A presto!`],
-   ["3","Link personale con i codici","Giorno dell'arrivo, ore 13:00","all",
-`Ciao [NOME]! Ci siamo! 🎉
+   ["3","Oggi si entra: codici visibili nella guida","Giorno dell'arrivo, ore 13:00","all",
+`Ciao {{GuestFirstName}}! Ci siamo! 🎉
 
-Ecco il tuo link personale per entrare: i codici di accesso sono già dentro 🗝️👇
-${codeLink(casa)}
+Da oggi i codici di accesso sono visibili nella tua guida 🗝️👇
+${G}
 
-Apri la guida da questo link e tocca "Check-in": troverai ogni passaggio con una foto, dalla strada fino alla porta di casa. Ci vorranno pochi minuti 😊
+Aprila da questo link e tocca "Check-in": troverai ogni passaggio con una foto, dalla strada fino alla porta di casa. Ci vorranno pochi minuti 😊
 La casa sarà pronta dalle 15:00.
 ${lat ? `
 ‼️ Prima di salire, leggete le 3 regole d'oro in cima alla pagina Check-in (ascensore, chiavi e porte): per noi e per i vicini sono davvero importanti 🙏
@@ -1763,7 +1763,7 @@ ${lat ? `
 Se vi bloccate in qualsiasi momento, chiamami o scrivimi 👉 ${WA_FABIO}
 Benvenuti a Roma! 🇮🇹`],
    ["4","Benvenuti in casa","Giorno dell'arrivo, ore 20:00","all",
-`Ciao [NOME]! Spero vi siate sistemati bene 😊🏠
+`Ciao {{GuestFirstName}}! Spero vi siate sistemati bene 😊🏠
 
 Tutto sulla casa (Wi-Fi, dove trovare le cose, come funziona) è nella vostra guida 👇
 ${G}#casa
@@ -1774,7 +1774,7 @@ ${lat ? `
 
 Buona prima serata a Roma! ✨`],
    ["5","Consigli su Roma","1 giorno dopo l'arrivo, ore 11:00","all",
-`Ciao [NOME]! ☀️ Pronti a esplorare?
+`Ciao {{GuestFirstName}}! ☀️ Pronti a esplorare?
 
 Nella guida trovate le nostre passeggiate preferite, tappa per tappa, e dove comprare i biglietti ufficiali 👇
 ${G}#itinerari
@@ -1784,7 +1784,7 @@ ${G}#mangiare
 
 Buona giornata! 😊`],
    ["6a","Check-out · Airbnb","1 giorno prima della partenza, ore 18:00","abn",
-`Ciao [NOME]! 😊 Spero che vi stiate godendo Roma!
+`Ciao {{GuestFirstName}}! 😊 Spero che vi stiate godendo Roma!
 
 Un promemoria: domani il check-out sarà entro le 10:00 🕙, perché qualche ora dopo arriveranno i prossimi ospiti.
 Prima di uscire:
@@ -1800,7 +1800,7 @@ ${G}#checkout
 
 Grazie mille! 🙏`],
    ["6b","Check-out · Booking e diretti (con tassa)","1 giorno prima della partenza, ore 18:00","bkg",
-`Ciao [NOME]! 😊 Spero che vi stiate godendo Roma!
+`Ciao {{GuestFirstName}}! 😊 Spero che vi stiate godendo Roma!
 
 Un promemoria: domani il check-out sarà entro le 10:00 🕙, perché qualche ora dopo arriveranno i prossimi ospiti.
 Prima di uscire:
@@ -1817,7 +1817,7 @@ ${G}#checkout
 
 Grazie mille! 🙏`],
    ["7","Grazie e recensione","1 giorno dopo la partenza, ore 11:00","all",
-`Ciao [NOME]! Grazie di cuore per aver soggiornato da noi 🙏😊
+`Ciao {{GuestFirstName}}! Grazie di cuore per aver soggiornato da noi 🙏😊
 Speriamo che Roma e la casa vi siano piaciute!
 
 Se hai un minuto, una recensione su Google per noi vale tantissimo ⭐👇
@@ -1829,13 +1829,13 @@ Buon rientro! ✈️`]
   ],
   es: [
    ["1","Alla conferma della prenotazione","Subito dopo la prenotazione (0 giorni dopo)","all",
-`¡Holaa [NOMBRE]! 😊
+`¡Holaa {{GuestFirstName}}! 😊
 Muchísimas gracias por reservar ${H}, ¡tenemos muchas ganas de recibiros en Roma! 🇮🇹
 
 Aquí tienes la guía digital del apartamento, con todo lo que vais a necesitar 📲👇
 ${G}
 
-🗝️ El check-in será desde las 15:00 y será un self check-in: no hay recepción, así que entraréis por vuestra cuenta siguiendo las fotos de la guía, paso a paso. El día de llegada te mandaré tu enlace personal con los códigos de acceso.
+🗝️ El check-in será desde las 15:00 y será un self check-in: no hay recepción, así que entraréis por vuestra cuenta siguiendo las fotos de la guía, paso a paso. El día de llegada los códigos de acceso aparecerán en esta misma guía.
 🕙 El check-out será antes de las 10:00.
 
 Para tenerlo todo listo, mándame por WhatsApp 👉 ${WA_FABIO}
@@ -1845,7 +1845,7 @@ Para tenerlo todo listo, mándame por WhatsApp 👉 ${WA_FABIO}
 Para cualquier otra cosa, ¡aquí estoy! 😊
 Fabio · JFM`],
    ["2","Come arrivare","3 giorni prima dell'arrivo, ore 10:00","all",
-`¡Holaa [NOMBRE]! 😊 ¡Quedan pocos días! ✈️
+`¡Holaa {{GuestFirstName}}! 😊 ¡Quedan pocos días! ✈️
 
 Aquí tienes cómo llegar al apartamento desde el aeropuerto o la estación, con tiempos y precios 👇
 ${G}#trasporti
@@ -1856,13 +1856,13 @@ Si aún no lo has hecho, mándame por WhatsApp la hora de llegada y las fotos de
 📌 La casa estará lista desde las 15:00: si llegáis antes, avísame y vemos juntos qué se puede hacer 😉
 
 ¡Hasta pronto!`],
-   ["3","Link personale con i codici","Giorno dell'arrivo, ore 13:00","all",
-`¡Holaa [NOMBRE]! ¡Ya llega el día! 🎉
+   ["3","Oggi si entra: codici visibili nella guida","Giorno dell'arrivo, ore 13:00","all",
+`¡Holaa {{GuestFirstName}}! ¡Ya llega el día! 🎉
 
-Aquí tienes tu enlace personal para entrar: los códigos de acceso ya están dentro 🗝️👇
-${codeLink(casa)}
+Desde hoy los códigos de acceso se ven en tu guía 🗝️👇
+${G}
 
-Abre la guía desde este enlace y toca "Check-in": encontrarás cada paso con una foto, de la calle a la puerta de casa. Se tarda pocos minutos 😊
+Ábrela desde este enlace y toca "Check-in": encontrarás cada paso con una foto, de la calle a la puerta de casa. Se tarda pocos minutos 😊
 La casa estará lista desde las 15:00.
 ${lat ? `
 ‼️ Antes de subir, leed las 3 reglas de oro al principio de la página Check-in (ascensor, llaves y puertas): para nosotros y para los vecinos son muy importantes 🙏
@@ -1872,7 +1872,7 @@ ${lat ? `
 Si os atascáis en cualquier momento, llámame o escríbeme 👉 ${WA_FABIO}
 ¡Bienvenidos a Roma! 🇮🇹`],
    ["4","Benvenuti in casa","Giorno dell'arrivo, ore 20:00","all",
-`¡Holaa [NOMBRE]! Espero que os hayáis instalado bien 😊🏠
+`¡Holaa {{GuestFirstName}}! Espero que os hayáis instalado bien 😊🏠
 
 Todo sobre la casa (wifi, dónde está cada cosa, cómo funciona) está en vuestra guía 👇
 ${G}#casa
@@ -1883,7 +1883,7 @@ ${lat ? `
 
 ¡Disfrutad de vuestra primera noche en Roma! ✨`],
    ["5","Consigli su Roma","1 giorno dopo l'arrivo, ore 11:00","all",
-`¡Holaa [NOMBRE]! ☀️ ¿Listos para explorar?
+`¡Holaa {{GuestFirstName}}! ☀️ ¿Listos para explorar?
 
 En la guía tenéis nuestros paseos favoritos, parada a parada, y dónde comprar las entradas oficiales 👇
 ${G}#itinerari
@@ -1893,7 +1893,7 @@ ${G}#mangiare
 
 ¡Que tengáis un día precioso! 😊`],
    ["6a","Check-out · Airbnb","1 giorno prima della partenza, ore 18:00","abn",
-`¡Holaa [NOMBRE]! 😊 ¡Espero que estéis disfrutando de Roma!
+`¡Holaa {{GuestFirstName}}! 😊 ¡Espero que estéis disfrutando de Roma!
 
 Un recordatorio: mañana el check-out será antes de las 10:00 🕙, porque unas horas después llegarán los próximos huéspedes.
 Antes de salir:
@@ -1909,7 +1909,7 @@ ${G}#checkout
 
 ¡Muchísimas gracias! 🙏`],
    ["6b","Check-out · Booking e diretti (con tassa)","1 giorno prima della partenza, ore 18:00","bkg",
-`¡Holaa [NOMBRE]! 😊 ¡Espero que estéis disfrutando de Roma!
+`¡Holaa {{GuestFirstName}}! 😊 ¡Espero que estéis disfrutando de Roma!
 
 Un recordatorio: mañana el check-out será antes de las 10:00 🕙, porque unas horas después llegarán los próximos huéspedes.
 Antes de salir:
@@ -1926,7 +1926,7 @@ ${G}#checkout
 
 ¡Muchísimas gracias! 🙏`],
    ["7","Grazie e recensione","1 giorno dopo la partenza, ore 11:00","all",
-`¡Holaa [NOMBRE]! Muchísimas gracias por alojaros con nosotros 🙏😊
+`¡Holaa {{GuestFirstName}}! Muchísimas gracias por alojaros con nosotros 🙏😊
 ¡Esperamos que os hayan encantado Roma y la casa!
 
 Si tienes un minuto, una reseña en Google nos ayudaría muchísimo ⭐👇
@@ -2020,7 +2020,7 @@ for (const casa of casas) {
       section: "inhouse",
       casa, lang, piatt: "all",
       title: `Info in-house`,
-      vars: "[NOME] · parti opzionali in [CORSIVO] da includere/escludere",
+      vars: "[NOME], [NUMERO PRENOTAZIONE] · parti opzionali in [CORSIVO] da includere/escludere",
       text: inhouseText[casa][lang]
     });
     // Checkout
@@ -2080,17 +2080,17 @@ for (const casa of casas) {
       section: "guide",
       casa, lang, piatt: "all",
       title: `Link guida ospite digitale`,
-      vars: "[NOME]",
-      text: guideTexts[lang](GUIDE_URL[casa])
+      vars: "[NOME], [NUMERO PRENOTAZIONE]",
+      text: guideTexts[lang](GUIDE_URL[casa] + "?b=[NUMERO PRENOTAZIONE]")
     });
     // Link guida con codici (da incollare nel messaggio Lodgify del giorno di arrivo)
     pushUnique({
       id: `guidecode-${casa}-${lang}`,
       section: "guide",
       casa, lang, piatt: "all",
-      title: `Link guida con codici (giorno di arrivo)`,
+      title: `Codici di accesso (solo per uso interno, sblocca con il PIN)`,
       vars: casa === "lat" ? "[CODICE KEYBOX]" : "[CODICE KEYBOX], [CODICE PORTONE]",
-      text: codeLink(casa) + "\n\n(Il link porta alla home della guida; i codici compaiono nelle slide del Check-in. Senza la parte ?k=… la guida non mostra i codici.)"
+      text: codesText(casa) + "\n\n(Agli ospiti i codici arrivano da soli nella guida, solo durante il soggiorno. Usali qui solo per emergenze.)"
     });
     // Lodgify: messaggi automatici in ordine
     lodgifyMsgs(casa, lang).forEach(function(m){
@@ -2099,7 +2099,7 @@ for (const casa of casas) {
         section: "lodgify",
         casa, lang, piatt: m[3],
         title: `${m[0]} · ${m[1]} — ⏱ ${m[2]}`,
-        vars: (lang === "es" ? "[NOMBRE]" : "[NOME]") + (m[0] === "3" ? (casa === "lat" ? ", [CODICE KEYBOX]" : ", [CODICE KEYBOX], [CODICE PORTONE]") : ""),
+        vars: "— (incolla così com'è in Lodgify: {{GuestFirstName}} e {{BookingId}} li compila Lodgify)",
         text: m[4]
       });
     });
