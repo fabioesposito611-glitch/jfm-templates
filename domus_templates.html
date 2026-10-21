@@ -31,6 +31,7 @@
   .tag-es { background: #fff8e1; color: #f57f17; }
   .tag-lat { background: #f3e5f5; color: #6a1b9a; }
   .tag-col { background: #fce4ec; color: #880e4f; }
+  .tag-both { background: #fff3e0; color: #b23c17; }
   .chevron { font-size: 18px; color: #888; transition: transform 0.2s; }
   .chevron.open { transform: rotate(180deg); }
   .card-body { display: none; padding: 0 16px 16px; }
@@ -1289,7 +1290,7 @@ var piattaforme = ["bkg","abn"];
 var knowns = [false, true];
 
 var arrivalLabels = { after15: "Arrivo dopo le 15:00", "13to15": "Arrivo 13:00–15:00", "1130to13": "Arrivo 11:30–13:00", before1130: "Arrivo prima delle 11:30", unknown: "Orario arrivo sconosciuto" };
-var casaLabels = { lat: "Laterani", col: "Colosseum" };
+var casaLabels = { lat: "Laterani", col: "Colosseum", both: "Entrambe le case" };
 var langLabels = { en: "🇬🇧 EN", it: "🇮🇹 IT", es: "🇪🇸 ES" };
 var piattLabels = { bkg: "Booking", abn: "Airbnb" };
 
@@ -1606,8 +1607,8 @@ var PID_GOOGLE = { lat: "ChIJx2THlBphLxMRUs6Aznzy12g", col: "ChIJ1dGmxCZhLxMR4xT
 var HOUSE_NAME = { lat: "Domus Laterani", col: "Domus Colosseum" };
 function codesText(casa){ return casa === "lat" ? "🗝️ Key box: [CODICE KEYBOX]" : "🚪 Portone: [CODICE PORTONE] + freccia su ⬆️\n🗝️ Key box: [CODICE KEYBOX]"; }
 function lodgifyMsgs(casa, L){
-  var G = GUIDE_URL[casa] + "?b={{BookingId}}", H = HOUSE_NAME[casa], lat = casa === "lat";
-  var rev = "https://search.google.com/local/writereview?placeid=" + PID_GOOGLE[casa];
+  var G = "https://guida.jfmitalia.com/?b={{BookingId}}", H = "{{HouseName}}";
+  var rev = "https://guida.jfmitalia.com/recensione/?b={{BookingId}}";
   var T = {
   en: [
    ["1","Alla conferma della prenotazione","Subito dopo la prenotazione (0 giorni dopo)","all",
@@ -1646,11 +1647,9 @@ ${G}
 
 Please open it from this link and tap "Check-in": you'll find every step with a photo, from the street to the apartment door. It only takes a few minutes 😊
 The apartment will be ready from 3 PM.
-${lat ? `
-‼️ Before going up, please read the 3 golden rules at the top of the Check-in page (elevator, keys and doors): they're really important for us and for the neighbours 🙏
-` : `
-🛗 If you take the elevator, please make sure the doors are properly closed when you get out 🙏
-`}
+
+‼️ Before going up, please read the notes highlighted in red on the Check-in page (elevator, keys and doors): they're really important for us and for the neighbours 🙏
+
 If you get stuck at any point, call or message me 👉 ${WA_FABIO}
 Welcome to Rome! 🇮🇹`],
    ["4","Benvenuti in casa","Giorno dell'arrivo, ore 20:00","all",
@@ -1658,9 +1657,9 @@ Welcome to Rome! 🇮🇹`],
 
 Everything about the apartment (Wi-Fi, where to find things, how the house works) is in your guide 👇
 ${G}#casa
-${lat ? `
-🛗 A gentle reminder: every time you use the elevator, close the doors properly and check the red light outside is off. And please pull the apartment doors until you hear the click 🙏
-` : ""}
+
+🛗 A gentle reminder: every time you use the elevator, close the doors properly, and pull the apartment door until you hear the click 🙏
+
 🪪 One last thing: if you haven't sent them yet, please send me a photo of an ID for each guest by tomorrow, it's required by Italian law 🙏 👉 ${WA_FABIO}
 
 Enjoy your first evening in Rome! ✨`],
@@ -1755,11 +1754,9 @@ ${G}
 
 Aprila da questo link e tocca "Check-in": troverai ogni passaggio con una foto, dalla strada fino alla porta di casa. Ci vorranno pochi minuti 😊
 La casa sarà pronta dalle 15:00.
-${lat ? `
-‼️ Prima di salire, leggete le 3 regole d'oro in cima alla pagina Check-in (ascensore, chiavi e porte): per noi e per i vicini sono davvero importanti 🙏
-` : `
-🛗 Se prendete l'ascensore, uscendo controllate che le porte siano chiuse bene 🙏
-`}
+
+‼️ Prima di salire, leggete gli avvisi in rosso nella pagina Check-in (ascensore, chiavi e porte): per noi e per i vicini sono davvero importanti 🙏
+
 Se vi bloccate in qualsiasi momento, chiamami o scrivimi 👉 ${WA_FABIO}
 Benvenuti a Roma! 🇮🇹`],
    ["4","Benvenuti in casa","Giorno dell'arrivo, ore 20:00","all",
@@ -1767,9 +1764,9 @@ Benvenuti a Roma! 🇮🇹`],
 
 Tutto sulla casa (Wi-Fi, dove trovare le cose, come funziona) è nella vostra guida 👇
 ${G}#casa
-${lat ? `
-🛗 Un piccolo promemoria: ogni volta che usate l'ascensore chiudete bene le porte e controllate che la luce rossa fuori sia spenta. E tirate le porte di casa finché non sentite lo scatto 🙏
-` : ""}
+
+🛗 Un piccolo promemoria: ogni volta che usate l'ascensore chiudete bene le porte, e tirate la porta di casa finché non sentite lo scatto 🙏
+
 🪪 Un'ultima cosa: se non l'hai ancora fatto, mandami entro domani la foto di un documento per ogni ospite, lo richiede la legge italiana 🙏 👉 ${WA_FABIO}
 
 Buona prima serata a Roma! ✨`],
@@ -1864,11 +1861,9 @@ ${G}
 
 Ábrela desde este enlace y toca "Check-in": encontrarás cada paso con una foto, de la calle a la puerta de casa. Se tarda pocos minutos 😊
 La casa estará lista desde las 15:00.
-${lat ? `
-‼️ Antes de subir, leed las 3 reglas de oro al principio de la página Check-in (ascensor, llaves y puertas): para nosotros y para los vecinos son muy importantes 🙏
-` : `
-🛗 Si cogéis el ascensor, al salir comprobad que las puertas queden bien cerradas 🙏
-`}
+
+‼️ Antes de subir, leed los avisos en rojo de la página Check-in (ascensor, llaves y puertas): para nosotros y para los vecinos son muy importantes 🙏
+
 Si os atascáis en cualquier momento, llámame o escríbeme 👉 ${WA_FABIO}
 ¡Bienvenidos a Roma! 🇮🇹`],
    ["4","Benvenuti in casa","Giorno dell'arrivo, ore 20:00","all",
@@ -1876,9 +1871,9 @@ Si os atascáis en cualquier momento, llámame o escríbeme 👉 ${WA_FABIO}
 
 Todo sobre la casa (wifi, dónde está cada cosa, cómo funciona) está en vuestra guía 👇
 ${G}#casa
-${lat ? `
-🛗 Un pequeño recordatorio: cada vez que uséis el ascensor cerrad bien las puertas y comprobad que la luz roja de fuera esté apagada. Y tirad de las puertas de casa hasta oír el clic 🙏
-` : ""}
+
+🛗 Un pequeño recordatorio: cada vez que uséis el ascensor cerrad bien las puertas, y tirad de la puerta de casa hasta oír el clic 🙏
+
 🪪 Una última cosa: si aún no lo has hecho, mándame antes de mañana una foto de un documento de cada huésped, lo exige la ley italiana 🙏 👉 ${WA_FABIO}
 
 ¡Disfrutad de vuestra primera noche en Roma! ✨`],
@@ -2093,11 +2088,11 @@ for (const casa of casas) {
       text: codesText(casa) + "\n\n(Agli ospiti i codici arrivano da soli nella guida, solo durante il soggiorno. Usali qui solo per emergenze.)"
     });
     // Lodgify: messaggi automatici in ordine
-    lodgifyMsgs(casa, lang).forEach(function(m){
+    if (casa === "lat") lodgifyMsgs(casa, lang).forEach(function(m){
       pushUnique({
-        id: `lodgify-${casa}-${lang}-${m[0]}`,
+        id: `lodgify-both-${lang}-${m[0]}`,
         section: "lodgify",
-        casa, lang, piatt: m[3],
+        casa: "both", lang, piatt: m[3],
         title: `${m[0]} · ${m[1]} — ⏱ ${m[2]}`,
         vars: "— (incolla così com'è in Lodgify: {{GuestFirstName}} e {{BookingId}} li compila Lodgify)",
         text: m[4]
@@ -2139,7 +2134,7 @@ var filterCasa = "all", filterLingua = "all", filterSection = "all", filterPiatt
 
 function getFiltered() {
   return templates.filter(t => {
-    if (filterCasa !== "all" && t.casa !== filterCasa) return false;
+    if (filterCasa !== "all" && t.casa !== filterCasa && t.casa !== "both") return false;
     if (filterLingua !== "all" && t.lang !== filterLingua) return false;
     if (filterSection !== "all" && t.section !== filterSection) return false;
     if (filterPiatt !== "all" && t.piatt !== "all" && t.piatt !== filterPiatt) return false;
@@ -2149,7 +2144,7 @@ function getFiltered() {
 
 var sectionOrder = ["lodgify","precheckin","docs_tax","guide","reminder","inhouse","checkout","luggage","tips_restaurants","tips_itinerary","location","warnings","ncc","garage"];
 var sectionTitles = {
-  lodgify: "L — 🤖 Lodgify · messaggi automatici (in ordine di invio)",
+  lodgify: "L — 🤖 Lodgify · messaggi automatici (in ordine di invio · validi per entrambe le case)",
   precheckin: "A — Pre check-in",
   docs_tax: "A2 — 🪪 Promemoria passaporti & tassa",
   guide: "A3 — 📲 Guida ospite digitale",

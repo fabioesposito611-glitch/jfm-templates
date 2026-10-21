@@ -34,6 +34,12 @@ async function propertyKey(env, propertyId) {
   }
   return PROPS[propertyId] || null;
 }
+// Da numero di prenotazione a casa ("lat"/"col"), senza controllare le date
+export async function houseOf(env, bookingId) {
+  if (!/^\d{1,12}$/.test(String(bookingId || "")) || !env.LODGIFY_KEY) return null;
+  try { const b = await lodgify(env, "/v2/reservations/bookings/" + bookingId); return await propertyKey(env, b.property_id); }
+  catch (e) { return null; }
+}
 // Restituisce {phase:"before"|"during"|"after"|"invalid", arrival, departure}
 export async function stay(env, bookingId, house) {
   if (!/^\d{1,12}$/.test(String(bookingId || ""))) return { phase: "invalid" };

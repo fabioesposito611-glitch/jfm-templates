@@ -1,9 +1,20 @@
 // Le guide si aprono solo con una prenotazione attiva (o come proprietario). Altrimenti: pagina di saluto.
-import { HOUSES, cookies, isAdmin, stay } from "./_lib.js";
+import { HOUSES, cookies, isAdmin, stay, houseOf } from "./_lib.js";
+const SLUG = { lat: "laterani", col: "colosseum" };
+const PID = { lat: "ChIJx2THlBphLxMRUs6Aznzy12g", col: "ChIJ1dGmxCZhLxMR4xTyDV0QUow" };
 
 export async function onRequest(ctx) {
   const { request, env } = ctx;
   const url = new URL(request.url);
+  // link universale dei messaggi Lodgify: guida.jfmitalia.com/?b=NUMERO -> la casa giusta
+  const bRoot = url.searchParams.get("b");
+  if ((url.pathname === "/" || url.pathname === "/recensione" || url.pathname === "/recensione/") && bRoot) {
+    const h = await houseOf(env, bRoot);
+    if (!h) return farewell("");
+    if (url.pathname.startsWith("/recensione")) return Response.redirect("https://search.google.com/local/writereview?placeid=" + PID[h], 302);
+    return new Response(null, { status: 302, headers: { Location: "/" + SLUG[h] + "/?b=" + bRoot + url.hash, "Cache-Control": "no-store" } });
+  }
+  if (url.pathname === "/") return farewell("");
   const m = url.pathname.match(/^\/(laterani|colosseum)(\/|$)/);
   if (!m) return ctx.next();
   const slug = m[1], house = HOUSES[slug];
@@ -34,5 +45,5 @@ export async function onRequest(ctx) {
   return out;
 }
 function farewell(slug) {
-  return new Response(null, { status: 302, headers: { Location: "/grazie/?h=" + slug, "Cache-Control": "no-store" } });
+  return new Response(null, { status: 302, headers: { Location: "/grazie/" + (slug ? "?h=" + slug : ""), "Cache-Control": "no-store" } });
 }
