@@ -482,6 +482,16 @@ body{font-size:17px}
 .pull{transform-origin:45px 45px;animation:pull 1.6s ease-in-out infinite}
 @keyframes pull{0%{transform:translate(-8px,-8px) scale(.75);opacity:0}20%{opacity:1}70%{transform:translate(8px,8px) scale(1.15);opacity:1}100%{transform:translate(8px,8px) scale(1.15);opacity:0}}
 @media (prefers-reduced-motion:reduce){.spin,.bob,.pull{animation:none}}
+.golden{background:var(--red-soft);border:2px solid var(--red);border-radius:var(--r);padding:16px;margin-bottom:22px}
+.golden h3{display:flex;align-items:center;gap:9px;font-size:19px;font-weight:800;color:var(--red)}
+.golden h3 svg{width:24px;height:24px}
+.golden>p{margin:6px 0 10px}
+.gold{display:flex;gap:12px;align-items:flex-start;background:var(--card);border-radius:14px;padding:12px;margin-top:8px}
+.gn{position:relative;width:50px;height:50px;border-radius:15px;background:var(--red);color:#fff;display:grid;place-items:center;flex:none}
+.gn svg{width:26px;height:26px}
+.gn i{position:absolute;top:-6px;left:-6px;width:24px;height:24px;border-radius:50%;background:var(--ink);color:#fff;font:800 13px/20px var(--f-display);text-align:center;font-style:normal;border:2px solid #fff}
+.gold>div>b{display:block;font-size:16.5px;margin-bottom:3px}
+.gold p{margin:0;font-size:15px}
 </style>
 
 <div class="app">
@@ -727,7 +737,7 @@ const HOUSE = {
     ]},
     { title:{it:"Percorso A · Ascensore",en:"Route A · Elevator",es:"Ruta A · Ascensor"}, path:"A", frames:[
       {img:"c_lift1_a", t:{it:"Entrati nell'androne, troverete l'ascensore <b>sulla destra</b>.",en:"Once in the entrance hall, you'll find the elevator <b>on the right</b>.",es:"Ya en el zaguán, encontraréis el ascensor <b>a la derecha</b>."}},
-      {img:"c_lift2", t:{it:"Salite al <b>2° piano</b>. Una cortesia: uscendo <b>chiudete bene le porte</b>, altrimenti l'ascensore resta bloccato per gli altri condomini.",en:"Go up to the <b>2nd floor</b>. A small favour: <b>close the doors properly</b> when you get out, otherwise the elevator stays blocked for the other residents.",es:"Subid al <b>2.º piso</b>. Un favor: al salir <b>cerrad bien las puertas</b>, si no el ascensor se queda bloqueado para los vecinos."}},
+      {img:"c_lift2", t:{it:"Salite al <b>2° piano</b>. <b>Importante:</b> uscendo controllate che le porte dell'ascensore siano <b>chiuse bene</b>, altrimenti l'ascensore resta bloccato per tutti gli altri residenti del palazzo.",en:"Go up to the <b>2nd floor</b>. <b>Important:</b> when you get out, check the elevator doors are <b>properly closed</b>, otherwise the elevator stays blocked for all the other residents.",es:"Subid al <b>2.º piso</b>. <b>Importante:</b> al salir comprobad que las puertas del ascensor estén <b>bien cerradas</b>, si no el ascensor se queda bloqueado para todos los demás vecinos."}},
       {img:"c_door_a", t:{it:"Uscendo dall'ascensore, la porta di casa sarà quella <b>a sinistra</b>. Sotto vedete come prendere le chiavi.",en:"When you step out of the elevator, the apartment door will be the one <b>on the left</b>. Below you'll see how to get the keys.",es:"Al salir del ascensor, la puerta de casa será la de <b>la izquierda</b>. Abajo veréis cómo coger las llaves."}}
     ]},
     { title:{it:"Percorso B · Scale",en:"Route B · Stairs",es:"Ruta B · Escalera"}, path:"B", warn:{it:"<b>Al 1° piano fate attenzione:</b> davanti a voi c'è il passaggio per la scala B, che porta da un'altra parte. Non andate dritto: <b>continuate a salire a destra</b> fino al 2° piano.",en:"<b>Careful on the 1st floor:</b> straight ahead there's the way to staircase B, which leads somewhere else. Don't go straight on: <b>keep going up to the right</b> until the 2nd floor.",es:"<b>Atención en el 1.er piso:</b> enfrente está el paso a la escalera B, que lleva a otro sitio. No sigáis recto: <b>seguid subiendo a la derecha</b> hasta el 2.º piso."}, frames:[
@@ -1059,8 +1069,15 @@ function frameHTML(f,n){
       ${f.video?video(f.video,f.vlabel):""}
     </div>`;
 }
+const MICON={ lift:svg('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 8l3-3 3 3M9 16l3 3 3-3"/>'), key:IC.key, door:IC.door, boiler:FIC.boiler };
+function goldenHTML(){
+  if(!HOUSE.golden) return "";
+  return `<section class="golden"><h3>${WARN}<span>${L({it:"Le 3 regole d'oro di questa casa",en:"The 3 golden rules of this apartment",es:"Las 3 reglas de oro de esta casa"})}</span></h3>
+    <p class="small">${L({it:"Sono poche, ma per noi e per i vicini del palazzo sono davvero importanti. Grazie!",en:"There are just a few, but they really matter to us and to the neighbours. Thank you!",es:"Son pocas, pero para nosotros y para los vecinos son muy importantes. ¡Gracias!"})}</p>
+    ${HOUSE.golden.map((g,i)=>`<div class="gold"><span class="gn">${MICON[g.ic]||IC.info}<i>${i+1}</i></span><div><b>${L(g.t)}</b><p>${L(g.d)}</p></div></div>`).join("")}</section>`;
+}
 function vArrivo(){
-  const G=HOUSE.arrival; let out="", step=0, i=0;
+  const G=HOUSE.arrival; let out=goldenHTML(), step=0, i=0;
   while(i<G.length){
     const g=G[i];
     if(g.path){
@@ -1089,7 +1106,7 @@ function vArrivo(){
 function vCasa(){
   const h=HOUSE;
   const withImg=h.find.filter(f=>f.img), noImg=h.find.filter(f=>!f.img);
-  return `${h.good?h3(WARN,{it:"Un paio di cose utili",en:"A couple of useful things",es:"Un par de cosas útiles"})+`<div class="gcards">${L(h.good).map((x,i)=>`<div class="gcard"><span class="gi">${[FIC.boiler,XI.toilet,IC.door][i]||IC.info}</span><p>${x}</p></div>`).join("")}</div>`:""}
+  return `${goldenHTML()}${h.good?h3(WARN,{it:"Un paio di cose utili",en:"A couple of useful things",es:"Un par de cosas útiles"})+`<div class="gcards">${L(h.good).map((x,i)=>`<div class="gcard"><span class="gi">${[FIC.boiler,XI.toilet,IC.door][i]||IC.info}</span><p>${x}</p></div>`).join("")}</div>`:""}
     ${h3(XI.search,{it:"Dove trovo…",en:"Where is…",es:"Dónde está…"})}
     <div class="finds2">${withImg.map(f=>`<article class="find2">${zoomImg(f.img,"ph")}<div><h4>${FIC[f.ic]||""}<span>${L(f.t)}</span></h4><p>${L(f.w)}</p></div></article>`).join("")}</div>
     ${noImg.length?`<div class="finds3">${noImg.map(f=>`<div class="find3"><span class="fci">${FIC[f.ic]||IC.home}</span><div><b>${L(f.t)}</b><span>${L(f.w)}</span></div></div>`).join("")}</div>`:""}`;
