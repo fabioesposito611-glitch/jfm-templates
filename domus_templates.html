@@ -43,6 +43,9 @@
   .vars strong { color: #1a1a1a; }
   .empty { text-align: center; padding: 3rem; color: #888; font-size: 14px; }
   .divider { height: 1px; background: #e8e6e0; margin: 6px 0; }
+.pinbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:1100px;margin:10px auto 0;padding:8px 14px;border-radius:10px;background:#fff3ed;border:1px solid #f3c7b4;font-size:14px}
+.pinbar input{width:110px;padding:6px 8px;border:1px solid #ccc;border-radius:8px;font-size:15px}
+.pinbar button{padding:6px 12px;border:0;border-radius:8px;background:#E9572A;color:#fff;font-weight:700;cursor:pointer}
 </style>
 </head>
 <body>
@@ -98,6 +101,7 @@
   </div>
 </div>
 
+<div class="pinbar" id="pinbar"><span id="pinState">🔒 Codici nascosti</span><input id="pinIn" type="password" inputmode="numeric" autocomplete="off" placeholder="PIN" maxlength="12"><button id="pinBtn" type="button">Mostra codici</button></div>
 <div class="main" id="main"></div>
 
 <script>
@@ -2206,8 +2210,8 @@ function render() {
           <span class="chevron" id="chev-${t.id}">▾</span>
         </div>
         <div class="card-body" id="body-${t.id}">
-          ${t.vars && t.vars !== "—" ? `<div class="vars">✏️ <strong>Da compilare:</strong> ${t.vars}</div>` : ""}
-          <div class="template-text" id="txt-${t.id}">${escHtml(t.text)}</div>
+          ${(function(){ var v = t.vars || "—"; if (CODES) v = v.replace(/,? ?\[CODICE [A-Z]+\]/g,"").replace(/^, /,"") || "—"; return v !== "—" ? `<div class="vars">✏️ <strong>Da compilare:</strong> ${v}</div>` : ""; })()}
+          <div class="template-text" id="txt-${t.id}">${escHtml(fillCodes(t))}</div>
           <button class="copy-btn" id="btn-${t.id}" onclick="copyText('${t.id}')">📋 Copia testo</button>
         </div>
       </div>`;
@@ -2215,6 +2219,36 @@ function render() {
   }
   main.innerHTML = html;
 }
+
+/* ===== Codici protetti da PIN: nel file pubblico c'è solo la versione cifrata ===== */
+var CODES_BLOB = {"s": "RX149DuzVdr+ZcUjs9k0Bg==", "i": "MKCZN0kPvWZYQasw", "n": 600000, "c": "D/FsHVqDZcLTe/oyv10u37AfGfmRAv/E5AdeUY3wR9r1txAwmthiytpKABHg7P6Q+mx4qRRGsOCAgw0UHkxUZJbs+W85N5vhkd9Xgobl9vliQPcDWpC7pA=="};
+var CODES = null;
+try { CODES = JSON.parse(sessionStorage.getItem("jfm-codes") || "null"); } catch(e) {}
+function b64(s){ return Uint8Array.from(atob(s), function(c){ return c.charCodeAt(0); }); }
+async function unlockCodes(pin){
+  const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pin), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey({name:"PBKDF2", salt:b64(CODES_BLOB.s), iterations:CODES_BLOB.n, hash:"SHA-256"}, base, {name:"AES-GCM", length:256}, false, ["decrypt"]);
+  const plain = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64(CODES_BLOB.i)}, key, b64(CODES_BLOB.c));
+  return JSON.parse(new TextDecoder().decode(plain));
+}
+function fillCodes(t){
+  if (!CODES || !CODES[t.casa]) return t.text;
+  var c = CODES[t.casa];
+  return t.text.split("[CODICE KEYBOX]").join(c.keybox || "[CODICE KEYBOX]").split("[CODICE PORTONE]").join(c.portone || "[CODICE PORTONE]");
+}
+function pinUI(){
+  document.getElementById("pinState").textContent = CODES ? "🔓 Codici visibili in questa sessione" : "🔒 Codici nascosti";
+  document.getElementById("pinIn").style.display = CODES ? "none" : "";
+  document.getElementById("pinBtn").textContent = CODES ? "Nascondi" : "Mostra codici";
+}
+document.getElementById("pinBtn").addEventListener("click", async function(){
+  if (CODES) { CODES = null; try{sessionStorage.removeItem("jfm-codes");}catch(e){} pinUI(); render(); return; }
+  var pin = document.getElementById("pinIn").value.trim();
+  try { CODES = await unlockCodes(pin); try{sessionStorage.setItem("jfm-codes", JSON.stringify(CODES));}catch(e){} document.getElementById("pinIn").value=""; pinUI(); render(); }
+  catch(e) { document.getElementById("pinState").textContent = "❌ PIN errato"; }
+});
+document.getElementById("pinIn").addEventListener("keydown", function(e){ if (e.key === "Enter") document.getElementById("pinBtn").click(); });
+setTimeout(pinUI, 0);
 
 function escHtml(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -2230,7 +2264,7 @@ function toggle(id) {
 function copyText(id) {
   const t = templates.find(x => x.id === id);
   if (!t) return;
-  navigator.clipboard.writeText(t.text).then(() => {
+  navigator.clipboard.writeText(fillCodes(t)).then(() => {
     const btn = document.getElementById("btn-"+id);
     btn.textContent = "✅ Copiato!";
     btn.classList.add("copied");
