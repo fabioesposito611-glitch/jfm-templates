@@ -416,6 +416,57 @@ body{font-size:17px}
 /* foto del percorso intere: frecce e riquadri sempre visibili */
 .fwrap .zimg.ph{aspect-ratio:auto;background:#10141f}
 .fwrap .zimg.ph img{height:auto;max-height:64vh;object-fit:contain}
+/* ===== v5: icone e schemi ===== */
+.pic2{width:44px;height:44px;border-radius:13px;background:#E3F1EE;color:#1F7A6B;display:grid;place-items:center;flex:none}
+.pic2 svg{width:23px;height:23px}
+.pic2.bl{background:var(--blue-soft);color:var(--blue)}.pic2.rd{background:var(--red-soft);color:var(--red)}.pic2.gr{background:#E3F1EE;color:#1F7A6B}
+.nearbar a{align-items:flex-start}
+.nic{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--or-soft);color:var(--or);margin-bottom:4px;font-style:normal}
+.nic svg{width:18px;height:18px}
+.gcards{display:grid;gap:10px}
+.gcard{display:flex;gap:14px;align-items:flex-start;background:var(--card);border-radius:var(--r);padding:14px;box-shadow:var(--shadow);border-left:5px solid var(--or)}
+.gcard p{margin:0;font-size:16px}
+.gi{width:52px;height:52px;border-radius:16px;background:var(--or-soft);color:var(--or);display:grid;place-items:center;flex:none}
+.gi svg{width:28px;height:28px}
+.story{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.story li{background:var(--card);border-radius:var(--r);padding:14px 12px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.story li:last-child:nth-child(odd){grid-column:1/-1}
+.sti{position:relative;width:62px;height:62px;border-radius:50%;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center}
+.sti svg{width:30px;height:30px}
+.sti i{position:absolute;top:-4px;right:-6px;width:26px;height:26px;border-radius:50%;background:var(--or);color:#fff;font:800 14px/26px var(--f-display);text-align:center;font-style:normal;border:2px solid var(--card)}
+.story b{font-size:15px;font-weight:600;line-height:1.35}
+.taxeq{display:flex;align-items:center;justify-content:space-between;gap:6px;margin:4px 0 12px}
+.taxeq>div{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
+.taxeq>div>span{width:52px;height:52px;border-radius:50%;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center}
+.taxeq>div>span svg{width:26px;height:26px}
+.taxeq small{font-size:12.5px;color:var(--muted);text-align:center}
+.taxeq em{font:800 24px var(--f-display);color:var(--muted);font-style:normal}
+.taxeq .eur b{font:800 34px/52px var(--f-display);color:var(--or);white-space:nowrap}
+.mline{background:var(--card);border-radius:var(--r);padding:14px;box-shadow:var(--shadow);margin-bottom:10px}
+.mhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.mhead .metro{width:26px;height:26px;font-size:15px}
+.mhead b{font-size:17px}
+.mhead small{display:inline-flex;align-items:center;gap:4px;color:var(--muted);font-size:13px;margin-left:auto}
+.mhead small svg{width:14px;height:14px}
+.mtrack{position:relative;display:flex;justify-content:space-between;align-items:flex-start;margin:16px 4px 6px}
+.mtrack::before{content:"";position:absolute;left:14px;right:14px;top:13px;height:6px;border-radius:3px;background:#E5571F}
+.mline.B .mtrack::before{background:#1D4E9E}
+.mdot{position:relative;z-index:1;width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;flex:none}
+.mdot svg{width:17px;height:17px}
+.mst{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;min-width:0}
+.mst i{width:20px;height:20px;margin-top:6px;border-radius:50%;background:#fff;border:5px solid #E5571F}
+.mline.B .mst i{border-color:#1D4E9E}
+.mst b{font-size:13px;margin-top:4px;line-height:1.15}
+.mst small{font-size:11.5px;color:var(--muted)}
+.route.tl{position:relative}
+.route.tl::after{content:"";position:absolute;left:23px;top:20px;bottom:20px;width:3px;background:#1F7A6B;opacity:.35;z-index:0}
+.route.tl li{position:relative;z-index:1}
+.route.tl li::before{background:#1F7A6B;color:#fff}
+.itth{position:relative;width:92px;height:92px;border-radius:16px;overflow:hidden;flex:none;background:#E3F1EE;color:#1F7A6B;display:grid;place-items:center}
+.itth img{width:100%;height:100%;object-fit:cover}
+.itth svg{width:34px;height:34px}
+.itth i{position:absolute;left:6px;top:6px;width:26px;height:26px;border-radius:50%;background:#1F7A6B;color:#fff;font:800 14px/26px var(--f-display);text-align:center;font-style:normal;border:2px solid #fff}
+.itd .zimg.itcov{aspect-ratio:16/9;margin-bottom:12px}
 </style>
 
 <div class="app">
@@ -876,6 +927,17 @@ const PHONE=svg('<path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 
 const CASH=svg('<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>');
 const GLOBE=svg('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/>');
 const XI={
+  fork:svg('<path d="M7 3v8a2 2 0 002 2v8M5 3v6M9 3v6M17 3c-2 2-2 7 0 9v9"/>'),
+  park:svg('<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 17V7h4a3 3 0 010 6H9"/>'),
+  hosp:svg('<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/>'),
+  pharm:svg('<path d="M10.5 3.5a5 5 0 017 7l-7 7a5 5 0 01-7-7z"/><path d="M7 10l7 7"/>'),
+  shield:svg('<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>'),
+  colos:svg('<path d="M3 20V9c0-2 4-4 9-4s9 2 9 4v11"/><path d="M3 13h18M7 20v-4M12 20v-4M17 20v-4M7 9v1M12 8v2M17 9v1"/>'),
+  toilet:svg('<path d="M6 3h6v7H6zM4 10h14a6 6 0 01-6 6H8a4 4 0 01-4-4zM9 16l-1 5h8l-1-5"/>'),
+  person:svg('<circle cx="12" cy="7" r="3.5"/><path d="M5 21a7 7 0 0114 0"/>'),
+  moon:svg('<path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z"/>'),
+  child:svg('<circle cx="12" cy="6" r="2.5"/><path d="M8 21v-6l-2-3 3-3h6l3 3-2 3v6"/>'),
+
   photo:svg('<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 16l-5-5-8 8"/>'),
   search:svg('<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>'),
   tool:svg('<path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"/>'),
@@ -909,7 +971,7 @@ let PAGE="home", SUB=null;
 /* ---------- mattoncini ---------- */
 function btn(href,label,cls="ghost",icon=IC.pin){ return `<a class="btn ${cls}" href="${href}" target="_blank" rel="noopener">${icon||""}<span>${label}</span>${CHEV}</a>`; }
 function row(k,label,desc,opts={}){
-  return `<a class="prow" href="${gm(P[k][0],P[k][1])}" target="_blank" rel="noopener"><div class="prow-m"><b>${label}</b>${desc?`<span>${desc}</span>`:""}${dist(k,opts)}</div><span class="prow-go">${IC.pin}${CHEV}</span></a>`;
+  return `<a class="prow" href="${gm(P[k][0],P[k][1])}" target="_blank" rel="noopener">${opts.ic?`<span class="pic2${opts.icc?" "+opts.icc:""}">${opts.ic}</span>`:""}<div class="prow-m"><b>${label}</b>${desc?`<span>${desc}</span>`:""}${dist(k,opts)}</div><span class="prow-go">${IC.pin}${CHEV}</span></a>`;
 }
 function moreList(id,items,show){
   if(items.length<=show) return `<div class="plist2">${items.join("")}</div>`;
@@ -1003,7 +1065,7 @@ function vArrivo(){
 function vCasa(){
   const h=HOUSE;
   const withImg=h.find.filter(f=>f.img), noImg=h.find.filter(f=>!f.img);
-  return `${h.good?h3(WARN,{it:"Un paio di cose utili",en:"A couple of useful things",es:"Un par de cosas útiles"})+L(h.good).map(x=>`<div class="note">${WARN}<span>${x}</span></div>`).join(""):""}
+  return `${h.good?h3(WARN,{it:"Un paio di cose utili",en:"A couple of useful things",es:"Un par de cosas útiles"})+`<div class="gcards">${L(h.good).map((x,i)=>`<div class="gcard"><span class="gi">${[FIC.boiler,XI.toilet,IC.door][i]||IC.info}</span><p>${x}</p></div>`).join("")}</div>`:""}
     ${h3(XI.search,{it:"Dove trovo…",en:"Where is…",es:"Dónde está…"})}
     <div class="finds2">${withImg.map(f=>`<article class="find2">${zoomImg(f.img,"ph")}<div><h4>${FIC[f.ic]||""}<span>${L(f.t)}</span></h4><p>${L(f.w)}</p></div></article>`).join("")}</div>
     ${noImg.length?`<div class="finds3">${noImg.map(f=>`<div class="find3"><span class="fci">${FIC[f.ic]||IC.home}</span><div><b>${L(f.t)}</b><span>${L(f.w)}</span></div></div>`).join("")}</div>`:""}`;
@@ -1023,7 +1085,7 @@ function vCheckout(){
   ];
   return `<p>${L({it:"Speriamo che vi siate trovati bene! Il check-out è entro le <b>10:00</b>: qualche ora dopo arrivano i prossimi ospiti e il nostro team deve preparare la casa anche per loro. Grazie per la collaborazione 😊",en:"We hope you enjoyed your stay! Check-out is by <b>10 AM</b>: a few hours later the next guests arrive and our team needs to get the apartment ready for them too. Thank you for your help 😊",es:"¡Esperamos que os hayáis sentido como en casa! El check-out es antes de las <b>10:00</b>: unas horas después llegan los próximos huéspedes y nuestro equipo tiene que preparar la casa también para ellos. Gracias por vuestra colaboración 😊"})}</p>
     ${h3(svg('<path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>'),{it:"Prima di uscire",en:"Before you leave",es:"Antes de salir"})}
-    <ol class="costeps">${steps.map(([ic,t],i)=>`<li><span class="cn">${i+1}</span><span class="ci">${ic}</span><b>${L(t)}</b></li>`).join("")}</ol>
+    <ol class="story">${steps.map(([ic,t],i)=>`<li><span class="sti">${ic}<i>${i+1}</i></span><b>${L(t)}</b></li>`).join("")}</ol>
     <div class="stop">${IC.clock}<div><b>${L({it:"Volete uscire più tardi o lasciare le valigie?",en:"Want to leave later or drop your bags?",es:"¿Queréis salir más tarde o dejar las maletas?"})}</b>
       <p>${L({it:"Va sempre <b>chiesto prima</b> e lo possiamo fare <b>solo se ve lo confermiamo noi</b>, in base agli ospiti in arrivo. Senza la nostra conferma, alle 10:00 la casa deve essere libera, valigie comprese.",en:"You always need to <b>ask us in advance</b>, and it's possible <b>only once we confirm it</b>, depending on the next guests. Without our confirmation, the apartment must be free at 10 AM, luggage included.",es:"Siempre hay que <b>pedirlo antes</b> y solo es posible <b>si os lo confirmamos</b>, según los próximos huéspedes. Sin nuestra confirmación, a las 10:00 la casa debe quedar libre, maletas incluidas."})}</p>
       ${btn(waLink(),L({it:"Chiedete su WhatsApp, qualche giorno prima",en:"Ask on WhatsApp, a few days before",es:"Preguntad por WhatsApp, unos días antes"}),"wa full",IC.chat)}</div></div>
@@ -1033,7 +1095,7 @@ function vCheckout(){
 /* ---------- ZONA ---------- */
 function vZona(){
   const h=HOUSE, q=encodeURIComponent(h.address.split(" · ")[0]+", Roma");
-  return `<div class="nearbar">${h.near.map(([k,lbl])=>`<a href="${gm(P[k][0],P[k][1])}" target="_blank" rel="noopener"><span>${L(lbl)}</span><b>${IC.walk}${DIST[k].walk} ${L(UI.min)}</b></a>`).join("")}</div>
+  return `<div class="nearbar">${h.near.map(([k,lbl])=>`<a href="${gm(P[k][0],P[k][1])}" target="_blank" rel="noopener"><i class="nic">${k==="colosseo"?XI.colos:k[0]==="m"&&k!=="minimkt"?IC.train:IC.cart}</i><span>${L(lbl)}</span><b>${IC.walk}${DIST[k].walk} ${L(UI.min)}</b></a>`).join("")}</div>
     <div class="gmap"><iframe title="Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${q}&z=15&hl=${LANG}&output=embed"></iframe></div>
     <div class="mt">${btn(gm(h.place[0],h.place[1]),L(UI.open_maps),"primary full")}</div>
     ${h3(IC.home,{it:"Il quartiere",en:"The neighbourhood",es:"El barrio"})}
@@ -1047,14 +1109,14 @@ function vItinerari(){
   if(n>=1 && n<=ITIN.length){
     const it=ITIN[n-1];
     return `<a class="btn ghost" href="#itinerari">${BACK}<span>${L({it:"Tutti gli itinerari",en:"All walks",es:"Todas las rutas"})}</span></a>
-      <div class="itd"><div class="itnum">${n}</div><h2>${L(it.title)}</h2><div class="when">${L(it.when)}</div>${it.intro?`<p>${L(it.intro)}</p>`:""}</div>
-      <ol class="route big">${it.stops.map(([k,d],i)=>`<li><a href="${gm(P[k][0],P[k][1])}" target="_blank" rel="noopener"><span>${esc(P[k][0])}</span>${IC.pin}${CHEV}</a><span class="rd">${L(d)}</span>${i>0?legHTML(it.stops[i-1][0],k):dist(k,{showVia:true})}</li>`).join("")}</ol>
+      <div class="itd">${it.cover?zoomImg(it.cover,"itcov"):""}<div class="itnum">${n}</div><h2>${L(it.title)}</h2><div class="when">${L(it.when)}</div>${it.intro?`<p>${L(it.intro)}</p>`:""}</div>
+      <ol class="route big tl">${it.stops.map(([k,d],i)=>`<li><a href="${gm(P[k][0],P[k][1])}" target="_blank" rel="noopener"><span>${esc(P[k][0])}</span>${IC.pin}${CHEV}</a><span class="rd">${L(d)}</span>${i>0?legHTML(it.stops[i-1][0],k):dist(k,{showVia:true})}</li>`).join("")}</ol>
       ${it.alt?`<p class="small muted">${L(it.alt)}</p>`:""}
       ${it.fact?`<p class="fact">💡 ${L(it.fact)}</p>`:""}
       ${n<ITIN.length?`<a class="btn primary full mt" href="#itinerari/${n+1}"><span>${L({it:"Itinerario successivo",en:"Next walk",es:"Siguiente ruta"})}: ${L(ITIN[n].title)}</span>${CHEV}</a>`:""}`;
   }
   return `<p>${L({it:"Tre passeggiate che facciamo fare ai nostri amici quando vengono a Roma. Ogni tappa ha la distanza a piedi e si apre in Google Maps.",en:"Three walks we suggest to our own friends when they visit Rome. Every stop shows the walking distance and opens in Google Maps.",es:"Tres paseos que recomendamos a nuestros amigos cuando vienen a Roma. Cada parada tiene la distancia a pie y se abre en Google Maps."})}</p>
-    <div class="itlist">${ITIN.map((it,i)=>`<a class="itc" href="#itinerari/${i+1}"><span class="itnum">${i+1}</span><div><b>${L(it.title)}</b><span class="when">${L(it.when)}</span><span class="stops">${it.stops.length} ${L({it:"tappe",en:"stops",es:"paradas"})} · ${it.stops.slice(0,3).map(s=>esc(P[s[0]][0].split(" ")[0]==="Basilica"?P[s[0]][0].replace("Basilica di ",""):P[s[0]][0])).join(", ")}…</span></div>${CHEV}</a>`).join("")}</div>`+vBiglietti();
+    <div class="itlist">${ITIN.map((it,i)=>`<a class="itc" href="#itinerari/${i+1}">${it.cover?`<span class="itth"><img src="img/${it.cover}.webp" alt="" loading="lazy"><i>${i+1}</i></span>`:`<span class="itth none"><i>${i+1}</i>${IC.map}</span>`}<div><b>${L(it.title)}</b><span class="when">${L(it.when)}</span><span class="stops">${it.stops.length} ${L({it:"tappe",en:"stops",es:"paradas"})} · ${it.stops.slice(0,3).map(s=>esc(P[s[0]][0].split(" ")[0]==="Basilica"?P[s[0]][0].replace("Basilica di ",""):P[s[0]][0])).join(", ")}…</span></div>${CHEV}</a>`).join("")}</div>`+vBiglietti();
 }
 function vBiglietti(){
   return `${h3(IC.star,{it:"Biglietti: solo dai siti ufficiali",en:"Tickets: official websites only",es:"Entradas: solo en las webs oficiales"})}
@@ -1064,15 +1126,15 @@ function vBiglietti(){
 function vMangiare(){
   const order = HOUSE.foodFirst==="col" ? ["col","sg"] : ["sg","col"];
   const food=order.flatMap(g=>FOOD[g].items).sort((a,b)=>DIST[a[0]].walk-DIST[b[0]].walk)
-    .map(([p,fav,cuis,price])=>row(p, esc(P[p][0])+(fav?` <span class="fav">${L(UI.fav)}</span>`:""), `${L(cuis)} · ${price}`, {showVia:true}));
+    .map(([p,fav,cuis,price])=>row(p, esc(P[p][0])+(fav?` <span class="fav">${L(UI.fav)}</span>`:""), `${L(cuis)} · ${price}`, {showVia:true,ic:/pizz/i.test(L(cuis))?FIC.pizza:XI.fork}));
   return `<p class="small muted">${L({it:"Dal più vicino. Prezzi a persona. Toccate un posto per aprirlo in Maps.",en:"Nearest first. Prices per person. Tap a place to open it in Maps.",es:"Del más cercano. Precios por persona. Toca un sitio para abrirlo en Maps."})}</p>${moreList("food",food,8)}
     ${h3(svg('<circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17h6l3-7h3M9 7h4l2 3"/>'),{it:"Cibo a domicilio",en:"Food delivery",es:"Comida a domicilio"})}
     <p class="small">${L({it:"Stanchi dopo una giornata in giro? Potete ordinare a casa con queste app.",en:"Tired after a day out? You can order to the apartment with these apps.",es:"¿Cansados después de un día por ahí? Podéis pedir a casa con estas apps."})}</p>
     <div class="note">${PHONE}<span>${L({it:"<b>Importante:</b> il citofono non funziona bene. Quando ordinate, scrivete nelle note di <b>chiamarvi al telefono</b> appena il rider arriva, e scendete voi al portone.",en:"<b>Important:</b> the intercom doesn't work well. When you order, write in the notes that the rider should <b>call your phone</b> on arrival, and go down to the street door yourselves.",es:"<b>Importante:</b> el telefonillo no funciona bien. Al pedir, escribid en las notas que el repartidor os <b>llame al móvil</b> al llegar, y bajad vosotros al portal."})}</span></div>
     <div class="col">${btn("https://www.justeat.it/","Just Eat","ghost",FIC.pizza)}${btn("https://glovoapp.com/it/it/roma/","Glovo","ghost",FIC.pizza)}${btn("https://deliveroo.it/","Deliveroo","ghost",FIC.pizza)}</div>`;
 }
-function vBar(){ return DRINK.map((g,gi)=>`<h3 class="h3b">${FIC[g.ic]||""}<span>${L(g.t)}</span></h3>${moreList("dr"+gi,[...g.items].sort((a,b)=>DIST[a[0]].walk-DIST[b[0]].walk).map(([k,d])=>row(k,esc(P[k][0]),L(d),{showVia:true})),4)}`).join(""); }
-function vVedere(){ return `<div class="plist2">${[...VIEWS,...GEMS].map(([k,d])=>row(k,esc(P[k][0]),L(d),{showVia:true})).join("")}</div>`; }
+function vBar(){ return DRINK.map((g,gi)=>`<h3 class="h3b">${FIC[g.ic]||""}<span>${L(g.t)}</span></h3>${moreList("dr"+gi,[...g.items].sort((a,b)=>DIST[a[0]].walk-DIST[b[0]].walk).map(([k,d])=>row(k,esc(P[k][0]),L(d),{showVia:true,ic:FIC[g.ic]})),4)}`).join(""); }
+function vVedere(){ return `<div class="plist2">${[...VIEWS,...GEMS].map(([k,d])=>row(k,esc(P[k][0]),L(d),{showVia:true,ic:XI.view})).join("")}</div>`; }
 function vTrasporti(){
   return `<div class="mvgrid">
       <div class="mv"><b>${IC.train}<span>Metro</span></b><span>${L({it:`<span class="metro A">A</span> San Giovanni · ${DIST.mSG.walk} min a piedi<br><span class="metro B">B</span> Colosseo · ${DIST.mCol.walk} min a piedi<br>Biglietto 1,50 € (100 min), o carta contactless ai tornelli.`,en:`<span class="metro A">A</span> San Giovanni · ${DIST.mSG.walk} min walk<br><span class="metro B">B</span> Colosseo · ${DIST.mCol.walk} min walk<br>Ticket €1.50 (100 min), or tap a contactless card.`,es:`<span class="metro A">A</span> San Giovanni · ${DIST.mSG.walk} min a pie<br><span class="metro B">B</span> Colosseo · ${DIST.mCol.walk} min a pie<br>Billete 1,50 € (100 min), o tarjeta contactless.`})}</span></div>
@@ -1082,6 +1144,8 @@ function vTrasporti(){
     <p class="small muted">${L({it:"Meglio scaricarla prima di partire: vi registrate, mettete la carta e prenotate da soli in un attimo.",en:"Best to download it before your trip: sign up, add your card and book on your own in seconds.",es:"Mejor descargarla antes del viaje: os registráis, añadís la tarjeta y reserváis solos en un momento."})}</p>
     <div class="tapps">${TAXI_APPS.map(([n,d,ios,and])=>{ const os=/iPhone|iPad|iPod/i.test(navigator.userAgent)?"ios":/Android/i.test(navigator.userAgent)?"and":"";
       return `<div class="tapp"><div><b>${n}</b><span>${L(d)}</span></div>${os?`<a class="store" href="${os==="ios"?ios:and}" target="_blank" rel="noopener">${L({it:"Scarica",en:"Download",es:"Descargar"})}</a>`:`<a class="store" href="${ios}" target="_blank" rel="noopener">iPhone</a><a class="store" href="${and}" target="_blank" rel="noopener">Android</a>`}</div>`; }).join("")}</div>
+    ${h3(IC.train,{it:"La metro in uno schema",en:"The metro at a glance",es:"El metro en un esquema"})}
+    ${metroMap()}
     ${h3(IC.plane,{it:"Aeroporto ↔ casa",en:"Airport ↔ home",es:"Aeropuerto ↔ casa"})}
     <div class="fares">
       <div><small>Taxi</small><b>Fiumicino 65–70 €</b><b>Ciampino 45–55 €</b><span>${L({it:"Tariffa ufficiale 55 € e 40 €, ma nella pratica si spende di più. Max 4 persone.",en:"Official fare €55 and €40, but in practice you pay more. Max 4 people.",es:"Tarifa oficial 55 € y 40 €, pero en la práctica se paga más. Máx. 4 personas."})}</span></div>
@@ -1090,11 +1154,17 @@ function vTrasporti(){
     <p class="small">${L({it:`Treno: Leonardo Express Fiumicino → Termini (32 min, da 14 €), poi metro <span class="metro A">A</span> direzione Anagnina fino a San Giovanni.`,en:`Train: Leonardo Express Fiumicino → Termini (32 min, from €14), then metro <span class="metro A">A</span> towards Anagnina to San Giovanni.`,es:`Tren: Leonardo Express Fiumicino → Termini (32 min, desde 14 €), luego metro <span class="metro A">A</span> dirección Anagnina hasta San Giovanni.`})}</p>
     <div class="mt">${btn(waLink(),L({it:"Prenota il transfer",en:"Book the transfer",es:"Reservar el traslado"}),"primary full",IC.van)}</div>
     ${h3(IC.car,{it:"In auto e parcheggi",en:"By car and parking",es:"En coche y aparcamiento"})}
-    <p class="small">${L(HOUSE.car)}</p><div class="plist2">${HOUSE.parking.map(k=>row(k,esc(P[k][0]),"")).join("")}</div>`;
+    <p class="small">${L(HOUSE.car)}</p><div class="plist2">${HOUSE.parking.map(k=>row(k,esc(P[k][0]),"",{ic:XI.park,icc:"bl"})).join("")}</div>`;
 }
-function vSpesa(){ return `<div class="plist2">${HOUSE.shop.map(([k,d])=>row(k,esc(P[k][0]),L(d))).join("")}</div>`; }
+function metroMap(){
+  const line=(c,from,walk,stops,dir)=>`<div class="mline ${c}"><div class="mhead"><span class="metro ${c}">${c}</span><b>${from}</b><small>${IC.walk}${walk} ${L(UI.min)} ${L({it:"da casa",en:"from home",es:"desde casa"})}</small></div>
+    <div class="mtrack"><span class="mdot home">${IC.home}</span>${stops.map(([n,k])=>`<span class="mst"><i></i><b>${n}</b><small>${k} ${L({it:"fermate",en:"stops",es:"paradas"})}</small></span>`).join("")}</div>${dir?`<p class="small muted">${L(dir)}</p>`:""}</div>`;
+  return line("A","San Giovanni",DIST.mSG.walk,[["Termini",3],["Spagna",6],["Ottaviano",9]],{it:"Direzione Battistini. Ottaviano è la fermata per il Vaticano.",en:"Towards Battistini. Ottaviano is the stop for the Vatican.",es:"Dirección Battistini. Ottaviano es la parada del Vaticano."})
+   +line("B","Colosseo",DIST.mCol.walk,[["Cavour",1],["Termini",2]],{it:"Direzione Rebibbia/Jonio. Nell'altra direzione (Laurentina): Circo Massimo 1 fermata, Piramide 2.",en:"Towards Rebibbia/Jonio. The other way (Laurentina): Circo Massimo 1 stop, Piramide 2.",es:"Dirección Rebibbia/Jonio. En la otra dirección (Laurentina): Circo Massimo 1 parada, Piramide 2."});
+}
+function vSpesa(){ return `<div class="plist2">${HOUSE.shop.map(([k,d])=>row(k,esc(P[k][0]),L(d),{ic:IC.cart,icc:"bl"})).join("")}</div>`; }
 function vBagagli(){
-  return `<div class="plist2">${row("kipoint","KiBag Kipoint · Roma Termini",L({it:"Dentro la stazione Termini, aperto 7–21",en:"Inside Termini station, open 7am–9pm",es:"Dentro de la estación Termini, abierto 7–21"}))}</div>
+  return `<div class="plist2">${row("kipoint","KiBag Kipoint · Roma Termini",L({it:"Dentro la stazione Termini, aperto 7–21",en:"Inside Termini station, open 7am–9pm",es:"Dentro de la estación Termini, abierto 7–21"}),{ic:IC.bag,icc:"bl"})}</div>
     <div class="col mt">${btn("https://radicalstorage.com/luggage-storage/rome/san-giovanni","Radical Storage · San Giovanni","ghost",IC.bag)}${btn("https://www.nannybag.com/en/luggage-storage/san-giovanni-patoni","Nannybag · San Giovanni","ghost",IC.bag)}</div>
     <p class="small muted mt">${L({it:"Radical Storage e Nannybag sono app con tanti punti deposito vicino casa: si prenota online e si paga a bagaglio.",en:"Radical Storage and Nannybag are apps with many drop-off points near the apartment: book online and pay per bag.",es:"Radical Storage y Nannybag son apps con muchos puntos de consigna cerca de casa: se reserva online y se paga por maleta."})}</p>`;
 }
@@ -1106,7 +1176,8 @@ function vInfo(){
       <p>${L({it:"Siamo un appartamento privato, non un hotel: <b>non c'è una reception</b> e nessuno è presente in casa o nel palazzo. Per questo il check-in è autonomo, con le istruzioni di questa guida, e noi siamo sempre raggiungibili su WhatsApp.",en:"We're a private apartment, not a hotel: <b>there's no reception</b> and nobody is on site, in the apartment or the building. That's why check-in is self-service, with the instructions in this guide, and we're always reachable on WhatsApp.",es:"Somos un apartamento privado, no un hotel: <b>no hay recepción</b> y no hay nadie en la casa ni en el edificio. Por eso el check-in es autónomo, con las instrucciones de esta guía, y siempre estamos disponibles por WhatsApp."})}</p>
       <p>${L({it:"<b>Pacchi e spedizioni:</b> non possiamo ricevere nulla per voi. Se ordinate qualcosa online, la consegna è a vostro carico: dovete essere voi in casa a riceverla, con il telefono a portata di mano.",en:"<b>Parcels and deliveries:</b> we can't receive anything on your behalf. If you order something online, the delivery is your responsibility: you need to be in to receive it yourselves, with your phone at hand.",es:"<b>Paquetes y envíos:</b> no podemos recibir nada por vosotros. Si pedís algo online, la entrega corre de vuestra cuenta: tenéis que estar en casa para recibirla, con el móvil a mano."})}</p></div>
     `+`<div class="icard"><h4>${CASH}<span>${L({it:"Tassa di soggiorno",en:"City tax",es:"Tasa turística"})}</span></h4>
-      <div class="taxrow"><b>5 €</b><span>${L({it:"a persona, a notte, prime 10 notti. Bambini fino a 10 anni esenti.",en:"per person, per night, first 10 nights. Children up to 10 exempt.",es:"por persona y noche, primeras 10 noches. Niños hasta 10 años exentos."})}</span></div>
+      <div class="taxeq"><div><span>${XI.person}</span><small>${L({it:"a persona",en:"per person",es:"por persona"})}</small></div><em>×</em><div><span>${XI.moon}</span><small>${L({it:"a notte",en:"per night",es:"por noche"})}</small></div><em>=</em><div class="eur"><b>5 €</b><small>${L({it:"max 10 notti",en:"max 10 nights",es:"máx. 10 noches"})}</small></div></div>
+      <div class="taxrow" hidden><b>5 €</b><span>${L({it:"a persona, a notte, prime 10 notti. Bambini fino a 10 anni esenti.",en:"per person, per night, first 10 nights. Children up to 10 exempt.",es:"por persona y noche, primeras 10 noches. Niños hasta 10 años exentos."})}</span></div>
       <div class="pay2"><div><b>Airbnb</b><span>${L({it:"Già pagata",en:"Already paid",es:"Ya pagada"})}</span></div><div><b>Booking · ${L({it:"diretta",en:"direct",es:"directa"})}</b><span>${L({it:"In contanti entro la partenza",en:"In cash before you leave",es:"En efectivo antes de salir"})}</span></div></div>
       <p class="ref">${L({it:"Rif.: art. 14, c. 16, lett. e) D.L. 78/2010; Regolamento Delib. Assemblea Capitolina n. 87/2022; tariffe Delib. Giunta Capitolina n. 255/2023.",en:"Ref.: art. 14(16)(e) Decree-Law 78/2010; Rome City Council Resolution 87/2022; City Executive Resolution 255/2023.",es:"Ref.: art. 14.16.e) D.L. 78/2010; Delib. Asamblea Capitolina 87/2022; Delib. Junta Capitolina 255/2023."})}</p></div>
     <div class="icard"><h4>${IC.doc}<span>${L({it:"Documenti",en:"ID documents",es:"Documentos"})}</span></h4>
@@ -1142,10 +1213,10 @@ function vSos(){
   return `<a class="sos112" href="tel:112"><b>112</b><div><strong>${L({it:"Ambulanza, polizia, pompieri",en:"Ambulance, police, fire",es:"Ambulancia, policía, bomberos"})}</strong><span>${L({it:"Gratis, 24 ore su 24. Tocca per chiamare.",en:"Free, 24/7. Tap to call.",es:"Gratis, 24 horas. Toca para llamar."})}</span></div>${PHONE}</a>
     ${h3(XI.sos,{it:"Ospedali, farmacie, polizia",en:"Hospitals, pharmacies, police",es:"Hospitales, farmacias, policía"})}
     <div class="plist2">
-      ${row("ps",L({it:"Pronto soccorso San Giovanni",en:"San Giovanni A&E",es:"Urgencias San Giovanni"}),L({it:"Il più vicino, 24h",en:"The nearest, 24/7",es:"El más cercano, 24h"}))}
-      ${row("bambino",L({it:"Bambino Gesù · ospedale pediatrico",en:"Bambino Gesù · children's hospital",es:"Bambino Gesù · hospital pediátrico"}),L({it:"Pronto soccorso bambini, 24h",en:"Children's A&E, 24/7",es:"Urgencias pediátricas, 24h"}))}
-      ${row("farmPrim","Farmacia Primavera",L({it:"Aperta fino a mezzanotte",en:"Open until midnight",es:"Abierta hasta medianoche"}))}
-      ${row("polCelio",L({it:"Polizia · Commissariato Celio",en:"Police · Celio station",es:"Policía · Comisaría Celio"}),L({it:"Denunce furto o smarrimento",en:"Report theft or loss",es:"Denuncias de robo o pérdida"}))}
+      ${row("ps",L({it:"Pronto soccorso San Giovanni",en:"San Giovanni A&E",es:"Urgencias San Giovanni"}),L({it:"Il più vicino, 24h",en:"The nearest, 24/7",es:"El más cercano, 24h"}),{ic:XI.hosp,icc:"rd"})}
+      ${row("bambino",L({it:"Bambino Gesù · ospedale pediatrico",en:"Bambino Gesù · children's hospital",es:"Bambino Gesù · hospital pediátrico"}),L({it:"Pronto soccorso bambini, 24h",en:"Children's A&E, 24/7",es:"Urgencias pediátricas, 24h"}),{ic:XI.child,icc:"rd"})}
+      ${row("farmPrim","Farmacia Primavera",L({it:"Aperta fino a mezzanotte",en:"Open until midnight",es:"Abierta hasta medianoche"}),{ic:XI.pharm,icc:"gr"})}
+      ${row("polCelio",L({it:"Polizia · Commissariato Celio",en:"Police · Celio station",es:"Policía · Comisaría Celio"}),L({it:"Denunce furto o smarrimento",en:"Report theft or loss",es:"Denuncias de robo o pérdida"}),{ic:XI.shield,icc:"bl"})}
     </div>
     <div class="nums">${[["118",{it:"Ambulanza",en:"Ambulance",es:"Ambulancia"}],["113",{it:"Polizia",en:"Police",es:"Policía"}],["115",{it:"Pompieri",en:"Fire",es:"Bomberos"}]].map(([n,t])=>`<a href="tel:${n}"><b>${n}</b><span>${L(t)}</span></a>`).join("")}</div>
     ${h3(IC.info,{it:"Frasi utili in italiano",en:"Useful phrases in Italian",es:"Frases útiles en italiano"})}
