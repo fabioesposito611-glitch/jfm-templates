@@ -2221,7 +2221,7 @@ function render() {
 }
 
 /* ===== Codici protetti da PIN: nel file pubblico c'è solo la versione cifrata ===== */
-var CODES_BLOB = {"s": "RX149DuzVdr+ZcUjs9k0Bg==", "i": "MKCZN0kPvWZYQasw", "n": 600000, "c": "D/FsHVqDZcLTe/oyv10u37AfGfmRAv/E5AdeUY3wR9r1txAwmthiytpKABHg7P6Q+mx4qRRGsOCAgw0UHkxUZJbs+W85N5vhkd9Xgobl9vliQPcDWpC7pA=="};
+var CODES_BLOB = {"s": "KTuBDXYPSWyLUZisO3t6bQ==", "i": "sJst9tOkeotL8c64", "n": 600000, "c": "yDINmsrv9UEUwZX6Jq0Xf6FL+NxS2gjp6ZD82HK84K5bK6fKU8T87wwX80WxSWre3ttI3uv/EYQvVFQcPTEgiW4600bdiw00w0iuMaIZbjyd1gpkh28BfA=="};
 var CODES = null;
 try { CODES = JSON.parse(sessionStorage.getItem("jfm-codes") || "null"); } catch(e) {}
 function b64(s){ return Uint8Array.from(atob(s), function(c){ return c.charCodeAt(0); }); }
