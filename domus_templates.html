@@ -85,6 +85,7 @@
   <div class="filter-group" id="filter-section">
     <div class="pill active" data-filter="section" data-val="all">Tutte</div>
     <div class="pill" data-filter="section" data-val="lodgify">🤖 Lodgify auto</div>
+    <div class="pill" data-filter="section" data-val="solleciti">🔔 Solleciti</div>
     <div class="pill" data-filter="section" data-val="precheckin">Pre check-in</div>
     <div class="pill" data-filter="section" data-val="docs_tax">🪪 Documenti & tassa</div>
     <div class="pill" data-filter="section" data-val="guide">📲 Guida ospite</div>
@@ -1934,6 +1935,74 @@ Y para tu próximo viaje a Roma puedes reservar directamente con nosotros 👉 h
   return T[L];
 }
 
+
+/* ===== L2 — Solleciti: solo a chi non ha fatto quello che chiedeva il messaggio automatico ===== */
+var sollecitiTexts = {
+  en: {
+    orario: `Hii [NOME]! 😊
+I'm getting everything ready for your arrival 🏠
+Could you please tell me roughly what time you'll arrive? Even an approximate time is perfect: it helps me organise the cleaning and be available if you need me 🙏
+
+Thank you, I'm here for anything!`,
+    documenti: `Hii [NOME]! 😊 I hope you had a lovely first night!
+I still need a photo of an ID (passport or ID card) for each guest 🪪
+Italian law requires me to register all guests with the police within 24 hours of arrival, so could you please send them here today? A clear photo of the page with the picture is enough 📸
+
+Thank you so much, and don't worry: they're only used for the registration 🙏`,
+    tassa: `Hii [NOME]! 😊 I hope you're enjoying your last days in Rome!
+Just a quick reminder about the city tax before you leave 👇
+
+`,
+    chiavi: `Hii [NOME]! 😊
+Have you already left the apartment? If so, could you please send me a photo of the keys on the table 🔑📸
+That way I know everything's fine and the cleaning team can start.
+
+Thank you so much and have a safe trip! ✈️`
+  },
+  it: {
+    orario: `Ciao [NOME]! 😊
+Sto preparando tutto per il vostro arrivo 🏠
+Mi dici più o meno a che ora arriverete? Va benissimo anche un orario indicativo: mi serve per organizzare le pulizie ed essere disponibile se avete bisogno 🙏
+
+Grazie, per qualsiasi cosa sono qui!`,
+    documenti: `Ciao [NOME]! 😊 Spero che la prima notte sia andata benissimo!
+Mi manca ancora la foto di un documento (passaporto o carta d'identità) per ogni ospite 🪪
+La legge italiana mi obbliga a registrare tutti gli ospiti in Questura entro 24 ore dall'arrivo, quindi me li mandi qui oggi? Basta una foto chiara della pagina con la foto 📸
+
+Grazie mille, e tranquillo: servono solo per la registrazione 🙏`,
+    tassa: `Ciao [NOME]! 😊 Spero che vi stiate godendo gli ultimi giorni a Roma!
+Solo un piccolo promemoria sulla tassa di soggiorno prima della partenza 👇
+
+`,
+    chiavi: `Ciao [NOME]! 😊
+Siete già usciti di casa? Se sì, mi mandi una foto delle chiavi sul tavolo 🔑📸
+Così so che è tutto a posto e il team delle pulizie può iniziare.
+
+Grazie mille e buon viaggio! ✈️`
+  },
+  es: {
+    orario: `¡Holaa [NOMBRE]! 😊
+Estoy preparando todo para vuestra llegada 🏠
+¿Me dices más o menos a qué hora llegaréis? Una hora aproximada está perfecta: me ayuda a organizar la limpieza y a estar disponible si necesitáis algo 🙏
+
+¡Gracias, para cualquier cosa aquí estoy!`,
+    documenti: `¡Holaa [NOMBRE]! 😊 ¡Espero que la primera noche haya ido genial!
+Todavía me falta la foto de un documento (pasaporte o DNI) de cada huésped 🪪
+La ley italiana me obliga a registrar a todos los huéspedes en la policía en las 24 horas siguientes a la llegada, así que ¿me los mandas hoy por aquí? Basta una foto clara de la página con la foto 📸
+
+Muchísimas gracias, y tranquilo: solo se usan para el registro 🙏`,
+    tassa: `¡Holaa [NOMBRE]! 😊 ¡Espero que estéis disfrutando de los últimos días en Roma!
+Solo un pequeño recordatorio sobre la tasa turística antes de la salida 👇
+
+`,
+    chiavi: `¡Holaa [NOMBRE]! 😊
+¿Ya habéis salido de casa? Si es así, ¿me mandas una foto de las llaves sobre la mesa? 🔑📸
+Así sé que todo está bien y el equipo de limpieza puede empezar.
+
+¡Muchísimas gracias y buen viaje! ✈️`
+  }
+};
+
 var warningsTexts = {
   en: `‼️ 2 very important things before you arrive:
 
@@ -2088,6 +2157,21 @@ for (const casa of casas) {
       text: codesText(casa) + "\n\n(Agli ospiti i codici arrivano da soli nella guida, solo durante il soggiorno. Usali qui solo per emergenze.)"
     });
     // Lodgify: messaggi automatici in ordine
+    // Solleciti (uguali per le due case)
+    if (casa === "lat") {
+      var NM = lang === "es" ? "[NOMBRE]" : "[NOME]";
+      [["orario","① Orario di arrivo non comunicato — 2 giorni prima dell'arrivo","all"],
+       ["documenti","② Documenti mancanti — mattina dopo l'arrivo","all"],
+       ["chiavi","④ Foto chiavi non arrivata — ore 10:00 del check-out","all"]].forEach(function(v){
+        pushUnique({ id:`sollecito-${v[0]}-${lang}`, section:"solleciti", casa:"both", lang, piatt:v[2], title:v[1], vars:NM, text:sollecitiTexts[lang][v[0]] });
+      });
+      [["jfm","IBAN JFM"],["fabio","IBAN Fabio"]].forEach(function(v){
+        pushUnique({ id:`sollecito-tassa-${v[0]}-${lang}`, section:"solleciti", casa:"both", lang, piatt:"bkg",
+          title:`③ Tassa di soggiorno non ancora pagata — giorno prima del check-out · ${v[1]}`,
+          vars: NM + ", " + (lang === "es" ? "[TOTAL TASA]" : "[TOTALE TASSA]"),
+          text: sollecitiTexts[lang].tassa + (v[0]==="jfm" ? taxBlock_jfm[lang] : taxBlock_fabio[lang]) });
+      });
+    }
     if (casa === "lat") lodgifyMsgs(casa, lang).forEach(function(m){
       pushUnique({
         id: `lodgify-both-${lang}-${m[0]}`,
@@ -2142,8 +2226,9 @@ function getFiltered() {
   });
 }
 
-var sectionOrder = ["lodgify","precheckin","docs_tax","guide","reminder","inhouse","checkout","luggage","tips_restaurants","tips_itinerary","location","warnings","ncc","garage"];
+var sectionOrder = ["lodgify","solleciti","precheckin","docs_tax","guide","reminder","inhouse","checkout","luggage","tips_restaurants","tips_itinerary","location","warnings","ncc","garage"];
 var sectionTitles = {
+  solleciti: "L2 — 🔔 Solleciti · solo a chi non l'ha fatto (controlli quotidiani)",
   lodgify: "L — 🤖 Lodgify · messaggi automatici (in ordine di invio · validi per entrambe le case)",
   precheckin: "A — Pre check-in",
   docs_tax: "A2 — 🪪 Promemoria passaporti & tassa",
