@@ -58,7 +58,10 @@ export async function stay(env, bookingId, house) {
   const k = await propertyKey(env, b.property_id).catch(() => null);
   if (k !== house) return { phase: "invalid", reason: "house" };
   const t = romeToday();
-  const phase = t < b.arrival ? "before" : t <= b.departure ? "during" : "after";
+  // i codici si vedono dal giorno prima dell'arrivo fino al giorno della partenza
+  const d = new Date(b.arrival + "T12:00:00Z"); d.setUTCDate(d.getUTCDate() - 1);
+  const codesFrom = d.toISOString().slice(0, 10);
+  const phase = t < codesFrom ? "before" : t <= b.departure ? "during" : "after";
   return { phase, arrival: b.arrival, departure: b.departure };
 }
 export function codesFor(env, house) {
