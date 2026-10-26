@@ -26,6 +26,7 @@
   .tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 400; }
   .tag-bkg { background: #e8f0fe; color: #1a56db; }
   .tag-abn { background: #fff0f0; color: #c0392b; }
+  .tag-dir { background: #e8f5e9; color: #2e7d32; }
   .tag-it { background: #e8f5e9; color: #2e7d32; }
   .tag-en { background: #e3f2fd; color: #1565c0; }
   .tag-es { background: #fff8e1; color: #f57f17; }
@@ -1290,7 +1291,7 @@ var knowns = [false, true];
 var arrivalLabels = { after15: "Arrivo dopo le 15:00", "13to15": "Arrivo 13:00–15:00", "1130to13": "Arrivo 11:30–13:00", before1130: "Arrivo prima delle 11:30", unknown: "Orario arrivo sconosciuto" };
 var casaLabels = { lat: "Laterani", col: "Colosseum", both: "Entrambe le case" };
 var langLabels = { en: "🇬🇧 EN", it: "🇮🇹 IT", es: "🇪🇸 ES" };
-var piattLabels = { bkg: "Booking", abn: "Airbnb" };
+var piattLabels = { bkg: "Booking", abn: "Airbnb", dir: "Diretta" };
 
 var checkoutTypes = [
   { tipo: "standard", withTax: false, label: "Checkout standard · senza tassa" },
@@ -1618,7 +1619,7 @@ ${G}
 🗝️ Check-in will be from 3 PM and it will be a self check-in: there's no reception, so you'll get in on your own by following the photos in the guide, step by step. On your arrival day the access codes will appear in this same guide.
 🕙 Check-out will be by 10 AM.
 
-To get everything ready, please send me on WhatsApp 👉 ${WA_FABIO}
+To get everything ready, please send me on WhatsApp 👉 +39 352 057 5278
 1️⃣ your approximate arrival time ⏰
 2️⃣ a photo of an ID for each guest 🪪 (it's required by Italian law)
 
@@ -1632,7 +1633,7 @@ ${G}#trasporti
 
 🚖 Good to know: in Rome you can't stop a taxi in the street, you'll need to book it with an app or go to a taxi rank. If you're a group of 5–7, we also offer a private transfer (airport €70–100, station €60–80): just ask me.
 
-If you haven't yet, please send me your arrival time and the ID photos on WhatsApp 👉 ${WA_FABIO}
+If you haven't yet, please send me your arrival time and the ID photos on WhatsApp 👉 +39 352 057 5278
 📌 The apartment will be ready from 3 PM: if you're arriving earlier, let me know and we'll see together what we can do 😉
 
 See you soon!`],
@@ -1646,7 +1647,7 @@ ${G}
 
 ‼️ Before going up, please read the notes highlighted in red on the Check-in page (elevator, keys and doors): they're really important for us and for the neighbours 🙏
 
-If you haven't yet, please send me on WhatsApp your arrival time and a photo of an ID for each guest 👉 ${WA_FABIO}
+If you haven't yet, please send me on WhatsApp your arrival time and a photo of an ID for each guest 👉 WhatsApp +39 352 057 5278
 
 See you tomorrow! 🇮🇹`],
    ["4a","Check-out · Airbnb","1 giorno prima della partenza, ore 18:00","abn",
@@ -1656,7 +1657,7 @@ Just a reminder: tomorrow check-out will be by 10 AM 🕙, because a few hours l
 Before leaving you'll:
 1️⃣ switch off the lights and air conditioning and close the windows
 2️⃣ leave all the keys on the table 🔑
-3️⃣ send me a photo of the keys on WhatsApp 📸 👉 ${WA_FABIO}
+3️⃣ send me a photo of the keys on WhatsApp 📸 👉 WhatsApp +39 352 057 5278
 4️⃣ close the door behind you 🚪
 
 Everything is also in your guide 👇
@@ -1665,7 +1666,7 @@ ${G}#checkout
 ⏰ If you'd like to leave later or leave your luggage, please ask me first: it's only possible if I confirm it, depending on the next guests.
 
 Thank you so much! 🙏`],
-   ["4b","Check-out · Booking e diretti (con tassa)","1 giorno prima della partenza, ore 18:00","bkg",
+   ["4b","Check-out · Booking e dirette (con tassa)","1 giorno prima della partenza, ore 18:00","bkg",
 `Hii {{GuestFirstName}}! 😊 I hope you're having a great time in Rome!
 
 Just a reminder: tomorrow check-out will be by 10 AM 🕙, because a few hours later the next guests will arrive.
@@ -1673,7 +1674,7 @@ Before leaving you'll:
 1️⃣ switch off the lights and air conditioning and close the windows
 2️⃣ leave all the keys on the table 🔑
 3️⃣ if you still need to pay the city tax (€5 per person per night), leave it in cash next to the keys 💶
-4️⃣ send me a photo of the keys on WhatsApp 📸 👉 ${WA_FABIO}
+4️⃣ send me a photo of the keys on WhatsApp 📸 👉 WhatsApp +39 352 057 5278
 5️⃣ close the door behind you 🚪
 
 Everything is also in your guide 👇
@@ -1682,13 +1683,21 @@ ${G}#checkout
 ⏰ If you'd like to leave later or leave your luggage, please ask me first: it's only possible if I confirm it, depending on the next guests.
 
 Thank you so much! 🙏`],
-   ["5","Grazie e recensione (canali: solo Airbnb e Booking)","1 giorno dopo la partenza, ore 11:00","all",
+   ["5a","Grazie e recensione · Airbnb e Booking (senza link)","1 giorno dopo la partenza, ore 11:00","all",
 `Hii {{GuestFirstName}}! Thank you so much for staying with us 🙏😊
 We hope you loved Rome and the apartment!
 
 If you have a minute, a review on the platform where you booked would mean a lot to us ⭐ It only takes a couple of minutes, but it really helps us keep welcoming guests in the best way 🌟
 
-And for your next trip to Rome, you can book directly with us 👉 https://jfmitalia.com
+Have a safe trip home! ✈️`],
+   ["5b","Grazie e recensione · prenotazioni dirette","1 giorno dopo la partenza, ore 11:00","dir",
+`Hii {{GuestFirstName}}! Thank you so much for staying with us 🙏😊
+We hope you loved Rome and the apartment!
+
+If you have a minute, a Google review would mean a lot to us ⭐👇
+https://guida.jfmitalia.com/recensione/?b={{BookingId}}
+
+And for your next trip to Rome, you can book directly with us again 👉 https://jfmitalia.com
 
 Have a safe trip home! ✈️`]
   ],
@@ -1703,7 +1712,7 @@ ${G}
 🗝️ Il check-in sarà dalle 15:00 e sarà un self check-in: non c'è una reception, quindi entrerete in autonomia seguendo le foto della guida, passo passo. Il giorno dell'arrivo i codici di accesso compariranno in questa stessa guida.
 🕙 Il check-out sarà entro le 10:00.
 
-Per preparare tutto, mandami su WhatsApp 👉 ${WA_FABIO}
+Per preparare tutto, mandami su WhatsApp 👉 +39 352 057 5278
 1️⃣ l'orario indicativo di arrivo ⏰
 2️⃣ la foto di un documento per ogni ospite 🪪 (lo richiede la legge italiana)
 
@@ -1717,7 +1726,7 @@ ${G}#trasporti
 
 🚖 Utile sapere: a Roma i taxi non si fermano per strada, vanno prenotati con un'app o presi ai parcheggi taxi. Se siete un gruppo di 5–7 persone offriamo anche un transfer privato (aeroporto 70–100 €, stazione 60–80 €): basta chiedermelo.
 
-Se non l'hai ancora fatto, mandami su WhatsApp l'orario di arrivo e le foto dei documenti 👉 ${WA_FABIO}
+Se non l'hai ancora fatto, mandami su WhatsApp l'orario di arrivo e le foto dei documenti 👉 WhatsApp +39 352 057 5278
 📌 La casa sarà pronta dalle 15:00: se arrivate prima fammelo sapere e vediamo insieme cosa si può fare 😉
 
 A presto!`],
@@ -1731,7 +1740,7 @@ ${G}
 
 ‼️ Prima di salire, leggete gli avvisi in rosso nella pagina Check-in (ascensore, chiavi e porte): per noi e per i vicini sono davvero importanti 🙏
 
-Se non l'hai ancora fatto, mandami su WhatsApp l'orario di arrivo e la foto di un documento per ogni ospite 👉 ${WA_FABIO}
+Se non l'hai ancora fatto, mandami su WhatsApp l'orario di arrivo e la foto di un documento per ogni ospite 👉 WhatsApp +39 352 057 5278
 
 A domani! 🇮🇹`],
    ["4a","Check-out · Airbnb","1 giorno prima della partenza, ore 18:00","abn",
@@ -1741,7 +1750,7 @@ Un promemoria: domani il check-out sarà entro le 10:00 🕙, perché qualche or
 Prima di uscire:
 1️⃣ spegnerete luci e aria condizionata e chiuderete le finestre
 2️⃣ lascerete tutte le chiavi sul tavolo 🔑
-3️⃣ mi manderete su WhatsApp una foto delle chiavi 📸 👉 ${WA_FABIO}
+3️⃣ mi manderete su WhatsApp una foto delle chiavi 📸 👉 WhatsApp +39 352 057 5278
 4️⃣ chiuderete la porta dietro di voi 🚪
 
 È tutto anche nella guida 👇
@@ -1750,7 +1759,7 @@ ${G}#checkout
 ⏰ Se vorrete uscire più tardi o lasciare le valigie, chiedetemelo prima: sarà possibile solo se ve lo confermo io, in base agli ospiti in arrivo.
 
 Grazie mille! 🙏`],
-   ["4b","Check-out · Booking e diretti (con tassa)","1 giorno prima della partenza, ore 18:00","bkg",
+   ["4b","Check-out · Booking e dirette (con tassa)","1 giorno prima della partenza, ore 18:00","bkg",
 `Ciao {{GuestFirstName}}! 😊 Spero che vi stiate godendo Roma!
 
 Un promemoria: domani il check-out sarà entro le 10:00 🕙, perché qualche ora dopo arriveranno i prossimi ospiti.
@@ -1758,7 +1767,7 @@ Prima di uscire:
 1️⃣ spegnerete luci e aria condizionata e chiuderete le finestre
 2️⃣ lascerete tutte le chiavi sul tavolo 🔑
 3️⃣ se dovete ancora saldare la tassa di soggiorno (5 € a persona a notte), la lascerete in contanti accanto alle chiavi 💶
-4️⃣ mi manderete su WhatsApp una foto delle chiavi 📸 👉 ${WA_FABIO}
+4️⃣ mi manderete su WhatsApp una foto delle chiavi 📸 👉 WhatsApp +39 352 057 5278
 5️⃣ chiuderete la porta dietro di voi 🚪
 
 È tutto anche nella guida 👇
@@ -1767,13 +1776,21 @@ ${G}#checkout
 ⏰ Se vorrete uscire più tardi o lasciare le valigie, chiedetemelo prima: sarà possibile solo se ve lo confermo io, in base agli ospiti in arrivo.
 
 Grazie mille! 🙏`],
-   ["5","Grazie e recensione (canali: solo Airbnb e Booking)","1 giorno dopo la partenza, ore 11:00","all",
+   ["5a","Grazie e recensione · Airbnb e Booking (senza link)","1 giorno dopo la partenza, ore 11:00","all",
 `Ciao {{GuestFirstName}}! Grazie di cuore per aver soggiornato da noi 🙏😊
 Speriamo che Roma e la casa vi siano piaciute!
 
 Se hai un minuto, una recensione sulla piattaforma dove hai prenotato per noi vale tantissimo ⭐ Bastano un paio di minuti, ma ci aiuta davvero a continuare ad accogliere gli ospiti nel modo migliore 🌟
 
-E per il prossimo viaggio a Roma puoi prenotare direttamente con noi 👉 https://jfmitalia.com
+Buon rientro! ✈️`],
+   ["5b","Grazie e recensione · prenotazioni dirette","1 giorno dopo la partenza, ore 11:00","dir",
+`Ciao {{GuestFirstName}}! Grazie di cuore per aver soggiornato da noi 🙏😊
+Speriamo che Roma e la casa vi siano piaciute!
+
+Se hai un minuto, una recensione su Google per noi vale tantissimo ⭐👇
+https://guida.jfmitalia.com/recensione/?b={{BookingId}}
+
+E per il prossimo viaggio a Roma puoi prenotare di nuovo direttamente con noi 👉 https://jfmitalia.com
 
 Buon rientro! ✈️`]
   ],
@@ -1788,7 +1805,7 @@ ${G}
 🗝️ El check-in será desde las 15:00 y será un self check-in: no hay recepción, así que entraréis por vuestra cuenta siguiendo las fotos de la guía, paso a paso. El día de llegada los códigos de acceso aparecerán en esta misma guía.
 🕙 El check-out será antes de las 10:00.
 
-Para tenerlo todo listo, mándame por WhatsApp 👉 ${WA_FABIO}
+Para tenerlo todo listo, mándame por WhatsApp 👉 +39 352 057 5278
 1️⃣ la hora aproximada de llegada ⏰
 2️⃣ una foto de un documento de cada huésped 🪪 (lo exige la ley italiana)
 
@@ -1802,7 +1819,7 @@ ${G}#trasporti
 
 🚖 Bueno saber: en Roma los taxis no se paran en la calle, hay que pedirlos con una app o cogerlos en una parada. Si sois un grupo de 5–7 personas, también ofrecemos traslado privado (aeropuerto 70–100 €, estación 60–80 €): solo tienes que pedírmelo.
 
-Si aún no lo has hecho, mándame por WhatsApp la hora de llegada y las fotos de los documentos 👉 ${WA_FABIO}
+Si aún no lo has hecho, mándame por WhatsApp la hora de llegada y las fotos de los documentos 👉 WhatsApp +39 352 057 5278
 📌 La casa estará lista desde las 15:00: si llegáis antes, avísame y vemos juntos qué se puede hacer 😉
 
 ¡Hasta pronto!`],
@@ -1816,7 +1833,7 @@ ${G}
 
 ‼️ Antes de subir, leed los avisos en rojo de la página Check-in (ascensor, llaves y puertas): para nosotros y para los vecinos son muy importantes 🙏
 
-Si aún no lo has hecho, mándame por WhatsApp la hora de llegada y una foto de un documento de cada huésped 👉 ${WA_FABIO}
+Si aún no lo has hecho, mándame por WhatsApp la hora de llegada y una foto de un documento de cada huésped 👉 WhatsApp +39 352 057 5278
 
 ¡Hasta mañana! 🇮🇹`],
    ["4a","Check-out · Airbnb","1 giorno prima della partenza, ore 18:00","abn",
@@ -1826,7 +1843,7 @@ Un recordatorio: mañana el check-out será antes de las 10:00 🕙, porque unas
 Antes de salir:
 1️⃣ apagaréis luces y aire acondicionado y cerraréis las ventanas
 2️⃣ dejaréis todas las llaves sobre la mesa 🔑
-3️⃣ me mandaréis por WhatsApp una foto de las llaves 📸 👉 ${WA_FABIO}
+3️⃣ me mandaréis por WhatsApp una foto de las llaves 📸 👉 WhatsApp +39 352 057 5278
 4️⃣ cerraréis la puerta al salir 🚪
 
 También está todo en la guía 👇
@@ -1835,7 +1852,7 @@ ${G}#checkout
 ⏰ Si queréis salir más tarde o dejar las maletas, pedídmelo antes: solo será posible si os lo confirmo, según los próximos huéspedes.
 
 ¡Muchísimas gracias! 🙏`],
-   ["4b","Check-out · Booking e diretti (con tassa)","1 giorno prima della partenza, ore 18:00","bkg",
+   ["4b","Check-out · Booking e dirette (con tassa)","1 giorno prima della partenza, ore 18:00","bkg",
 `¡Holaa {{GuestFirstName}}! 😊 ¡Espero que estéis disfrutando de Roma!
 
 Un recordatorio: mañana el check-out será antes de las 10:00 🕙, porque unas horas después llegarán los próximos huéspedes.
@@ -1843,7 +1860,7 @@ Antes de salir:
 1️⃣ apagaréis luces y aire acondicionado y cerraréis las ventanas
 2️⃣ dejaréis todas las llaves sobre la mesa 🔑
 3️⃣ si aún tenéis que pagar la tasa turística (5 € por persona y noche), la dejaréis en efectivo junto a las llaves 💶
-4️⃣ me mandaréis por WhatsApp una foto de las llaves 📸 👉 ${WA_FABIO}
+4️⃣ me mandaréis por WhatsApp una foto de las llaves 📸 👉 WhatsApp +39 352 057 5278
 5️⃣ cerraréis la puerta al salir 🚪
 
 También está todo en la guía 👇
@@ -1852,13 +1869,21 @@ ${G}#checkout
 ⏰ Si queréis salir más tarde o dejar las maletas, pedídmelo antes: solo será posible si os lo confirmo, según los próximos huéspedes.
 
 ¡Muchísimas gracias! 🙏`],
-   ["5","Grazie e recensione (canali: solo Airbnb e Booking)","1 giorno dopo la partenza, ore 11:00","all",
+   ["5a","Grazie e recensione · Airbnb e Booking (senza link)","1 giorno dopo la partenza, ore 11:00","all",
 `¡Holaa {{GuestFirstName}}! Muchísimas gracias por alojaros con nosotros 🙏😊
 ¡Esperamos que os hayan encantado Roma y la casa!
 
 Si tienes un minuto, una reseña en la plataforma donde reservaste significaría muchísimo para nosotros ⭐ Solo lleva un par de minutos, pero nos ayuda de verdad a seguir recibiendo a los huéspedes de la mejor manera 🌟
 
-Y para tu próximo viaje a Roma puedes reservar directamente con nosotros 👉 https://jfmitalia.com
+¡Buen viaje de vuelta! ✈️`],
+   ["5b","Grazie e recensione · prenotazioni dirette","1 giorno dopo la partenza, ore 11:00","dir",
+`¡Holaa {{GuestFirstName}}! Muchísimas gracias por alojaros con nosotros 🙏😊
+¡Esperamos que os hayan encantado Roma y la casa!
+
+Si tienes un minuto, una reseña en Google significaría muchísimo para nosotros ⭐👇
+https://guida.jfmitalia.com/recensione/?b={{BookingId}}
+
+Y para tu próximo viaje a Roma puedes volver a reservar directamente con nosotros 👉 https://jfmitalia.com
 
 ¡Buen viaje de vuelta! ✈️`]
   ]};
