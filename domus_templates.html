@@ -435,18 +435,15 @@ var reviewBlock = {
     en: `⭐ One small favour
 If you enjoyed your stay and found the apartment comfortable, clean, and our tips helpful 🗺️, I'd be truly grateful if you could leave us a review on Booking with a score of 10 ⭐.
 It only takes a few minutes ⏳, but it means the world to us — it helps us grow and keep welcoming guests in the best way possible 🌟.
-We're also just one step away from achieving Superhost status, so your support would be incredibly important! 🙏
-👉 Leave your review here: https://secure.booking.com/mytrips.html`,
+We're also just one step away from achieving Superhost status, so your support would be incredibly important! 🙏`,
     it: `⭐ Un piccolo favore
 Se ti sei trovato bene e hai trovato l'appartamento confortevole, pulito e i nostri consigli utili 🗺️, mi farebbe davvero piacere se potessi lasciarci una recensione da 10⭐ su Booking.
 Richiede solo pochi minuti ⏳, ma per noi significa moltissimo — ci aiuta a crescere e continuare ad accogliere ospiti nel miglior modo possibile 🌟.
-Siamo anche ad un passo dallo status Superhost, quindi il tuo supporto sarebbe incredibilmente importante! 🙏
-👉 Puoi lasciarla qui: https://secure.booking.com/mytrips.html`,
+Siamo anche ad un passo dallo status Superhost, quindi il tuo supporto sarebbe incredibilmente importante! 🙏`,
     es: `⭐ Un pequeño favor
 Si disfrutaste tu estancia y encontraste el apartamento cómodo, limpio y nuestros consejos útiles 🗺️, te estaría muy agradecido si pudieras dejarnos una reseña de 10⭐ en Booking.
 Solo lleva unos minutos ⏳, pero para nosotros significa muchísimo — nos ayuda a crecer y seguir recibiendo a futuros huéspedes de la mejor manera posible 🌟.
-¡Estamos a un paso del estatus Superanfitrión, así que tu apoyo sería increíblemente importante! 🙏
-👉 Puedes dejarla aquí: https://secure.booking.com/mytrips.html`
+¡Estamos a un paso del estatus Superanfitrión, así que tu apoyo sería increíblemente importante! 🙏`
   },
   abn: {
     en: `⭐ One small favour
@@ -1609,7 +1606,6 @@ var HOUSE_NAME = { lat: "Domus Laterani", col: "Domus Colosseum" };
 function codesText(casa){ return casa === "lat" ? "🗝️ Key box: [CODICE KEYBOX]" : "🚪 Portone: [CODICE PORTONE] + freccia su ⬆️\n🗝️ Key box: [CODICE KEYBOX]"; }
 function lodgifyMsgs(casa, L){
   var G = "https://guida.jfmitalia.com/?b={{BookingId}}", H = "{{HouseName}}";
-  var rev = "https://guida.jfmitalia.com/recensione/?b={{BookingId}}";
   var T = {
   en: [
    ["1","Alla conferma della prenotazione","Subito dopo la prenotazione (0 giorni dopo)","all",
@@ -1686,12 +1682,11 @@ ${G}#checkout
 ⏰ If you'd like to leave later or leave your luggage, please ask me first: it's only possible if I confirm it, depending on the next guests.
 
 Thank you so much! 🙏`],
-   ["5","Grazie e recensione","1 giorno dopo la partenza, ore 11:00","all",
+   ["5","Grazie e recensione (canali: solo Airbnb e Booking)","1 giorno dopo la partenza, ore 11:00","all",
 `Hii {{GuestFirstName}}! Thank you so much for staying with us 🙏😊
 We hope you loved Rome and the apartment!
 
-If you have a minute, a Google review would mean a lot to us ⭐👇
-${rev}
+If you have a minute, a review on the platform where you booked would mean a lot to us ⭐ It only takes a couple of minutes, but it really helps us keep welcoming guests in the best way 🌟
 
 And for your next trip to Rome, you can book directly with us 👉 https://jfmitalia.com
 
@@ -1772,12 +1767,11 @@ ${G}#checkout
 ⏰ Se vorrete uscire più tardi o lasciare le valigie, chiedetemelo prima: sarà possibile solo se ve lo confermo io, in base agli ospiti in arrivo.
 
 Grazie mille! 🙏`],
-   ["5","Grazie e recensione","1 giorno dopo la partenza, ore 11:00","all",
+   ["5","Grazie e recensione (canali: solo Airbnb e Booking)","1 giorno dopo la partenza, ore 11:00","all",
 `Ciao {{GuestFirstName}}! Grazie di cuore per aver soggiornato da noi 🙏😊
 Speriamo che Roma e la casa vi siano piaciute!
 
-Se hai un minuto, una recensione su Google per noi vale tantissimo ⭐👇
-${rev}
+Se hai un minuto, una recensione sulla piattaforma dove hai prenotato per noi vale tantissimo ⭐ Bastano un paio di minuti, ma ci aiuta davvero a continuare ad accogliere gli ospiti nel modo migliore 🌟
 
 E per il prossimo viaggio a Roma puoi prenotare direttamente con noi 👉 https://jfmitalia.com
 
@@ -1858,12 +1852,11 @@ ${G}#checkout
 ⏰ Si queréis salir más tarde o dejar las maletas, pedídmelo antes: solo será posible si os lo confirmo, según los próximos huéspedes.
 
 ¡Muchísimas gracias! 🙏`],
-   ["5","Grazie e recensione","1 giorno dopo la partenza, ore 11:00","all",
+   ["5","Grazie e recensione (canali: solo Airbnb e Booking)","1 giorno dopo la partenza, ore 11:00","all",
 `¡Holaa {{GuestFirstName}}! Muchísimas gracias por alojaros con nosotros 🙏😊
 ¡Esperamos que os hayan encantado Roma y la casa!
 
-Si tienes un minuto, una reseña en Google nos ayudaría muchísimo ⭐👇
-${rev}
+Si tienes un minuto, una reseña en la plataforma donde reservaste significaría muchísimo para nosotros ⭐ Solo lleva un par de minutos, pero nos ayuda de verdad a seguir recibiendo a los huéspedes de la mejor manera 🌟
 
 Y para tu próximo viaje a Roma puedes reservar directamente con nosotros 👉 https://jfmitalia.com
 
