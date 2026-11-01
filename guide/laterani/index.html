@@ -1266,7 +1266,7 @@ function vBagagli(){
   const site=u=>`<a class="lugsite" href="${u}" target="_blank" rel="noopener">${GLOBE}<span>${L({it:"Sito e prenotazione",en:"Website & booking",es:"Web y reserva"})}</span>${CHEV}</a>`;
   const hrs=h=>h?` · 🕒 ${typeof h==="string"?h:L(h)}`:"";
   const card=([k,name,addr,h,u])=>`<div class="lugc">${k
-      ? row(k,esc(name),`📍 ${typeof addr==="string"?addr:L(addr)}${hrs(h)}`,{ic:IC.bag,icc:"bl"})
+      ? row(k,esc(name),`📍 ${typeof addr==="string"?addr:L(addr)}${hrs(h)}`,{ic:IC.bag,icc:"bl",showVia:true})
       : `<div class="prow nolink"><span class="pic2 bl">${IC.bag}</span><div class="prow-m"><b>${esc(name)}</b><span>📍 ${L(addr)}</span></div></div>`}${site(u)}</div>`;
   const steps=[
     {it:"Scegli il deposito più comodo per il tuo percorso: vicino casa se esci a fare un giro, a Termini se poi prendi il treno o il bus per l'aeroporto.",en:"Pick the most convenient one for your route: near the apartment if you're heading out to explore, at Termini if you then take the train or the airport bus.",es:"Elige la consigna más cómoda para tu recorrido: cerca de casa si sales a pasear, en Termini si luego tomas el tren o el bus al aeropuerto."},
@@ -1409,7 +1409,7 @@ window.addEventListener("hashchange",route);
   const qs=new URLSearchParams(location.search);
   const SLUG=HOUSE.key, today=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Rome"}).format(new Date());
   try{ BOOK=localStorage.getItem("jfm-b-"+SLUG); }catch(_){}
-  if(/^\d{1,12}$/.test(qs.get("b")||"")){ BOOK=qs.get("b"); try{localStorage.setItem("jfm-b-"+SLUG,BOOK)}catch(_){} }
+  if(/^[A-Za-z0-9-]{4,40}$/.test(qs.get("b")||"")){ BOOK=qs.get("b"); try{localStorage.setItem("jfm-b-"+SLUG,BOOK)}catch(_){} }
   try{ const c=JSON.parse(localStorage.getItem("jfm-codes-"+SLUG)||"null"); if(c && c.exp>=today) CODES=c.codes||{}; else localStorage.removeItem("jfm-codes-"+SLUG); }catch(_){}
   const qlang=qs.get("l");
   if(qs.toString()) history.replaceState(null,"",location.pathname+location.hash);

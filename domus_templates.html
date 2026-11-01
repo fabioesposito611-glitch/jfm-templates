@@ -85,7 +85,7 @@
   <span class="filter-label">Sezione:</span>
   <div class="filter-group" id="filter-section">
     <div class="pill active" data-filter="section" data-val="all">Tutte</div>
-    <div class="pill" data-filter="section" data-val="lodgify">🤖 Lodgify auto</div>
+    <div class="pill" data-filter="section" data-val="lodgify">🤖 Hospitable auto</div>
     <div class="pill" data-filter="section" data-val="solleciti">🔔 Solleciti</div>
     <div class="pill" data-filter="section" data-val="precheckin">Pre check-in</div>
     <div class="pill" data-filter="section" data-val="docs_tax">🪪 Documenti & tassa</div>
@@ -1887,17 +1887,17 @@ Compartidla con quien viaja con vosotros. Para cualquier otra cosa, ¡aquí esto
 };
 
 
-/* ===== L — Lodgify: messaggi automatici (in ordine di invio) ===== */
+/* ===== L — Hospitable: messaggi automatici (in ordine di invio) ===== */
 var WA_FABIO = "https://wa.me/393520575278";
 var PID_GOOGLE = { lat: "ChIJx2THlBphLxMRUs6Aznzy12g", col: "ChIJ1dGmxCZhLxMR4xTyDV0QUow" };
 var HOUSE_NAME = { lat: "Domus Laterani", col: "Domus Colosseum" };
 function codesText(casa){ return casa === "lat" ? "🗝️ Key box: [CODICE KEYBOX]" : "🚪 Portone: [CODICE PORTONE] + freccia su ⬆️\n🗝️ Key box: [CODICE KEYBOX]"; }
 function lodgifyMsgs(casa, L){
-  var G = "https://guida.jfmitalia.com/?b={{BookingId}}", H = "{{HouseName}}";
+  var G = "https://guida.jfmitalia.com/?b=%reservation_code%", H = "%property_name%";
   var T = {
   en: [
    ["1","Alla conferma della prenotazione","Subito dopo la prenotazione (0 giorni dopo)","all",
-`Hii {{GuestFirstName}}! 😊
+`Hii %guest_first_name%! 😊
 Thank you so much for booking ${H}, we can't wait to welcome you to Rome! 🇮🇹
 
 Here's your digital guide to the apartment, with everything you'll need 📲👇
@@ -1915,7 +1915,7 @@ To get everything ready, please send me on WhatsApp§NUM§ these two things:
 For anything else, I'm here! 😊
 Fabio · JFM`],
    ["2","Come arrivare","3 giorni prima dell'arrivo, ore 10:00","all",
-`Hii {{GuestFirstName}}! 😊 Only a few days to go! ✈️
+`Hii %guest_first_name%! 😊 Only a few days to go! ✈️
 
 Here's how to get to the apartment from the airport or the station, with times and prices 👇
 ${G}#trasporti
@@ -1927,7 +1927,7 @@ If you haven't yet, please send me your arrival time and the ID photos on WhatsA
 
 See you soon!`],
    ["3","Domani si arriva","1 giorno prima dell'arrivo, ore 18:00","all",
-`Hii {{GuestFirstName}}! 😊 Tomorrow's the day! 🎉
+`Hii %guest_first_name%! 😊 Tomorrow's the day! 🎉
 
 Here's your guide again, keep it handy 👇
 ${G}
@@ -1940,7 +1940,7 @@ If you haven't yet, please send me on WhatsApp your arrival time and a photo of 
 
 See you tomorrow! 🇮🇹`],
    ["4a","Check-out · Airbnb","1 giorno prima della partenza, ore 18:00","abn",
-`Hii {{GuestFirstName}}! 😊 I hope you're having a great time in Rome!
+`Hii %guest_first_name%! 😊 I hope you're having a great time in Rome!
 
 Just a reminder: tomorrow check-out will be by 10 AM 🕙, because a few hours later the next guests will arrive.
 Before leaving you'll:
@@ -1956,7 +1956,7 @@ ${G}#checkout
 
 Thank you so much! 🙏`],
    ["4b","Check-out · Booking e dirette (con tassa)","1 giorno prima della partenza, ore 18:00","bkg",
-`Hii {{GuestFirstName}}! 😊 I hope you're having a great time in Rome!
+`Hii %guest_first_name%! 😊 I hope you're having a great time in Rome!
 
 Just a reminder: tomorrow check-out will be by 10 AM 🕙, because a few hours later the next guests will arrive.
 Before leaving you'll:
@@ -1973,18 +1973,18 @@ ${G}#checkout
 
 Thank you so much! 🙏`],
    ["5a","Grazie e recensione · Airbnb e Booking (senza link)","1 giorno dopo la partenza, ore 11:00","all",
-`Hii {{GuestFirstName}}! Thank you so much for staying with us 🙏😊
+`Hii %guest_first_name%! Thank you so much for staying with us 🙏😊
 We hope you loved Rome and the apartment!
 
 If you have a minute, a review on the platform where you booked would mean a lot to us ⭐ It only takes a couple of minutes, but it really helps us keep welcoming guests in the best way 🌟
 
 Have a safe trip home! ✈️`],
    ["5b","Grazie e recensione · prenotazioni dirette","1 giorno dopo la partenza, ore 11:00","dir",
-`Hii {{GuestFirstName}}! Thank you so much for staying with us 🙏😊
+`Hii %guest_first_name%! Thank you so much for staying with us 🙏😊
 We hope you loved Rome and the apartment!
 
 If you have a minute, a Google review would mean a lot to us ⭐👇
-https://guida.jfmitalia.com/recensione/?b={{BookingId}}
+https://guida.jfmitalia.com/recensione/?b=%reservation_code%
 
 And for your next trip to Rome, you can book directly with us again 👉 https://jfmitalia.com
 
@@ -1992,7 +1992,7 @@ Have a safe trip home! ✈️`]
   ],
   it: [
    ["1","Alla conferma della prenotazione","Subito dopo la prenotazione (0 giorni dopo)","all",
-`Ciao {{GuestFirstName}}! 😊
+`Ciao %guest_first_name%! 😊
 Grazie mille per aver prenotato ${H}, non vediamo l'ora di accoglierti a Roma! 🇮🇹
 
 Ecco la guida digitale dell'appartamento, con tutto quello che ti servirà 📲👇
@@ -2010,7 +2010,7 @@ Per preparare tutto, mandami su WhatsApp§NUM§ queste due cose:
 Per qualsiasi altra cosa sono qui! 😊
 Fabio · JFM`],
    ["2","Come arrivare","3 giorni prima dell'arrivo, ore 10:00","all",
-`Ciao {{GuestFirstName}}! 😊 Mancano pochi giorni! ✈️
+`Ciao %guest_first_name%! 😊 Mancano pochi giorni! ✈️
 
 Ecco come arrivare in appartamento dall'aeroporto o dalla stazione, con tempi e prezzi 👇
 ${G}#trasporti
@@ -2022,7 +2022,7 @@ Se non l'hai ancora fatto, mandami su WhatsApp l'orario di arrivo e le foto dei 
 
 A presto!`],
    ["3","Domani si arriva","1 giorno prima dell'arrivo, ore 18:00","all",
-`Ciao {{GuestFirstName}}! 😊 Domani ci siamo! 🎉
+`Ciao %guest_first_name%! 😊 Domani ci siamo! 🎉
 
 Ecco di nuovo la tua guida, tienila a portata di mano 👇
 ${G}
@@ -2035,7 +2035,7 @@ Se non l'hai ancora fatto, mandami su WhatsApp l'orario di arrivo e la foto di u
 
 A domani! 🇮🇹`],
    ["4a","Check-out · Airbnb","1 giorno prima della partenza, ore 18:00","abn",
-`Ciao {{GuestFirstName}}! 😊 Spero che vi stiate godendo Roma!
+`Ciao %guest_first_name%! 😊 Spero che vi stiate godendo Roma!
 
 Un promemoria: domani il check-out sarà entro le 10:00 🕙, perché qualche ora dopo arriveranno i prossimi ospiti.
 Prima di uscire:
@@ -2051,7 +2051,7 @@ ${G}#checkout
 
 Grazie mille! 🙏`],
    ["4b","Check-out · Booking e dirette (con tassa)","1 giorno prima della partenza, ore 18:00","bkg",
-`Ciao {{GuestFirstName}}! 😊 Spero che vi stiate godendo Roma!
+`Ciao %guest_first_name%! 😊 Spero che vi stiate godendo Roma!
 
 Un promemoria: domani il check-out sarà entro le 10:00 🕙, perché qualche ora dopo arriveranno i prossimi ospiti.
 Prima di uscire:
@@ -2068,18 +2068,18 @@ ${G}#checkout
 
 Grazie mille! 🙏`],
    ["5a","Grazie e recensione · Airbnb e Booking (senza link)","1 giorno dopo la partenza, ore 11:00","all",
-`Ciao {{GuestFirstName}}! Grazie di cuore per aver soggiornato da noi 🙏😊
+`Ciao %guest_first_name%! Grazie di cuore per aver soggiornato da noi 🙏😊
 Speriamo che Roma e la casa vi siano piaciute!
 
 Se hai un minuto, una recensione sulla piattaforma dove hai prenotato per noi vale tantissimo ⭐ Bastano un paio di minuti, ma ci aiuta davvero a continuare ad accogliere gli ospiti nel modo migliore 🌟
 
 Buon rientro! ✈️`],
    ["5b","Grazie e recensione · prenotazioni dirette","1 giorno dopo la partenza, ore 11:00","dir",
-`Ciao {{GuestFirstName}}! Grazie di cuore per aver soggiornato da noi 🙏😊
+`Ciao %guest_first_name%! Grazie di cuore per aver soggiornato da noi 🙏😊
 Speriamo che Roma e la casa vi siano piaciute!
 
 Se hai un minuto, una recensione su Google per noi vale tantissimo ⭐👇
-https://guida.jfmitalia.com/recensione/?b={{BookingId}}
+https://guida.jfmitalia.com/recensione/?b=%reservation_code%
 
 E per il prossimo viaggio a Roma puoi prenotare di nuovo direttamente con noi 👉 https://jfmitalia.com
 
@@ -2087,7 +2087,7 @@ Buon rientro! ✈️`]
   ],
   es: [
    ["1","Alla conferma della prenotazione","Subito dopo la prenotazione (0 giorni dopo)","all",
-`¡Holaa {{GuestFirstName}}! 😊
+`¡Holaa %guest_first_name%! 😊
 Muchísimas gracias por reservar ${H}, ¡tenemos muchas ganas de recibiros en Roma! 🇮🇹
 
 Aquí tienes la guía digital del apartamento, con todo lo que vais a necesitar 📲👇
@@ -2105,7 +2105,7 @@ Para tenerlo todo listo, mándame por WhatsApp§NUM§ estas dos cosas:
 Para cualquier otra cosa, ¡aquí estoy! 😊
 Fabio · JFM`],
    ["2","Come arrivare","3 giorni prima dell'arrivo, ore 10:00","all",
-`¡Holaa {{GuestFirstName}}! 😊 ¡Quedan pocos días! ✈️
+`¡Holaa %guest_first_name%! 😊 ¡Quedan pocos días! ✈️
 
 Aquí tienes cómo llegar al apartamento desde el aeropuerto o la estación, con tiempos y precios 👇
 ${G}#trasporti
@@ -2117,7 +2117,7 @@ Si aún no lo has hecho, mándame por WhatsApp la hora de llegada y las fotos de
 
 ¡Hasta pronto!`],
    ["3","Domani si arriva","1 giorno prima dell'arrivo, ore 18:00","all",
-`¡Holaa {{GuestFirstName}}! 😊 ¡Mañana es el día! 🎉
+`¡Holaa %guest_first_name%! 😊 ¡Mañana es el día! 🎉
 
 Aquí tienes otra vez tu guía, tenla a mano 👇
 ${G}
@@ -2130,7 +2130,7 @@ Si aún no lo has hecho, mándame por WhatsApp la hora de llegada y una foto de 
 
 ¡Hasta mañana! 🇮🇹`],
    ["4a","Check-out · Airbnb","1 giorno prima della partenza, ore 18:00","abn",
-`¡Holaa {{GuestFirstName}}! 😊 ¡Espero que estéis disfrutando de Roma!
+`¡Holaa %guest_first_name%! 😊 ¡Espero que estéis disfrutando de Roma!
 
 Un recordatorio: mañana el check-out será antes de las 10:00 🕙, porque unas horas después llegarán los próximos huéspedes.
 Antes de salir:
@@ -2146,7 +2146,7 @@ ${G}#checkout
 
 ¡Muchísimas gracias! 🙏`],
    ["4b","Check-out · Booking e dirette (con tassa)","1 giorno prima della partenza, ore 18:00","bkg",
-`¡Holaa {{GuestFirstName}}! 😊 ¡Espero que estéis disfrutando de Roma!
+`¡Holaa %guest_first_name%! 😊 ¡Espero que estéis disfrutando de Roma!
 
 Un recordatorio: mañana el check-out será antes de las 10:00 🕙, porque unas horas después llegarán los próximos huéspedes.
 Antes de salir:
@@ -2163,18 +2163,18 @@ ${G}#checkout
 
 ¡Muchísimas gracias! 🙏`],
    ["5a","Grazie e recensione · Airbnb e Booking (senza link)","1 giorno dopo la partenza, ore 11:00","all",
-`¡Holaa {{GuestFirstName}}! Muchísimas gracias por alojaros con nosotros 🙏😊
+`¡Holaa %guest_first_name%! Muchísimas gracias por alojaros con nosotros 🙏😊
 ¡Esperamos que os hayan encantado Roma y la casa!
 
 Si tienes un minuto, una reseña en la plataforma donde reservaste significaría muchísimo para nosotros ⭐ Solo lleva un par de minutos, pero nos ayuda de verdad a seguir recibiendo a los huéspedes de la mejor manera 🌟
 
 ¡Buen viaje de vuelta! ✈️`],
    ["5b","Grazie e recensione · prenotazioni dirette","1 giorno dopo la partenza, ore 11:00","dir",
-`¡Holaa {{GuestFirstName}}! Muchísimas gracias por alojaros con nosotros 🙏😊
+`¡Holaa %guest_first_name%! Muchísimas gracias por alojaros con nosotros 🙏😊
 ¡Esperamos que os hayan encantado Roma y la casa!
 
 Si tienes un minuto, una reseña en Google significaría muchísimo para nosotros ⭐👇
-https://guida.jfmitalia.com/recensione/?b={{BookingId}}
+https://guida.jfmitalia.com/recensione/?b=%reservation_code%
 
 Y para tu próximo viaje a Roma puedes volver a reservar directamente con nosotros 👉 https://jfmitalia.com
 
@@ -2395,7 +2395,7 @@ for (const casa of casas) {
       vars: "[NOME], [NUMERO PRENOTAZIONE]",
       text: guideTexts[lang](GUIDE_URL[casa] + "?b=[NUMERO PRENOTAZIONE]")
     });
-    // Link guida con codici (da incollare nel messaggio Lodgify del giorno di arrivo)
+    // Link guida con codici (da incollare nel messaggio Hospitable del giorno di arrivo)
     pushUnique({
       id: `guidecode-${casa}-${lang}`,
       section: "guide",
@@ -2404,7 +2404,7 @@ for (const casa of casas) {
       vars: casa === "lat" ? "[CODICE KEYBOX]" : "[CODICE KEYBOX], [CODICE PORTONE]",
       text: codesText(casa) + "\n\n(Agli ospiti i codici arrivano da soli nella guida, solo durante il soggiorno. Usali qui solo per emergenze.)"
     });
-    // Lodgify: messaggi automatici in ordine
+    // Hospitable: messaggi automatici in ordine
     // Solleciti (uguali per le due case)
     if (casa === "lat") {
       var NM = lang === "es" ? "[NOMBRE]" : "[NOME]";
@@ -2434,7 +2434,7 @@ for (const casa of casas) {
         section: "lodgify",
         casa: "both", lang, piatt: m[3],
         title: `${m[0]} · ${m[1]} — ⏱ ${m[2]}`,
-        vars: "— (incolla così com'è in Lodgify: {{GuestFirstName}} e {{BookingId}} li compila Lodgify)",
+        vars: "— (incolla così com'è in Hospitable: %guest_first_name% e %reservation_code% li compila Hospitable)",
         text: m[4]
       });
     });
@@ -2485,7 +2485,7 @@ function getFiltered() {
 var sectionOrder = ["lodgify","solleciti","precheckin","docs_tax","guide","reminder","inhouse","checkout","luggage","tips_restaurants","tips_itinerary","location","warnings","ncc","garage"];
 var sectionTitles = {
   solleciti: "L2 — 🔔 Solleciti · solo a chi non l'ha fatto (controlli quotidiani)",
-  lodgify: "L — 🤖 Lodgify · messaggi automatici (in ordine di invio · validi per entrambe le case)",
+  lodgify: "L — 🤖 Hospitable · messaggi automatici (in ordine di invio · validi per entrambe le case)",
   precheckin: "A — Pre check-in",
   docs_tax: "A2 — 🪪 Promemoria passaporti & tassa",
   guide: "A3 — 📲 Guida ospite digitale",
