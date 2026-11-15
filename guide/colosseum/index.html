@@ -503,6 +503,28 @@ body{font-size:17px}
 .lugsite svg{width:18px;height:18px;flex:none}
 .lugsteps{margin:4px 0 10px;padding-left:22px;display:flex;flex-direction:column;gap:8px;font-size:15px;line-height:1.45}
 .lugsteps li::marker{font-weight:700;color:var(--blue)}
+
+/* da leggere subito */
+.mustc{display:flex;align-items:center;gap:12px;margin:4px 0 16px;padding:14px;border-radius:var(--r);background:var(--red-soft);border:2px solid var(--red);color:inherit;text-decoration:none}
+.mustc>svg:first-child{width:28px;height:28px;flex:none;color:var(--red)}
+.mustc>div{flex:1;display:flex;flex-direction:column;gap:3px}
+.mustc b{font-size:16.5px;color:var(--red)}
+.mustc span{font-size:14px}
+.mustc small{font-size:12.5px;font-weight:700;color:var(--red)}
+.mustc.ok{background:var(--card);border:1.5px solid var(--line)}
+.mustc.ok>svg:first-child{color:#2e8b57}
+.mustc.ok b{color:#2e8b57}
+.mbar{display:block;height:7px;border-radius:9px;background:rgba(0,0,0,.08);overflow:hidden;margin-top:4px}
+.mbar>i{display:block;height:100%;background:var(--red);border-radius:9px;transition:width .3s}
+.mprog{display:flex;align-items:center;gap:10px;margin:0 0 6px}
+.mprog .mbar{flex:1;margin:0}
+.gold.mustx{border:1.5px solid var(--red-soft)}
+.gold.mustx.ok{opacity:.75}
+.gold.mustx .btn{display:inline-flex}
+.note.ok{background:#e9f6ee;border-color:#2e8b57}
+.note.ok svg{color:#2e8b57}
+.mustc svg.chev{width:20px;height:20px;flex:none;color:var(--ink)}
+.mustc .mbar{width:100%}
 </style>
 
 <div class="app">
@@ -768,6 +790,7 @@ const HOUSE = {
       {img:"c_entry", t:{it:"Aprite la porta: benvenuti a casa! Speriamo che vi piaccia 😊",en:"Open the door: welcome home! We hope you'll love it 😊",es:"Abrid la puerta: ¡bienvenidos a casa! Esperamos que os guste 😊"}}
     ]}
   ],
+  must:[{"ic": "lift", "t": {"it": "Ascensore: porte sempre chiuse, luce rossa spenta", "en": "Elevator: doors always closed, red light off", "es": "Ascensor: puertas siempre cerradas, luz roja apagada"}, "d": {"it": "Quando uscite dall'ascensore <b>chiudete bene le porte</b> e guardate il tastierino fuori: <b>la luce rossa deve spegnersi</b>. Se resta accesa, l'ascensore si blocca per tutto il palazzo e i residenti restano senza ascensore: per loro è un problema serio e ce lo segnalano subito. Vi chiediamo davvero questa attenzione, ogni volta.", "en": "When you get out of the elevator, <b>close the doors properly</b> and look at the keypad outside: <b>the red light must go off</b>. If it stays on, the elevator is blocked for the whole building and the residents are left without it: for them it's a serious problem and they report it to us straight away. Please pay attention to this every single time.", "es": "Al salir del ascensor <b>cerrad bien las puertas</b> y mirad el panel de fuera: <b>la luz roja debe apagarse</b>. Si se queda encendida, el ascensor se bloquea para todo el edificio y los vecinos se quedan sin ascensor: para ellos es un problema serio y nos lo comunican enseguida. Os pedimos de verdad esta atención, cada vez."}}, {"ic": "key", "t": {"it": "Key box: mescolate sempre i numeri", "en": "Key box: always scramble the numbers", "es": "Caja de llaves: mezclad siempre los números"}, "d": {"it": "Ogni volta che aprite il key box, <b>prima di andare via richiudetelo e mescolate i numeri</b>: se resta sulla combinazione giusta, chiunque passi può aprirlo e prendere le chiavi.", "en": "Every time you open the key box, <b>close it again and scramble the numbers before you leave</b>: if it stays on the right combination, anyone walking by can open it and take the keys.", "es": "Cada vez que abráis la caja de llaves, <b>antes de iros cerradla y mezclad los números</b>: si se queda en la combinación correcta, cualquiera que pase puede abrirla y coger las llaves."}}],
   musts:[
     {ic:"lift", t:{it:"Ascensore",en:"Elevator",es:"Ascensor"}, d:{it:"Uscendo chiudete bene le porte: la luce rossa fuori deve spegnersi.",en:"Close the doors properly when you get out: the red light outside must go off.",es:"Al salir cerrad bien las puertas: la luz roja de fuera debe apagarse."}},
     {ic:"stairs", t:{it:"Scale: 2° piano",en:"Stairs: 2nd floor",es:"Escalera: 2.º piso"}, d:{it:"Al 1° piano non andate verso la scala B: continuate a salire.",en:"On the 1st floor don't head to staircase B: keep climbing.",es:"En el 1.er piso no vayáis a la escalera B: seguid subiendo."}},
@@ -1005,7 +1028,8 @@ const APPS={
   aiuto:{ic:XI.tool, c:"or", t:{it:"Problemi?",en:"Problems?",es:"¿Problemas?"}, h:{it:"Qualcosa non va?",en:"Something wrong?",es:"¿Algo no va bien?"}, d:{it:"Le soluzioni ai problemi più comuni.",en:"Fixes for the most common problems.",es:"Soluciones a los problemas más comunes."}},
   sos:{ic:XI.sos, c:"rd", t:{it:"Emergenze",en:"Emergency",es:"Emergencias"}, h:{it:"Emergenze",en:"Emergency",es:"Emergencias"}, d:{it:"112, ospedali, farmacie, polizia.",en:"112, hospitals, pharmacies, police.",es:"112, hospitales, farmacias, policía."}}
 };
-const ORDER=Object.keys(APPS);
+APPS.importante={hide:true, ic:WARN, c:"rd", t:{it:"Da leggere subito",en:"Read this first",es:"Leed esto primero"}, h:{it:"Da leggere subito",en:"Read this first",es:"Leed esto primero"}, d:{it:"Poche cose, ma importanti per stare bene in casa. Ci vuole un minuto.",en:"Just a few things, but important for a good stay. It takes a minute.",es:"Pocas cosas, pero importantes para estar bien en casa. Es un minuto."}};
+const ORDER=Object.keys(APPS).filter(k=>!APPS[k].hide);
 let PAGE="home", SUB=null;
 
 /* ---------- mattoncini ---------- */
@@ -1046,6 +1070,7 @@ function vHome(c){
     <div class="hero-t"><span>${L(UI.welcome)}</span><h1>${esc(h.name)}</h1></div>
   </section>
   <p class="hello">${L({it:"Siamo felici di avervi qui! In questa guida trovate tutto quello che vi serve: toccate un'icona per iniziare.",en:"We're happy to have you here! This guide has everything you need: tap an icon to start.",es:"¡Nos alegra teneros aquí! En esta guía encontráis todo lo que necesitáis: tocad un icono para empezar."})}</p>
+  ${mustCard()}
   <div class="facts2">
     <div><small>${L(UI.checkin)}</small><b>${L(DAYS)}</b></div>
     <div><small>${L(UI.checkout)}</small><b>${L(DAYS_OUT)}</b></div>
@@ -1084,7 +1109,7 @@ function frameHTML(f,n){
       ${f.video?video(f.video,f.vlabel):""}
     </div>`;
 }
-const MICON={ lift:svg('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 8l3-3 3 3M9 16l3 3 3-3"/>'), key:IC.key, door:IC.door, boiler:FIC.boiler };
+const MICON={ lift:svg('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 8l3-3 3 3M9 16l3 3 3-3"/>'), key:IC.key, door:IC.door, boiler:FIC.boiler, toilet:XI.toilet };
 function goldenHTML(){
   if(!HOUSE.golden) return "";
   return `<section class="golden"><h3>${WARN}<span>${L({it:"Le 3 regole d'oro di questa casa",en:"The 3 golden rules of this apartment",es:"Las 3 reglas de oro de esta casa"})}</span></h3>
@@ -1114,14 +1139,35 @@ function vArrivo(){
       ${carousel(g.frames.map((f,k)=>frameHTML(f,k+1)))}</div>`;
     i++;
   }
-  return out;
+  return out+(HOUSE.must?`<div class="astep"><div class="ash"><span class="sn">${step+1}</span><h3>${L({it:"Siete dentro: ultima cosa!",en:"You're in: one last thing!",es:"Ya estáis dentro: ¡una última cosa!"})}</h3></div>${mustCard()}</div>`:"");
+}
+
+
+/* ---------- DA LEGGERE SUBITO ---------- */
+function ackGet(){ try{ return JSON.parse(localStorage.getItem("jfm-ack-"+HOUSE.key)||"[]"); }catch(_){ return []; } }
+function ackSet(a){ try{ localStorage.setItem("jfm-ack-"+HOUSE.key,JSON.stringify(a)); }catch(_){} }
+let ACK=null;
+function acks(){ if(!ACK) ACK=ackGet(); return ACK; }
+function mustCard(){
+  const M=HOUSE.must; if(!M||!M.length) return "";
+  const n=M.length, done=M.filter((_,i)=>acks().includes(i)).length;
+  if(done>=n) return `<a class="mustc ok" href="#importante">${svg('<path d="M4 12l5 5L20 6"/>')}<div><b>${L({it:"Cose importanti lette",en:"Important things read",es:"Cosas importantes leídas"})}</b><span>${L({it:"Grazie! Potete rileggerle quando volete.",en:"Thank you! You can read them again any time.",es:"¡Gracias! Podéis releerlas cuando queráis."})}</span></div>${CHEV}</a>`;
+  return `<a class="mustc" href="#importante">${WARN}<div><b>${L({it:`Da leggere subito: ${n} cose importanti`,en:`Read this first: ${n} important things`,es:`Leed esto primero: ${n} cosas importantes`})}</b><span>${L({it:"Un minuto per stare tranquilli tutto il soggiorno",en:"One minute for a worry-free stay",es:"Un minuto para estar tranquilos toda la estancia"})}</span><i class="mbar"><i style="width:${Math.round(done/n*100)}%"></i></i><small>${done}/${n} ${L({it:"lette",en:"read",es:"leídas"})}</small></div>${CHEV}</a>`;
+}
+function vImportante(){
+  const M=HOUSE.must||[], n=M.length, a=acks(), done=M.filter((_,i)=>a.includes(i)).length;
+  return `<p class="lugintro">${L({it:"Sono le cose che gli ospiti a volte non sanno e che poi creano problemi a voi o ai vicini. <b>Leggetele tutte e toccate «Ho capito» su ognuna.</b>",en:"These are the things guests sometimes don't know, and that then cause problems for you or the neighbours. <b>Please read them all and tap «Got it» on each one.</b>",es:"Son las cosas que a veces los huéspedes no saben y que luego causan problemas a vosotros o a los vecinos. <b>Leedlas todas y tocad «Entendido» en cada una.</b>"})}</p>
+    <div class="mprog"><i class="mbar"><i style="width:${n?Math.round(done/n*100):0}%"></i></i><b>${done}/${n}</b></div>
+    ${M.map((g,i)=>{ const ok=a.includes(i); return `<div class="gold mustx${ok?" ok":""}"><span class="gn">${MICON[g.ic]||IC.info}<i>${i+1}</i></span><div><b>${L(g.t)}</b><p>${L(g.d)}</p>
+      <button type="button" class="btn ${ok?"ghost":"primary"} sm mt" data-ack="${i}">${ok?svg('<path d="M4 12l5 5L20 6"/>'):""}<span>${ok?L({it:"Letto",en:"Read",es:"Leído"}):L({it:"Ho capito",en:"Got it",es:"Entendido"})}</span></button></div></div>`; }).join("")}
+    ${done>=n&&n?`<div class="note ok mt">${svg('<path d="M4 12l5 5L20 6"/>')}<span>${L({it:"Grazie mille! Ora siete pronti: godetevi la casa e Roma 😊",en:"Thank you so much! You're all set: enjoy the apartment and Rome 😊",es:"¡Muchas gracias! Ya estáis listos: disfrutad de la casa y de Roma 😊"})}</span></div>`:""}`;
 }
 
 /* ---------- CASA ---------- */
 function vCasa(){
   const h=HOUSE;
   const withImg=h.find.filter(f=>f.img), noImg=h.find.filter(f=>!f.img);
-  return `${goldenHTML()}${h.good?h3(svg('<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 00-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0012 3z"/>'),{it:"Trucchi e segreti della casa",en:"House tips & tricks",es:"Trucos y secretos de la casa"})+`<div class="gcards">${L(h.good).map((x,i)=>`<div class="gcard"><span class="gi">${[FIC.boiler,XI.toilet,IC.door][i]||IC.info}</span><p>${x}</p></div>`).join("")}</div>`:""}
+  return `${mustCard()}${h.good?h3(svg('<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 00-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0012 3z"/>'),{it:"Trucchi e segreti della casa",en:"House tips & tricks",es:"Trucos y secretos de la casa"})+`<div class="gcards">${L(h.good).map((x,i)=>`<div class="gcard"><span class="gi">${[FIC.boiler,XI.toilet,IC.door][i]||IC.info}</span><p>${x}</p></div>`).join("")}</div>`:""}
     ${h3(XI.search,{it:"Dove trovo…",en:"Where is…",es:"Dónde está…"})}
     <div class="finds2">${withImg.map(f=>`<article class="find2">${zoomImg(f.img,"ph")}<div><h4>${FIC[f.ic]||""}<span>${L(f.t)}</span></h4><p>${L(f.w)}</p></div></article>`).join("")}</div>
     ${noImg.length?`<div class="finds3">${noImg.map(f=>`<div class="find3"><span class="fci">${FIC[f.ic]||IC.home}</span><div><b>${L(f.t)}</b><span>${L(f.w)}</span></div></div>`).join("")}</div>`:""}`;
@@ -1306,9 +1352,9 @@ function vSos(){
 }
 
 /* ---------- pagina ---------- */
-const VIEWS_BY={arrivo:vArrivo,casa:vCasa,foto:vFoto,checkout:vCheckout,zona:vZona,itinerari:vItinerari,mangiare:vMangiare,bar:vBar,vedere:vVedere,trasporti:vTrasporti,spesa:vSpesa,bagagli:vBagagli,info:vInfo,recensione:vRecensione,aiuto:vAiuto,sos:vSos};
+const VIEWS_BY={importante:vImportante,arrivo:vArrivo,casa:vCasa,foto:vFoto,checkout:vCheckout,zona:vZona,itinerari:vItinerari,mangiare:vMangiare,bar:vBar,vedere:vVedere,trasporti:vTrasporti,spesa:vSpesa,bagagli:vBagagli,info:vInfo,recensione:vRecensione,aiuto:vAiuto,sos:vSos};
 function vPage(s,c){
-  const i=ORDER.indexOf(s), nx=ORDER[i+1], a=APPS[s];
+  const i=ORDER.indexOf(s), nx=i<0?null:ORDER[i+1], a=APPS[s];
   return `<header class="phead"><span class="ai ${a.c}">${a.ic}</span><div><h1>${L(a.h)}</h1><p>${L(a.d)}</p></div></header>
     ${VIEWS_BY[s](c)}
     <div class="pfoot"><a class="btn primary full" href="#home">${IC.home}<span>${L({it:"Torna alla home",en:"Back to home",es:"Volver al inicio"})}</span>${CHEV}</a>
@@ -1356,7 +1402,8 @@ function carUpdate(car){
 document.addEventListener("scroll",e=>{ const t=e.target; if(t.classList && t.classList.contains("track")){ clearTimeout(t._t); t._t=setTimeout(()=>carUpdate(t.parentElement),60); } },true);
 
 document.addEventListener("click",e=>{
-  const t=e.target.closest("[data-copy],[data-zoom],[data-more],[data-car],[data-go],[data-lang],#langBtn"); if(!t) return;
+  const t=e.target.closest("[data-ack],[data-copy],[data-zoom],[data-more],[data-car],[data-go],[data-lang],#langBtn"); if(!t) return;
+  if(t.dataset.ack!==undefined){ const k=+t.dataset.ack, a=acks(); if(!a.includes(k)){ a.push(k); ackSet(a); } render(true); return; }
   if(t.id==="langBtn"){ langSheet(false); return; }
   if(t.dataset.lang){ setLang(t.dataset.lang); document.getElementById("langSheet").hidden=true; return; }
   if(t.dataset.copy!==undefined){ const txt=t.dataset.copy, done=()=>toast(L(UI.copied));
