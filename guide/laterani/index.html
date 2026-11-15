@@ -1089,7 +1089,7 @@ const TAXI_APPS=[
   ["Uber",{it:"Taxi e auto con autista",en:"Taxis and private drivers",es:"Taxis y coches con conductor"},"https://apps.apple.com/app/id368677368","https://play.google.com/store/apps/details?id=com.ubercab"],
   ["itTaxi",{it:"L'app dei radiotaxi italiani",en:"The Italian radio-taxi app",es:"La app de los radiotaxis italianos"},"https://apps.apple.com/it/app/it-taxi/id527559443","https://play.google.com/store/apps/details?id=it.ud.microtek.ITTaxi"]];
 /* ---------- codici: arrivano solo dal link personale (?k= key box, ?p= portone) ---------- */
-let CODES={}, BOOK=null, PHASE=null;
+let CODES={}, BOOK=null, PHASE=null, PLATFORM=(()=>{try{return localStorage.getItem("jfm-plat-"+SLUG)||""}catch(_){return ""}})();
 const ON_GH=location.hostname.endsWith("github.io");
 function codesNote(where){
   if(Object.keys(CODES||{}).length) return "";
@@ -1150,7 +1150,7 @@ function frameHTML(f,n){
       ${f.video?video(f.video,f.vlabel):""}
     </div>`;
 }
-const MICON={ lift:svg('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 8l3-3 3 3M9 16l3 3 3-3"/>'), key:IC.key, door:IC.door, boiler:FIC.boiler, toilet:XI.toilet };
+const MICON={ lift:svg('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 8l3-3 3 3M9 16l3 3 3-3"/>'), key:IC.key, door:IC.door, boiler:FIC.boiler, toilet:XI.toilet, doc:IC.doc, cash:CASH };
 function goldenHTML(){
   if(!HOUSE.golden) return "";
   return `<section class="golden"><h3>${WARN}<span>${L({it:"Le 3 regole d'oro di questa casa",en:"The 3 golden rules of this apartment",es:"Las 3 reglas de oro de esta casa"})}</span></h3>
@@ -1180,27 +1180,41 @@ function vArrivo(){
       ${carousel(g.frames.map((f,k)=>frameHTML(f,k+1)))}</div>`;
     i++;
   }
-  return out+(HOUSE.must?`<div class="astep"><div class="ash"><span class="sn">${step+1}</span><h3>${L({it:"Siete dentro: ultima cosa!",en:"You're in: one last thing!",es:"Ya estáis dentro: ¡una última cosa!"})}</h3></div>${mustCard()}</div>`:"");
+  return out+(MUSTS().length?`<div class="astep"><div class="ash"><span class="sn">${step+1}</span><h3>${L({it:"Siete dentro: ultima cosa!",en:"You're in: one last thing!",es:"Ya estáis dentro: ¡una última cosa!"})}</h3></div>${mustCard()}</div>`:"");
 }
 
 
 /* ---------- DA LEGGERE SUBITO ---------- */
+const MUST_DOCS={id:"docs",ic:"doc",t:{it:"Documenti: la foto dei passaporti di tutti",en:"ID: a photo of everyone's passport",es:"Documentos: la foto de los pasaportes de todos"},
+ d:{it:"Mandateci su WhatsApp la foto del <b>passaporto o della carta d'identità di tutti gli ospiti</b>. Prima dell'arrivo fatelo con calma, quando potete; <b>dal check-in in poi invece è urgente</b>, perché la legge ci dà <b>solo 24 ore</b> per registrarvi in Questura.",
+    en:"Send us on WhatsApp a photo of the <b>passport or ID card of every guest</b>. Before arrival there's no rush, whenever you can; <b>once you've checked in, though, it's urgent</b>, because the law gives us <b>only 24 hours</b> to register you with the police.",
+    es:"Mandadnos por WhatsApp la foto del <b>pasaporte o del DNI de todos los huéspedes</b>. Antes de llegar, con calma, cuando podáis; <b>desde el check-in, en cambio, es urgente</b>, porque la ley nos da <b>solo 24 horas</b> para registraros en la policía."}, wa:1};
+const MUST_TAX={id:"tax",ic:"cash",t:{it:"Tassa di soggiorno: va pagata a parte",en:"City tax: it's paid separately",es:"Tasa turística: se paga aparte"},
+ d:{it:"La tassa di soggiorno del Comune di Roma (<b>5 € a persona a notte</b>, massimo 10 notti; bambini fino a 10 anni esenti) <b>non è inclusa nel prezzo</b> della prenotazione. Scriveteci su WhatsApp e ci accordiamo insieme su come pagarla.",
+    en:"The City of Rome tourist tax (<b>€5 per person per night</b>, max 10 nights; children up to 10 exempt) <b>isn't included in the price</b> of your booking. Message us on WhatsApp and we'll agree together on how to pay it.",
+    es:"La tasa turística del Ayuntamiento de Roma (<b>5 € por persona y noche</b>, máximo 10 noches; niños hasta 10 años exentos) <b>no está incluida en el precio</b> de la reserva. Escribidnos por WhatsApp y acordamos juntos cómo pagarla."}, note:{it:"Solo per chi ha prenotato su Booking.com o direttamente con noi: su Airbnb è già pagata.",en:"Only if you booked on Booking.com or directly with us: on Airbnb it's already paid.",es:"Solo si habéis reservado en Booking.com o directamente con nosotros: en Airbnb ya está pagada."}, wa:1};
+function MUSTS(){
+  const list=[MUST_DOCS];
+  if(!/airbnb/.test(PLATFORM)) list.push(MUST_TAX);
+  return list.concat((HOUSE.must||[]).map((g,i)=>Object.assign({id:"h"+i},g)));
+}
+
 function ackGet(){ try{ return JSON.parse(localStorage.getItem("jfm-ack-"+HOUSE.key)||"[]"); }catch(_){ return []; } }
 function ackSet(a){ try{ localStorage.setItem("jfm-ack-"+HOUSE.key,JSON.stringify(a)); }catch(_){} }
 let ACK=null;
 function acks(){ if(!ACK) ACK=ackGet(); return ACK; }
 function mustCard(){
-  const M=HOUSE.must; if(!M||!M.length) return "";
-  const n=M.length, done=M.filter((_,i)=>acks().includes(i)).length;
+  const M=MUSTS(); if(!M.length) return "";
+  const n=M.length, done=M.filter(g=>acks().includes(g.id)).length;
   if(done>=n) return `<a class="mustc ok" href="#importante">${svg('<path d="M4 12l5 5L20 6"/>')}<div><b>${L({it:"Cose importanti lette",en:"Important things read",es:"Cosas importantes leídas"})}</b><span>${L({it:"Grazie! Potete rileggerle quando volete.",en:"Thank you! You can read them again any time.",es:"¡Gracias! Podéis releerlas cuando queráis."})}</span></div>${CHEV}</a>`;
   return `<a class="mustc" href="#importante">${WARN}<div><b>${L({it:`Da leggere subito: ${n} cose importanti`,en:`Read this first: ${n} important things`,es:`Leed esto primero: ${n} cosas importantes`})}</b><span>${L({it:"Un minuto per stare tranquilli tutto il soggiorno",en:"One minute for a worry-free stay",es:"Un minuto para estar tranquilos toda la estancia"})}</span><i class="mbar"><i style="width:${Math.round(done/n*100)}%"></i></i><small>${done}/${n} ${L({it:"lette",en:"read",es:"leídas"})}</small></div>${CHEV}</a>`;
 }
 function vImportante(){
-  const M=HOUSE.must||[], n=M.length, a=acks(), done=M.filter((_,i)=>a.includes(i)).length;
+  const M=MUSTS(), n=M.length, a=acks(), done=M.filter(g=>a.includes(g.id)).length;
   return `<p class="lugintro">${L({it:"Sono le cose che gli ospiti a volte non sanno e che poi creano problemi a voi o ai vicini. <b>Leggetele tutte e toccate «Ho capito» su ognuna.</b>",en:"These are the things guests sometimes don't know, and that then cause problems for you or the neighbours. <b>Please read them all and tap «Got it» on each one.</b>",es:"Son las cosas que a veces los huéspedes no saben y que luego causan problemas a vosotros o a los vecinos. <b>Leedlas todas y tocad «Entendido» en cada una.</b>"})}</p>
     <div class="mprog"><i class="mbar"><i style="width:${n?Math.round(done/n*100):0}%"></i></i><b>${done}/${n}</b></div>
-    ${M.map((g,i)=>{ const ok=a.includes(i); return `<div class="gold mustx${ok?" ok":""}"><span class="gn">${MICON[g.ic]||IC.info}<i>${i+1}</i></span><div><b>${L(g.t)}</b><p>${L(g.d)}</p>
-      <button type="button" class="btn ${ok?"ghost":"primary"} sm mt" data-ack="${i}">${ok?svg('<path d="M4 12l5 5L20 6"/>'):""}<span>${ok?L({it:"Letto",en:"Read",es:"Leído"}):L({it:"Ho capito",en:"Got it",es:"Entendido"})}</span></button></div></div>`; }).join("")}
+    ${M.map((g,i)=>{ const ok=a.includes(g.id); return `<div class="gold mustx${ok?" ok":""}"><span class="gn">${MICON[g.ic]||IC.info}<i>${i+1}</i></span><div><b>${L(g.t)}</b><p>${L(g.d)}</p>${g.note&&!PLATFORM?`<p class="small muted">${L(g.note)}</p>`:""}${g.wa?`<div class="mt">${btn(waLink(),L({it:"Scrivici su WhatsApp",en:"Message us on WhatsApp",es:"Escríbenos por WhatsApp"}),"wa sm",IC.chat)}</div>`:""}
+      <button type="button" class="btn ${ok?"ghost":"primary"} sm mt" data-ack="${g.id}">${ok?svg('<path d="M4 12l5 5L20 6"/>'):""}<span>${ok?L({it:"Letto",en:"Read",es:"Leído"}):L({it:"Ho capito",en:"Got it",es:"Entendido"})}</span></button></div></div>`; }).join("")}
     ${done>=n&&n?`<div class="note ok mt">${svg('<path d="M4 12l5 5L20 6"/>')}<span>${L({it:"Grazie mille! Ora siete pronti: godetevi la casa e Roma 😊",en:"Thank you so much! You're all set: enjoy the apartment and Rome 😊",es:"¡Muchas gracias! Ya estáis listos: disfrutad de la casa y de Roma 😊"})}</span></div>`:""}`;
 }
 
@@ -1222,7 +1236,7 @@ function vCheckout(){
   const steps=[
     [svg('<path d="M12 3v9"/><path d="M6.4 7.4a8 8 0 1011.2 0"/>'),{it:"Spegnerete luci e aria condizionata e chiuderete le finestre",en:"You'll switch off the lights and air conditioning and close the windows",es:"Apagaréis luces y aire acondicionado y cerraréis las ventanas"}],
     [IC.key,{it:"Lascerete tutte le chiavi sul tavolo",en:"You'll leave all the keys on the table",es:"Dejaréis todas las llaves sobre la mesa"}],
-    [CASH,{it:"Se dovrete ancora saldare la tassa di soggiorno, la lascerete in contanti accanto alle chiavi",en:"If you still need to pay the city tax, you'll leave it in cash next to the keys",es:"Si aún tenéis que pagar la tasa turística, la dejaréis en efectivo junto a las llaves"}],
+    [CASH,{it:"Se vi siete accordati con noi per pagare la tassa di soggiorno in contanti, la lascerete accanto alle chiavi",en:"If you agreed with us to pay the city tax in cash, you'll leave it next to the keys",es:"Si acordasteis con nosotros pagar la tasa turística en efectivo, la dejaréis junto a las llaves"}],
     [IC.chat,{it:"Ci manderete su WhatsApp una foto delle chiavi sul tavolo",en:"You'll send us a WhatsApp photo of the keys on the table",es:"Nos mandaréis por WhatsApp una foto de las llaves en la mesa"}],
     [IC.door,{it:"Chiuderete la porta dietro di voi, controllando che sia chiusa davvero. Buon viaggio!",en:"You'll close the door behind you, checking it's really shut. Have a safe trip!",es:"Cerraréis la puerta al salir, comprobando que esté bien cerrada. ¡Buen viaje!"}]
   ];
@@ -1347,7 +1361,7 @@ function vInfo(){
     `+`<div class="icard"><h4>${CASH}<span>${L({it:"Tassa di soggiorno",en:"City tax",es:"Tasa turística"})}</span></h4>
       <div class="taxeq"><div><span>${XI.person}</span><small>${L({it:"a persona",en:"per person",es:"por persona"})}</small></div><em>×</em><div><span>${XI.moon}</span><small>${L({it:"a notte",en:"per night",es:"por noche"})}</small></div><em>=</em><div class="eur"><b>5 €</b><small>${L({it:"max 10 notti",en:"max 10 nights",es:"máx. 10 noches"})}</small></div></div>
       <div class="taxrow" hidden><b>5 €</b><span>${L({it:"a persona, a notte, prime 10 notti. Bambini fino a 10 anni esenti.",en:"per person, per night, first 10 nights. Children up to 10 exempt.",es:"por persona y noche, primeras 10 noches. Niños hasta 10 años exentos."})}</span></div>
-      <div class="pay2"><div><b>Airbnb</b><span>${L({it:"Già pagata",en:"Already paid",es:"Ya pagada"})}</span></div><div><b>Booking · ${L({it:"diretta",en:"direct",es:"directa"})}</b><span>${L({it:"In contanti entro la partenza",en:"In cash before you leave",es:"En efectivo antes de salir"})}</span></div></div>
+      <div class="pay2"><div><b>Airbnb</b><span>${L({it:"Già pagata",en:"Already paid",es:"Ya pagada"})}</span></div><div><b>Booking · ${L({it:"diretta",en:"direct",es:"directa"})}</b><span>${L({it:"Da pagare a parte: ci accordiamo su WhatsApp",en:"Paid separately: we'll agree on WhatsApp",es:"Se paga aparte: lo acordamos por WhatsApp"})}</span></div></div>
       <p class="ref">${L({it:"Rif.: art. 14, c. 16, lett. e) D.L. 78/2010; Regolamento Delib. Assemblea Capitolina n. 87/2022; tariffe Delib. Giunta Capitolina n. 255/2023.",en:"Ref.: art. 14(16)(e) Decree-Law 78/2010; Rome City Council Resolution 87/2022; City Executive Resolution 255/2023.",es:"Ref.: art. 14.16.e) D.L. 78/2010; Delib. Asamblea Capitolina 87/2022; Delib. Junta Capitolina 255/2023."})}</p></div>
     <div class="icard"><h4>${IC.doc}<span>${L({it:"Documenti",en:"ID documents",es:"Documentos"})}</span></h4>
       <p>${L({it:"Mandateci su WhatsApp la foto di un documento per ogni ospite, prima dell'arrivo o appena entrati.",en:"Send us a WhatsApp photo of an ID for every guest, before arrival or as soon as you're in.",es:"Mandadnos por WhatsApp la foto de un documento de cada huésped, antes de llegar o nada más entrar."})}</p>
@@ -1444,7 +1458,7 @@ document.addEventListener("scroll",e=>{ const t=e.target; if(t.classList && t.cl
 
 document.addEventListener("click",e=>{
   const t=e.target.closest("[data-ack],[data-copy],[data-zoom],[data-more],[data-car],[data-go],[data-lang],#langBtn"); if(!t) return;
-  if(t.dataset.ack!==undefined){ const k=+t.dataset.ack, a=acks(); if(!a.includes(k)){ a.push(k); ackSet(a); } render(true); return; }
+  if(t.dataset.ack!==undefined){ const k=t.dataset.ack, a=acks(); if(!a.includes(k)){ a.push(k); ackSet(a); } render(true); return; }
   if(t.id==="langBtn"){ langSheet(false); return; }
   if(t.dataset.lang){ setLang(t.dataset.lang); document.getElementById("langSheet").hidden=true; return; }
   if(t.dataset.copy!==undefined){ const txt=t.dataset.copy, done=()=>toast(L(UI.copied));
@@ -1483,6 +1497,7 @@ window.addEventListener("hashchange",route);
   fetch("/api/stay?h="+SLUG+(BOOK?"&b="+BOOK:""),{cache:"no-store",credentials:"same-origin"}).then(r=>r.ok?r.json():null).then(j=>{
     if(!j) return;
     if(j.phase==="after"||j.phase==="invalid"){ try{["jfm-codes-","jfm-cfg-","jfm-b-"].forEach(k=>localStorage.removeItem(k+SLUG))}catch(_){} location.replace("/grazie/?h="+SLUG); return; }
+    if(j.platform){ PLATFORM=j.platform; try{localStorage.setItem("jfm-plat-"+SLUG,j.platform)}catch(_){} }
     if(j.codes){ CODES=j.codes; try{localStorage.setItem("jfm-codes-"+SLUG,JSON.stringify({codes:j.codes,exp:j.departure||"9999-12-31"}))}catch(_){} render(true); }
     else if(j.phase==="before"){ CODES={}; PHASE="before"; try{localStorage.removeItem("jfm-codes-"+SLUG)}catch(_){} render(true); }
   }).catch(()=>{});

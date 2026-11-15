@@ -57,7 +57,7 @@ async function find(env, code) {
       }
     }
     const cat = (r.reservation_status && r.reservation_status.current && r.reservation_status.current.category) || r.status || "";
-    b = { arrival: String(r.arrival_date).slice(0, 10), departure: String(r.departure_date).slice(0, 10), status: cat, house };
+    b = { arrival: String(r.arrival_date).slice(0, 10), departure: String(r.departure_date).slice(0, 10), status: cat, house, platform: String(r.platform || "").toLowerCase() };
   }
   // prenotazione trovata: 10 minuti; non trovata (magari appena fatta): solo 1 minuto
   await cache.put(ckey, new Response(JSON.stringify(b), { headers: { "Cache-Control": "max-age=" + (b ? 600 : 60) } }));
@@ -82,7 +82,8 @@ export async function stay(env, code, house) {
   const d = new Date(b.arrival + "T12:00:00Z"); d.setUTCDate(d.getUTCDate() - 1);
   const codesFrom = d.toISOString().slice(0, 10);
   const phase = t < codesFrom ? "before" : t <= b.departure ? "during" : "after";
-  return { phase, arrival: b.arrival, departure: b.departure };
+  // piattaforma: "airbnb", "booking", "manual"/"direct"… (serve alla guida per la tassa di soggiorno)
+  return { phase, arrival: b.arrival, departure: b.departure, platform: b.platform || "" };
 }
 export function codesFor(env, house) {
   try { return JSON.parse(env.CODES || "{}")[house] || null; } catch (e) { return null; }
