@@ -553,8 +553,7 @@ const UI = {
   open_maps:{it:"Apri in Maps",en:"Open in Maps",es:"Abrir en Maps"}, maps:{it:"Maps",en:"Maps",es:"Maps"},
   write:{it:"Scrivici su WhatsApp",en:"Message us on WhatsApp",es:"Escríbenos por WhatsApp"},
   lift:{it:"Ascensore",en:"Elevator",es:"Ascensor"}, stairs:{it:"Scale",en:"Stairs",es:"Escaleras"},
-  code_wa:{it:"Il codice ve lo mandiamo su WhatsApp il giorno prima del vostro arrivo.",en:"We'll send you the code on WhatsApp the day before your arrival.",es:"Os enviaremos el código por WhatsApp el día antes de vuestra llegada."},
-  code_wait:{it:"🔒 Il codice comparirà qui nelle 24 ore prima del vostro arrivo, se aprite la guida dal link che vi abbiamo mandato.",en:"🔒 The code will appear here within the 24 hours before your arrival, if you open the guide from the link we sent you.",es:"🔒 El código aparecerá aquí en las 24 horas antes de vuestra llegada, si abrís la guía desde el enlace que os mandamos."},
+  code_wait:{it:"🔒 Il codice comparirà qui a partire dalle 24 ore prima del vostro arrivo.",en:"🔒 The code will appear here from 24 hours before your arrival.",es:"🔒 El código aparecerá aquí a partir de las 24 horas antes de vuestra llegada."},
   fav:{it:"Preferito",en:"Our pick",es:"Favorito"},
   walk:{it:"a piedi",en:"walk",es:"a pie"}, min:{it:"min",en:"min",es:"min"},
   welcome:{it:"Benvenuti a Roma",en:"Welcome to Rome",es:"Bienvenidos a Roma"},
@@ -968,7 +967,7 @@ function shots(list){
 }
 function mapsBtnH(){ return `<a class="btn primary" href="${gm(HOUSE.place[0],HOUSE.place[1])}" target="_blank" rel="noopener">${IC.pin}${L(UI.open_maps)}</a>`; }
 function codeTiles(code, arrow){
-  if(!code) return `<div class="note">${L(location.hostname.endsWith("github.io")?UI.code_wa:UI.code_wait)}</div>`;
+  if(!code) return `<div class="note">${L(UI.code_wait)}</div>`;
   const ks=[...String(code)].map(d=>`<span class="k">${esc(d)}</span>`).join("");
   return `<div class="code">${ks}${arrow?'<span class="k arrow">↑</span>':''}<span class="cap">${arrow?L(UI.codeArrow):L(UI.code)}</span></div>`;
 }
@@ -982,7 +981,7 @@ function liftWarning(){
   return `<div class="note">${L({it:"<b>Ascensore: un'attenzione importante.</b> Quando uscite, controllate che le porte interne siano ben chiuse (a volte rimbalzano) e che la <b>luce rossa sul tastierino esterno sia spenta</b>. Altrimenti l'ascensore si blocca per tutto il palazzo. Grazie!",en:"<b>Elevator: one important thing.</b> When you get out, check that the inner doors are fully closed (they sometimes bounce back) and that the <b>red light on the outside keypad is off</b>. Otherwise the elevator stops working for the whole building. Thank you!",es:"<b>Ascensor: una cosa importante.</b> Al salir, comprobad que las puertas interiores queden bien cerradas (a veces rebotan) y que la <b>luz roja del teclado exterior esté apagada</b>. Si no, el ascensor se bloquea para todo el edificio. ¡Gracias!"})}</div>`;
 }
 function wifiCard(c){
-  if(!c) return `<div class="card"><p class="muted">${L(location.hostname.endsWith("github.io")?UI.code_wa:UI.code_wait)}</p></div>`;
+  if(!c) return `<div class="card"><p class="muted">${L(UI.code_wait)}</p></div>`;
   return `<div class="card wifi">
     <span class="lbl">${L(UI.network)}</span><span></span>
     <span class="val">${esc(c.wifi_rete)}</span><span></span>
@@ -1092,10 +1091,14 @@ const TAXI_APPS=[
 /* ---------- codici: arrivano solo dal link personale (?k= key box, ?p= portone) ---------- */
 let CODES={}, BOOK=null, PHASE=null;
 const ON_GH=location.hostname.endsWith("github.io");
-function codesNote(){
+function codesNote(where){
   if(Object.keys(CODES||{}).length) return "";
   if(!ON_GH && PHASE!=="before") return "";
-  return `<div class="note lock"><span class="lk">🔒</span><span>${L(ON_GH?{it:"La guida è già tutta disponibile. I <b>codici di accesso</b> ve li mandiamo su WhatsApp il giorno prima del vostro arrivo.",en:"The whole guide is already available. We'll send you the <b>access codes</b> on WhatsApp the day before your arrival.",es:"La guía ya está disponible entera. Los <b>códigos de acceso</b> os los enviamos por WhatsApp el día antes de vuestra llegada."}:{it:"La guida è già tutta disponibile. Solo i <b>codici di accesso</b>, per sicurezza, compariranno nella pagina Check-in <b>nelle 24 ore prima del vostro arrivo</b>: fino ad allora vedrete un lucchetto, è normale.",en:"The whole guide is already available. Only the <b>access codes</b>, for security, will appear on the Check-in page <b>within the 24 hours before your arrival</b>: until then you'll see a lock, that's normal.",es:"La guía ya está disponible entera. Solo los <b>códigos de acceso</b>, por seguridad, aparecerán en la página Check-in <b>en las 24 horas antes de vuestra llegada</b>: hasta entonces veréis un candado, es normal."})}</span></div>`;
+  const here=where==="arrivo";
+  return `<div class="note lock"><span class="lk">🔒</span><span>${L({
+    it:`<b>La guida è già tutta vostra:</b> potete consultarla da subito per organizzarvi, dal viaggio fino ai nostri consigli su Roma. Solo i <b>codici d'ingresso</b>, per la vostra sicurezza, compariranno ${here?"in questa pagina":"nella pagina Check-in"} <b>a partire dalle 24 ore prima del vostro arrivo</b>. Fino ad allora, al loro posto vedrete un lucchetto: è tutto normale.`,
+    en:`<b>The guide is already all yours:</b> you can browse it right away to plan your stay, from the journey to our tips for Rome. Only the <b>entry codes</b>, for your security, will appear ${here?"on this page":"on the Check-in page"} <b>from 24 hours before your arrival</b>. Until then you'll see a padlock in their place: that's completely normal.`,
+    es:`<b>La guía ya es toda vuestra:</b> podéis consultarla desde ya para organizaros, desde el viaje hasta nuestros consejos sobre Roma. Solo los <b>códigos de entrada</b>, por vuestra seguridad, aparecerán ${here?"en esta página":"en la página Check-in"} <b>a partir de las 24 horas antes de vuestra llegada</b>. Hasta entonces veréis un candado en su lugar: es totalmente normal.`})}</span></div>`;
 }
 function codeOf(k){ return CODES[k] || null; }
 
@@ -1155,7 +1158,7 @@ function goldenHTML(){
     ${HOUSE.golden.map((g,i)=>`<div class="gold"><span class="gn">${MICON[g.ic]||IC.info}<i>${i+1}</i></span><div><b>${L(g.t)}</b><p>${L(g.d)}</p></div></div>`).join("")}</section>`;
 }
 function vArrivo(){
-  const G=HOUSE.arrival; let out=codesNote()+goldenHTML(), step=0, i=0;
+  const G=HOUSE.arrival; let out=codesNote("arrivo")+goldenHTML(), step=0, i=0;
   while(i<G.length){
     const g=G[i];
     if(g.path){
