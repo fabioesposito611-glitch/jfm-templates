@@ -59,7 +59,8 @@ async function find(env, code) {
     const cat = (r.reservation_status && r.reservation_status.current && r.reservation_status.current.category) || r.status || "";
     b = { arrival: String(r.arrival_date).slice(0, 10), departure: String(r.departure_date).slice(0, 10), status: cat, house };
   }
-  await cache.put(ckey, new Response(JSON.stringify(b), { headers: { "Cache-Control": "max-age=600" } }));
+  // prenotazione trovata: 10 minuti; non trovata (magari appena fatta): solo 1 minuto
+  await cache.put(ckey, new Response(JSON.stringify(b), { headers: { "Cache-Control": "max-age=" + (b ? 600 : 60) } }));
   return b;
 }
 // Da codice prenotazione a casa ("lat"/"col"), senza controllare le date
