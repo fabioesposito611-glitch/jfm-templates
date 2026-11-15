@@ -1918,6 +1918,8 @@ To get everything ready, please send me on WhatsApp§NUM§ these two things:
 1️⃣ your approximate arrival time ⏰
 2️⃣ a photo of an ID for each guest 🪪 (it's required by Italian law)
 
+📱 If the number on your booking isn't on WhatsApp, just reply here with one that is, or download the app: that's where I'll send you everything for your stay 🙏
+
 For anything else, I'm here! 😊
 Fabio · JFM`],
    ["2","Come arrivare","3 giorni prima dell'arrivo, ore 10:00","all",
@@ -2012,6 +2014,8 @@ ${G}
 Per preparare tutto, mandami su WhatsApp§NUM§ queste due cose:
 1️⃣ l'orario indicativo di arrivo ⏰
 2️⃣ la foto di un documento per ogni ospite 🪪 (lo richiede la legge italiana)
+
+📱 Se il numero della prenotazione non è su WhatsApp, rispondimi qui con uno che lo sia, oppure scarica l'app: è lì che ti mando tutto per il soggiorno 🙏
 
 Per qualsiasi altra cosa sono qui! 😊
 Fabio · JFM`],
@@ -2108,6 +2112,8 @@ Para tenerlo todo listo, mándame por WhatsApp§NUM§ estas dos cosas:
 1️⃣ la hora aproximada de llegada ⏰
 2️⃣ una foto de un documento de cada huésped 🪪 (lo exige la ley italiana)
 
+📱 Si el número de tu reserva no está en WhatsApp, respóndeme aquí con uno que sí lo esté, o descárgate la app: es por ahí donde te mando todo para la estancia 🙏
+
 Para cualquier otra cosa, ¡aquí estoy! 😊
 Fabio · JFM`],
    ["2","Come arrivare","3 giorni prima dell'arrivo, ore 10:00","all",
@@ -2193,6 +2199,18 @@ Y para tu próximo viaje a Roma puedes volver a reservar directamente con nosotr
 /* ===== L2 — Solleciti: solo a chi non ha fatto quello che chiedeva il messaggio automatico ===== */
 var sollecitiTexts = {
   en: {
+    nowa_sms: `Hii [NOME]! 😊 This is Fabio, your host in Rome 🏠
+
+I tried to reach you on WhatsApp, but your number doesn't seem to be active there 🙈 That's where I send all the check-in instructions, so could you please send me a number that's on WhatsApp, or download the app? 📲
+
+You can also just message me on WhatsApp at this number, it's super quick! Don't worry, I'm here for anything you need 🥰
+
+Fabio 😊`,
+    nowa_chat: `Hii [NOME]! 😊
+I tried to reach you on WhatsApp, but the number on your booking doesn't seem to be active there 🙈
+That's where I send all the check-in instructions, so could you please reply here with a number that's on WhatsApp, or download the app and message me there§NUM§? 📲
+
+It only takes a minute, don't worry: I'm here for anything you need 🥰`,
     orario: `Hii [NOME]! 😊
 I'm getting everything ready for your arrival 🏠
 Could you please tell me roughly what time you'll arrive? Even an approximate time is perfect: it helps me organise the cleaning and be available if you need me 🙏
@@ -2214,6 +2232,18 @@ That way I know everything's fine and the cleaning team can start.
 Thank you so much and have a safe trip! ✈️`
   },
   it: {
+    nowa_sms: `Ciao [NOME]! 😊 Sono Fabio, il tuo host a Roma 🏠
+
+Ho provato a scriverti su WhatsApp, ma il tuo numero non sembra attivo lì 🙈 È su WhatsApp che mando tutte le istruzioni per il check-in, quindi mi mandi un numero che sia su WhatsApp, oppure scarichi l'app? 📲
+
+Puoi anche scrivermi direttamente su WhatsApp a questo numero, si fa in un attimo! Tranquillo, per qualsiasi cosa sono qui 🥰
+
+Fabio 😊`,
+    nowa_chat: `Ciao [NOME]! 😊
+Ho provato a scriverti su WhatsApp, ma il numero della prenotazione non sembra attivo lì 🙈
+È su WhatsApp che mando tutte le istruzioni per il check-in, quindi mi rispondi qui con un numero che sia su WhatsApp, oppure scarichi l'app e mi scrivi lì§NUM§? 📲
+
+Ci vuole un minuto, tranquillo: per qualsiasi cosa sono qui 🥰`,
     orario: `Ciao [NOME]! 😊
 Sto preparando tutto per il vostro arrivo 🏠
 Mi dici più o meno a che ora arriverete? Va benissimo anche un orario indicativo: mi serve per organizzare le pulizie ed essere disponibile se avete bisogno 🙏
@@ -2235,6 +2265,18 @@ Così so che è tutto a posto e il team delle pulizie può iniziare.
 Grazie mille e buon viaggio! ✈️`
   },
   es: {
+    nowa_sms: `¡Holaa [NOMBRE]! 😊 Soy Fabio, tu anfitrión en Roma 🏠
+
+He intentado escribirte por WhatsApp, pero tu número no parece estar activo ahí 🙈 Es por WhatsApp donde mando todas las instrucciones del check-in, así que ¿me mandas un número que esté en WhatsApp, o te descargas la app? 📲
+
+También puedes escribirme directamente por WhatsApp a este número, ¡es un momento! Tranquilo, para cualquier cosa aquí estoy 🥰
+
+Fabio 😊`,
+    nowa_chat: `¡Holaa [NOMBRE]! 😊
+He intentado escribirte por WhatsApp, pero el número de la reserva no parece estar activo ahí 🙈
+Es por WhatsApp donde mando todas las instrucciones del check-in, así que ¿me respondes aquí con un número que esté en WhatsApp, o te descargas la app y me escribes ahí§NUM§? 📲
+
+Es solo un minuto, tranquilo: para cualquier cosa aquí estoy 🥰`,
     orario: `¡Holaa [NOMBRE]! 😊
 Estoy preparando todo para vuestra llegada 🏠
 ¿Me dices más o menos a qué hora llegaréis? Una hora aproximada está perfecta: me ayuda a organizar la limpieza y a estar disponible si necesitáis algo 🙏
@@ -2429,6 +2471,16 @@ for (const casa of casas) {
     // Solleciti (uguali per le due case)
     if (casa === "lat") {
       var NM = lang === "es" ? "[NOMBRE]" : "[NOME]";
+      var NUM_WA = { abn: "", bkg: { en:" (+39 352 057 5278)", it:" (+39 352 057 5278)", es:" (+39 352 057 5278)" } };
+      pushUnique({ id:`sollecito-nowa-sms-${lang}`, section:"solleciti", casa:"both", lang, piatt:"all",
+        title:"⓪ Numero non su WhatsApp — SMS normale al numero della prenotazione, appena ci si accorge che non c'è su WhatsApp",
+        vars:NM, text:sollecitiTexts[lang].nowa_sms });
+      pushUnique({ id:`sollecito-nowa-chat-abn-${lang}`, section:"solleciti", casa:"both", lang, piatt:"abn",
+        title:"⓪ Numero non su WhatsApp — in chat Airbnb (senza numero), se anche l'SMS non ha risposta",
+        vars:NM, text:sollecitiTexts[lang].nowa_chat.split("§NUM§").join("") });
+      pushUnique({ id:`sollecito-nowa-chat-bkg-${lang}`, section:"solleciti", casa:"both", lang, piatt:"bkg",
+        title:"⓪ Numero non su WhatsApp — in chat Booking, se anche l'SMS non ha risposta",
+        vars:NM, text:sollecitiTexts[lang].nowa_chat.split("§NUM§").join(NUM_WA.bkg[lang]) });
       [["orario","① Orario di arrivo non comunicato — 2 giorni prima dell'arrivo","all"],
        ["documenti","② Documenti mancanti — mattina dopo l'arrivo","all"],
        ["chiavi","④ Foto chiavi non arrivata — ore 10:00 del check-out","all"]].forEach(function(v){
