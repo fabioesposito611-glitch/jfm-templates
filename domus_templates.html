@@ -114,7 +114,11 @@ var IBAN_FABIO = "IT05N0503403238000000006593";
 var BIC_FABIO  = "BAPPIT21N96";
 var PP_FABIO   = "https://www.paypal.me/FabioEsposito611";
 var WEB = "www.jfmitalia.com";
-var GUIDE_URL = { lat: "https://guida.jfmitalia.com/laterani/", col: "https://guida.jfmitalia.com/colosseum/" };
+// GUIDA_LIVE: mettere true solo quando guida.jfmitalia.com è attivo (fasi Cloudflare/GoDaddy del piano)
+var GUIDA_LIVE = false;
+var GUIDE_URL = GUIDA_LIVE
+  ? { lat: "https://guida.jfmitalia.com/laterani/", col: "https://guida.jfmitalia.com/colosseum/" }
+  : { lat: "https://fabioesposito611-glitch.github.io/jfm-templates/guide/laterani/", col: "https://fabioesposito611-glitch.github.io/jfm-templates/guide/colosseum/" };
 
 // taxBlock_jfm: tassa intestata a JF Management Srls (Booking)
 var taxBlock_jfm = {
