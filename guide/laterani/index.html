@@ -525,6 +525,8 @@ body{font-size:17px}
 .note.ok svg{color:#2e8b57}
 .mustc svg.chev{width:20px;height:20px;flex:none;color:var(--ink)}
 .mustc .mbar{width:100%}
+.note.lock{background:#eef3fb;border-color:#9fb6dc;align-items:flex-start}
+.note.lock .lk{font-size:18px;line-height:1.3}
 </style>
 
 <div class="app">
@@ -552,7 +554,7 @@ const UI = {
   write:{it:"Scrivici su WhatsApp",en:"Message us on WhatsApp",es:"Escríbenos por WhatsApp"},
   lift:{it:"Ascensore",en:"Elevator",es:"Ascensor"}, stairs:{it:"Scale",en:"Stairs",es:"Escaleras"},
   code_wa:{it:"Il codice ve lo mandiamo su WhatsApp il giorno prima del vostro arrivo.",en:"We'll send you the code on WhatsApp the day before your arrival.",es:"Os enviaremos el código por WhatsApp el día antes de vuestra llegada."},
-  code_wait:{it:"Il codice comparirà qui il giorno prima del vostro arrivo, se aprite la guida dal link che vi abbiamo mandato.",en:"The code will appear here the day before your arrival, if you open the guide from the link we sent you.",es:"El código aparecerá aquí el día antes de vuestra llegada, si abrís la guía desde el enlace que os mandamos."},
+  code_wait:{it:"🔒 Il codice comparirà qui nelle 24 ore prima del vostro arrivo, se aprite la guida dal link che vi abbiamo mandato.",en:"🔒 The code will appear here within the 24 hours before your arrival, if you open the guide from the link we sent you.",es:"🔒 El código aparecerá aquí en las 24 horas antes de vuestra llegada, si abrís la guía desde el enlace que os mandamos."},
   fav:{it:"Preferito",en:"Our pick",es:"Favorito"},
   walk:{it:"a piedi",en:"walk",es:"a pie"}, min:{it:"min",en:"min",es:"min"},
   welcome:{it:"Benvenuti a Roma",en:"Welcome to Rome",es:"Bienvenidos a Roma"},
@@ -1088,7 +1090,13 @@ const TAXI_APPS=[
   ["Uber",{it:"Taxi e auto con autista",en:"Taxis and private drivers",es:"Taxis y coches con conductor"},"https://apps.apple.com/app/id368677368","https://play.google.com/store/apps/details?id=com.ubercab"],
   ["itTaxi",{it:"L'app dei radiotaxi italiani",en:"The Italian radio-taxi app",es:"La app de los radiotaxis italianos"},"https://apps.apple.com/it/app/it-taxi/id527559443","https://play.google.com/store/apps/details?id=it.ud.microtek.ITTaxi"]];
 /* ---------- codici: arrivano solo dal link personale (?k= key box, ?p= portone) ---------- */
-let CODES={}, BOOK=null;
+let CODES={}, BOOK=null, PHASE=null;
+const ON_GH=location.hostname.endsWith("github.io");
+function codesNote(){
+  if(Object.keys(CODES||{}).length) return "";
+  if(!ON_GH && PHASE!=="before") return "";
+  return `<div class="note lock"><span class="lk">🔒</span><span>${L(ON_GH?{it:"La guida è già tutta disponibile. I <b>codici di accesso</b> ve li mandiamo su WhatsApp il giorno prima del vostro arrivo.",en:"The whole guide is already available. We'll send you the <b>access codes</b> on WhatsApp the day before your arrival.",es:"La guía ya está disponible entera. Los <b>códigos de acceso</b> os los enviamos por WhatsApp el día antes de vuestra llegada."}:{it:"La guida è già tutta disponibile. Solo i <b>codici di accesso</b>, per sicurezza, compariranno nella pagina Check-in <b>nelle 24 ore prima del vostro arrivo</b>: fino ad allora vedrete un lucchetto, è normale.",en:"The whole guide is already available. Only the <b>access codes</b>, for security, will appear on the Check-in page <b>within the 24 hours before your arrival</b>: until then you'll see a lock, that's normal.",es:"La guía ya está disponible entera. Solo los <b>códigos de acceso</b>, por seguridad, aparecerán en la página Check-in <b>en las 24 horas antes de vuestra llegada</b>: hasta entonces veréis un candado, es normal."})}</span></div>`;
+}
 function codeOf(k){ return CODES[k] || null; }
 
 /* ---------- HOME ---------- */
@@ -1105,6 +1113,7 @@ function vHome(c){
     <div><small>${L(UI.checkout)}</small><b>${L(DAYS_OUT)}</b></div>
     <div><small>${L({it:"Piano",en:"Floor",es:"Piso"})}</small><b>${h.floor}</b></div>
   </div>
+  ${codesNote()}
   ${c?`<div class="wifi2"><span class="wic">${FIC.wifi}</span><div class="wtx"><small>Wi-Fi</small><b>${esc(c.wifi_rete)}</b><span class="mono">${esc(c.wifi_password)}</span></div><button class="btn primary sm" type="button" data-copy="${esc(c.wifi_password)}">${IC.copy}<span>${L(UI.copy)}</span></button></div>`:""}
   <div class="apps">${ORDER.map(s=>`<a class="appi" href="#${s}"><span class="ai ${APPS[s].c}">${APPS[s].ic}</span><b>${L(APPS[s].t)}</b></a>`).join("")}</div>
   <div class="homecard">
@@ -1146,7 +1155,7 @@ function goldenHTML(){
     ${HOUSE.golden.map((g,i)=>`<div class="gold"><span class="gn">${MICON[g.ic]||IC.info}<i>${i+1}</i></span><div><b>${L(g.t)}</b><p>${L(g.d)}</p></div></div>`).join("")}</section>`;
 }
 function vArrivo(){
-  const G=HOUSE.arrival; let out=goldenHTML(), step=0, i=0;
+  const G=HOUSE.arrival; let out=codesNote()+goldenHTML(), step=0, i=0;
   while(i<G.length){
     const g=G[i];
     if(g.path){
@@ -1472,7 +1481,7 @@ window.addEventListener("hashchange",route);
     if(!j) return;
     if(j.phase==="after"||j.phase==="invalid"){ try{["jfm-codes-","jfm-cfg-","jfm-b-"].forEach(k=>localStorage.removeItem(k+SLUG))}catch(_){} location.replace("/grazie/?h="+SLUG); return; }
     if(j.codes){ CODES=j.codes; try{localStorage.setItem("jfm-codes-"+SLUG,JSON.stringify({codes:j.codes,exp:j.departure||"9999-12-31"}))}catch(_){} render(true); }
-    else if(j.phase==="before"){ CODES={}; try{localStorage.removeItem("jfm-codes-"+SLUG)}catch(_){} }
+    else if(j.phase==="before"){ CODES={}; PHASE="before"; try{localStorage.removeItem("jfm-codes-"+SLUG)}catch(_){} render(true); }
   }).catch(()=>{});
   fetch("config.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(j=>{ if(j){ CFG=j; try{localStorage.setItem("jfm-cfg-"+HOUSE.key,JSON.stringify(j))}catch(_){} render(true); } }).catch(()=>{});
   if("serviceWorker" in navigator && location.protocol==="https:") navigator.serviceWorker.register("sw.js").catch(()=>{});
