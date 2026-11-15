@@ -114,8 +114,9 @@ var IBAN_FABIO = "IT05N0503403238000000006593";
 var BIC_FABIO  = "BAPPIT21N96";
 var PP_FABIO   = "https://www.paypal.me/FabioEsposito611";
 var WEB = "www.jfmitalia.com";
-// GUIDA_LIVE: mettere true solo quando guida.jfmitalia.com è attivo (fasi Cloudflare/GoDaddy del piano)
-var GUIDA_LIVE = false;
+// GUIDA_LIVE: automatico. Se la libreria è aperta da Cloudflare (jfm-libreria.pages.dev) i link puntano a guida.jfmitalia.com;
+// se è aperta dalla vecchia copia GitHub puntano alla guida provvisoria su GitHub.
+var GUIDA_LIVE = !/github\.io$/.test(location.hostname);
 var GUIDE_URL = GUIDA_LIVE
   ? { lat: "https://guida.jfmitalia.com/laterani/", col: "https://guida.jfmitalia.com/colosseum/" }
   : { lat: "https://fabioesposito611-glitch.github.io/jfm-templates/guide/laterani/", col: "https://fabioesposito611-glitch.github.io/jfm-templates/guide/colosseum/" };
