@@ -553,7 +553,7 @@ const UI = {
   open_maps:{it:"Apri in Maps",en:"Open in Maps",es:"Abrir en Maps"}, maps:{it:"Maps",en:"Maps",es:"Maps"},
   write:{it:"Scrivici su WhatsApp",en:"Message us on WhatsApp",es:"Escríbenos por WhatsApp"},
   lift:{it:"Ascensore",en:"Elevator",es:"Ascensor"}, stairs:{it:"Scale",en:"Stairs",es:"Escaleras"},
-  code_wait:{it:"🔒 Il codice comparirà qui a partire dalle 24 ore prima del vostro arrivo.",en:"🔒 The code will appear here from 24 hours before your arrival.",es:"🔒 El código aparecerá aquí a partir de las 24 horas antes de vuestra llegada."},
+  code_wait:{it:"🔒 Il codice compare qui a partire dalle 24 ore precedenti l'arrivo.",en:"🔒 The code appears here from 24 hours before arrival.",es:"🔒 El código aparece aquí a partir de las 24 horas previas a la llegada."},
   fav:{it:"Preferito",en:"Our pick",es:"Favorito"},
   walk:{it:"a piedi",en:"walk",es:"a pie"}, min:{it:"min",en:"min",es:"min"},
   welcome:{it:"Benvenuti a Roma",en:"Welcome to Rome",es:"Bienvenidos a Roma"},
@@ -1058,7 +1058,7 @@ const APPS={
   aiuto:{ic:XI.tool, c:"or", t:{it:"Problemi?",en:"Problems?",es:"¿Problemas?"}, h:{it:"Qualcosa non va?",en:"Something wrong?",es:"¿Algo no va bien?"}, d:{it:"Le soluzioni ai problemi più comuni.",en:"Fixes for the most common problems.",es:"Soluciones a los problemas más comunes."}},
   sos:{ic:XI.sos, c:"rd", t:{it:"Emergenze",en:"Emergency",es:"Emergencias"}, h:{it:"Emergenze",en:"Emergency",es:"Emergencias"}, d:{it:"112, ospedali, farmacie, polizia.",en:"112, hospitals, pharmacies, police.",es:"112, hospitales, farmacias, policía."}}
 };
-APPS.importante={hide:true, ic:WARN, c:"rd", t:{it:"Da leggere subito",en:"Read this first",es:"Leed esto primero"}, h:{it:"Da leggere subito",en:"Read this first",es:"Leed esto primero"}, d:{it:"Poche cose, ma importanti per stare bene in casa. Ci vuole un minuto.",en:"Just a few things, but important for a good stay. It takes a minute.",es:"Pocas cosas, pero importantes para estar bien en casa. Es un minuto."}};
+APPS.importante={hide:true, ic:WARN, c:"rd", t:{it:"Da leggere subito",en:"Read this first",es:"Leed esto primero"}, h:{it:"Da leggere subito",en:"Read this first",es:"Leed esto primero"}, d:{it:"Indicazioni essenziali per il soggiorno, un minuto di lettura.",en:"Essential information for the stay, a one-minute read.",es:"Indicaciones esenciales para la estancia, un minuto de lectura."}};
 const ORDER=Object.keys(APPS).filter(k=>!APPS[k].hide);
 let PAGE="home", SUB=null;
 
@@ -1096,9 +1096,9 @@ function codesNote(where){
   if(!ON_GH && PHASE!=="before") return "";
   const here=where==="arrivo";
   return `<div class="note lock"><span class="lk">🔒</span><span>${L({
-    it:`<b>La guida è già tutta vostra:</b> potete consultarla da subito per organizzarvi, dal viaggio fino ai nostri consigli su Roma. Solo i <b>codici d'ingresso</b>, per la vostra sicurezza, compariranno ${here?"in questa pagina":"nella pagina Check-in"} <b>a partire dalle 24 ore prima del vostro arrivo</b>. Fino ad allora, al loro posto vedrete un lucchetto: è tutto normale.`,
-    en:`<b>The guide is already all yours:</b> you can browse it right away to plan your stay, from the journey to our tips for Rome. Only the <b>entry codes</b>, for your security, will appear ${here?"on this page":"on the Check-in page"} <b>from 24 hours before your arrival</b>. Until then you'll see a padlock in their place: that's completely normal.`,
-    es:`<b>La guía ya es toda vuestra:</b> podéis consultarla desde ya para organizaros, desde el viaje hasta nuestros consejos sobre Roma. Solo los <b>códigos de entrada</b>, por vuestra seguridad, aparecerán ${here?"en esta página":"en la página Check-in"} <b>a partir de las 24 horas antes de vuestra llegada</b>. Hasta entonces veréis un candado en su lugar: es totalmente normal.`})}</span></div>`;
+    it:`<b>La guida è consultabile fin da subito in ogni sua parte.</b> Solo i <b>codici d'ingresso</b>, per sicurezza, compaiono ${here?"in questa pagina":"nella pagina Check-in"} <b>a partire dalle 24 ore precedenti l'arrivo</b>; fino ad allora, al loro posto è visibile un lucchetto.`,
+    en:`<b>The whole guide can be consulted right away.</b> Only the <b>entry codes</b>, for security reasons, appear ${here?"on this page":"on the Check-in page"} <b>from 24 hours before arrival</b>; until then, a padlock is shown in their place.`,
+    es:`<b>La guía se puede consultar completa desde ya.</b> Solo los <b>códigos de entrada</b>, por seguridad, aparecen ${here?"en esta página":"en la página Check-in"} <b>a partir de las 24 horas previas a la llegada</b>; hasta entonces, en su lugar se muestra un candado.`})}</span></div>`;
 }
 function codeOf(k){ return CODES[k] || null; }
 
@@ -1180,19 +1180,19 @@ function vArrivo(){
       ${carousel(g.frames.map((f,k)=>frameHTML(f,k+1)))}</div>`;
     i++;
   }
-  return out+(MUSTS().length?`<div class="astep"><div class="ash"><span class="sn">${step+1}</span><h3>${L({it:"Siete dentro: ultima cosa!",en:"You're in: one last thing!",es:"Ya estáis dentro: ¡una última cosa!"})}</h3></div>${mustCard()}</div>`:"");
+  return out+(MUSTS().length?`<div class="astep"><div class="ash"><span class="sn">${step+1}</span><h3>${L({it:"Ultimo passo: le indicazioni essenziali",en:"Last step: the essential information",es:"Último paso: las indicaciones esenciales"})}</h3></div>${mustCard()}</div>`:"");
 }
 
 
 /* ---------- DA LEGGERE SUBITO ---------- */
-const MUST_DOCS={id:"docs",ic:"doc",t:{it:"Documenti: la foto dei passaporti di tutti",en:"ID: a photo of everyone's passport",es:"Documentos: la foto de los pasaportes de todos"},
- d:{it:"Mandateci su WhatsApp la foto del <b>passaporto o della carta d'identità di tutti gli ospiti</b>. Prima dell'arrivo fatelo con calma, quando potete; <b>dal check-in in poi invece è urgente</b>, perché la legge ci dà <b>solo 24 ore</b> per registrarvi in Questura.",
-    en:"Send us on WhatsApp a photo of the <b>passport or ID card of every guest</b>. Before arrival there's no rush, whenever you can; <b>once you've checked in, though, it's urgent</b>, because the law gives us <b>only 24 hours</b> to register you with the police.",
-    es:"Mandadnos por WhatsApp la foto del <b>pasaporte o del DNI de todos los huéspedes</b>. Antes de llegar, con calma, cuando podáis; <b>desde el check-in, en cambio, es urgente</b>, porque la ley nos da <b>solo 24 horas</b> para registraros en la policía."}, wa:1};
-const MUST_TAX={id:"tax",ic:"cash",t:{it:"Tassa di soggiorno: va pagata a parte",en:"City tax: it's paid separately",es:"Tasa turística: se paga aparte"},
- d:{it:"La tassa di soggiorno del Comune di Roma (<b>5 € a persona a notte</b>, massimo 10 notti; bambini fino a 10 anni esenti) <b>non è inclusa nel prezzo</b> della prenotazione. Scriveteci su WhatsApp e ci accordiamo insieme su come pagarla.",
-    en:"The City of Rome tourist tax (<b>€5 per person per night</b>, max 10 nights; children up to 10 exempt) <b>isn't included in the price</b> of your booking. Message us on WhatsApp and we'll agree together on how to pay it.",
-    es:"La tasa turística del Ayuntamiento de Roma (<b>5 € por persona y noche</b>, máximo 10 noches; niños hasta 10 años exentos) <b>no está incluida en el precio</b> de la reserva. Escribidnos por WhatsApp y acordamos juntos cómo pagarla."}, note:{it:"Solo per chi ha prenotato su Booking.com o direttamente con noi: su Airbnb è già pagata.",en:"Only if you booked on Booking.com or directly with us: on Airbnb it's already paid.",es:"Solo si habéis reservado en Booking.com o directamente con nosotros: en Airbnb ya está pagada."}, wa:1};
+const MUST_DOCS={id:"docs",ic:"doc",t:{it:"Documenti di tutti gli ospiti",en:"ID documents of all guests",es:"Documentos de todos los huéspedes"},
+ d:{it:"La legge italiana obbliga a registrare ogni ospite in Questura <b>entro 24 ore dall'arrivo</b>. Per questo serve la <b>foto del passaporto o della carta d'identità di tutti gli ospiti</b>, bambini compresi, da inviare su WhatsApp. <b>Prima dell'arrivo:</b> quando possibile, senza fretta. <b>Dopo il check-in:</b> subito, perché il termine di legge è stretto.",
+    en:"Italian law requires every guest to be registered with the police <b>within 24 hours of arrival</b>. A <b>photo of the passport or ID card of every guest</b>, children included, must therefore be sent on WhatsApp. <b>Before arrival:</b> whenever possible, no rush. <b>After check-in:</b> straight away, as the legal deadline is tight.",
+    es:"La ley italiana obliga a registrar a cada huésped en la policía <b>en un plazo de 24 horas desde la llegada</b>. Por eso se necesita la <b>foto del pasaporte o del DNI de todos los huéspedes</b>, niños incluidos, enviada por WhatsApp. <b>Antes de la llegada:</b> cuando sea posible, sin prisa. <b>Después del check-in:</b> enseguida, porque el plazo legal es corto."}, wa:1};
+const MUST_TAX={id:"tax",ic:"cash",t:{it:"Tassa di soggiorno: si paga a parte",en:"City tax: paid separately",es:"Tasa turística: se paga aparte"},
+ d:{it:"Il Comune di Roma applica una tassa di soggiorno di <b>5 € a persona a notte</b> (massimo 10 notti; esenti i bambini fino a 10 anni). <b>Non è inclusa nel prezzo</b> della prenotazione: le modalità di pagamento si concordano con l'host su WhatsApp.",
+    en:"The City of Rome charges a tourist tax of <b>€5 per person per night</b> (max 10 nights; children up to 10 exempt). <b>It isn't included in the price</b> of the booking: the payment method is agreed with the host on WhatsApp.",
+    es:"El Ayuntamiento de Roma aplica una tasa turística de <b>5 € por persona y noche</b> (máximo 10 noches; exentos los niños hasta 10 años). <b>No está incluida en el precio</b> de la reserva: la forma de pago se acuerda con el anfitrión por WhatsApp."}, note:{it:"Solo per prenotazioni Booking.com e dirette. Con Airbnb la tassa è già pagata online.",en:"Only for Booking.com and direct bookings. With Airbnb the tax is already paid online.",es:"Solo para reservas de Booking.com y directas. Con Airbnb la tasa ya está pagada online."}, wa:1};
 function MUSTS(){
   const list=[MUST_DOCS];
   if(!/airbnb/.test(PLATFORM)) list.push(MUST_TAX);
@@ -1206,16 +1206,16 @@ function acks(){ if(!ACK) ACK=ackGet(); return ACK; }
 function mustCard(){
   const M=MUSTS(); if(!M.length) return "";
   const n=M.length, done=M.filter(g=>acks().includes(g.id)).length;
-  if(done>=n) return `<a class="mustc ok" href="#importante">${svg('<path d="M4 12l5 5L20 6"/>')}<div><b>${L({it:"Cose importanti lette",en:"Important things read",es:"Cosas importantes leídas"})}</b><span>${L({it:"Grazie! Potete rileggerle quando volete.",en:"Thank you! You can read them again any time.",es:"¡Gracias! Podéis releerlas cuando queráis."})}</span></div>${CHEV}</a>`;
-  return `<a class="mustc" href="#importante">${WARN}<div><b>${L({it:`Da leggere subito: ${n} cose importanti`,en:`Read this first: ${n} important things`,es:`Leed esto primero: ${n} cosas importantes`})}</b><span>${L({it:"Un minuto per stare tranquilli tutto il soggiorno",en:"One minute for a worry-free stay",es:"Un minuto para estar tranquilos toda la estancia"})}</span><i class="mbar"><i style="width:${Math.round(done/n*100)}%"></i></i><small>${done}/${n} ${L({it:"lette",en:"read",es:"leídas"})}</small></div>${CHEV}</a>`;
+  if(done>=n) return `<a class="mustc ok" href="#importante">${svg('<path d="M4 12l5 5L20 6"/>')}<div><b>${L({it:"Cose importanti lette",en:"Important things read",es:"Cosas importantes leídas"})}</b><span>${L({it:"Rileggibili in qualsiasi momento.",en:"Can be reread at any time.",es:"Se pueden releer en cualquier momento."})}</span></div>${CHEV}</a>`;
+  return `<a class="mustc" href="#importante">${WARN}<div><b>${L({it:`Da leggere subito: ${n} cose importanti`,en:`Read this first: ${n} important things`,es:`Leed esto primero: ${n} cosas importantes`})}</b><span>${L({it:"Indicazioni essenziali per il soggiorno, un minuto di lettura",en:"Essential information for the stay, a one-minute read",es:"Indicaciones esenciales para la estancia, un minuto de lectura"})}</span><i class="mbar"><i style="width:${Math.round(done/n*100)}%"></i></i><small>${done}/${n} ${L({it:"lette",en:"read",es:"leídas"})}</small></div>${CHEV}</a>`;
 }
 function vImportante(){
   const M=MUSTS(), n=M.length, a=acks(), done=M.filter(g=>a.includes(g.id)).length;
-  return `<p class="lugintro">${L({it:"Sono le cose che gli ospiti a volte non sanno e che poi creano problemi a voi o ai vicini. <b>Leggetele tutte e toccate «Ho capito» su ognuna.</b>",en:"These are the things guests sometimes don't know, and that then cause problems for you or the neighbours. <b>Please read them all and tap «Got it» on each one.</b>",es:"Son las cosas que a veces los huéspedes no saben y que luego causan problemas a vosotros o a los vecinos. <b>Leedlas todas y tocad «Entendido» en cada una.</b>"})}</p>
+  return `<p class="lugintro">${L({it:"Indicazioni essenziali per il soggiorno, da conoscere prima di tutto il resto. <b>Ogni punto va letto e confermato con «Ho capito».</b>",en:"Essential information for the stay, to know before anything else. <b>Each point should be read and confirmed with «Got it».</b>",es:"Indicaciones esenciales para la estancia, que conviene conocer antes que nada. <b>Cada punto se lee y se confirma con «Entendido».</b>"})}</p>
     <div class="mprog"><i class="mbar"><i style="width:${n?Math.round(done/n*100):0}%"></i></i><b>${done}/${n}</b></div>
-    ${M.map((g,i)=>{ const ok=a.includes(g.id); return `<div class="gold mustx${ok?" ok":""}"><span class="gn">${MICON[g.ic]||IC.info}<i>${i+1}</i></span><div><b>${L(g.t)}</b><p>${L(g.d)}</p>${g.note&&!PLATFORM?`<p class="small muted">${L(g.note)}</p>`:""}${g.wa?`<div class="mt">${btn(waLink(),L({it:"Scrivici su WhatsApp",en:"Message us on WhatsApp",es:"Escríbenos por WhatsApp"}),"wa sm",IC.chat)}</div>`:""}
+    ${M.map((g,i)=>{ const ok=a.includes(g.id); return `<div class="gold mustx${ok?" ok":""}"><span class="gn">${MICON[g.ic]||IC.info}<i>${i+1}</i></span><div><b>${L(g.t)}</b><p>${L(g.d)}</p>${g.note&&!PLATFORM?`<p class="small muted">${L(g.note)}</p>`:""}${g.wa?`<div class="mt">${btn(waLink(),L({it:"Contatta l'host su WhatsApp",en:"Contact the host on WhatsApp",es:"Contactar con el anfitrión por WhatsApp"}),"wa sm",IC.chat)}</div>`:""}
       <button type="button" class="btn ${ok?"ghost":"primary"} sm mt" data-ack="${g.id}">${ok?svg('<path d="M4 12l5 5L20 6"/>'):""}<span>${ok?L({it:"Letto",en:"Read",es:"Leído"}):L({it:"Ho capito",en:"Got it",es:"Entendido"})}</span></button></div></div>`; }).join("")}
-    ${done>=n&&n?`<div class="note ok mt">${svg('<path d="M4 12l5 5L20 6"/>')}<span>${L({it:"Grazie mille! Ora siete pronti: godetevi la casa e Roma 😊",en:"Thank you so much! You're all set: enjoy the apartment and Rome 😊",es:"¡Muchas gracias! Ya estáis listos: disfrutad de la casa y de Roma 😊"})}</span></div>`:""}`;
+    ${done>=n&&n?`<div class="note ok mt">${svg('<path d="M4 12l5 5L20 6"/>')}<span>${L({it:"Tutte le indicazioni sono state lette. Buon soggiorno a Roma!",en:"All the information has been read. Enjoy your stay in Rome!",es:"Todas las indicaciones han sido leídas. ¡Buena estancia en Roma!"})}</span></div>`:""}`;
 }
 
 /* ---------- CASA ---------- */
@@ -1236,7 +1236,7 @@ function vCheckout(){
   const steps=[
     [svg('<path d="M12 3v9"/><path d="M6.4 7.4a8 8 0 1011.2 0"/>'),{it:"Spegnerete luci e aria condizionata e chiuderete le finestre",en:"You'll switch off the lights and air conditioning and close the windows",es:"Apagaréis luces y aire acondicionado y cerraréis las ventanas"}],
     [IC.key,{it:"Lascerete tutte le chiavi sul tavolo",en:"You'll leave all the keys on the table",es:"Dejaréis todas las llaves sobre la mesa"}],
-    [CASH,{it:"Se vi siete accordati con noi per pagare la tassa di soggiorno in contanti, la lascerete accanto alle chiavi",en:"If you agreed with us to pay the city tax in cash, you'll leave it next to the keys",es:"Si acordasteis con nosotros pagar la tasa turística en efectivo, la dejaréis junto a las llaves"}],
+    [CASH,{it:"Se è stato concordato il pagamento in contanti, la tassa di soggiorno andrà lasciata accanto alle chiavi",en:"If cash payment was agreed, the city tax will be left next to the keys",es:"Si se acordó el pago en efectivo, la tasa turística se dejará junto a las llaves"}],
     [IC.chat,{it:"Ci manderete su WhatsApp una foto delle chiavi sul tavolo",en:"You'll send us a WhatsApp photo of the keys on the table",es:"Nos mandaréis por WhatsApp una foto de las llaves en la mesa"}],
     [IC.door,{it:"Chiuderete la porta dietro di voi, controllando che sia chiusa davvero. Buon viaggio!",en:"You'll close the door behind you, checking it's really shut. Have a safe trip!",es:"Cerraréis la puerta al salir, comprobando que esté bien cerrada. ¡Buen viaje!"}]
   ];
@@ -1361,7 +1361,7 @@ function vInfo(){
     `+`<div class="icard"><h4>${CASH}<span>${L({it:"Tassa di soggiorno",en:"City tax",es:"Tasa turística"})}</span></h4>
       <div class="taxeq"><div><span>${XI.person}</span><small>${L({it:"a persona",en:"per person",es:"por persona"})}</small></div><em>×</em><div><span>${XI.moon}</span><small>${L({it:"a notte",en:"per night",es:"por noche"})}</small></div><em>=</em><div class="eur"><b>5 €</b><small>${L({it:"max 10 notti",en:"max 10 nights",es:"máx. 10 noches"})}</small></div></div>
       <div class="taxrow" hidden><b>5 €</b><span>${L({it:"a persona, a notte, prime 10 notti. Bambini fino a 10 anni esenti.",en:"per person, per night, first 10 nights. Children up to 10 exempt.",es:"por persona y noche, primeras 10 noches. Niños hasta 10 años exentos."})}</span></div>
-      <div class="pay2"><div><b>Airbnb</b><span>${L({it:"Già pagata",en:"Already paid",es:"Ya pagada"})}</span></div><div><b>Booking · ${L({it:"diretta",en:"direct",es:"directa"})}</b><span>${L({it:"Da pagare a parte: ci accordiamo su WhatsApp",en:"Paid separately: we'll agree on WhatsApp",es:"Se paga aparte: lo acordamos por WhatsApp"})}</span></div></div>
+      <div class="pay2"><div><b>Airbnb</b><span>${L({it:"Già pagata",en:"Already paid",es:"Ya pagada"})}</span></div><div><b>Booking · ${L({it:"diretta",en:"direct",es:"directa"})}</b><span>${L({it:"A parte, modalità da concordare con l'host",en:"Paid separately, method agreed with the host",es:"Aparte, forma de pago a acordar con el anfitrión"})}</span></div></div>
       <p class="ref">${L({it:"Rif.: art. 14, c. 16, lett. e) D.L. 78/2010; Regolamento Delib. Assemblea Capitolina n. 87/2022; tariffe Delib. Giunta Capitolina n. 255/2023.",en:"Ref.: art. 14(16)(e) Decree-Law 78/2010; Rome City Council Resolution 87/2022; City Executive Resolution 255/2023.",es:"Ref.: art. 14.16.e) D.L. 78/2010; Delib. Asamblea Capitolina 87/2022; Delib. Junta Capitolina 255/2023."})}</p></div>
     <div class="icard"><h4>${IC.doc}<span>${L({it:"Documenti",en:"ID documents",es:"Documentos"})}</span></h4>
       <p>${L({it:"Mandateci su WhatsApp la foto di un documento per ogni ospite, prima dell'arrivo o appena entrati.",en:"Send us a WhatsApp photo of an ID for every guest, before arrival or as soon as you're in.",es:"Mandadnos por WhatsApp la foto de un documento de cada huésped, antes de llegar o nada más entrar."})}</p>
