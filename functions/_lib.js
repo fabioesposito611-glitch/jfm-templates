@@ -15,8 +15,15 @@ export function cookies(req) {
 export function romeToday() {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Rome" }).format(new Date()); // YYYY-MM-DD
 }
+// chiave proprietario: ADMIN_TOKEN, o qualsiasi segreto il cui nome contenga "admin" (tollera refusi nel nome)
+export function adminToken(env) {
+  if (env.ADMIN_TOKEN) return String(env.ADMIN_TOKEN).trim();
+  for (const k of Object.keys(env || {})) if (/admin/i.test(k) && typeof env[k] === "string" && env[k].trim()) return env[k].trim();
+  return "";
+}
 export function isAdmin(env, req) {
-  return !!env.ADMIN_TOKEN && cookies(req).jfm_admin === String(env.ADMIN_TOKEN).trim();
+  const t = adminToken(env);
+  return !!t && cookies(req).jfm_admin === t;
 }
 export async function hosp(env, path) {
   const base = env.HOSPITABLE_BASE || "https://public.api.hospitable.com/v2";

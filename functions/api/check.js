@@ -1,9 +1,10 @@
 // Controllo per il proprietario: /api/check?admin=TOKEN[&b=CODICE] — verifica collegamento a Hospitable
-import { stay, romeToday, hosp } from "../_lib.js";
+import { stay, romeToday, hosp, adminToken } from "../_lib.js";
 export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);
   const given = url.searchParams.get("admin") || "";
-  if (!env.ADMIN_TOKEN || given !== String(env.ADMIN_TOKEN).trim()) {
+  const tok = adminToken(env);
+  if (!tok || given !== tok) {
     // diagnosi senza rivelare valori: quali segreti esistono e quanto sono lunghi
     const diag = {
       esito: "no",
@@ -13,7 +14,9 @@ export async function onRequestGet({ request, env }) {
       ADMIN_TOKEN_spazi: env.ADMIN_TOKEN ? String(env.ADMIN_TOKEN) !== String(env.ADMIN_TOKEN).trim() : false,
       lunghezza_nel_link: given.length,
       CODES_presente: !!env.CODES,
-      HOSPITABLE_TOKEN_presente: !!env.HOSPITABLE_TOKEN
+      HOSPITABLE_TOKEN_presente: !!env.HOSPITABLE_TOKEN,
+      chiave_trovata_lunghezza: tok.length,
+      nomi_segreti_visti: Object.keys(env || {}).filter(k => typeof env[k] === "string")
     };
     return new Response(JSON.stringify(diag, null, 2), { status: 403, headers: { "Content-Type": "application/json" } });
   }
