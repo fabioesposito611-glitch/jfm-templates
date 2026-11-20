@@ -6,6 +6,8 @@ const PID = { lat: "ChIJx2THlBphLxMRUs6Aznzy12g", col: "ChIJ1dGmxCZhLxMR4xTyDV0Q
 export async function onRequest(ctx) {
   const { request, env } = ctx;
   const url = new URL(request.url);
+  // questo controllo vale solo per la guida: libreria (jfm-libreria) e sito (jfm-sito) passano senza filtri
+  if (!/^(guida\.jfmitalia\.com|([a-z0-9-]+\.)?jfm-templates\.pages\.dev|([a-z0-9-]+\.)?jfm-guida\.pages\.dev|localhost|127\.0\.0\.1)$/.test(url.hostname)) return ctx.next();
   // link universale dei messaggi Lodgify: guida.jfmitalia.com/?b=NUMERO -> la casa giusta
   const bRoot = url.searchParams.get("b");
   if ((url.pathname === "/" || url.pathname === "/recensione" || url.pathname === "/recensione/") && bRoot) {
