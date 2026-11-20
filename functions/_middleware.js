@@ -23,9 +23,9 @@ export async function onRequest(ctx) {
 
   // accesso proprietario: link segreto una volta, poi cookie per un anno
   const adminQ = url.searchParams.get("admin");
-  if (adminQ && env.ADMIN_TOKEN && adminQ === env.ADMIN_TOKEN) {
+  if (adminQ && env.ADMIN_TOKEN && adminQ === String(env.ADMIN_TOKEN).trim()) {
     const r = new Response(null, { status: 302, headers: { Location: "/" + slug + "/" } });
-    r.headers.append("Set-Cookie", `jfm_admin=${env.ADMIN_TOKEN}; Path=/; Max-Age=31536000; Secure; HttpOnly; SameSite=Lax`);
+    r.headers.append("Set-Cookie", `jfm_admin=${String(env.ADMIN_TOKEN).trim()}; Path=/; Max-Age=31536000; Secure; HttpOnly; SameSite=Lax`);
     return r;
   }
   if (isAdmin(env, request)) return ctx.next();

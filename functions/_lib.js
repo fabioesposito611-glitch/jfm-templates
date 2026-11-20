@@ -16,7 +16,7 @@ export function romeToday() {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Rome" }).format(new Date()); // YYYY-MM-DD
 }
 export function isAdmin(env, req) {
-  return !!env.ADMIN_TOKEN && cookies(req).jfm_admin === env.ADMIN_TOKEN;
+  return !!env.ADMIN_TOKEN && cookies(req).jfm_admin === String(env.ADMIN_TOKEN).trim();
 }
 export async function hosp(env, path) {
   const base = env.HOSPITABLE_BASE || "https://public.api.hospitable.com/v2";
