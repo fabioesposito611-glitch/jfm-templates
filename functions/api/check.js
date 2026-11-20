@@ -21,7 +21,7 @@ export async function onRequestGet({ request, env }) {
     return new Response(JSON.stringify(diag, null, 2), { status: 403, headers: { "Content-Type": "application/json" } });
   }
   const pc = parseCodes(env);
-  const out = { today: romeToday(), token: !!env.HOSPITABLE_TOKEN, codes: !!env.CODES, codici_leggibili: !!pc, case_con_codici: pc ? Object.keys(pc) : [], campi_codici: pc ? Object.fromEntries(Object.entries(pc).map(([k, v]) => [k, Object.keys(v || {})])) : {} };
+  const out = { today: romeToday(), token: !!env.HOSPITABLE_TOKEN, codes: !!env.CODES, codici_leggibili: !!pc, CODES_lunghezza: String(env.CODES || "").length, CODES_inizia_con: String(env.CODES || "").slice(0, 8), case_con_codici: pc ? Object.keys(pc) : [], campi_codici: pc ? Object.fromEntries(Object.entries(pc).map(([k, v]) => [k, Object.keys(v || {})])) : {} };
   try {
     const j = await hosp(env, "/properties?per_page=50");
     out.properties = (j.data || []).map(p => ({ id: p.id, name: p.name }));

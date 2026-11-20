@@ -95,7 +95,11 @@ export async function stay(env, code, house) {
 // legge CODES anche se incollato dal telefono con virgolette curve o spazi strani
 export function parseCodes(env) {
   const raw = String(env.CODES || "{}").replace(/[\u201C\u201D\u201E\u201F\u2033\u00AB\u00BB]/g, '"').replace(/[\u2018\u2019]/g, "'").replace(/\u00A0/g, " ").trim();
-  try { return JSON.parse(raw); } catch (e) { return null; }
+  try { return JSON.parse(raw); } catch (e) {}
+  // ultimo tentativo: tiene solo la parte tra la prima { e l'ultima } (toglie apici ` o testo copiato in più)
+  const a = raw.indexOf("{"), b = raw.lastIndexOf("}");
+  if (a >= 0 && b > a) { try { return JSON.parse(raw.slice(a, b + 1)); } catch (e) {} }
+  return null;
 }
 export function codesFor(env, house) {
   const c = parseCodes(env);
