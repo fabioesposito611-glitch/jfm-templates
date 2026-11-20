@@ -92,6 +92,12 @@ export async function stay(env, code, house) {
   // piattaforma: "airbnb", "booking", "manual"/"direct"… (serve alla guida per la tassa di soggiorno)
   return { phase, arrival: b.arrival, departure: b.departure, platform: b.platform || "" };
 }
+// legge CODES anche se incollato dal telefono con virgolette curve o spazi strani
+export function parseCodes(env) {
+  const raw = String(env.CODES || "{}").replace(/[\u201C\u201D\u201E\u201F\u2033\u00AB\u00BB]/g, '"').replace(/[\u2018\u2019]/g, "'").replace(/\u00A0/g, " ").trim();
+  try { return JSON.parse(raw); } catch (e) { return null; }
+}
 export function codesFor(env, house) {
-  try { return JSON.parse(env.CODES || "{}")[house] || null; } catch (e) { return null; }
+  const c = parseCodes(env);
+  return (c && c[house]) || null;
 }
